@@ -209,6 +209,7 @@
 		22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602D23C8FC8D00D2E54C /* CallLog.swift */; };
 		22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */; };
 		4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */; };
+		4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E874F248FFF7000C62904 /* latestLogoFone.png */; };
 		EC51D988E235724C86C3C2B4 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6928EC6430D72FC20704C32 /* Pods_Fone.framework */; };
 /* End PBXBuildFile section */
 
@@ -439,6 +440,7 @@
 		22E1602D23C8FC8D00D2E54C /* CallLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLog.swift; sourceTree = "<group>"; };
 		22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallHandler.swift; sourceTree = "<group>"; };
 		4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		4F9E874F248FFF7000C62904 /* latestLogoFone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestLogoFone.png; sourceTree = "<group>"; };
 		63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3C4DDF7A23689B0FEBC047 /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
 		A6928EC6430D72FC20704C32 /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1029,6 +1031,7 @@
 		22880EE723C074BC0044263D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4F9E874F248FFF7000C62904 /* latestLogoFone.png */,
 				229AF2FD23D771E500A1D2CD /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -1532,6 +1535,7 @@
 				1BA0977B24817B5000E0A042 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.xib in Resources */,
 				1BA0978224817B5000E0A042 /* GroupChannelOutgoingUserMessageTableViewCell.xib in Resources */,
 				1BA0977224817B5000E0A042 /* GroupChannelIncomingImageVideoFileMessageTableViewCell.xib in Resources */,
+				4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */,
 				229AF2FE23D771E500A1D2CD /* Assets.xcassets in Resources */,
 				1BA097A924817B5000E0A042 /* Settings.storyboard in Resources */,
 				1BA0977824817B5000E0A042 /* GroupChannelOutgoingImageVideoFileMessageTableViewCell.xib in Resources */,
@@ -1999,9 +2003,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				INFOPLIST_FILE = Fone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -2012,7 +2016,7 @@
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Profile_Adhoc_May_2020;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2025,9 +2029,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				INFOPLIST_FILE = Fone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -2038,7 +2042,7 @@
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Profile_Adhoc_May_2020;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";

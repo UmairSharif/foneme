@@ -199,6 +199,7 @@ class FriendTabVC: UIViewController {
                         }
                     }
                     self.getAccessTokenAPI(mobileNumber: mobilenumber ?? "")
+                    return
                 }
                 
                 print(json)
@@ -215,9 +216,9 @@ class FriendTabVC: UIViewController {
                             }
                         }
                     }
+                    self.friendList.removeAll()
                 }
                 
-                self.friendList.removeAll()
 
                 if contacts?.count == 0
                 {
@@ -242,21 +243,7 @@ class FriendTabVC: UIViewController {
                 else
                 {
                     self.inviteView.isHidden = true
-                    for items in contacts ?? []
-                    {
-                        let dict = items.dictionary
-                            
-                        let number = dict?["ContactsNumber"]?.string ?? ""
-                        let name = dict?["ContactsName"]?.string ?? ""
-                        let userImage = dict?["Image"]?.string ?? ""
-                        
-                        let getData = FriendList(name: name, number: number,userImage : userImage)
-                        self.friendList.append(getData)
-                    }
-                    
-
-                    //Table View Reload
-                    self.contactTVC.reloadData()
+                    self.loadDataFromCache()
                 }
             }else {
                 

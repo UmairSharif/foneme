@@ -14,7 +14,6 @@ import SwiftyJSON
 import TwilioVoice
 import AVFoundation
 
-let baseURLString = "http://v72.appcrates.co/twilio/public"
 let accessTokenEndpoint = "/accesstoken"
 let identity = "AliceIdentity"
 let twimlParamTo = "to"
