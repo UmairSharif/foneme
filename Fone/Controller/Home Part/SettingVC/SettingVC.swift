@@ -170,9 +170,7 @@ class SettingVC: UIViewController {
                 self.activityIndicator.isHidden = true
                 
                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                UserDefaults.standard.removeObject(forKey: key_User_Profile)
                 UserDefaults.standard.synchronize()
-                
                 let vc = UIStoryboard().loadLoginNavVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)

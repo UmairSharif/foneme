@@ -199,7 +199,6 @@ class FriendTabVC: UIViewController {
                         }
                     }
                     self.getAccessTokenAPI(mobileNumber: mobilenumber ?? "")
-                    return
                 }
                 
                 print(json)
@@ -216,9 +215,9 @@ class FriendTabVC: UIViewController {
                             }
                         }
                     }
-                    self.friendList.removeAll()
                 }
                 
+                self.friendList.removeAll()
 
                 if contacts?.count == 0
                 {
@@ -243,7 +242,21 @@ class FriendTabVC: UIViewController {
                 else
                 {
                     self.inviteView.isHidden = true
-                    self.loadDataFromCache()
+                    for items in contacts ?? []
+                    {
+                        let dict = items.dictionary
+                            
+                        let number = dict?["ContactsNumber"]?.string ?? ""
+                        let name = dict?["ContactsName"]?.string ?? ""
+                        let userImage = dict?["Image"]?.string ?? ""
+                        
+                        let getData = FriendList(name: name, number: number,userImage : userImage)
+                        self.friendList.append(getData)
+                    }
+                    
+
+                    //Table View Reload
+                    self.contactTVC.reloadData()
                 }
             }else {
                 
@@ -360,16 +373,13 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
             }
         }
-        cell.btnCall.tag = indexPath.row
-        cell.btnCall.addTarget(self, action:#selector(self.btnCallClicked(_:)) , for: .touchUpInside)
-        cell.btnVideo.tag = indexPath.row
-        cell.btnVideo.addTarget(self, action:#selector(self.btnVideoClicked(_:)) , for: .touchUpInside)
+            
         return cell
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
-        /*if isFiltering {
+        if isFiltering {
                 
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadVideoCallVC()
@@ -381,50 +391,6 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
         {
             let contact = friendList[indexPath.row]
             let vc = UIStoryboard().loadVideoCallVC()
-            vc.recieverNumber = contact.number
-            vc.userImage = contact.userImage
-            self.present(vc, animated: true, completion: nil)
-        
-        }*/
-    }
-    
-    @objc func btnCallClicked(_ sender:UIButton){
-        if isFiltering {
-                
-            let contact = filteredContacts[sender.tag]
-            let vc = UIStoryboard().loadVideoCallVC()
-            vc.isVideo = false
-            vc.recieverNumber = contact.number
-            vc.userImage = contact.userImage
-            self.present(vc, animated: true, completion: nil)
-        }
-        else
-        {
-            let contact = friendList[sender.tag]
-            let vc = UIStoryboard().loadVideoCallVC()
-            vc.isVideo = false
-            vc.recieverNumber = contact.number
-            vc.userImage = contact.userImage
-            self.present(vc, animated: true, completion: nil)
-        
-        }
-    }
-    
-    @objc func btnVideoClicked(_ sender:UIButton){
-        if isFiltering {
-                
-            let contact = filteredContacts[sender.tag]
-            let vc = UIStoryboard().loadVideoCallVC()
-            vc.isVideo = true
-            vc.recieverNumber = contact.number
-            vc.userImage = contact.userImage
-            self.present(vc, animated: true, completion: nil)
-        }
-        else
-        {
-            let contact = friendList[sender.tag]
-            let vc = UIStoryboard().loadVideoCallVC()
-            vc.isVideo = true
             vc.recieverNumber = contact.number
             vc.userImage = contact.userImage
             self.present(vc, animated: true, completion: nil)
