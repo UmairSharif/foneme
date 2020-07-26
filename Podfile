@@ -15,7 +15,7 @@ target 'Fone' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'TwilioChatClient', '~> 2.3.0'
-  pod 'TwilioVideo', '~> 2.4'
+  pod 'TwilioVideo'
   pod 'TwilioAccessManager', '~> 1.0.0'
   pod 'ReachabilitySwift'
   pod 'TwilioVoice', '~> 5.1.1'
@@ -26,7 +26,12 @@ target 'Fone' do
   pod 'RSKImageCropper'
   pod 'NYTPhotoViewer', '~> 1.1.0'
   pod 'FLAnimatedImage', '~> 1.0'
+  pod 'Google-Mobile-Ads-SDK'
+  pod 'OneSignal'
 
+  target 'OneSignalNotificationServiceExtension' do
+    pod 'OneSignal'
+  end
 
   target 'FoneTests' do
     inherit! :search_paths
@@ -37,5 +42,14 @@ target 'Fone' do
     inherit! :search_paths
     # Pods for testing
   end
-
+  
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+       end
+    end
+  end
+ 
 end
+

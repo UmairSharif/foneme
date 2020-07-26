@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I26-u2-qVg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I26-u2-qVg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Profile Image & Name-->
         <scene sceneID="WD0-Eg-oi1">
             <objects>
-                <viewController title="Profile Image &amp; Name" id="DQW-Dx-Yxd" customClass="UpdateUserProfileViewController" customModule="SendBird_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile Image &amp; Name" id="DQW-Dx-Yxd" customClass="UpdateUserProfileViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GAN-bO-hSj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +123,7 @@
         <!--Settings View Controller-->
         <scene sceneID="SEk-lL-hZ8">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsViewController" id="I26-u2-qVg" customClass="SettingsViewController" customModule="SendBird_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsViewController" id="I26-u2-qVg" customClass="SettingsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="HvX-5I-bdx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="18" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="whi-k9-s6Y" id="5If-Uo-PO6">
-                                            <rect key="frame" x="0.0" y="0.0" width="382.5" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-2k-6JZ" userLabel="Profile Image View">
@@ -151,7 +151,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NIckname Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzd-Hq-IWO" userLabel="Nickname Label">
-                                                    <rect key="frame" x="83" y="19" width="283.5" height="21"/>
+                                                    <rect key="frame" x="83" y="19" width="284" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <color key="textColor" name="color_settings_nickname_label"/>
                                                     <nil key="highlightedColor"/>
@@ -180,7 +180,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hM-4I-SbF" userLabel="User ID Label">
-                                                    <rect key="frame" x="131" y="49" width="235.5" height="16"/>
+                                                    <rect key="frame" x="131" y="49" width="236" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.28627450980000002" green="0.30588235289999999" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -205,11 +205,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Group Channel Notifications" id="vQj-1Q-7CD">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="k9Z-rF-Rge" customClass="SettingsSwitchTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="k9Z-rF-Rge" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="155" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k9Z-rF-Rge" id="Fpe-CD-HfS">
-                                            <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-Of-z3R" userLabel="Bottom Border View">
@@ -255,7 +255,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Distinct Group Channel" footerTitle="When Create Distinct Channel is disabled, a new channel will be created even if a channel with the same members already exists." id="3uf-wF-uk3">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rzC-70-rn0" customClass="SettingsSwitchTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rzC-70-rn0" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="262.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rzC-70-rn0" id="8MQ-id-uuO">
@@ -311,7 +311,7 @@
                                         <rect key="frame" x="0.0" y="406.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5s-lt-gZ3" id="oaT-SA-BkY">
-                                            <rect key="frame" x="0.0" y="0.0" width="382.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blocked Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xnh-He-PWs" userLabel="Setting Label">
@@ -387,7 +387,7 @@
         <!--Settings Time View Controller-->
         <scene sceneID="jCq-3Y-z9r">
             <objects>
-                <viewController id="kam-QO-vLM" customClass="SettingsTimeViewController" customModule="SendBird_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kam-QO-vLM" customClass="SettingsTimeViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xfK-a2-AlO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -396,7 +396,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsSwitchTableViewCell" id="iiO-b3-LxA" customClass="SettingsSwitchTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsSwitchTableViewCell" id="iiO-b3-LxA" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iiO-b3-LxA" id="E6x-YN-DWM">
@@ -444,7 +444,7 @@
                                             <outlet property="switchButton" destination="GE6-i7-ind" id="gF0-Hq-hgx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimeTableViewCell" id="GET-tU-FvO" customClass="SettingsTimeTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimeTableViewCell" id="GET-tU-FvO" customClass="SettingsTimeTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GET-tU-FvO" id="r4Z-aB-TF1">
@@ -512,7 +512,7 @@
                                             <outlet property="timeLabel" destination="yiI-Mb-Eg2" id="UbE-sf-7u0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimePickerTableViewCell" rowHeight="242" id="gQk-7o-e2B" customClass="SettingsTimePickerTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimePickerTableViewCell" rowHeight="242" id="gQk-7o-e2B" customClass="SettingsTimePickerTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="414" height="242"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gQk-7o-e2B" id="xbR-pK-6Fw">
@@ -537,7 +537,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jm7-5z-HYP" customClass="CustomActivityIndicatorView" customModule="SendBird_iOS" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jm7-5z-HYP" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </activityIndicatorView>
                         </subviews>
@@ -566,7 +566,7 @@
         <!--Settings Blocked User List View Controller-->
         <scene sceneID="QXF-re-Ydo">
             <objects>
-                <viewController id="t5N-We-wvf" customClass="SettingsBlockedUserListViewController" customModule="SendBird_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="t5N-We-wvf" customClass="SettingsBlockedUserListViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8Jm-fv-d0n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -575,7 +575,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BlockedUserTableViewCell" rowHeight="66" id="PPK-KZ-ZGO" customClass="BlockedUserTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BlockedUserTableViewCell" rowHeight="66" id="PPK-KZ-ZGO" customClass="BlockedUserTableViewCell" customModule="Fone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PPK-KZ-ZGO" id="GBU-GH-fXe">
@@ -672,7 +672,7 @@
             <color red="0.28600001335144043" green="0.3059999942779541" blue="0.34099999070167542" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="color_settings_time_label_normal">
-            <color red="0.65499997138977051" green="0.6119999885559082" blue="0.7839999794960022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.44699999690055847" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_user_list_divider">
             <color red="0.79600000381469727" green="0.80800002813339233" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

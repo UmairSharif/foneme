@@ -20,7 +20,7 @@ class SettingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userImage.layer.cornerRadius = userImage.frame.size.height / 2
         //Forcing View to light Mode
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -170,7 +170,9 @@ class SettingVC: UIViewController {
                 self.activityIndicator.isHidden = true
                 
                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                UserDefaults.standard.removeObject(forKey: key_User_Profile)
                 UserDefaults.standard.synchronize()
+                
                 let vc = UIStoryboard().loadLoginNavVC()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)

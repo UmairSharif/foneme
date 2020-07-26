@@ -8,6 +8,88 @@
 
 
 import UIKit
+import GoogleMobileAds
+import Alamofire
+import SwiftyJSON
+
+protocol FullScreenAdsDelegate: class {
+    func fullscreenAdLoaded()
+    func fullscreenAdClosed()
+}
+
+public typealias isCompletion = (_ isCompleted: Bool?) -> Void
+
+/// separate class for google sign-in methods
+class FullScreenAdManager: NSObject {
+    
+    // MARK: - Properties
+    
+    var onadLoaded: isCompletion?
+    var onadDismissed: isCompletion?
+    var interstitialAd: GADInterstitial?
+    
+    func createAndLoadInterstitial() {
+        
+        //        if !isAdsEnabled {
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        //                self.onadDismissed?(true)
+        //            }
+        //            return
+        //        }
+        
+        interstitialAd = GADInterstitial(adUnitID: "ca-app-pub-0169736027593374/6775235379")
+        interstitialAd?.delegate = self
+        interstitialAd?.load(GADRequest())
+    }
+    
+}
+
+// MARK: - GIDSignInDelegate methods
+extension FullScreenAdManager: GADInterstitialDelegate {
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        if let onadDismissed = self.onadDismissed {
+            onadDismissed(true)
+        }
+    }
+    
+    /// Tells the delegate an ad request succeeded.
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("interstitialDidReceiveAd")
+        if let onadLoaded = self.onadLoaded {
+            onadLoaded(true)
+        }
+    }
+    
+    /// Tells the delegate an ad request failed.
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print("interstitial:didFailToReceiveAdWithError: \(error.localizedDescription)")
+        if let onadDismissed = self.onadDismissed {
+            onadDismissed(true)
+        }
+    }
+    
+    /// Tells the delegate that an interstitial will be presented.
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+        print("interstitialWillPresentScreen")
+    }
+    
+    /// Tells the delegate the interstitial is to be animated off the screen.
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        print("interstitialWillDismissScreen")
+    }
+    
+    /// Tells the delegate the interstitial had been animated off the screen.
+    //    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    //      print("interstitialDidDismissScreen")
+    //    }
+    
+    /// Tells the delegate that a user click will open another app
+    /// (such as the App Store), backgrounding the current app.
+    func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
+        print("interstitialWillLeaveApplication")
+    }
+}
 
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -196,12 +278,12 @@ extension String {
 }
 
 extension UISearchBar {
-
+    
     func getTextField() -> UITextField? { return value(forKey: "searchField") as? UITextField }
     func set(textColor: UIColor) { if let textField = getTextField() { textField.textColor = textColor } }
     func setPlaceholder(textColor: UIColor) { getTextField()?.setPlaceholder(textColor: textColor) }
     func setClearButton(color: UIColor) { getTextField()?.setClearButton(color: color) }
-
+    
     func setTextField(color: UIColor) {
         guard let textField = getTextField() else { return }
         switch searchBarStyle {
@@ -212,7 +294,7 @@ extension UISearchBar {
         @unknown default: break
         }
     }
-
+    
     func setSearchImage(color: UIColor) {
         guard let imageView = getTextField()?.leftView as? UIImageView else { return }
         imageView.tintColor = color
@@ -221,25 +303,25 @@ extension UISearchBar {
 }
 
 private extension UITextField {
-
+    
     private class Label: UILabel {
         private var _textColor = UIColor.lightGray
         override var textColor: UIColor! {
             set { super.textColor = _textColor }
             get { return _textColor }
         }
-
+        
         init(label: UILabel, textColor: UIColor = .lightGray) {
             _textColor = textColor
             super.init(frame: label.frame)
             self.text = label.text
             self.font = label.font
         }
-
+        
         required init?(coder: NSCoder) { super.init(coder: coder) }
     }
-
-
+    
+    
     private class ClearButtonImage {
         static private var _image: UIImage?
         static private var semaphore = DispatchSemaphore(value: 1)
@@ -261,7 +343,7 @@ private extension UITextField {
             }
         }
     }
-
+    
     func setClearButton(color: UIColor) {
         ClearButtonImage.getImage { [weak self] image in
             guard   let image = image,
@@ -270,14 +352,266 @@ private extension UITextField {
             button.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
         }
     }
-
+    
     var placeholderLabel: UILabel? { return value(forKey: "placeholderLabel") as? UILabel }
-
+    
     func setPlaceholder(textColor: UIColor) {
         guard let placeholderLabel = placeholderLabel else { return }
         let label = Label(label: placeholderLabel, textColor: textColor)
         setValue(label, forKey: "placeholderLabel")
     }
-
+    
     func getClearButton() -> UIButton? { return value(forKey: "clearButton") as? UIButton }
+}
+
+
+extension UIViewController {
+    func sendFCMPush(title : String, description : String , fcmToken : String , params : Parameters) {
+        
+        let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
+        
+        var headers = [String:String]()
+        headers = ["Content-Type": "application/json",
+                   "Authorization" : "bearer " + loginToken!]
+        let params = [
+            "Title": title,
+            "Desc":description,
+            "FcmToken":fcmToken,
+            "Data": params ] as [String : Any]
+        Alamofire.request(sendFcmOPt, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .responseJSON { (response) in
+                if response.error != nil {
+                    print(response.error?.localizedDescription ?? "Response Error" )
+                }
+                else {
+                    do {
+                        let jsonData = try JSON(data: response.data!)
+                        print(jsonData)
+                    }catch {
+                        print(error.localizedDescription)
+                    }
+                }
+        }
+    }
+    
+    
+    
+    func showToast(controller: UIViewController, message : String, seconds: Double) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.backgroundColor = UIColor.black
+        alert.view.alpha = 0.6
+        alert.view.layer.cornerRadius = 15
+        
+        controller.present(alert, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+            alert.dismiss(animated: true)
+        }
+    }
+    
+    
+    func getUserDetail(cnic foneId: String = "" ,friend friendId : String = "" ,_ completion : @escaping (_ model : UserDetailModel? , _ success : Bool) -> Void )
+    {
+        
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
+                    
+                    let params = ["Me":user.userId ?? "",
+                                  "Url":"",
+                                  "Cnic" : foneId,
+                                  "Friend":friendId] as [String:Any]
+                    print("params: \(params)")
+                    
+                    var headers = [String:String]()
+                    headers = ["Content-Type": "application/json",
+                               "Authorization" : "bearer " + loginToken]
+                    
+                    ServerCall.makeCallWitoutFile(getProfileUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+                        
+                        if let json = response {
+                            print(json)
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                let profileData = json["UserProfileData"]
+                                var userModel = UserDetailModel(fromJson: profileData)
+                                if foneId != "" {
+                                    userModel.cnic = foneId
+                                }
+                                completion(userModel,true)
+                            }
+                            else{
+                                completion(nil,false)
+                            }
+                        }else{
+                            completion(nil,false)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func addFirend( foneId: String , friendId : String,url : String ,_ completion : @escaping (_ model : UserDetailModel? , _ success : Bool) -> Void )
+    {
+        
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
+                    
+                    let params = ["Me":user.userId ?? "",
+                                  "Url":url,
+                                  "Cnic" : foneId,
+                                  "Friend":friendId] as [String:Any]
+                    print("params: \(params)")
+                    
+                    var headers = [String:String]()
+                    headers = ["Content-Type": "application/json",
+                               "Authorization" : "bearer " + loginToken]
+                    
+                    ServerCall.makeCallWitoutFile(addMyFriend, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+                        
+                        if let json = response {
+                            print(json)
+                            let statusCode = json["StatusCode"].string ?? "" //IsSuccessed
+                            let IsSuccessed = json["IsSuccessed"].boolValue
+                            
+                            if statusCode == "200" {
+                                let profileData = json["UserProfileData"]
+                                var userModel = UserDetailModel(fromJson: profileData)
+                                if foneId != "" {
+                                    userModel.cnic = foneId
+                                }
+                                if IsSuccessed == false {
+                                    completion(userModel,false)
+                                    return
+                                }
+                                completion(userModel,true)
+                            }
+                            else{
+                                completion(nil,false)
+                                if let topVc = topViewController() {
+                                    topVc.showAlert(response?.error?.localizedDescription ?? "JSON Error")
+                                }
+                            }
+                        }else{
+                            completion(nil,false)
+                            if let topVc = topViewController() {
+                                topVc.showAlert(response?.error?.localizedDescription ?? "Request Error")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func removeFirend( foneId: String , friendId : String,url : String ,_ completion : @escaping (_ model : UserDetailModel? , _ success : Bool) -> Void )
+    {
+        
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
+                    
+                    let params = ["Me":user.userId ?? "",
+                                  "Url":url,
+                                  "Cnic" : foneId,
+                                  "Friend":friendId] as [String:Any]
+                    print("params: \(params)")
+                    
+                    var headers = [String:String]()
+                    headers = ["Content-Type": "application/json",
+                               "Authorization" : "bearer " + loginToken]
+                    
+                    ServerCall.makeCallWitoutFile(removeMyFriend, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+                        
+                        if let json = response {
+                            print(json)
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                let profileData = json["UserProfileData"]
+                                var userModel = UserDetailModel(fromJson: profileData)
+                                if foneId != "" {
+                                    userModel.cnic = foneId
+                                }
+                                completion(userModel,true)
+                            }
+                            else{
+                                completion(nil,false)
+                                if let topVc = topViewController() {
+                                    topVc.showAlert(response?.error?.localizedDescription ?? "JSON Error")
+                                }
+                            }
+                        }else{
+                            completion(nil,false)
+                            if let topVc = topViewController() {
+                                topVc.showAlert(response?.error?.localizedDescription ?? "Request Error")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func searchFriend( byCnic: String ,_ completion : @escaping (_ model : [FriendList]? , _ success : Bool) -> Void )
+    {
+        
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
+                
+                let params = ["byCnic":byCnic] as [String:Any]
+                print("params: \(params)")
+                
+                var headers = [String:String]()
+                headers = ["Content-Type": "application/json",
+                           "Authorization" : "bearer " + loginToken]
+                
+                ServerCall.makeCallWitoutFile(searchUser, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+                    
+                    if let json = response {
+                        print(json)
+                        let statusCode = json["StatusCode"].string ?? ""
+                        if statusCode == "200" {
+                            let profileData = json["Data"].array
+                            var profilesList = [FriendList]()
+                            if profileData != nil {
+                                for json in profileData! {
+                                    let number = json["PhoneNumber"].stringValue
+                                    let name = json["Name"].stringValue
+                                    let userImage = json["ImageUrl"].stringValue
+                                    let ContactsCnic = json["Address"].stringValue
+                                    let userId = json["UserId"].stringValue
+                                    let userModel = FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic,userId: userId)
+                                    profilesList.append(userModel)
+                                }
+                                completion(profilesList,true)
+                            }else{
+                                completion(nil,false)
+                            }
+                        }
+                        else{
+                            completion(nil,false)
+                            if let topVc = topViewController() {
+                                topVc.showAlert(response?.error?.localizedDescription ?? "JSON Error")
+                            }
+                        }
+                    }else{
+                        completion(nil,false)
+                        if let topVc = topViewController() {
+                            topVc.showAlert(response?.error?.localizedDescription ?? "Request Error")
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

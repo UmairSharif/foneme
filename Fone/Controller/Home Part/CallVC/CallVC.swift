@@ -7,13 +7,15 @@
 //
 
 import UIKit
-
+import NVActivityIndicatorView
 class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     //IBOutlet and Variables
     @IBOutlet weak var codeLbl : UILabel!
     @IBOutlet weak var numberTxt : UITextField!
     @IBOutlet weak var flagBtn : UIButton!
+    
+    @IBOutlet weak var ActivityIndicatorView: NVActivityIndicatorView!
     var number : String?
     var selectedStatus : Bool?
     let network = NetworkManager.sharedInstance
@@ -21,7 +23,8 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.ActivityIndicatorView.stopAnimating()
+        self.ActivityIndicatorView.isHidden = true
         //Forcing View to light Mode
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
@@ -91,16 +94,35 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     @IBAction func callBtnTapped(_ sender : UIButton)
     {
+        self.ActivityIndicatorView.isHidden = false
+        self.ActivityIndicatorView.startAnimating()
+        
         if (numberTxt.text?.isEmpty)!
         {
+            self.ActivityIndicatorView.stopAnimating()
+            self.ActivityIndicatorView.isHidden = true
             self.errorAlert("Please enter your number.")
         }
         else
         {
-            let number = codeLbl.text! + numberTxt.text!
-            let vc = UIStoryboard().loadVoiceCallVC()
-            vc.callTo = number
-            self.present(vc, animated: true, completion: nil)
+            
+            let fullscreenAdManager = FullScreenAdManager()
+            fullscreenAdManager.createAndLoadInterstitial()
+            fullscreenAdManager.onadLoaded = { [weak self] (loaded) in
+                if let interstitialAd = fullscreenAdManager.interstitialAd, interstitialAd.isReady, let weakself = self {
+                    interstitialAd.present(fromRootViewController: weakself)
+                }
+            }
+            fullscreenAdManager.onadDismissed = { [weak self] (loaded) in
+                self?.ActivityIndicatorView.stopAnimating()
+                self?.ActivityIndicatorView.isHidden = true
+                if let weakself = self {
+                    let number = weakself.codeLbl.text! + weakself.numberTxt.text!
+                    let vc = UIStoryboard().loadVoiceCallVC()
+                    vc.callTo = number
+                    weakself.present(vc, animated: true, completion: nil)
+                }
+            }
         }
     }
     

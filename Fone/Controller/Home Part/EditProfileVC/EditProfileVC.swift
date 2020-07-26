@@ -229,7 +229,8 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
             "UserId" : userId ?? "",
             "PhoneNumber" : phoneNumber,
             "Email" : emailTxt.text!,
-            "Address" : addressTxt.text ?? ""
+            "Address" : addressTxt.text ?? "",
+            "FatherName": "iOS",
             ] as [String : Any]
 
         var headers = [String:String]()

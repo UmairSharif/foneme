@@ -17,6 +17,7 @@ class SignUpVC: UIViewController,CountryDataDelegate {
     @IBOutlet weak var emailTxt : UITextField!
     @IBOutlet weak var phoneTxt : UITextField!
     @IBOutlet weak var passwordTxt : UITextField!
+    @IBOutlet weak var textFieldFoneId : UITextField!
     @IBOutlet weak var codeLbl : UILabel!
     @IBOutlet weak var flagBtn : UIButton!
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
@@ -108,6 +109,12 @@ class SignUpVC: UIViewController,CountryDataDelegate {
             self.errorAlert("Please enter a valid email!")
             return false
         }
+        else if (textFieldFoneId.text?.isEmpty)!
+        {
+            self.errorAlert("Please enter your Fone Id!")
+            return false
+        }
+
         else if (phoneTxt.text?.isEmpty)!
         {
             self.errorAlert("Please enter your phone number!")
@@ -133,11 +140,14 @@ extension SignUpVC
         mobileNumber.remove(at: mobileNumber.startIndex)
         let params = ["Name": nameTxt.text!,
                       "Email": emailTxt.text!,
+                      "CNIC": textFieldFoneId.text!,
                       "PhoneNumber": mobileNumber,
                       "Password": passwordTxt.text!,
                       "CountryCode": codeLbl.text!,
+                      "FatherName": "iOS",
                       "NumberWithOutCode": phoneTxt.text!] as [String:Any]
-        
+        // "CNIC": textFieldFoneId.text!,
+
         print("params: \(params)")
         var headers = [String:String]()
         headers = ["Content-Type": "application/json"]

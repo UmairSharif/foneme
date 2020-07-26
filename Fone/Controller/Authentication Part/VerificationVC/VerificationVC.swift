@@ -352,8 +352,9 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 UserDefaults.standard.set(accessToken, forKey: "AccessToken")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
-                self.performSegue(withIdentifier: "GoToMain", sender: self)
-                
+                let tabBarVC = UIStoryboard().loadTabBarController()
+                appDeleg.window?.rootViewController = tabBarVC
+                appDeleg.window?.makeKeyAndVisible()
             case.failure(let error):
                 print("Not Success",error)
                 self.errorAlert("\(error)")

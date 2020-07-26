@@ -18,6 +18,7 @@ import TwilioVoice
 
 class AudioCallHandler: NSObject {
 
+    /*
     //IBOutlet and Variables
     weak var remoteView: TVIVideoView!
     weak var previewView: TVIVideoView!
@@ -665,4 +666,5 @@ extension AudioCallHandler
             }
         }
     }
+ */
 }

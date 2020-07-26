@@ -16,27 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foneLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Sw6-f6-xgi">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="latestLogoFone.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sw6-f6-xgi">
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="0XR-H1-MOl"/>
-                                    <constraint firstAttribute="height" constant="200" id="vjQ-aN-D3Z"/>
-                                </constraints>
-                            </imageView>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-ellipsis-100 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="CcU-Oc-mHY">
-                                <rect key="frame" x="107" y="817" width="200" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="1fE-aw-tWA"/>
-                                    <constraint firstAttribute="width" constant="200" id="bkj-4h-dwL"/>
+                                    <constraint firstAttribute="width" constant="100" id="0XR-H1-MOl"/>
+                                    <constraint firstAttribute="height" constant="100" id="vjQ-aN-D3Z"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Sw6-f6-xgi" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8kv-NW-sYc"/>
-                            <constraint firstItem="CcU-Oc-mHY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ESp-kj-uL6"/>
-                            <constraint firstItem="CcU-Oc-mHY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Usb-cN-Yju"/>
                             <constraint firstItem="Sw6-f6-xgi" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vMk-yD-Sf1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -48,7 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="foneLogo" width="600" height="600"/>
-        <image name="icons8-ellipsis-100 (1)" width="100" height="100"/>
+        <image name="latestLogoFone.png" width="150" height="150"/>
     </resources>
 </document>

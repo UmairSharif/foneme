@@ -14,6 +14,9 @@ import Foundation
 import SwiftyJSON
 import TwilioVoice
 
+let callController = CXCallController()
+
+
 
 extension UIViewController {
     
@@ -142,6 +145,18 @@ extension UIViewController {
             NotificationHandler.shared.callStatus = true
             NotificationHandler.shared.contentAvailable = contentAvailable
             
+            let dialerFoneId = userInfo?["DialerFoneID"] as? String
+            NotificationHandler.shared.dialerFoneId = dialerFoneId
+            var hasVideo = false
+            if NotificationHandler.shared.callType == "VD"{
+                hasVideo = true
+            }
+            appDeleg.displayIncomingCall(uuid: UUID(), handle: dialerFoneId ?? "", hasVideo: hasVideo, completion: { (error) in
+            })
+            NotificationHandler.shared.currentCallStatus = CurrentCallStatus.Incoming
+            NotificationHandler.shared.isCallNotificationHandled = true
+            
+            return
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.voiceChat, options: .mixWithOthers)
                 try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
@@ -149,43 +164,91 @@ extension UIViewController {
             } catch {
                 print("Speaker error : \(error)")
             }
+            let providerConfig = CXProviderConfiguration(localizedName: "Fone")
             
-            let provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Fone"))
-            provider.setDelegate(self, queue: nil)
+            let provider = CXProvider(configuration: providerConfig)
+           // provider.setDelegate(self, queue: nil)
             let update = CXCallUpdate()
-            update.remoteHandle = CXHandle(type: .generic, value: dialerNumber ?? "")
-            provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
+            if NotificationHandler.shared.callType == "AD"{
+                update.hasVideo = false
+            }else{
+                update.hasVideo = true
+            }
+            let callId = UUID()
+            update.remoteHandle = CXHandle(type: .generic, value: dialerFoneId ?? "")
+            provider.reportNewIncomingCall(with: callId, update: update, completion: { error in })
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+               var identifiers: [String] = []
+               for notification:UNNotificationRequest in notificationRequests {
+                   if notification.identifier == "identifierCancel" {
+                      identifiers.append(notification.identifier)
+                   }
+               }
+               UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            }
+            NotificationHandler.shared.currentCallUUID = callId
+            NotificationHandler.shared.currentCallStatus = CurrentCallStatus.Incoming
+            NotificationHandler.shared.isCallNotificationHandled = true
         }
         else if notificationType == "UNA"
         {
-            NotificationHandler.shared.callStatus = false
-            self.dismiss(animated: true, completion: nil)
-            performsEndCallAction()
+            if NotificationHandler.shared.currentCallStatus != . OutGoing {
+                NotificationHandler.shared.callStatus = false
+                performsEndCallAction()
+            }
         }
             
         else if notificationType == "CE"
         {
-            NotificationHandler.shared.callStatus = false
-            self.dismiss(animated: true, completion: nil)
-            performsEndCallAction()
+            if NotificationHandler.shared.currentCallStatus != . OutGoing {
+                NotificationHandler.shared.callStatus = false
+                performsEndCallAction()
+            }
         }
     }
     
     func performsEndCallAction() {
-        let uuid = UUID()
-           let callKitCallController: CXCallController?
-           let endCallAction = CXEndCallAction(call: uuid)
-           callKitCallController = CXCallController()
-           let transaction = CXTransaction(action: endCallAction)
-           
-           callKitCallController?.request(transaction) { error in
-               if let error = error {
-                   NSLog("EndCallAction transaction request failed: \(error.localizedDescription).")
-               } else {
-                   NSLog("EndCallAction transaction request successful")
-               }
-           }
-       }
+        if NotificationHandler.shared.currentCallStatus == .OutGoing {
+            topViewController()?.dismiss(animated: true, completion: {
+                
+            })
+        }else {
+
+        }
+        NotificationHandler.shared.receiverId = nil
+        NotificationHandler.shared.notificationType = nil
+        NotificationHandler.shared.callStatusLogId = nil
+        NotificationHandler.shared.callType = nil
+        NotificationHandler.shared.dialerNumber = nil
+        NotificationHandler.shared.status = nil
+        NotificationHandler.shared.dialerId = nil
+        NotificationHandler.shared.receiverNumber = nil
+        NotificationHandler.shared.channelName = nil
+        NotificationHandler.shared.callDate = nil
+        NotificationHandler.shared.dialerImageUrl = nil
+        NotificationHandler.shared.callStatus = false
+        NotificationHandler.shared.contentAvailable = nil
+        NotificationHandler.shared.currentCallStatus = CurrentCallStatus.Nothing
+        NotificationHandler.shared.currentCallUUID = nil
+        NotificationHandler.shared.dialerFoneId = nil
+        appDeleg.userInfo = nil
+
+       return
+        
+        if let uuid = NotificationHandler.shared.currentCallUUID {
+            let endCallAction = CXEndCallAction(call: uuid)
+            let transaction = CXTransaction(action: endCallAction)
+            
+            callController.request(transaction) { error in
+                if let error = error {
+                    NSLog("EndCallAction transaction request failed: \(error.localizedDescription).")
+                } else {
+                    NSLog("EndCallAction transaction request successful")
+                }
+            }
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     func sendMissedCallNotificationAPI(){
@@ -256,6 +319,7 @@ extension UIViewController {
             let tabBarController = UIStoryboard().loadTabBarController()
             let selectedIndexe = tabBarController.selectedIndex
             let desiredVC = UIStoryboard().loadVideoCallVC()
+            desiredVC.isVideo = false
             
             if selectedIndexe == 0 {
                 self.navigationController?.present(desiredVC, animated: true, completion: nil)
@@ -270,20 +334,11 @@ extension UIViewController {
             {
                 self.navigationController?.present(desiredVC, animated: true, completion: nil)
             }
-        }
-    }
-}
-
-extension UIViewController : CXProviderDelegate{
-    public func providerDidReset(_ provider: CXProvider) {
-    }
-    
-    public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-    
-        if NotificationHandler.shared.callType == "AD"{
+        }else if NotificationHandler.shared.callType == "VD"{
             let tabBarController = UIStoryboard().loadTabBarController()
             let selectedIndexe = tabBarController.selectedIndex
             let desiredVC = UIStoryboard().loadVideoCallVC()
+            desiredVC.isVideo = true
             
             if selectedIndexe == 0 {
                 self.navigationController?.present(desiredVC, animated: true, completion: nil)
@@ -296,23 +351,192 @@ extension UIViewController : CXProviderDelegate{
             }
             else
             {
-               self.navigationController?.present(desiredVC, animated: true, completion: nil)
+                self.navigationController?.present(desiredVC, animated: true, completion: nil)
             }
         }
-        action.fulfill()
     }
     
-   public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
     
-    DispatchQueue.main.async {
+    func testingCall() {
         
-        if NotificationHandler.shared.callStatus ?? false
-        {
-            topViewController()?.sendMissedCallNotificationAPI()
+        appDeleg.displayIncomingCall(uuid: UUID(), handle: "Sagar", hasVideo: true, completion: { (error) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                self.performsEndCallAction()
+            }
+        })
+        return
+        
+        let providerConfig = CXProviderConfiguration(localizedName: "Fone")
+        let provider = CXProvider(configuration: providerConfig)
+      //  provider.setDelegate(self, queue: nil)
+        let update = CXCallUpdate()
+        if NotificationHandler.shared.callType == "AD"{
+            update.hasVideo = false
+        }else{
+            update.hasVideo = true
         }
+        let callId = UUID()
+        update.remoteHandle = CXHandle(type: .generic, value: "sagar")
+        provider.reportNewIncomingCall(with: callId, update: update, completion: { error in })
+        NotificationHandler.shared.currentCallUUID = callId
         
-        action.fulfill()
-   
-       }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            self.performsEndCallAction()
+        }
     }
+}
+//
+//extension UIViewController : CXProviderDelegate{
+//    public func providerDidReset(_ provider: CXProvider) {
+//    }
+//    
+//    public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+//    
+//        if NotificationHandler.shared.callType == "AD"{
+//            let tabBarController = UIStoryboard().loadTabBarController()
+//            let selectedIndexe = tabBarController.selectedIndex
+//            let desiredVC = UIStoryboard().loadVideoCallVC()
+//            
+//            if selectedIndexe == 0 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else if selectedIndexe == 1 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else if selectedIndexe == 2 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else
+//            {
+//               self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//        }else if NotificationHandler.shared.callType == "VD"{
+//            let tabBarController = UIStoryboard().loadTabBarController()
+//            let selectedIndexe = tabBarController.selectedIndex
+//            let desiredVC = UIStoryboard().loadVideoCallVC()
+//            desiredVC.isVideo = true
+//            
+//            if selectedIndexe == 0 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else if selectedIndexe == 1 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else if selectedIndexe == 2 {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//            else
+//            {
+//                self.navigationController?.present(desiredVC, animated: true, completion: nil)
+//            }
+//        }
+//        action.fulfill()
+//    }
+//    
+//   public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+//    
+//    DispatchQueue.main.async {
+//        
+//        if NotificationHandler.shared.callStatus ?? false
+//        {
+//            topViewController()?.sendMissedCallNotificationAPI()
+//        }
+//        
+//        action.fulfill()
+//   
+//       }
+//    }
+//}
+
+
+
+extension UIViewController {
+    
+    func isValid(email:String) -> Bool {
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    func isValid(name: String) -> Bool {
+        let nameRegEx = "[a-zA-Z\\s]+"
+        let nameTest = NSPredicate(format:"SELF MATCHES %@", nameRegEx)
+        return nameTest.evaluate(with: name)
+    }
+    
+    func isValid(password: String) -> Bool {
+        return password.count > 5
+    }
+    
+    func isValid(phoneNumber: String) -> Bool {
+        let PHONE_REGEX = "^((\\+)|(00))[0-9]{6,14}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: phoneNumber)
+        return result
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        if let topVC = topViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showAlert(message: String, handler: @escaping (UIAlertAction) -> Void) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: handler))
+        if let topVC = topViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showCustomAlert(title : String ,message: String, handler: @escaping (UIAlertAction) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: handler))
+        if let topVC = topViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showLogAlert(message: String, handler: @escaping (UIAlertAction) -> Void) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: handler))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        if let topVC = topViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showLogAlert1(message: String, handler: @escaping (UIAlertAction) -> Void) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: handler))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: handler))
+        if let topVC = topViewController() {
+            topVC.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showText(text: String, collectionView: UICollectionView) {
+        if collectionView.numberOfItems(inSection: 0) <= 0 {
+            let label = UILabel(frame: CGRect.zero)
+            label.font = UIFont.boldSystemFont(ofSize: 22.0)
+            label.text = text
+            label.tag = 10
+            label.translatesAutoresizingMaskIntoConstraints = false
+            collectionView.addSubview(label)
+            
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        }
+        else {
+            if let label = collectionView.viewWithTag(10) {
+                label.removeFromSuperview()
+            }
+        }
+    }
+    
 }

@@ -26,6 +26,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>NO</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-0169736027593374~8663032117</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -37,6 +39,8 @@
 	<string>$(PRODUCT_NAME) would like to access your camera to take a profile picture.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your contacts so we can upload your contacts to server and find matching your friends who are using this app</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to access your location for send location in chat.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your microphone to make a  voip call.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

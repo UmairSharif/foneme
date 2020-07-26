@@ -111,6 +111,7 @@ extension UIStoryboard {
     
     func loadVideoCallVC() -> VideoCallVC
     {
+        NotificationHandler.setSharedNotificationsForOutgoingCall()
         return self.loadFromStoryBoard(.home , "VideoCallVC") as! VideoCallVC
     }
     
@@ -118,4 +119,9 @@ extension UIStoryboard {
     {
         return self.loadFromStoryBoard(.home , "VoiceCallVC") as! VoiceCallVC
     }
+    func loadUserDetailsVC() -> UserDetailsVC
+    {
+        return self.loadFromStoryBoard(.home , "UserDetailsVC") as! UserDetailsVC
+    }
+    
 }

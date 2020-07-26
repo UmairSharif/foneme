@@ -52,13 +52,13 @@ class NetworkManager: NSObject {
     }
     
     static func isReachable(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection != .none {
+        if (NetworkManager.sharedInstance.reachability).connection != .unavailable {
             completed(NetworkManager.sharedInstance)
         }
     }
     
     static func isUnreachable(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .none {
+        if (NetworkManager.sharedInstance.reachability).connection == .unavailable {
             completed(NetworkManager.sharedInstance)
         }
     }

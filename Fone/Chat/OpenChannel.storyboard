@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxL-Kp-KCL">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxL-Kp-KCL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,24 +14,24 @@
             <objects>
                 <viewController storyboardIdentifier="OpenChannelsViewController" id="YxL-Kp-KCL" customClass="OpenChannelsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="efT-c8-IJ1">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no open channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A52-uj-hxU" userLabel="Empty Label">
-                                <rect key="frame" x="319.5" y="578" width="195" height="18"/>
+                                <rect key="frame" x="109.5" y="444" width="195" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" name="color_empty_list_label"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bzG-Qy-SeE" userLabel="Open Channels Table View">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="832"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelTableViewCell" rowHeight="84" id="QTf-wu-F7B" customClass="OpenChannelTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="834" height="84"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QTf-wu-F7B" id="pOh-GI-oXV">
-                                            <rect key="frame" x="0.0" y="0.0" width="808" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_icon_operator" translatesAutoresizingMaskIntoConstraints="NO" id="FNE-eg-xrV" userLabel="Opearator Mark Image View">
@@ -48,13 +48,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Participant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDw-vV-aDE" userLabel="Participant Count Label">
-                                                    <rect key="frame" x="72" y="42" width="715" height="18"/>
+                                                    <rect key="frame" x="72" y="42" width="290" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="color_open_channel_participants_count_label"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12r-6K-vSt" userLabel="Divider View">
-                                                    <rect key="frame" x="73.5" y="83.5" width="760.5" height="0.5"/>
+                                                    <rect key="frame" x="73.5" y="83.5" width="340.5" height="0.5"/>
                                                     <color key="backgroundColor" name="color_open_channel_list_divider"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="Cfv-Hn-Rh5"/>
@@ -102,7 +102,7 @@
                                 </prototypes>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VFC-ri-NII" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -138,18 +138,18 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="T6M-vb-pdo" customClass="OpenChannelChatViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wwn-Fi-Mxi">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lsQ-FF-wFS" userLabel="Message Table View">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="951.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="753"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSX-A8-aAZ" userLabel="Input Message Container View">
-                                <rect key="frame" x="0.0" y="951.5" width="712" height="55"/>
+                                <rect key="frame" x="0.0" y="753" width="414" height="89"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNM-Q0-PE0" userLabel="Input Message Inner Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HY6-1J-Olt" userLabel="Send File Message Button">
                                                 <rect key="frame" x="10" y="10.5" width="34" height="34"/>
@@ -167,7 +167,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5j-uf-mu2" userLabel="Send User Message Button">
-                                                <rect key="frame" x="675" y="15" width="25" height="25"/>
+                                                <rect key="frame" x="377" y="15" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Jwu-fQ-bkk"/>
                                                     <constraint firstAttribute="width" constant="25" id="w7G-sd-8XG"/>
@@ -182,10 +182,10 @@
                                                 </connections>
                                             </button>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x73-eK-VOL" userLabel="Input Message Text Field Container View">
-                                                <rect key="frame" x="52" y="6.5" width="612" height="42"/>
+                                                <rect key="frame" x="52" y="6.5" width="314" height="42"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type a message.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="93a-uX-WxZ">
-                                                        <rect key="frame" x="1" y="1" width="610" height="40"/>
+                                                        <rect key="frame" x="1" y="1" width="312" height="40"/>
                                                         <color key="backgroundColor" name="color_message_input_textfiled_bg"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="mpi-As-QQb"/>
@@ -231,7 +231,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lw-mR-wEd" userLabel="Divider View">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="0.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
                                         <color key="backgroundColor" name="color_message_input_view_top_border"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="usN-BL-lUF"/>
@@ -247,10 +247,10 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-ac-MJ0" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-YR-dMa" userLabel="Toast View">
-                                <rect key="frame" x="296" y="448" width="120" height="111"/>
+                                <rect key="frame" x="147" y="365.5" width="120" height="111"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_toast_check" translatesAutoresizingMaskIntoConstraints="NO" id="6tZ-09-hkn" userLabel="Toast Check Image View">
                                         <rect key="frame" x="40" y="33" width="40" height="32"/>
@@ -325,21 +325,21 @@
             <objects>
                 <viewController id="bzC-kj-O4L" customClass="CreateOpenChannelViewControllerA" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Za1-1N-pk5">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moe-Sp-lKq" userLabel="Divider View">
-                                <rect key="frame" x="0.0" y="176" width="540" height="0.5"/>
+                                <rect key="frame" x="0.0" y="176" width="414" height="0.5"/>
                                 <color key="backgroundColor" name="color_settings_border"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="XFk-ox-PVi"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Run-Sr-ppP" userLabel="Description Container View">
-                                <rect key="frame" x="0.0" y="176.5" width="540" height="443.5"/>
+                                <rect key="frame" x="0.0" y="176.5" width="414" height="665.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIR-hV-aNg" userLabel="Description A Label">
-                                        <rect key="frame" x="16" y="28" width="508" height="50.5"/>
+                                        <rect key="frame" x="16" y="28" width="382" height="67"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">Open Channel is a public chat. In this channel type, anyone can enter and participate in the chat without permission. A single channel can handle thousands of simultaneous users like Twitch-style public chat.</string>
@@ -379,7 +379,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Open Channel Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bmp-rS-zB9" userLabel="Channel Name Text Field">
-                                <rect key="frame" x="131" y="102" width="394" height="28"/>
+                                <rect key="frame" x="131" y="102" width="268" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="LKb-X5-k8a"/>
                                 </constraints>
@@ -424,11 +424,11 @@
             <objects>
                 <viewController id="jKm-Sy-A6a" customClass="OpenChannelCoverImageNameSettingViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6sl-qw-b7G">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRA-Vx-Cdl" userLabel="Container View">
-                                <rect key="frame" x="0.0" y="56" width="712" height="120"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="120"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7S-f3-V91" userLabel="Cover Image Container View">
                                         <rect key="frame" x="15" y="10" width="100" height="100"/>
@@ -481,7 +481,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLo-Mo-mPV" userLabel="Divider View">
-                                        <rect key="frame" x="0.0" y="119" width="712" height="1"/>
+                                        <rect key="frame" x="0.0" y="119" width="414" height="1"/>
                                         <color key="backgroundColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="iHQ-Jd-OPJ"/>
@@ -502,7 +502,7 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="npm-02-gtJ" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
@@ -535,25 +535,25 @@
             <objects>
                 <viewController id="mfb-aV-Ie5" customClass="CreateOpenChannelViewControllerB" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0so-mh-D7C">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="v60-Wl-YH1" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" sectionIndexMinimumDisplayRowCount="2" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-5M-KZA">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelChannelUrlTableViewCell" rowHeight="44" id="0xM-Dl-YRq" customClass="CreateOpenChannelChannelUrlTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0xM-Dl-YRq" id="HbN-F9-4wr">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Channel URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aoQ-Qa-2DS" userLabel="Channel URL Text Field">
-                                                    <rect key="frame" x="11" y="11.5" width="518" height="21"/>
+                                                    <rect key="frame" x="11" y="11" width="392" height="22"/>
                                                     <color key="textColor" red="0.20392156859999999" green="0.21960784310000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -571,10 +571,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelAddOperatorTableViewCell" id="Eo1-5Y-9aJ" customClass="CreateOpenChannelAddOperatorTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eo1-5Y-9aJ" id="APh-nl-zwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_icon_add_operator" translatesAutoresizingMaskIntoConstraints="NO" id="Qnb-gv-gsH">
@@ -585,7 +585,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add an operator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0NG-y0-il2" userLabel="Add operator Label">
-                                                    <rect key="frame" x="68" y="11.5" width="452" height="21"/>
+                                                    <rect key="frame" x="68" y="11.5" width="326" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.31372549020000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -602,10 +602,10 @@
                                         <viewLayoutGuide key="safeArea" id="BXa-H6-Jvp"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelUserTableViewCell" rowHeight="50" id="xax-zL-W6T" customClass="CreateOpenChannelUserTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="143.5" width="540" height="50"/>
+                                        <rect key="frame" x="0.0" y="143.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xax-zL-W6T" id="wvN-lt-IUV">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tM1-Kv-Km7" userLabel="Current User Profile Image View">
@@ -636,7 +636,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zrz-3A-NeG" userLabel="Current User Name Label">
-                                                    <rect key="frame" x="68" y="14.5" width="452" height="21"/>
+                                                    <rect key="frame" x="68" y="14.5" width="326" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -697,15 +697,15 @@
             <objects>
                 <viewController id="Sgh-zm-VIi" customClass="SelectOperatorsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="COt-Al-Zs1">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Bz-uS-K6P">
-                                <rect key="frame" x="0.0" y="126" width="712" height="880.5"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="716"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yPk-4D-zRC">
-                                <rect key="frame" x="0.0" y="56" width="712" height="70"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="WJz-AF-5Cp"/>
@@ -747,18 +747,18 @@
             <objects>
                 <viewController id="PWN-sO-Gwd" customClass="OpenChannelUserListViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5rl-5o-PR2">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RFx-ai-J89">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="OmT-pZ-q8g" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="712" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OmT-pZ-q8g" id="XX7-4y-u23">
-                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VnI-Iw-qQJ">
@@ -795,7 +795,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptI-gN-087">
-                                                    <rect key="frame" x="68" y="11.5" width="628" height="21"/>
+                                                    <rect key="frame" x="68" y="11.5" width="330" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -823,7 +823,7 @@
                                 </prototypes>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no banned users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Neh-fq-0XN" userLabel="Empty Label">
-                                <rect key="frame" x="262" y="494.5" width="188" height="18"/>
+                                <rect key="frame" x="113" y="412" width="188" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" name="color_empty_list_label"/>
                                 <nil key="highlightedColor"/>
@@ -854,19 +854,19 @@
             <objects>
                 <viewController id="8Sw-7o-qXa" customClass="OpenChannelSettingsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nqV-qj-hJS">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" sectionIndexMinimumDisplayRowCount="3" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-i2-r4F">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="color_channel_settings_bg"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsChannelNameTableViewCell" rowHeight="108" id="cvK-1d-Oml" customClass="OpenChannelSettingsChannelNameTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="712" height="108"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cvK-1d-Oml" id="TxQ-aZ-Hbs">
-                                            <rect key="frame" x="0.0" y="0.0" width="712" height="108"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_cover_image_placeholder_1" translatesAutoresizingMaskIntoConstraints="NO" id="mcV-uX-2Jp" userLabel="Channel Cover Image View">
@@ -882,12 +882,12 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Channel Name" placeholder="Channel Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xDH-qG-0BB">
-                                                    <rect key="frame" x="131" y="42.5" width="509" height="23"/>
+                                                    <rect key="frame" x="131" y="42.5" width="211" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CME-Lq-LKl" userLabel="Enable Edit Button">
-                                                    <rect key="frame" x="656" y="36" width="36" height="36"/>
+                                                    <rect key="frame" x="358" y="36" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="YqY-NI-OHB"/>
                                                         <constraint firstAttribute="width" constant="36" id="tyZ-EO-HBY"/>
@@ -914,10 +914,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="YWF-Zw-TGB" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163.5" width="712" height="44"/>
+                                        <rect key="frame" x="0.0" y="163.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWF-Zw-TGB" id="CsJ-Xz-zUs">
-                                            <rect key="frame" x="0.0" y="0.0" width="712" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HRi-al-KPI">
@@ -954,7 +954,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHH-87-err">
-                                                    <rect key="frame" x="68" y="11.5" width="628" height="21"/>
+                                                    <rect key="frame" x="68" y="11.5" width="330" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -981,10 +981,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelSettingsMenuTableViewCell" id="s3X-vW-jFa" customClass="OpenChannelSettingsMenuTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="207.5" width="712" height="44"/>
+                                        <rect key="frame" x="0.0" y="207.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s3X-vW-jFa" id="M86-m6-pOG">
-                                            <rect key="frame" x="0.0" y="0.0" width="686" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="agc-8s-iyQ" userLabel="Setting Menu Icon Image View">
@@ -1001,7 +1001,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEY-az-qOv" userLabel="Count Label">
-                                                    <rect key="frame" x="667" y="13" width="19" height="18"/>
+                                                    <rect key="frame" x="364" y="13" width="19" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="open_channe_settings_count_label_color"/>
                                                     <nil key="highlightedColor"/>
@@ -1027,7 +1027,7 @@
                                 </prototypes>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VaK-ij-hlj" userLabel="Loading Indicator View" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
@@ -1061,11 +1061,11 @@
             <objects>
                 <viewController id="J0f-aM-Rwm" customClass="UserProfileViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0sz-cx-uM9">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bi-6Z-7Nr">
-                                <rect key="frame" x="0.0" y="56" width="712" height="121"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="121"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_default_profile_image_4" translatesAutoresizingMaskIntoConstraints="NO" id="rEv-hE-83j" userLabel="Profile Image View">
                                         <rect key="frame" x="15" y="10.5" width="100" height="100"/>
@@ -1080,7 +1080,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3v7-LZ-ARk" userLabel="Nickname Label">
-                                        <rect key="frame" x="131" y="26" width="566" height="21"/>
+                                        <rect key="frame" x="131" y="26" width="268" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <color key="textColor" name="color_profile_nickname"/>
                                         <nil key="highlightedColor"/>
@@ -1149,7 +1149,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dle-0C-8Zz" customClass="CreateOpenChannelNavigationController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rwM-VT-4RA">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1167,7 +1167,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="JXT-n3-1vX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0e5-GT-G5H">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1180,6 +1180,9 @@
             <point key="canvasLocation" x="72.661870503597129" y="2865.8291457286432"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="gmn-Sg-5KT"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="img_btn_edit_channel_name" width="36" height="36"/>
         <image name="img_btn_send_file_msg_normal" width="34" height="34"/>
@@ -1236,7 +1239,4 @@
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="gmn-Sg-5KT"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -1,0 +1,4 @@
+UUID: 42681F63-73F9-3A34-8FA4-D4D5CFC00E0E (i386) TwilioChatClient.framework/TwilioChatClient
+UUID: 193E93A6-6700-3126-A931-6BD4659DDE82 (x86_64) TwilioChatClient.framework/TwilioChatClient
+UUID: 4F3B5602-7D4C-3C27-8880-876B8C5A6A25 (armv7) TwilioChatClient.framework/TwilioChatClient
+UUID: 52DAEF45-D205-3683-A2E7-4667D6392D40 (arm64) TwilioChatClient.framework/TwilioChatClient

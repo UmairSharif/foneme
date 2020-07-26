@@ -42,7 +42,12 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController?.searchBar.delegate = self
-        self.searchController?.searchBar.searchTextField.textColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            self.searchController?.searchBar.searchTextField.textColor = UIColor.white
+        } else {
+
+            // Fallback on earlier versions
+        }
         self.searchController?.searchBar.placeholder = "Search"
         self.searchController?.searchBar.tintColor = .white
         self.searchController?.obscuresBackgroundDuringPresentation = false

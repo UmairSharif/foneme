@@ -68,7 +68,7 @@ class VoiceCallVC: UIViewController {
         
         super.init(coder: aDecoder)
         
-        callKitProvider.setDelegate(self, queue: nil)
+        //callKitProvider.setDelegate(self, queue: nil)
         
         voipRegistry.delegate = self
         voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
@@ -602,7 +602,7 @@ extension VoiceCallVC {
     
     // MARK: CXProviderDelegate
     
-    override func providerDidReset(_ provider: CXProvider) {
+    func providerDidReset(_ provider: CXProvider) {
         NSLog("providerDidReset:")
         audioDevice.isEnabled = true
     }
@@ -655,7 +655,8 @@ extension VoiceCallVC {
         }
     }
     
-    override func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+    
+    func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         NSLog("provider:performAnswerCallAction:")
         
         assert(action.callUUID == self.callInvite?.uuid)
@@ -674,7 +675,7 @@ extension VoiceCallVC {
         action.fulfill()
     }
     
-    override func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+    func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
         NSLog("provider:performEndCallAction:")
         
         if (self.callInvite != nil) {

@@ -196,7 +196,7 @@
 		22C658A223D0B8A300164BB8 /* VoiceCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C658A123D0B8A300164BB8 /* VoiceCallVC.swift */; };
 		22CCC94F23C6442600592614 /* LocalContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCC94E23C6442600592614 /* LocalContactVC.swift */; };
 		22CCC95223C645A600592614 /* LocalContactTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCC95123C645A600592614 /* LocalContactTVC.swift */; };
-		22CCC95523C671CC00592614 /* VideoCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCC95423C671CC00592614 /* VideoCallVC.swift */; };
+		22CCC95523C671CC00592614 /* VideoCallVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCC95423C671CC00592614 /* VideoCallVC1.swift */; };
 		22CCC95823C793F300592614 /* TwilioVideoCallSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCC95723C793F300592614 /* TwilioVideoCallSettings.swift */; };
 		22CCC95A23C798C600592614 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CCC95923C798C600592614 /* PushKit.framework */; };
 		22CCC95C23C798CE00592614 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CCC95B23C798CE00592614 /* CoreTelephony.framework */; };
@@ -208,7 +208,26 @@
 		22E1602B23C8FA9600D2E54C /* LocalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */; };
 		22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602D23C8FC8D00D2E54C /* CallLog.swift */; };
 		22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */; };
+		4B31F26AB802EAC5FA733035 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AFA38347CBEB9600F0A446 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
+		4F16BC84249D1744001C4708 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC76249D1744001C4708 /* CallManager.swift */; };
+		4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC77249D1744001C4708 /* CallsViewController.swift */; };
+		4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC79249D1744001C4708 /* CallTableViewCell.swift */; };
+		4F16BC8B249D1744001C4708 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC7F249D1744001C4708 /* Audio.swift */; };
+		4F16BC8C249D1744001C4708 /* NewCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC80249D1744001C4708 /* NewCallViewController.swift */; };
+		4F16BC8E249D1744001C4708 /* ProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC82249D1744001C4708 /* ProviderDelegate.swift */; };
+		4F16BC8F249D1744001C4708 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC83249D1744001C4708 /* Call.swift */; };
+		4F2E8352249209E500FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E8350249209E400FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift */; };
+		4F2E8353249209E500FFC0B0 /* VideoCallVC+CallKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E8351249209E500FFC0B0 /* VideoCallVC+CallKit.swift */; };
+		4F2E83552492103D00FFC0B0 /* AppDelegate+IncomingCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E83542492103D00FFC0B0 /* AppDelegate+IncomingCall.swift */; };
+		4F83FD3724ACA39D00121486 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */; };
 		4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */; };
+		4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E874F248FFF7000C62904 /* latestLogoFone.png */; };
+		C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5517CB524C9F592004C42BA /* UserDetailModel.swift */; };
+		C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B524C2FEF000400874 /* VideoCallVC.swift */; };
+		C56F34B824C2FEF000400874 /* VideoCallVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */; };
+		C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B924C3170D00400874 /* VideoCallSetings.swift */; };
+		C56F34D724C397AB00400874 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34D624C397AB00400874 /* NotificationService.swift */; };
+		C56F34DB24C397AB00400874 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EC51D988E235724C86C3C2B4 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6928EC6430D72FC20704C32 /* Pods_Fone.framework */; };
 /* End PBXBuildFile section */
 
@@ -227,7 +246,28 @@
 			remoteGlobalIDString = 22880E6A23C074380044263D;
 			remoteInfo = Fone;
 		};
+		C56F34D924C397AB00400874 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22880E6323C074380044263D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C56F34D324C397AB00400874;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C56F34DF24C397AB00400874 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C56F34DB24C397AB00400874 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimeViewController.swift; sourceTree = "<group>"; };
@@ -350,6 +390,7 @@
 		1BA0974724817B5000E0A042 /* Array+SendBird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+SendBird.swift"; sourceTree = "<group>"; };
 		1BA0974A24817B5000E0A042 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		1BA097C5248181AF00E0A042 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22142E1023DA8557008C1311 /* telephone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = telephone.mp3; sourceTree = "<group>"; };
 		2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
@@ -426,7 +467,7 @@
 		22C658A123D0B8A300164BB8 /* VoiceCallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCallVC.swift; sourceTree = "<group>"; };
 		22CCC94E23C6442600592614 /* LocalContactVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactVC.swift; sourceTree = "<group>"; };
 		22CCC95123C645A600592614 /* LocalContactTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactTVC.swift; sourceTree = "<group>"; };
-		22CCC95423C671CC00592614 /* VideoCallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallVC.swift; sourceTree = "<group>"; };
+		22CCC95423C671CC00592614 /* VideoCallVC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallVC1.swift; sourceTree = "<group>"; };
 		22CCC95723C793F300592614 /* TwilioVideoCallSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwilioVideoCallSettings.swift; sourceTree = "<group>"; };
 		22CCC95923C798C600592614 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		22CCC95B23C798CE00592614 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -438,10 +479,31 @@
 		22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactHandler.swift; sourceTree = "<group>"; };
 		22E1602D23C8FC8D00D2E54C /* CallLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLog.swift; sourceTree = "<group>"; };
 		22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallHandler.swift; sourceTree = "<group>"; };
+		4F16BC76249D1744001C4708 /* CallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
+		4F16BC77249D1744001C4708 /* CallsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsViewController.swift; sourceTree = "<group>"; };
+		4F16BC79249D1744001C4708 /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
+		4F16BC7F249D1744001C4708 /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		4F16BC80249D1744001C4708 /* NewCallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCallViewController.swift; sourceTree = "<group>"; };
+		4F16BC82249D1744001C4708 /* ProviderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderDelegate.swift; sourceTree = "<group>"; };
+		4F16BC83249D1744001C4708 /* Call.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		4F2E8350249209E400FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCallVC+SimulateIncomingCall.swift"; sourceTree = "<group>"; };
+		4F2E8351249209E500FFC0B0 /* VideoCallVC+CallKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCallVC+CallKit.swift"; sourceTree = "<group>"; };
+		4F2E83542492103D00FFC0B0 /* AppDelegate+IncomingCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+IncomingCall.swift"; sourceTree = "<group>"; };
+		4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		4F9E874F248FFF7000C62904 /* latestLogoFone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestLogoFone.png; sourceTree = "<group>"; };
+		619FDE9233471CAE88390960 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3C4DDF7A23689B0FEBC047 /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
+		A5AFA38347CBEB9600F0A446 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6928EC6430D72FC20704C32 /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5517CB524C9F592004C42BA /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
+		C56F34B524C2FEF000400874 /* VideoCallVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallVC.swift; sourceTree = "<group>"; };
+		C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCallVC+Extension.swift"; sourceTree = "<group>"; };
+		C56F34B924C3170D00400874 /* VideoCallSetings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallSetings.swift; sourceTree = "<group>"; };
+		C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C56F34D624C397AB00400874 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C56F34D824C397AB00400874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C66191513DE8DB9B74A77B00 /* Pods-FoneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoneTests/Pods-FoneTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE8DA9AEE90B1A7BB53F6D56 /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
 		DF8BE6FEAE4814790384B7C9 /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -482,6 +544,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0955AFF862A5A8E251A985F5 /* Pods_FoneUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C56F34D124C397AB00400874 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B31F26AB802EAC5FA733035 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +949,7 @@
 				22880E6D23C074380044263D /* Fone */,
 				22880E8523C074390044263D /* FoneTests */,
 				22880E9023C0743A0044263D /* FoneUITests */,
+				C56F34D524C397AB00400874 /* OneSignalNotificationServiceExtension */,
 				22880E6C23C074380044263D /* Products */,
 				6497D48AA1CBFD3413844619 /* Pods */,
 				2D9D042061A00D4CFA49F9A1 /* Frameworks */,
@@ -891,6 +962,7 @@
 				22880E6B23C074380044263D /* Fone.app */,
 				22880E8223C074390044263D /* FoneTests.xctest */,
 				22880E8D23C0743A0044263D /* FoneUITests.xctest */,
+				C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -898,6 +970,7 @@
 		22880E6D23C074380044263D /* Fone */ = {
 			isa = PBXGroup;
 			children = (
+				4F16BC75249D1744001C4708 /* Hotline */,
 				1BA096AE24817ADA00E0A042 /* Chat */,
 				229BCD0623C3B2DF00AEF903 /* Fone.entitlements */,
 				22880EE523C0749C0044263D /* AppDelegate */,
@@ -1000,11 +1073,14 @@
 		22880EC123C074830044263D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4F2E8351249209E500FFC0B0 /* VideoCallVC+CallKit.swift */,
+				4F2E8350249209E400FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift */,
 				22880EC223C074830044263D /* HKBaseViewController.swift */,
 				22880EC323C074830044263D /* HKStoryboardExt.swift */,
 				22880EC423C074830044263D /* HKViewControllerExt.swift */,
 				22880EC523C074830044263D /* Extensions.swift */,
 				22880EC623C074830044263D /* HKImagePickerHandler.swift */,
+				4F2E83542492103D00FFC0B0 /* AppDelegate+IncomingCall.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1029,6 +1105,7 @@
 		22880EE723C074BC0044263D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4F9E874F248FFF7000C62904 /* latestLogoFone.png */,
 				229AF2FD23D771E500A1D2CD /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -1092,6 +1169,7 @@
 			isa = PBXGroup;
 			children = (
 				22880EEF23C0766B0044263D /* User.swift */,
+				C5517CB524C9F592004C42BA /* UserDetailModel.swift */,
 			);
 			path = UserModel;
 			sourceTree = "<group>";
@@ -1193,6 +1271,7 @@
 		22880F1123C0AAC20044263D /* Home Part */ = {
 			isa = PBXGroup;
 			children = (
+				4F83FD3524ACA31700121486 /* UserDetailsVC */,
 				4F8AA6AA2477AE1600D06BC0 /* ChatVC */,
 				2291D31D23D3C0BE0032AE5B /* FriendTabVC */,
 				22C658A023D0B88B00164BB8 /* VoiceCallVC */,
@@ -1333,7 +1412,10 @@
 		22CCC95323C6712900592614 /* VideoCallVC */ = {
 			isa = PBXGroup;
 			children = (
-				22CCC95423C671CC00592614 /* VideoCallVC.swift */,
+				C56F34B924C3170D00400874 /* VideoCallSetings.swift */,
+				C56F34B524C2FEF000400874 /* VideoCallVC.swift */,
+				C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */,
+				22CCC95423C671CC00592614 /* VideoCallVC1.swift */,
 			);
 			path = VideoCallVC;
 			sourceTree = "<group>";
@@ -1374,8 +1456,31 @@
 				A6928EC6430D72FC20704C32 /* Pods_Fone.framework */,
 				63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */,
 				1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */,
+				A5AFA38347CBEB9600F0A446 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F16BC75249D1744001C4708 /* Hotline */ = {
+			isa = PBXGroup;
+			children = (
+				4F16BC76249D1744001C4708 /* CallManager.swift */,
+				4F16BC77249D1744001C4708 /* CallsViewController.swift */,
+				4F16BC79249D1744001C4708 /* CallTableViewCell.swift */,
+				4F16BC7F249D1744001C4708 /* Audio.swift */,
+				4F16BC80249D1744001C4708 /* NewCallViewController.swift */,
+				4F16BC82249D1744001C4708 /* ProviderDelegate.swift */,
+				4F16BC83249D1744001C4708 /* Call.swift */,
+			);
+			path = Hotline;
+			sourceTree = "<group>";
+		};
+		4F83FD3524ACA31700121486 /* UserDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */,
+			);
+			path = UserDetailsVC;
 			sourceTree = "<group>";
 		};
 		4F8AA6AA2477AE1600D06BC0 /* ChatVC */ = {
@@ -1395,8 +1500,19 @@
 				DF8BE6FEAE4814790384B7C9 /* Pods-FoneTests.release.xcconfig */,
 				EFB7F2B9E8139C3F8C54375D /* Pods-FoneUITests.debug.xcconfig */,
 				F32046DC753D32C7E94F2636 /* Pods-FoneUITests.release.xcconfig */,
+				619FDE9233471CAE88390960 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C56F34D524C397AB00400874 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C56F34D624C397AB00400874 /* NotificationService.swift */,
+				C56F34D824C397AB00400874 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1412,10 +1528,12 @@
 				22880E6923C074380044263D /* Resources */,
 				7A1D2B141C530C02BCFD68DC /* [CP] Embed Pods Frameworks */,
 				1BE5D5C1248032A50080AACF /* ShellScript */,
+				C56F34DF24C397AB00400874 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C56F34DA24C397AB00400874 /* PBXTargetDependency */,
 			);
 			name = Fone;
 			productName = Fone;
@@ -1460,13 +1578,31 @@
 			productReference = 22880E8D23C0743A0044263D /* FoneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C56F34D324C397AB00400874 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C56F34DC24C397AB00400874 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				796B11AFDE78CB777B4CA315 /* [CP] Check Pods Manifest.lock */,
+				C56F34D024C397AB00400874 /* Sources */,
+				C56F34D124C397AB00400874 /* Frameworks */,
+				C56F34D224C397AB00400874 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		22880E6323C074380044263D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = Optechno;
 				TargetAttributes = {
@@ -1486,6 +1622,9 @@
 						CreatedOnToolsVersion = 10.3;
 						TestTargetID = 22880E6A23C074380044263D;
 					};
+					C56F34D324C397AB00400874 = {
+						CreatedOnToolsVersion = 11.5;
+					};
 				};
 			};
 			buildConfigurationList = 22880E6623C074380044263D /* Build configuration list for PBXProject "Fone" */;
@@ -1504,6 +1643,7 @@
 				22880E6A23C074380044263D /* Fone */,
 				22880E8123C074390044263D /* FoneTests */,
 				22880E8C23C0743A0044263D /* FoneUITests */,
+				C56F34D324C397AB00400874 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1532,6 +1672,7 @@
 				1BA0977B24817B5000E0A042 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.xib in Resources */,
 				1BA0978224817B5000E0A042 /* GroupChannelOutgoingUserMessageTableViewCell.xib in Resources */,
 				1BA0977224817B5000E0A042 /* GroupChannelIncomingImageVideoFileMessageTableViewCell.xib in Resources */,
+				4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */,
 				229AF2FE23D771E500A1D2CD /* Assets.xcassets in Resources */,
 				1BA097A924817B5000E0A042 /* Settings.storyboard in Resources */,
 				1BA0977824817B5000E0A042 /* GroupChannelOutgoingImageVideoFileMessageTableViewCell.xib in Resources */,
@@ -1554,6 +1695,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		22880E8B23C0743A0044263D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C56F34D224C397AB00400874 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1626,6 +1774,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		796B11AFDE78CB777B4CA315 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Fone-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7A1D2B141C530C02BCFD68DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1683,6 +1853,8 @@
 				1BA0976024817B5000E0A042 /* GroupChannelPublicChannelTableViewCell.swift in Sources */,
 				1BA097C024817B5100E0A042 /* CustomPhotosViewController.swift in Sources */,
 				1BA0976A24817B5000E0A042 /* GroupChannelSettingsNotificationsTableViewCell.swift in Sources */,
+				4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */,
+				4F83FD3724ACA39D00121486 /* UserDetailsVC.swift in Sources */,
 				1BA0977324817B5000E0A042 /* GroupChannelOutgoingMessageTableViewCell.swift in Sources */,
 				22880EDC23C074830044263D /* Enums.swift in Sources */,
 				1BA0979D24817B5000E0A042 /* SelectOperatorsDelegate.swift in Sources */,
@@ -1694,18 +1866,21 @@
 				22880ECB23C074830044263D /* CosmosDefaultSettings.swift in Sources */,
 				1BA0977524817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift in Sources */,
 				1BA0976924817B5000E0A042 /* GroupChannelSettingsMemberTableViewCell.swift in Sources */,
+				4F16BC8B249D1744001C4708 /* Audio.swift in Sources */,
 				1BA097B224817B5100E0A042 /* LoginViewController.swift in Sources */,
 				1BA0976D24817B5000E0A042 /* GroupChannelNeutralAdminMessageTableViewCell.swift in Sources */,
 				1BA0979324817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.swift in Sources */,
 				1BA097BD24817B5100E0A042 /* UIViewController+Utils.swift in Sources */,
 				1BA0979124817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.swift in Sources */,
 				1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */,
+				4F16BC8C249D1744001C4708 /* NewCallViewController.swift in Sources */,
 				1BA097C424817B5100E0A042 /* SplitViewController.swift in Sources */,
 				1BA0978724817B5000E0A042 /* OpenChannelTableViewCell.swift in Sources */,
 				22880ECA23C074830044263D /* CosmosText.swift in Sources */,
 				1BA0978524817B5000E0A042 /* CreateOpenChannelDelegate.swift in Sources */,
 				22880EC923C074830044263D /* CosmosAccessibility.swift in Sources */,
 				22880F0D23C0A0EF0044263D /* ForgotPasswordVC.swift in Sources */,
+				4F16BC8E249D1744001C4708 /* ProviderDelegate.swift in Sources */,
 				1BA097A024817B5000E0A042 /* OpenChannelUserListViewController.swift in Sources */,
 				22880E6F23C074380044263D /* AppDelegate.swift in Sources */,
 				22E1602B23C8FA9600D2E54C /* LocalContactHandler.swift in Sources */,
@@ -1721,6 +1896,7 @@
 				1BA0976E24817B5000E0A042 /* GroupChannelIncomingUserMessageTableViewCell.swift in Sources */,
 				1BA097A624817B5000E0A042 /* OpenChannelSettingsUserTableViewCell.swift in Sources */,
 				1BA0974F24817B5000E0A042 /* UpdateUserProfileViewController.swift in Sources */,
+				C56F34B824C2FEF000400874 /* VideoCallVC+Extension.swift in Sources */,
 				1BA097AF24817B5100E0A042 /* SelectedUserCollectioViewCell.swift in Sources */,
 				22880F1F23C0C4900044263D /* PolicyVC.swift in Sources */,
 				1BA0979E24817B5000E0A042 /* OpenChannelCoverImageNameSettingViewController.swift in Sources */,
@@ -1741,10 +1917,12 @@
 				1BA0974E24817B5000E0A042 /* SettingsTableViewCellDelegate.swift in Sources */,
 				1BA0978624817B5000E0A042 /* OpenChannelsViewController.swift in Sources */,
 				1BA0976B24817B5000E0A042 /* GroupChannelSettingsDelegate.swift in Sources */,
+				C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */,
 				1BA0977124817B5000E0A042 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.swift in Sources */,
 				1BA0975E24817B5000E0A042 /* CreateGroupChannelViewControllerB.swift in Sources */,
 				1BA097BC24817B5100E0A042 /* ImageUtil.swift in Sources */,
 				1BA0975924817B5000E0A042 /* GroupChannelsViewController.swift in Sources */,
+				4F16BC84249D1744001C4708 /* CallManager.swift in Sources */,
 				1BA0975F24817B5000E0A042 /* CreateGroupChannelViewControllerA.swift in Sources */,
 				1BA0978D24817B5000E0A042 /* OpenChannelUserMessageTableViewCell.swift in Sources */,
 				1BA0975824817B5000E0A042 /* GroupChannelHiddenChannelsViewController.swift in Sources */,
@@ -1758,6 +1936,7 @@
 				22880EDF23C074830044263D /* Theme.swift in Sources */,
 				1BA0976124817B5000E0A042 /* GroupChannelPublicChannelsViewController.swift in Sources */,
 				1BA097AB24817B5000E0A042 /* UserProfileViewController.swift in Sources */,
+				4F2E8353249209E500FFC0B0 /* VideoCallVC+CallKit.swift in Sources */,
 				22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */,
 				22880F1723C0B8660044263D /* CallLogVC.swift in Sources */,
 				4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */,
@@ -1766,7 +1945,7 @@
 				1BA097A324817B5000E0A042 /* OpenChannelSettingsMenuTableViewCell.swift in Sources */,
 				1BA0979724817B5000E0A042 /* CreateOpenChannelViewControllerA.swift in Sources */,
 				1BA0977024817B5000E0A042 /* GroupChannelIncomingMessageTableViewCell.swift in Sources */,
-				22CCC95523C671CC00592614 /* VideoCallVC.swift in Sources */,
+				22CCC95523C671CC00592614 /* VideoCallVC1.swift in Sources */,
 				22AB54F823CF8E9400823EF8 /* FriendTVC.swift in Sources */,
 				1BA0976224817B5000E0A042 /* GroupChannelInviteMemberDelegate.swift in Sources */,
 				1BA097B524817B5100E0A042 /* CustomProgressCircle.swift in Sources */,
@@ -1786,6 +1965,7 @@
 				22880E7723C074380044263D /* Fone.xcdatamodeld in Sources */,
 				1BA097B124817B5100E0A042 /* ConnectionManager.swift in Sources */,
 				1BA0975424817B5000E0A042 /* SettingsBlockedUserListViewController.swift in Sources */,
+				4F2E8352249209E500FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift in Sources */,
 				1BA0978A24817B5000E0A042 /* OpenChannelMessageTableViewCell.swift in Sources */,
 				1BA097C124817B5100E0A042 /* WebViewController.swift in Sources */,
 				1BA0975A24817B5000E0A042 /* GroupChannelsUpdateListDelegate.swift in Sources */,
@@ -1799,6 +1979,7 @@
 				1BA0975224817B5000E0A042 /* SettingsSwitchTableViewCell.swift in Sources */,
 				1BA0979924817B5000E0A042 /* CreateOpenChannelUserTableViewCell.swift in Sources */,
 				22880EC823C074830044263D /* StarLayer.swift in Sources */,
+				4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */,
 				22CCC95823C793F300592614 /* TwilioVideoCallSettings.swift in Sources */,
 				229BCD0523C202EF00AEF903 /* HelpVC.swift in Sources */,
 				22CCC95223C645A600592614 /* LocalContactTVC.swift in Sources */,
@@ -1808,13 +1989,17 @@
 				22880ECF23C074830044263D /* CosmosLayers.swift in Sources */,
 				1BA0975124817B5000E0A042 /* BlockedUserTableViewCell.swift in Sources */,
 				1BA0979824817B5000E0A042 /* CreateOpenChannelNavigationController.swift in Sources */,
+				4F16BC8F249D1744001C4708 /* Call.swift in Sources */,
 				1BA0975D24817B5000E0A042 /* CreateGroupChannelViewControllerDelegate.swift in Sources */,
 				2282ECE123CBCFF100D80A97 /* NotificationHandler.swift in Sources */,
 				1BA0979C24817B5000E0A042 /* CreateOpenChannelCurrentUserTableViewCell.swift in Sources */,
 				22880EE423C074830044263D /* HKImagePickerHandler.swift in Sources */,
+				C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */,
 				22880ECE23C074830044263D /* RightToLeft.swift in Sources */,
 				22880EE323C074830044263D /* Extensions.swift in Sources */,
+				4F2E83552492103D00FFC0B0 /* AppDelegate+IncomingCall.swift in Sources */,
 				1BA097C6248181AF00E0A042 /* MainTabBarController.swift in Sources */,
+				C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */,
 				1BA0975B24817B5000E0A042 /* GroupChannelTableViewCell.swift in Sources */,
 				22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */,
 				1BA097A424817B5000E0A042 /* OpenChannelSettingsChannelNameTableViewCellDelegate.swift in Sources */,
@@ -1848,6 +2033,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C56F34D024C397AB00400874 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C56F34D724C397AB00400874 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1860,6 +2053,11 @@
 			isa = PBXTargetDependency;
 			target = 22880E6A23C074380044263D /* Fone */;
 			targetProxy = 22880E8E23C0743A0044263D /* PBXContainerItemProxy */;
+		};
+		C56F34DA24C397AB00400874 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C56F34D324C397AB00400874 /* OneSignalNotificationServiceExtension */;
+			targetProxy = C56F34D924C397AB00400874 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1997,22 +2195,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F3C4DDF7A23689B0FEBC047 /* Pods-Fone.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Fone",
+				);
 				INFOPLIST_FILE = Fone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Profile_Adhoc_May_2020;
+				PROVISIONING_PROFILE_SPECIFIER = "oz dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2023,22 +2226,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE8DA9AEE90B1A7BB53F6D56 /* Pods-Fone.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Fone",
+				);
 				INFOPLIST_FILE = Fone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Profile_Adhoc_May_2020;
+				PROVISIONING_PROFILE_SPECIFIER = "oz dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2131,6 +2339,66 @@
 			};
 			name = Release;
 		};
+		C56F34DD24C397AB00400874 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 619FDE9233471CAE88390960 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Fone",
+				);
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Dev;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C56F34DE24C397AB00400874 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 18;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Fone",
+				);
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = Dev;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2166,6 +2434,15 @@
 			buildConfigurations = (
 				22880E9D23C0743A0044263D /* Debug */,
 				22880E9E23C0743A0044263D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C56F34DC24C397AB00400874 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C56F34DD24C397AB00400874 /* Debug */,
+				C56F34DE24C397AB00400874 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -18,14 +18,25 @@ let key_User_Profile = "User_Profile"
 //let key_Provider_Profile = "Provider_Profile"
 let Key_Login_Token = "LoginToken"
 let Key_Login_Status = "LoginStatus"
+let Key_VOIP_Token = "VOIPToken"
 let ClientId = "aad4dc0739b64c529ab86c2126ed341c"
 let Key_FCM_token = "FCMToken"
+let OneSignalId = "8e245475-891c-4b63-a6c0-615e1cddbd65"
+let oneSignalSendNotification = "https://onesignal.com/api/v1/notifications"
+let oneSignalRegisterVOIP = "https://onesignal.com/api/v1/players"
 
 //****************************************//
 //******       VARIABLES           *******//
 //****************************************//
 
 var appDeleg = UIApplication.shared.delegate as! AppDelegate
+
+var VoipToken : String? {
+    if let token = UserDefaults.standard.string(forKey: Key_VOIP_Token) {
+        return token
+    }
+    return nil
+}
 
 var LoginToken : String? {
     if let token = UserDefaults.standard.string(forKey: Key_Login_Token) {
@@ -106,3 +117,4 @@ public func topViewController(_ base: UIViewController? = UIApplication.shared.k
     }
     return base
 }
+

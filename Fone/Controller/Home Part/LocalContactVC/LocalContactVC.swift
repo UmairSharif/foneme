@@ -20,6 +20,8 @@ struct FriendList  {
     var name : String?
     var number : String?
     var userImage : String?
+    var ContactsCnic:String?
+    var userId:String?
 }
 
 class LocalContactVC: UIViewController {
@@ -126,8 +128,8 @@ class LocalContactVC: UIViewController {
                         let number = dict?["ContactsNumber"]?.string ?? ""
                         let name = dict?["ContactsName"]?.string ?? ""
                         let userImage = dict?["Image"]?.string ?? ""
-                        
-                        let getData = FriendList(name: name, number: number,userImage : userImage)
+                        let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
+                        let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic)
                         self.friendList.append(getData)
                     }
                     

@@ -17,6 +17,11 @@ import SystemConfiguration
 import IQKeyboardManagerSwift
 import Branch
 import SendBirdSDK
+import AudioToolbox
+import TwilioVideo
+import Alamofire
+import OneSignal
+import SwiftyJSON
 
 protocol PushKitEventDelegate: AnyObject {
     func credentialsUpdated(credentials: PKPushCredentials) -> Void
@@ -27,37 +32,84 @@ protocol PushKitEventDelegate: AnyObject {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     var userInfo : [AnyHashable : Any]?
     let gcmMessageIDKey = "gcm.message_id"
     var launchFromPushNotific = false
-    var provider = CXProvider(configuration: CXProviderConfiguration(localizedName: "Fone"))
+    
+    var navigationController: UINavigationController?
+    var audioDevice: DefaultAudioDevice = DefaultAudioDevice()
     var pushKitEventDelegate: PushKitEventDelegate?
-    var voipRegistry : PKPushRegistry?
-
-
+    var voipRegistry = PKPushRegistry.init(queue: DispatchQueue.main)
+    let viewController = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "VideoCallVC") as! VideoCallVC
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // Voip Push Call Registry
-       // self.voipRegistration()
+        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
+        //START OneSignal initialization code
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
+        
+        // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: OneSignalId,
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 6)
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
+        
+        
+        // Voip Push Call Registry
+        // self.voipRegistration()
+        TwilioVideoSDK.audioDevice = self.audioDevice;
+        self.pushKitEventDelegate = viewController
+        initializePushKit()
         //Config Firebase
         FirebaseApp.configure()
         Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
-             // do stuff with deep link data (nav to page, display content, etc)
+            // do stuff with deep link data (nav to page, display content, etc)
             if let params = params as? [String: AnyObject] {
                 if let foneId = params["ID"] as? String {
-                    self.getUserDetail(foneId)
+                    if let topVC = topViewController() {
+                        topVC.getUserDetail(cnic: foneId, friend: "") { (userModel, success) in
+                            if success {
+                                let vc = UIStoryboard().loadUserDetailsVC()
+                                vc.userDetails = userModel!
+                                vc.modalPresentationStyle = .overFullScreen
+                                topVC.present(vc, animated: true, completion: {
+                                })
+
+                            }
+                        }
+                    }
                 }
             }
             
         }
+        
         UIApplication.shared.applicationIconBadgeNumber = 0
         
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+            var identifiers: [String] = []
+            for notification:UNNotificationRequest in notificationRequests {
+                if notification.identifier == "identifierCancel" {
+                    identifiers.append(notification.identifier)
+                }
+            }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+        //NotificationHandler.shared.isCallNotificationHandled = true
+        
         SBDMain.initWithApplicationId(APP_ID)
-
+        SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
         let isLogin = UserDefaults.standard.bool(forKey: "isLoggedIn")
         
         if isLogin
@@ -123,9 +175,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
+
         application.registerForRemoteNotifications()
         
+        self.registerForLocalNotifications()
         // [END register_for_notifications]
         
         
@@ -144,19 +197,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Application Setup
         configureApplicationSetup()
         
+        navigationController = application.windows[0].rootViewController as? UINavigationController
+        
+        
+        
         return true
     }
     
+    func initializePushKit() {
+        voipRegistry.delegate = self
+        voipRegistry.desiredPushTypes = [.voIP]
+        
+    }
+    
     func voipRegistration() {
-           let mainQueue = DispatchQueue.main
-           // Create a push registry object
-           self.voipRegistry = PKPushRegistry(queue: mainQueue)
-           // Set the registry's delegate to self
-        self.voipRegistry?.delegate = self
-           // Set the push type to VoIP
-        self.voipRegistry?.desiredPushTypes = [PKPushType.voIP]
-       }
-
+        let mainQueue = DispatchQueue.global()
+        // Create a push registry object
+        self.voipRegistry = PKPushRegistry(queue: mainQueue)
+        // Set the registry's delegate to self
+        //        self.voipRegistry?.delegate = self
+        //        // Set the push type to VoIP
+        //        self.voipRegistry?.desiredPushTypes = [PKPushType.voIP]
+    }
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         Branch.getInstance().continue(userActivity)
     }
@@ -169,58 +232,113 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         var bgTask: UIBackgroundTaskIdentifier
         bgTask = UIBackgroundTaskIdentifier.invalid
         bgTask = application.beginBackgroundTask(withName: "MyTask", expirationHandler: {
-               // Clean up any unfinished task business by marking where you
-               // stopped or ending the task outright.
-               application.endBackgroundTask(bgTask)
-               bgTask = UIBackgroundTaskIdentifier.invalid
-           })
-
-           // Start the long-running task and return immediately.
-           DispatchQueue.global(qos: .default).async(execute: {
-
-               // Do the work associated with the task, preferably in chunks.
-
-               application.endBackgroundTask(bgTask)
-               bgTask = UIBackgroundTaskIdentifier.invalid
-           })
+            // Clean up any unfinished task business by marking where you
+            // stopped or ending the task outright.
+            application.endBackgroundTask(bgTask)
+            bgTask = UIBackgroundTaskIdentifier.invalid
+        })
+        
+        // Start the long-running task and return immediately.
+        DispatchQueue.global(qos: .default).async(execute: {
+            
+            // Do the work associated with the task, preferably in chunks.
+            
+            application.endBackgroundTask(bgTask)
+            bgTask = UIBackgroundTaskIdentifier.invalid
+        })
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        //            topViewController()?.testingCall()
+        //        }
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //fireRepeatingNotification()
     }
-
+    
+    func fireRepeatingNotification(counter  : Int) {
+        
+        if counter > 15{
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+                var identifiers: [String] = []
+                for notification:UNNotificationRequest in notificationRequests {
+                    if notification.identifier == "identifierCancel" {
+                        identifiers.append(notification.identifier)
+                    }
+                }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            }
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let content = UNMutableNotificationContent()
+            
+            if let callType = self.userInfo?["CallType"] as? String {
+                var callTypeString = "video"
+                if callType == "AD" {
+                    callTypeString = "audio"
+                }
+                callTypeString += "  call"
+                var notificationTitle = "You are receiving " + (callType == "AD" ? "an " :  "a ") + callTypeString
+                if let dialerFoneId = self.userInfo?["DialerFoneID"] as? String {
+                    notificationTitle += (" from " + dialerFoneId)
+                }else {
+                    notificationTitle += (" from someone")
+                }
+                content.title = notificationTitle
+                content.body = "Tap to connect"
+                content.categoryIdentifier = "ROOM_INVITATION"
+                content.userInfo = self.userInfo ?? [ : ]
+                //content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
+                let identifier = "identifierCancel"
+                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let theError = error {
+                        print("Error posting local notification \(theError)")
+                    }
+                }
+                AudioServicesPlaySystemSound(1003);
+                self.fireRepeatingNotification(counter: counter + 1)
+            }
+            //DialerFoneID, RecieverFoneID
+        }
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-
+    
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
-        */
+         */
         let container = NSPersistentContainer(name: "Fone")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+                
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -234,9 +352,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -251,6 +369,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    
     // [START receive_message]
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
@@ -259,25 +378,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
+        
+        if let push_type = userInfo[AnyHashable("push_type")] as? String {
+            print(push_type)
+          
+        }
+        if let push_type = userInfo[AnyHashable("aps")] as? String {
+            print(push_type)
+        }
+        
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
         print(userInfo)
-        
-//        if UIApplication.shared.applicationState == UIApplication.State.background {
-//
-//            // Print full message.
-//            print(userInfo)
-//            self.userInfo = userInfo
-//            topViewController()?.seralizeNotificationResult()
-//        }
-//         if UIApplication.shared.applicationState == UIApplication.State.active {
-//
-//            // Print full message.
-//            print(userInfo)
-//            self.userInfo = userInfo
-//            topViewController()?.seralizeNotificationResult()
-//        }
+        if let sendbirdDict = userInfo["sendbird"] as? [String:Any] {
+            if let channelDict  = sendbirdDict["channel"] as? [String:Any] {
+                
+            }
+        }
+        //        if UIApplication.shared.applicationState == UIApplication.State.background {
+        //
+        //            // Print full message.
+        //            print(userInfo)
+        //            self.userInfo = userInfo
+        //            topViewController()?.seralizeNotificationResult()
+        //        }
+        //         if UIApplication.shared.applicationState == UIApplication.State.active {
+        //
+        //            // Print full message.
+        //            print(userInfo)
+        //            self.userInfo = userInfo
+        //            topViewController()?.seralizeNotificationResult()
+        //        }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -294,18 +426,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(userInfo)
         
-//        if UIApplication.shared.applicationState == UIApplication.State.background {
-//            self.userInfo = userInfo
-//            topViewController()?.seralizeNotificationResult()
-//            completionHandler(UIBackgroundFetchResult.newData)
-//        }
-//         if UIApplication.shared.applicationState == UIApplication.State.active {
-//            self.userInfo = userInfo
-//            topViewController()?.seralizeNotificationResult()
-//            completionHandler(UIBackgroundFetchResult.newData)
-//        }
+        //        if UIApplication.shared.applicationState == UIApplication.State.background {
+        //            self.userInfo = userInfo
+        //            topViewController()?.seralizeNotificationResult()
+        //            completionHandler(UIBackgroundFetchResult.newData)
+        //        }
+        //         if UIApplication.shared.applicationState == UIApplication.State.active {
+        //            self.userInfo = userInfo
+        //            topViewController()?.seralizeNotificationResult()
+        //            completionHandler(UIBackgroundFetchResult.newData)
+        //        }
         
-        completionHandler(UIBackgroundFetchResult.newData)
+        //NotificationHandler.shared.isCallNotificationHandled = false
+        
+        self.userInfo = userInfo
+        topViewController()?.seralizeNotificationResult()
+        //fireRepeatingNotification(counter: 0)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 20) {
+            completionHandler(UIBackgroundFetchResult.newData)
+        }
+        
     }
     
     // [END receive_message]
@@ -319,8 +459,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs token: \(token)")
+        SBDMain.registerDevicePushToken(deviceToken, unique: true, completionHandler: { (status, error) in
+            if error == nil {
+                if status == SBDPushTokenRegistrationStatus.pending {
+                    // A device token is pending.
+                    print(status)
+                }
+                else {
+                    // A device token is successfully registered.
+                    print(status)
+                }
+            }
+            else {
+                // Registration failure.
+                print(status)
+            }
+        })
     }
-    
     
     //  MARK:- Configuration
     func configureApplicationSetup(){
@@ -339,75 +494,103 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func getUserDetail(_ foneId: String)
-    {
-        if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
-            
-            let params = ["DeviceToken": foneId] as [String:Any]
-            print("params: \(params)")
-                
-            var headers = [String:String]()
-            headers = ["Content-Type": "application/json",
-                           "Authorization" : "bearer " + loginToken]
-            
-            ServerCall.makeCallWitoutFile(getProfileUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-                
-                if let json = response {
-                    
-                    let statusCode = json["StatusCode"].string ?? ""
-                    if statusCode == "200" {
-                        if let profileData = json["UserProfileData"].dictionary {
-                            if let mobileNumber = profileData["PhoneNumber"]?.string {
-                                let vc = UIStoryboard().loadVideoCallVC()
-                                vc.recieverNumber = mobileNumber
-                                vc.userImage = profileData["ImageUrl"]?.string ?? ""
-                                topViewController()?.present(vc, animated: true, completion: {
-                                })
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
+    
 }
 
 // [START ios_10_message_handling]
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
-    
 
-    // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        userInfo = notification.request.content.userInfo
-        
-        
-        if let messageID = userInfo![gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-        
-        topViewController()?.seralizeNotificationResult()
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-        
-        
-        if let messageID = userInfo![gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-    
-        topViewController()?.seralizeNotificationResult()
-        
-        completionHandler()
-    }
-    
 }
+
+extension AppDelegate : SBDChannelDelegate {
+    func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
+        let topViewController = UIViewController.currentViewController()
+        if topViewController is GroupChannelsViewController {
+            return
+        }
+        
+        if let vc = topViewController as? GroupChannelChatViewController {
+            if vc.channel?.channelUrl == sender.channelUrl {
+                return
+            }
+        }
+        guard let groupChannel = sender as? SBDGroupChannel else { return }
+        
+        let pushOption = groupChannel.myPushTriggerOption
+        
+        switch pushOption {
+        case .all, .default, .mentionOnly:
+            break
+        case .off:
+            return
+        @unknown default:
+            return()
+        }
+        var title = ""
+        var body = ""
+        var type = ""
+        var customType = ""
+        if message is SBDUserMessage {
+            let userMessage = message as! SBDUserMessage
+            let sender = userMessage.sender
+            
+            type = "MESG"
+            body = String(format: "%@: %@", (sender?.nickname)!, userMessage.message!)
+            customType = userMessage.customType!
+        }
+        else if message is SBDFileMessage {
+            let fileMessage = message as! SBDFileMessage
+            let sender = fileMessage.sender
+            
+            if fileMessage.type.hasPrefix("image") {
+                body = String(format: "%@: (Image)", (sender?.nickname)!)
+            }
+            else if fileMessage.type.hasPrefix("video") {
+                body = String(format: "%@: (Video)", (sender?.nickname)!)
+            }
+            else if fileMessage.type.hasPrefix("audio") {
+                body = String(format: "%@: (Audio)", (sender?.nickname)!)
+            }
+            else {
+                body = String(format: "%@: (File)", sender!.nickname!)
+            }
+        }
+        else if message is SBDAdminMessage {
+            let adminMessage = message as! SBDAdminMessage
+            
+            title = ""
+            body = adminMessage.message!
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        content.categoryIdentifier = "SENDBIRD_NEW_MESSAGE"
+        content.userInfo = [
+            "sendbird": [
+                "type": type,
+                "custom_type": customType,
+                "channel": [
+                    "channel_url": sender.channelUrl
+                ],
+                "data": "",
+            ],
+        ]
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 0.1, repeats: false)
+        let request = UNNotificationRequest(identifier: String(format: "%@_%@", content.categoryIdentifier, sender.channelUrl), content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            if error != nil {
+                
+            }
+        }
+    }
+}
+
+
 
 extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
@@ -419,185 +602,225 @@ extension AppDelegate : MessagingDelegate {
         UserDefaults.standard.synchronize()
         let dataDict:[String: String] = ["token": fcmToken]
         
-    
+        self.updateFCMDeviceToken(token: fcmToken)
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
-    // [END refresh_token]
-    // [START ios_10_data_message]
-    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
+    
+    func updateFCMDeviceToken(token : String){
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                let parameters: Parameters = [
+                    "UserGuid": user.userId ?? "",
+                    "Data": token
+                ] as [String : Any]
+                let header = ["Content-Type":"application/json",
+                              "charset":"utf-8"]
+                Alamofire.request(changeuserdevicetoken, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header)
+                    .validate()
+                    .responseString { (response) in
+                        if response.error != nil {
+                            print(response.error?.localizedDescription ?? "Request Error")
+                            return
+                        }else{
+                            do{
+                                let jsonData = try JSON(data: response.data!)
+                                print(jsonData)
+                                
+                            }
+                            catch{
+                                print(error.localizedDescription )
+                            }
+                        }
+                }
+            }
+        }
     }
-    // [END ios_10_data_message]
+    
 }
 
 
-extension AppDelegate: PKPushRegistryDelegate {
-    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-//        let token = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-//        NSLog("voip token: \(token)")
-        
-        let tokens = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-        print("voip token: \(tokens)")
-        
-        UserDefaults.standard.set(tokens, forKey: "VoipToken")
-        UserDefaults.standard.synchronize()
-    }
-
-    func pushRegistry(registry: PKPushRegistry!, didUpdatePushCredentials credentials: PKPushCredentials!, forType type: String!) {
-
-        //print out the VoIP token. We will use this to test the notification.
-        let token = credentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-        NSLog("voip token: \(token)")
+/// Mark :- MyCode
+extension AppDelegate : PKPushRegistryDelegate {
+    // MARK: PKPushRegistryDelegate
     
+    
+    func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, for type: PKPushType) {
+        print("pushRegistry:didUpdatePushCredentials:forType:")
+        
+        let deviceToken = credentials.token.reduce("", {$0 + String(format: "%02X", $1) })
+        print("\(#function) token is: \(deviceToken)")
+        self.registerVOIPToken(voipToken: deviceToken, credentials: credentials)
     }
     
-    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+    func registerVOIPToken(voipToken:String , credentials: PKPushCredentials) {
         
-        
-        let payloadDict = payload.dictionaryPayload["aps"] as? [AnyHashable : Any]
-        
-        let receiverId = payloadDict?["ReceiverId"] as? AnyHashable
-        let notificationType = payloadDict?["NotificationType"] as? AnyHashable
-        let callStatusLogId = payloadDict?["CallLogStatusId"] as? AnyHashable
-        let callType = payloadDict?["CallType"] as? AnyHashable
-        let dialerNumber = payloadDict?["DialerNumber"] as? AnyHashable
-        let status = payloadDict?["Status"] as? AnyHashable
-        let callerName = payloadDict?["CallerName"] as? AnyHashable
-        let dialerId = payloadDict?["DialerId"] as? AnyHashable
-        let receiverNumber = payloadDict?["ReceiverNumber"] as? AnyHashable
-        let channelName = payloadDict?["ChannelName"] as? AnyHashable
-        let callDate = payloadDict?["CallDate"] as? AnyHashable
-        let dialerImageUrl = payloadDict?["DialerImageUrl"] as? AnyHashable
-        _ = payloadDict?["alert"] as? AnyHashable
-        _ = payloadDict?[AnyHashable("body")] as? AnyHashable
-        _ = payloadDict?["title"] as? AnyHashable
-
-        if type == .voIP
-        {
-            //present a local notifcation to visually see when we are recieving a VoIP Notification
-            if UIApplication.shared.applicationState == UIApplication.State.background {
-                
-                if notificationType as? String == "CLLCN"
-                        {
-                           DispatchQueue.main.async {
-                            
-                            self.provider.setDelegate(self, queue: nil)
-                            let update = CXCallUpdate()
-                            update.remoteHandle = CXHandle(type: .phoneNumber, value: callerName as? String ?? "")
-                            self.provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
-                            
-                            NotificationHandler.shared.receiverId = receiverId as? String
-                            NotificationHandler.shared.notificationType = notificationType as? String
-                            NotificationHandler.shared.callStatusLogId = callStatusLogId as? String
-                            NotificationHandler.shared.callType = callType as? String
-                            NotificationHandler.shared.dialerNumber = dialerNumber as? String
-                            NotificationHandler.shared.status = status as? String
-                            NotificationHandler.shared.dialerId = dialerId as? String
-                            NotificationHandler.shared.receiverNumber = receiverNumber as? String
-                            NotificationHandler.shared.channelName = channelName as? String
-                            NotificationHandler.shared.callDate = callDate as? String
-                            NotificationHandler.shared.dialerImageUrl = dialerImageUrl as? String
-                            NotificationHandler.shared.callStatus = true
+        let parameters: Parameters = [
+            "app_id": OneSignalId,
+            "identifier": voipToken,
+            "device_type":"0",
+            "test_type":"1"
+        ]
+        let header = ["Content-Type":"application/json",
+                      "charset":"utf-8"]
+        Alamofire.request(oneSignalRegisterVOIP, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header)
+            .validate()
+            .responseString { (response) in
+                if response.error != nil {
+                    print(response.error?.localizedDescription ?? "Request Error")
+                    return
+                }else{
+                    do{
+                        let jsonData = try JSON(data: response.data!)
+                        print(jsonData)
+                        let success = jsonData["success"].boolValue
+                        if success {
+                            let id = jsonData["id"].stringValue
+                            if let delegate = self.pushKitEventDelegate {
+                                delegate.credentialsUpdated(credentials: credentials)
                             }
+                            self.updateVoipDeviceToken(token: id)
                         }
-                    
-                        else if notificationType as? String == "UNA"
-                        {
-                            topViewController()?.performsEndCallAction()
-                            NotificationHandler.shared.callStatus = false
-                        }
-                            
-                        else if notificationType as? String == "CE"
-                        {
-
-                            topViewController()?.performsEndCallAction()
-                            NotificationHandler.shared.callStatus = false
-                        }
-                
-            }
-            if UIApplication.shared.applicationState == UIApplication.State.active {
-                print("Active")
-                
-                if notificationType as? String == "CLLCN"
-                {
-                    DispatchQueue.main.async {
-                        
-                    self.provider.setDelegate(self, queue: nil)
-                    let update = CXCallUpdate()
-                    update.remoteHandle = CXHandle(type: .generic, value: callerName as? String ?? "")
-                        self.provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
-                    
-                    NotificationHandler.shared.receiverId = receiverId as? String
-                    NotificationHandler.shared.notificationType = notificationType as? String
-                    NotificationHandler.shared.callStatusLogId = callStatusLogId as? String
-                    NotificationHandler.shared.callType = callType as? String
-                    NotificationHandler.shared.dialerNumber = dialerNumber as? String
-                    NotificationHandler.shared.status = status as? String
-                    NotificationHandler.shared.dialerId = dialerId as? String
-                    NotificationHandler.shared.receiverNumber = receiverNumber as? String
-                    NotificationHandler.shared.channelName = channelName as? String
-                    NotificationHandler.shared.callDate = callDate as? String
-                    NotificationHandler.shared.dialerImageUrl = dialerImageUrl as? String
-                    NotificationHandler.shared.callStatus = true
+                    }
+                    catch{
+                        print(error.localizedDescription )
                     }
                 }
-                else if notificationType as? String == "UNA"
-                {
-                    topViewController()?.performsEndCallAction()
-                    NotificationHandler.shared.callStatus = false
-                }
-                    
-                else if notificationType as? String == "CE"
-                {
-
-                    topViewController()?.performsEndCallAction()
-                    NotificationHandler.shared.callStatus = false
+        }
+    }
+    
+    func updateVoipDeviceToken(token : String){
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                let parameters: Parameters = [
+                    "UserGuid": user.userId ?? "",
+                    "Data": token
+                ] as [String : Any]
+                let header = ["Content-Type":"application/json",
+                              "charset":"utf-8"]
+                Alamofire.request(changeuservoiptoken, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: header)
+                    .validate()
+                    .responseString { (response) in
+                        if response.error != nil {
+                            print(response.error?.localizedDescription ?? "Request Error")
+                            return
+                        }else{
+                            do{
+                                let jsonData = try JSON(data: response.data!)
+                                print(jsonData)
+                                
+                            }
+                            catch{
+                                print(error.localizedDescription )
+                            }
+                        }
                 }
             }
         }
     }
     
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
+        print("pushRegistry:didInvalidatePushTokenForType:")
         
-        print("token invalidated")
-    }
-}
-
-
-extension AppDelegate : CXProviderDelegate{
-    
-    public func providerDidReset(_ provider: CXProvider) {
-        
+        if let delegate = self.pushKitEventDelegate {
+            delegate.credentialsInvalidated()
+        }
     }
     
-    public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+    /**
+     * Try using the `pushRegistry:didReceiveIncomingPushWithPayload:forType:withCompletionHandler:` method if
+     * your application is targeting iOS 11. According to the docs, this delegate method is deprecated by Apple.
+     */
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        print("pushRegistry:didReceiveIncomingPushWithPayload:forType:")
+        
+        if let topVC = topViewController() {
+            if topVC != viewController {
+                topVC.present(viewController, animated: true) {
+                    self.viewController.loadViewIfNeeded()
+                    
+                }
+                if let delegate = self.pushKitEventDelegate {
+                    delegate.incomingPushReceived(payload: payload)
+                }
+            }
+        }
+        
+    }
     
-        if UIApplication.shared.applicationState == UIApplication.State.background {
+    /**
+     * This delegate method is available on iOS 11 and above. Call the completion handler once the
+     * notification payload is passed to the `TwilioVoice.handleNotification()` method.
+     */
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        
+        if let topVC = topViewController() {
+            if topVC != viewController {
+                topVC.present(viewController, animated: true) {
+                    self.viewController.loadViewIfNeeded()
+                    
+                }
+                if let delegate = self.pushKitEventDelegate {
+                    delegate.incomingPushReceived(payload: payload, completion: completion)
+                }
+                if let version = Float(UIDevice.current.systemVersion), version >= 13.0 {
+                    /**
+                     * The Voice SDK processes the call notification and returns the call invite synchronously. Report the incoming call to
+                     * CallKit and fulfill the completion before exiting this callback method.
+                     */
+                    
+                    
+                    completion()
+                    
+                }
+            }
             
-            topViewController()?.navigateToCallScreen()
-            //AudioCallHandler.instance.startFunc()
         }
-        else //if UIApplication.shared.applicationState == UIApplication.State.active
-        {
-            topViewController()?.navigateToCallScreen()
-        }
-        action.fulfill()
-    }
-    
-   public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
-    
-    DispatchQueue.main.async {
         
-        if NotificationHandler.shared.callStatus ?? false
-        {
-            topViewController()?.sendMissedCallNotificationAPI()
-        }
-        action.fulfill()
-   
-       }
     }
 }
+
+
+
+/*
+ 
+ 
+ extension AppDelegate : CXProviderDelegate{
+ 
+ public func providerDidReset(_ provider: CXProvider) {
+ 
+ }
+ 
+ public func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+ 
+ if UIApplication.shared.applicationState == UIApplication.State.background {
+ 
+ topViewController()?.navigateToCallScreen()
+ //AudioCallHandler.instance.startFunc()
+ }
+ else //if UIApplication.shared.applicationState == UIApplication.State.active
+ {
+ topViewController()?.navigateToCallScreen()
+ }
+ action.fulfill()
+ }
+ 
+ public func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+ 
+ DispatchQueue.main.async {
+ 
+ if NotificationHandler.shared.callStatus ?? false
+ {
+ topViewController()?.sendMissedCallNotificationAPI()
+ }
+ action.fulfill()
+ 
+ }
+ }
+ }
+ */

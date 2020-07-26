@@ -12,6 +12,7 @@ import AlamofireImage
 import SwiftyJSON
 
 class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate {
+    
     @IBOutlet weak var groupChannelsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var toastView: UIView!
@@ -148,6 +149,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         } else if segue.identifier == "ShowGroupChat", let destination = segue.destination.children.first as? GroupChannelChatViewController {
             destination.hidesBottomBarWhenPushed = true
             if let index = sender as? Int {
+                print(self.channels[index].channelUrl)
                 destination.channel = self.channels[index]
             } else if let channel = sender as? SBDGroupChannel {
                 destination.channel = channel

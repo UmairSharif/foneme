@@ -17,6 +17,11 @@ struct MissCallData {
     var status : String?
     var dateTime : String?
     var name : String?
+    
+    var callerId : String?
+    var receiverId : String?
+    var callerFoneId : String?
+    var receiverFoneId : String?
 }
 
 
@@ -143,16 +148,20 @@ class CallLogVC: UIViewController {
             let status = dict?["CallLogStatus"]?.string ?? ""
             let number = dict?["CallLogNumber"]?.string ?? ""
             let name = dict?["CallLogName"]?.string ?? ""
-            
+            let callerFoneId = dict?["CallerFoneId"]?.string ?? ""
+            let callingFoneId = dict?["CallingFoneId"]?.string ?? ""
+            let callerUserId = dict?["CallerUserId"]?.string ?? ""
+            let callingUserId = dict?["CallingUserId"]?.string ?? ""
+
             if status == "Missed"
             {
-                let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime,name:name)
+                let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                 self.missCallArray.append(getData)
             }
             
             if status != ""
             {
-                let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime,name:name)
+                let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                 self.logArray.append(getData)
             }
         }
@@ -272,16 +281,20 @@ class CallLogVC: UIViewController {
                         let status = dict?["CallLogStatus"]?.string ?? ""
                         let number = dict?["CallLogNumber"]?.string ?? ""
                         let name = dict?["CallLogName"]?.string ?? ""
-                        
+                        let callerFoneId = dict?["CallerFoneId"]?.string ?? ""
+                        let callingFoneId = dict?["CallingFoneId"]?.string ?? ""
+                        let callerUserId = dict?["CallerUserId"]?.string ?? ""
+                        let callingUserId = dict?["CallingUserId"]?.string ?? ""
+
                         if status == "Missed"
                         {
-                            let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime,name:name)
+                            let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.missCallArray.append(getData)
                         }
                         
                         if status != ""
                         {
-                            let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime,name:name)
+                            let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.logArray.append(getData)
                         }
                     }
@@ -368,15 +381,34 @@ extension CallLogVC : UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        
         if status == "All"
         {
             let log = logArray[indexPath.row]
             
             let vc = UIStoryboard().loadVideoCallVC()
             vc.recieverNumber = log.number
+            vc.name = log.name ?? ""
             vc.userImage = log.userImage
-            self.present(vc, animated: true, completion: nil)
+            vc.DialerFoneID = log.receiverFoneId ?? ""
+            self.getUserDetail(cnic: log.receiverFoneId!, friend: "") { (user, success) in
+                if success {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+                    vc.userDetails = user!
+                    vc.modalPresentationStyle = .fullScreen
+                    NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+                }
+            }
         }
          else
         {
@@ -386,8 +418,24 @@ extension CallLogVC : UITableViewDelegate,UITableViewDataSource
             
             let vc = UIStoryboard().loadVideoCallVC()
             vc.recieverNumber = log.number
+            vc.name = log.name ?? ""
             vc.userImage = log.userImage
-            self.present(vc, animated: true, completion: nil)
+            vc.DialerFoneID = log.receiverFoneId ?? ""
+            self.getUserDetail(cnic: log.receiverFoneId!, friend: "") { (user, success) in
+                if success {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+                    vc.userDetails = user!
+                    vc.modalPresentationStyle = .fullScreen
+                    NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
+                    self.present(vc, animated: true, completion: nil)
+                }else{
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+                }
+            }
         }
         
     }
