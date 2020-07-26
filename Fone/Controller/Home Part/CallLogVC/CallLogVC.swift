@@ -184,14 +184,12 @@ class CallLogVC: UIViewController {
     @IBAction func allBtnTapped(_ sender : UIButton)
     {
         self.status = "All"
-        //Reload Table View
         self.callLogTVC.reloadData()
     }
 
     @IBAction func missBtnTapped(_ sender : UIButton)
     {
         self.status = "Missed"
-        //Reload Table View
         self.callLogTVC.reloadData()
     }
     
