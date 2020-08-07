@@ -120,11 +120,6 @@ class SignUpVC: UIViewController,CountryDataDelegate {
             self.errorAlert("Please enter your phone number!")
             return false
         }
-        else if (passwordTxt.text?.isEmpty)!
-        {
-            self.errorAlert("Please enter your password!")
-            return false
-        }
         return true
     }
 }
@@ -142,7 +137,7 @@ extension SignUpVC
                       "Email": emailTxt.text!,
                       "CNIC": textFieldFoneId.text!,
                       "PhoneNumber": mobileNumber,
-                      "Password": passwordTxt.text!,
+                      "Password": "",
                       "CountryCode": codeLbl.text!,
                       "FatherName": "iOS",
                       "NumberWithOutCode": phoneTxt.text!] as [String:Any]

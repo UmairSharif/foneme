@@ -9,7 +9,6 @@
 import Foundation
 
 let BASEURL = "https://zwilio.com/"
-
 //************** Authenticate Part URL *************/////
 let registerUrl = "\(BASEURL)api/account/v1/register"
 let getSMSCodeUrl = "\(BASEURL)api/account/v1/getsmscode"

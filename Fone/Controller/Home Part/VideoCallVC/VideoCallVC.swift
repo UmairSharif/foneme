@@ -89,8 +89,8 @@ class VideoCallVC: UIViewController {
         callerImage.layer.cornerRadius = callerImage.frame.size.height / 2
         callerImage.clipsToBounds = true
         UserNameLbl.text = self.name
-        previewView.contentMode = .scaleAspectFill
-        previewCallingView.contentMode = .scaleAspectFill
+        previewView.contentMode = .scaleToFill
+        previewCallingView.contentMode = .scaleToFill
         self.roomVOIPToken = userDetails?.contactVT ?? ""
         if isVideo == true {
             previewCallingView.isHidden = false

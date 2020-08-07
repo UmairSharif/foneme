@@ -249,8 +249,6 @@ class CallLogVC: UIViewController {
             if let json = response {
                 
                 print(json)
-                
-                
                 self.logArray.removeAll()
                 self.missCallArray.removeAll()
                 
@@ -328,51 +326,55 @@ extension CallLogVC : UITableViewDelegate,UITableViewDataSource
         
         if status == "All"
         {
-            let log = logArray[indexPath.row]
-            
-            if log.status == "Out Going"
-            {
-                cell.callStatusLbl.text = "Out Going"
+            if logArray.count > indexPath.row {
+                let log = logArray[indexPath.row]
+                
+                if log.status == "Out Going"
+                {
+                    cell.callStatusLbl.text = "Out Going"
+                }
+                else if log.status == "InComing"
+                {
+                    cell.callStatusLbl.text = "InComing"
+                }
+                else
+                {
+                    cell.callStatusLbl.text = "Missed"
+                }
+                
+                let dateFormatter = DateFormatter()
+                let tempLocale = dateFormatter.locale
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                let date = dateFormatter.date(from: log.dateTime ?? "")
+                dateFormatter.locale = Locale(identifier:"en_US_POSIX")
+                dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+                dateFormatter.locale = tempLocale // reset the locale
+                let dateString = dateFormatter.string(from: date ?? Date())
+                cell.timeLbl.text = dateString
+                cell.nameLbl.text = log.name
+                cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+                cell.countLbl.isHidden = true
             }
-            else if log.status == "InComing"
-            {
-                cell.callStatusLbl.text = "InComing"
-            }
-            else
-            {
-                cell.callStatusLbl.text = "Missed"
-            }
-            
-            let dateFormatter = DateFormatter()
-            let tempLocale = dateFormatter.locale
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            let date = dateFormatter.date(from: log.dateTime ?? "")
-            dateFormatter.locale = Locale(identifier:"en_US_POSIX")
-            dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-            dateFormatter.locale = tempLocale // reset the locale
-            let dateString = dateFormatter.string(from: date ?? Date())
-            cell.timeLbl.text = dateString
-            cell.nameLbl.text = log.name
-            cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-            cell.countLbl.isHidden = true
         }
         else
         {
-            let log = missCallArray[indexPath.row]
-            
-            let dateFormatter = DateFormatter()
-            let tempLocale = dateFormatter.locale
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            let date = dateFormatter.date(from: log.dateTime ?? "")
-            dateFormatter.locale = Locale(identifier:"en_US_POSIX")
-            dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-            dateFormatter.locale = tempLocale // reset the locale
-            let dateString = dateFormatter.string(from: date ?? Date())
-            cell.timeLbl.text = dateString
-            cell.nameLbl.text = log.name
-            cell.callStatusLbl.text = log.status
-            cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-            cell.countLbl.isHidden = true
+            if missCallArray.count > indexPath.row {
+                let log = missCallArray[indexPath.row]
+                
+                let dateFormatter = DateFormatter()
+                let tempLocale = dateFormatter.locale
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                let date = dateFormatter.date(from: log.dateTime ?? "")
+                dateFormatter.locale = Locale(identifier:"en_US_POSIX")
+                dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+                dateFormatter.locale = tempLocale // reset the locale
+                let dateString = dateFormatter.string(from: date ?? Date())
+                cell.timeLbl.text = dateString
+                cell.nameLbl.text = log.name
+                cell.callStatusLbl.text = log.status
+                cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+                cell.countLbl.isHidden = true
+            }
         }
         
         return cell

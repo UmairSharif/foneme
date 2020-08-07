@@ -650,14 +650,14 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2n-A5-mTZ">
-                                        <rect key="frame" x="319" y="36" width="40" height="38.666666666666671"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2n-A5-mTZ">
+                                        <rect key="frame" x="319" y="35" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="1pC-bD-QuG"/>
                                             <constraint firstAttribute="height" constant="40" id="55P-Qn-xjS"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" backgroundImage="person.circle.fill" catalog="system"/>
+                                        <state key="normal" image="Group 9"/>
                                         <connections>
                                             <action selector="btnClickFriend:" destination="8Xg-4D-QH0" eventType="touchUpInside" id="va3-Ll-jxq"/>
                                         </connections>
@@ -701,7 +701,7 @@
                                             <constraint firstAttribute="width" constant="40" id="z7b-7f-tjM"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" backgroundImage="ic_chat_black"/>
+                                        <state key="normal" backgroundImage="Chats"/>
                                         <connections>
                                             <action selector="btnClickChat:" destination="8Xg-4D-QH0" eventType="touchUpInside" id="0gC-oR-UKF"/>
                                         </connections>
@@ -1054,8 +1054,8 @@
                                                     <constraint firstAttribute="height" constant="26" id="I1W-o2-6kE"/>
                                                     <constraint firstAttribute="width" constant="30" id="pb3-dr-ZeY"/>
                                                 </constraints>
-                                                <state key="normal" image="ic_call_video_stope"/>
-                                                <state key="selected" image="ic_call_vedio"/>
+                                                <state key="normal" image="Videos3"/>
+                                                <state key="selected" image="Videos2"/>
                                                 <connections>
                                                     <action selector="btnHoldAction:" destination="RRY-u7-UXV" eventType="touchUpInside" id="rtQ-jE-K8f"/>
                                                 </connections>
@@ -2293,7 +2293,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <scene sceneID="2dH-QG-ACy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="nGa-9q-ORN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Calls" image="ic_call-1" id="cjm-ha-taa"/>
+                    <tabBarItem key="tabBarItem" title="Calls" image="Calls1" selectedImage="Callscolor" id="cjm-ha-taa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gRb-WW-fYG">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2311,7 +2311,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <scene sceneID="hVb-ua-fRk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="L78-sU-EC6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="ic_setting" id="O0R-N0-0mY"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsColor" id="O0R-N0-0mY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1p7-js-mg6">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2329,7 +2329,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <scene sceneID="b34-8x-Oyg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="y7t-Z2-G3L" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" image="profile" id="qqG-I2-agg"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="Friends" selectedImage="Friendscolor" id="qqG-I2-agg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9PX-GM-sAZ">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2414,7 +2414,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <scene sceneID="A0T-6U-zPO">
             <objects>
                 <navigationController title="Group Channels" automaticallyAdjustsScrollViewInsets="NO" id="EiV-SS-DRA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" image="img_tab_group_channel_normal" selectedImage="img_tab_group_channel_selected" id="DDL-nD-Rsy"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="Chats1" selectedImage="ChatsColor" id="DDL-nD-Rsy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KYe-Pp-Dn0">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -2441,6 +2441,18 @@ Please contact us if you have any questions, concerns or recommendations, our te
         </scene>
     </scenes>
     <resources>
+        <image name="Calls1" width="24" height="24"/>
+        <image name="Callscolor" width="24" height="24"/>
+        <image name="Chats" width="35" height="30"/>
+        <image name="Chats1" width="28" height="24"/>
+        <image name="ChatsColor" width="28" height="24"/>
+        <image name="Friends" width="24" height="24"/>
+        <image name="Friendscolor" width="24" height="24"/>
+        <image name="Group 9" width="27" height="22"/>
+        <image name="Settings" width="24" height="24"/>
+        <image name="SettingsColor" width="24" height="24"/>
+        <image name="Videos2" width="39" height="26"/>
+        <image name="Videos3" width="39" height="26"/>
         <image name="bg_call" width="414" height="792"/>
         <image name="call_end" width="78" height="78"/>
         <image name="flag" width="512" height="512"/>
@@ -2449,14 +2461,10 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <image name="ic_back_blk" width="9.6666669845581055" height="19"/>
         <image name="ic_back_white" width="11.333333015441895" height="18"/>
         <image name="ic_call" width="13.333333015441895" height="13.333333015441895"/>
-        <image name="ic_call-1" width="27.333333969116211" height="27.333333969116211"/>
         <image name="ic_call_audio" width="68" height="68"/>
         <image name="ic_call_speaker" width="67" height="68"/>
         <image name="ic_call_top" width="22.333333969116211" height="23"/>
-        <image name="ic_call_vedio" width="39" height="26"/>
-        <image name="ic_call_video_stope" width="225" height="225"/>
         <image name="ic_chat-1" width="24.666666030883789" height="24.666666030883789"/>
-        <image name="ic_chat_black" width="24.666666030883789" height="24.666666030883789"/>
         <image name="ic_contact" width="32.666667938232422" height="32"/>
         <image name="ic_help" width="32.666667938232422" height="32"/>
         <image name="ic_info" width="20.333333969116211" height="20.333333969116211"/>
@@ -2464,17 +2472,12 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <image name="ic_next" width="9.6666669845581055" height="18.333333969116211"/>
         <image name="ic_profile" width="109.33333587646484" height="109.33333587646484"/>
         <image name="ic_qr_set" width="32.666667938232422" height="32"/>
-        <image name="ic_setting" width="24.666666030883789" height="24.666666030883789"/>
         <image name="ic_tell" width="32.666667938232422" height="32"/>
         <image name="icon_video" width="96" height="96"/>
         <image name="iconfinder_phone_1608790" width="512" height="512"/>
         <image name="icons8-add-list-64" width="64" height="64"/>
         <image name="img_icon_edit_camera" width="30" height="30"/>
-        <image name="img_tab_group_channel_normal" width="28" height="28"/>
-        <image name="img_tab_group_channel_selected" width="28" height="28"/>
-        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="placeHolder" width="225" height="200"/>
-        <image name="profile" width="30" height="30"/>
         <image name="usa_flag" width="512" height="512"/>
     </resources>
 </document>
