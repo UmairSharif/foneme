@@ -7,86 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E0F640BD-99C7-4F5D-B07A-45D4FFB2256B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "recevierSendNotificationAPI(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EB27A990-A55D-41EF-BCE5-6C4DAA871B91"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "817"
-            endingLineNumber = "817"
-            landmarkName = "didSubscribeToAudioTrack(audioTrack:publication:participant:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B134C5F5-350F-4C3C-B8E8-22D6D5F0F6EE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "913"
-            endingLineNumber = "913"
-            landmarkName = "addCallLogAPI(status:notifType:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B134C5F5-350F-4C3C-B8E8-22D6D5F0F6EE - b9b94eb66a014194"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Fone.VideoCallVC.addCallLogAPI(status: Swift.String, notifType: Swift.String) -&gt; ()"
-                  moduleName = "Fone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jahan/Desktop/Projects/foneme-ios/Fone/Controller/Home%20Part/VideoCallVC/VideoCallVC+Extension.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "913"
-                  endingLineNumber = "913"
-                  offsetFromSymbolStart = "5076">
-               </Location>
-               <Location
-                  uuid = "B134C5F5-350F-4C3C-B8E8-22D6D5F0F6EE - 5b30db125303ab05"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;SwiftyJSON.JSON&gt;) -&gt; () in Fone.VideoCallVC.addCallLogAPI(status: Swift.String, notifType: Swift.String) -&gt; ()"
-                  moduleName = "Fone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jahan/Desktop/Projects/foneme-ios/Fone/Controller/Home%20Part/VideoCallVC/VideoCallVC+Extension.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "915"
-                  endingLineNumber = "915"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A635F352-C147-41D9-BCA0-9580979383A7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -145,6 +65,38 @@
             startingLineNumber = "581"
             endingLineNumber = "581"
             landmarkName = "searchFriend(byCnic:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ABF1225B-E5E7-47EB-8104-B8E70FEC46E6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Network/ServerInteraction/OMServerInteraction.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "makeCallWithFile(_:params:files:type:currentView:header:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21BE4127-DE47-43BC-9F39-E9DA472E67F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/ChatVC/ChatVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

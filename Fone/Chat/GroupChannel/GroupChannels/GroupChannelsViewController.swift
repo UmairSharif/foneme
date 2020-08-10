@@ -121,10 +121,20 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
 
         self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")
         self.navigationController?.navigationBar.isTranslucent = false
-        
+
         self.groupChannelsTableView.layoutIfNeeded()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+       
+    }
     func showToast(message: String, completion: (() -> Void)?) {
         self.toastCompleted = false
         self.toastView.alpha = 1

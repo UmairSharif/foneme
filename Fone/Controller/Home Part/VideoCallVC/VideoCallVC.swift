@@ -112,6 +112,7 @@ class VideoCallVC: UIViewController {
         configuration.maximumCallsPerCallGroup = 1
         configuration.supportsVideo = true
         configuration.supportedHandleTypes = [.generic]
+        
         if let callKitIcon = UIImage(named: "iconMask80") {
             configuration.iconTemplateImageData = callKitIcon.pngData()
         }
@@ -151,6 +152,8 @@ class VideoCallVC: UIViewController {
         }
         
     }
+    
+    
     
     @IBAction func panView(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: sender.view)
@@ -247,6 +250,7 @@ class VideoCallVC: UIViewController {
         super.viewWillDisappear(animated)
         self.timer?.invalidate()
         self.timer = nil
+        self.player?.stop()
     }
     
     func getTokenAPI(completion : @escaping (_ success : Bool) -> Void)
@@ -366,7 +370,7 @@ class VideoCallVC: UIViewController {
                       "ChannelName" : dialerNumber ?? "",
                       "UserId" : userId ?? "",
                       "CallStatusType": "APPTOAPP",
-                      
+
             ] as [String:Any]
         
         print("params: \(params)")
@@ -410,33 +414,22 @@ class VideoCallVC: UIViewController {
         }
     }
     
-    @IBAction func speakerBtnTapped(_ sender: Any) {
-        if mute {
-            mute = false
-            self.speakerButton.setImage(UIImage(named: "ic_loaud_selected"), for: UIControl.State.normal)
+    @IBAction func speakerBtnTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
             let session = AVAudioSession.sharedInstance()
             var _: Error?
             try? session.setCategory(AVAudioSession.Category.playAndRecord)
             try? session.setMode(AVAudioSession.Mode.voiceChat)
-            
             try? session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-            
             try? session.setActive(true)
-        }
-        else if !mute
-        {
-            
-            mute = true
-            self.speakerButton.setImage(UIImage(named: "ic_loaud"), for: UIControl.State.normal)
+        }else{
             let session = AVAudioSession.sharedInstance()
             var _: Error?
             try? session.setCategory(AVAudioSession.Category.playAndRecord)
             try? session.setMode(AVAudioSession.Mode.voiceChat)
-            
             try? session.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
-            
             try? session.setActive(true)
-            
         }
     }
     
@@ -527,22 +520,12 @@ class VideoCallVC: UIViewController {
     
     
     
-    @IBAction func toggleMic(sender: AnyObject) {
-        if let room = room, let uuid = room.uuid, let localAudioTrack = self.localAudioTrack {
-            let isMuted = localAudioTrack.isEnabled
-            let muteAction = CXSetMutedCallAction(call: uuid, muted: isMuted)
-            let transaction = CXTransaction(action: muteAction)
-            
-            callKitCallController.request(transaction)  { error in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.logMessage(messageText: "SetMutedCallAction transaction request failed: \(error.localizedDescription)")
-                        return
-                    }
-                    self.logMessage(messageText: "SetMutedCallAction transaction request successful")
-                }
-            }
+    @IBAction func toggleMic(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if let localAudioTrack = self.localAudioTrack {
+              localAudioTrack.isEnabled = sender.isSelected
         }
+
     }
     
     func muteAudio(isMuted: Bool) {

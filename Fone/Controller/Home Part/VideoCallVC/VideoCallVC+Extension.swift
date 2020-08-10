@@ -35,6 +35,7 @@ extension VideoCallVC : CXProviderDelegate {
             print(response ?? JSON.null)
             
             if let json = response {
+                print(json)
                 if !json.isEmpty {
                     print(json)
                     if status == "MIS" {
@@ -164,7 +165,7 @@ extension VideoCallVC : CXProviderDelegate {
         // Stop the audio unit by setting isEnabled to `false`.
         DispatchQueue.main.async {
             self.audioDevice.isEnabled = false;
-            
+            self.player?.stop()
             // Configure the AVAudioSession by executign the audio device's `block`.
             self.audioDevice.block()
             if self.isVideo {
@@ -196,6 +197,8 @@ extension VideoCallVC : CXProviderDelegate {
     
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
         NSLog("provider:performEndCallAction:")
+        self.player?.stop()
+
         if self.isDeclinedCall == false {
             self.isDeclinedCall = true
         }
@@ -289,15 +292,18 @@ extension VideoCallVC {
         
         let callHandle = CXHandle(type: .phoneNumber, value: roomName ?? "")
         let callUpdate = CXCallUpdate()
+        
         callUpdate.remoteHandle = callHandle
         callUpdate.supportsDTMF = false
         callUpdate.supportsHolding = true
         callUpdate.supportsGrouping = false
         callUpdate.supportsUngrouping = false
         callUpdate.hasVideo = self.isVideo
+        
         self.isIncommingCall = true
         self.roomFCMToken = NotificationHandler.shared.fcmToken ?? ""
         callKitProvider.reportNewIncomingCall(with: uuid, update: callUpdate) { error in
+            self.playSound()
             if error == nil {
                 NSLog("Incoming call successfully reported.")
                 
