@@ -89,8 +89,11 @@ class VideoCallVC: UIViewController {
         callerImage.layer.cornerRadius = callerImage.frame.size.height / 2
         callerImage.clipsToBounds = true
         UserNameLbl.text = self.name
-        previewView.contentMode = .scaleToFill
-        previewCallingView.contentMode = .scaleToFill
+        previewView.contentMode = .scaleAspectFill
+        previewCallingView.contentMode = .scaleAspectFill
+        
+        previewView.backgroundColor = .black
+        previewCallingView.backgroundColor = .black
         self.roomVOIPToken = userDetails?.contactVT ?? ""
         if isVideo == true {
             previewCallingView.isHidden = false
@@ -167,8 +170,8 @@ class VideoCallVC: UIViewController {
                 self.isVideo = false
             }
             if self.isVideo {
-                self.previewView.contentMode = .scaleToFill
-                self.previewCallingView.contentMode = .scaleToFill
+                self.previewView.contentMode = .scaleAspectFill
+                self.previewCallingView.contentMode = .scaleAspectFill
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = false
                 self.remoteCallingView.isHidden = false
@@ -179,8 +182,8 @@ class VideoCallVC: UIViewController {
             }
         }else{
             if self.isVideo {
-                self.previewView.contentMode = .scaleToFill
-                self.previewCallingView.contentMode = .scaleToFill
+                self.previewView.contentMode = .scaleAspectFill
+                self.previewCallingView.contentMode = .scaleAspectFill
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = false
                 self.remoteCallingView.isHidden = false
@@ -190,6 +193,7 @@ class VideoCallVC: UIViewController {
                 self.remoteCallingView.isHidden = true
             }
         }
+        self.remoteCallingView.backgroundColor = .black
         if NotificationHandler.shared.isReceived == false {
             if !(NotificationHandler.shared.callStatus ?? false){
                 //roomName = recieverNumber ?? ""

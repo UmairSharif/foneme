@@ -184,7 +184,7 @@ class FriendTabVC: UIViewController {
             "Contacts": contactList
             
             ] as [String:Any]
-        
+        print(parameters)
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
                    "Authorization" : "bearer " + loginToken!]
