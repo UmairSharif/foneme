@@ -523,7 +523,7 @@ class VideoCallVC: UIViewController {
     @IBAction func toggleMic(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if let localAudioTrack = self.localAudioTrack {
-              localAudioTrack.isEnabled = sender.isSelected
+              localAudioTrack.isEnabled = !sender.isSelected
         }
 
     }
