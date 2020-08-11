@@ -275,54 +275,30 @@ class VideoCallVC: UIViewController {
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
                    "Authorization" : "bearer " + loginToken!]
-        //http://stagingfluff.notesdb.co/api/get/token
-        let params1 = ["identity":identity,
-                       "room_name":roomName]
-        Alamofire.request("http://stagingfluff.notesdb.co/api/get/token", method: .post, parameters: params1, encoding: JSONEncoding.default, headers: nil)
-            .validate()
-            .responseString { (response) in
-                do{
-                    let json = try JSON(data: response.data!)
-                    print(json)
-                    let token = json["token"].stringValue
-                    UserDefaults.standard.set(token, forKey: "token")
-                    UserDefaults.standard.synchronize()
-                    self.accessToken = token
-                    if !(NotificationHandler.shared.callStatus ?? false)
-                    {
-                        //Send call Notification
-                        self.sendCallNotificationAPI()
-                        
-                    }
-                    completion(true)
+  
+        ServerCall.makeCallWitoutFile(getCallTokenUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+            
+            if let json = response {
+                print(json)
+                
+                let token = json["JWTToken"].string ?? ""
+                UserDefaults.standard.set(token, forKey: "token")
+                UserDefaults.standard.synchronize()
+                self.accessToken = token
+                if !(NotificationHandler.shared.callStatus ?? false)
+                {
+                    //Send call Notification
+                    self.sendCallNotificationAPI()
+                    
                 }
-                catch{
-                    completion(false)
-                }
+                completion(true)
+                //                self.configureSetup(token : token)
+            }
+            else{
+                completion(false)
+                print(response?.error?.localizedDescription)
+            }
         }
-        //        ServerCall.makeCallWitoutFile(getCallTokenUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-        //
-        //            if let json = response {
-        //                print(json)
-        //
-        //                let token = json["JWTToken"].string ?? ""
-        //                UserDefaults.standard.set(token, forKey: "token")
-        //                UserDefaults.standard.synchronize()
-        //
-        //                if !(NotificationHandler.shared.callStatus ?? false)
-        //                {
-        //                    //Send call Notification
-        //                    self.sendCallNotificationAPI()
-        //
-        //                }
-        //                completion(true)
-        //                //                self.configureSetup(token : token)
-        //            }
-        //            else{
-        //                completion(false)
-        //                print(response?.error?.localizedDescription)
-        //            }
-        //        }
     }
     
     func runTimer() {
@@ -690,4 +666,31 @@ class VideoCallVC: UIViewController {
  completion(false)
  }
  }
+ */
+/*
+       //http://stagingfluff.notesdb.co/api/get/token
+ //        let params1 = ["identity":identity,
+ //                       "room_name":roomName]
+ //        Alamofire.request("http://stagingfluff.notesdb.co/api/get/token", method: .post, parameters: params1, encoding: JSONEncoding.default, headers: nil)
+ //            .validate()
+ //            .responseString { (response) in
+ //                do{
+ //                    let json = try JSON(data: response.data!)
+ //                    print(json)
+ //                    let token = json["token"].stringValue
+ //                    UserDefaults.standard.set(token, forKey: "token")
+ //                    UserDefaults.standard.synchronize()
+ //                    self.accessToken = token
+ //                    if !(NotificationHandler.shared.callStatus ?? false)
+ //                    {
+ //                        //Send call Notification
+ //                        self.sendCallNotificationAPI()
+ //
+ //                    }
+ //                    completion(true)
+ //                }
+ //                catch{
+ //                    completion(false)
+ //                }
+ //        }
  */
