@@ -982,7 +982,11 @@ extension VideoCallVC : RoomDelegate {
             
             self.sendVOIPNotification(voipToken: self.roomVOIPToken, roomName: room.name, uuid: room.uuid!.uuidString, fcmToken: self.roomFCMToken) { (success) in
                 if success {
-                    
+                    self.sendVOIPNotification(voipToken: self.roomVOIPToken, roomName: room.name, uuid: room.uuid!.uuidString, fcmToken: self.roomFCMToken) { (success) in
+                        if success {
+                            
+                        }
+                    }
                 }
             }
         }
