@@ -21,7 +21,7 @@ let Key_Login_Status = "LoginStatus"
 let Key_VOIP_Token = "VOIPToken"
 let ClientId = "aad4dc0739b64c529ab86c2126ed341c"
 let Key_FCM_token = "FCMToken"
-let OneSignalId = "8e245475-891c-4b63-a6c0-615e1cddbd65"
+let OneSignalId = "783cb86b-0366-4269-84b5-1029c3970e4c"//"8e245475-891c-4b63-a6c0-615e1cddbd65"
 let oneSignalSendNotification = "https://onesignal.com/api/v1/notifications"
 let oneSignalRegisterVOIP = "https://onesignal.com/api/v1/players"
 
