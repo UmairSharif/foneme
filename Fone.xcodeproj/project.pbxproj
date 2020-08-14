@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0955AFF862A5A8E251A985F5 /* Pods_FoneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */; };
 		196B06EB6108F5D262711BFC /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */; };
 		1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */; };
 		1BA0974C24817B5000E0A042 /* SettingsTimePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */; };
@@ -136,7 +135,6 @@
 		22880E7723C074380044263D /* Fone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22880E7523C074380044263D /* Fone.xcdatamodeld */; };
 		22880E7C23C074390044263D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22880E7A23C074390044263D /* LaunchScreen.storyboard */; };
 		22880E8723C0743A0044263D /* FoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880E8623C074390044263D /* FoneTests.swift */; };
-		22880E9223C0743A0044263D /* FoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880E9123C0743A0044263D /* FoneUITests.swift */; };
 		22880EC723C074830044263D /* StarFillMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880EA123C074820044263D /* StarFillMode.swift */; };
 		22880EC823C074830044263D /* StarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880EA223C074820044263D /* StarLayer.swift */; };
 		22880EC923C074830044263D /* CosmosAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880EA323C074820044263D /* CosmosAccessibility.swift */; };
@@ -233,13 +231,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		22880E8323C074390044263D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 22880E6323C074380044263D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 22880E6A23C074380044263D;
-			remoteInfo = Fone;
-		};
-		22880E8E23C0743A0044263D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22880E6323C074380044263D /* Project object */;
 			proxyType = 1;
@@ -403,7 +394,6 @@
 		22880E8223C074390044263D /* FoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22880E8623C074390044263D /* FoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoneTests.swift; sourceTree = "<group>"; };
 		22880E8823C0743A0044263D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22880E8D23C0743A0044263D /* FoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22880E9123C0743A0044263D /* FoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoneUITests.swift; sourceTree = "<group>"; };
 		22880E9323C0743A0044263D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22880EA123C074820044263D /* StarFillMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarFillMode.swift; sourceTree = "<group>"; };
@@ -536,14 +526,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				196B06EB6108F5D262711BFC /* Pods_FoneTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		22880E8A23C0743A0044263D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0955AFF862A5A8E251A985F5 /* Pods_FoneUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,7 +943,6 @@
 			children = (
 				22880E6B23C074380044263D /* Fone.app */,
 				22880E8223C074390044263D /* FoneTests.xctest */,
-				22880E8D23C0743A0044263D /* FoneUITests.xctest */,
 				C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -1559,25 +1540,6 @@
 			productReference = 22880E8223C074390044263D /* FoneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22880E8C23C0743A0044263D /* FoneUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 22880E9C23C0743A0044263D /* Build configuration list for PBXNativeTarget "FoneUITests" */;
-			buildPhases = (
-				7091CBE5A52A856DB6670FC7 /* [CP] Check Pods Manifest.lock */,
-				22880E8923C0743A0044263D /* Sources */,
-				22880E8A23C0743A0044263D /* Frameworks */,
-				22880E8B23C0743A0044263D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				22880E8F23C0743A0044263D /* PBXTargetDependency */,
-			);
-			name = FoneUITests;
-			productName = FoneUITests;
-			productReference = 22880E8D23C0743A0044263D /* FoneUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		C56F34D324C397AB00400874 /* OneSignalNotificationServiceExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C56F34DC24C397AB00400874 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
@@ -1618,10 +1580,6 @@
 						CreatedOnToolsVersion = 10.3;
 						TestTargetID = 22880E6A23C074380044263D;
 					};
-					22880E8C23C0743A0044263D = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = 22880E6A23C074380044263D;
-					};
 					C56F34D324C397AB00400874 = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -1642,7 +1600,6 @@
 			targets = (
 				22880E6A23C074380044263D /* Fone */,
 				22880E8123C074390044263D /* FoneTests */,
-				22880E8C23C0743A0044263D /* FoneUITests */,
 				C56F34D324C397AB00400874 /* OneSignalNotificationServiceExtension */,
 			);
 		};
@@ -1694,13 +1651,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22880E8B23C0743A0044263D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C56F34D224C397AB00400874 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1746,28 +1696,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Fone-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7091CBE5A52A856DB6670FC7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoneUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2025,14 +1953,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		22880E8923C0743A0044263D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22880E9223C0743A0044263D /* FoneUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C56F34D024C397AB00400874 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2048,11 +1968,6 @@
 			isa = PBXTargetDependency;
 			target = 22880E6A23C074380044263D /* Fone */;
 			targetProxy = 22880E8323C074390044263D /* PBXContainerItemProxy */;
-		};
-		22880E8F23C0743A0044263D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 22880E6A23C074380044263D /* Fone */;
-			targetProxy = 22880E8E23C0743A0044263D /* PBXContainerItemProxy */;
 		};
 		C56F34DA24C397AB00400874 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2198,9 +2113,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2215,7 +2130,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "oz dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Fone-Dist2";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2229,9 +2144,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2246,7 +2161,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "oz dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Fone-Dist2";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2259,8 +2174,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GJ5G74VFAN;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2269,6 +2184,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fone.app/Fone";
@@ -2281,8 +2198,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GJ5G74VFAN;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2291,51 +2208,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fone.app/Fone";
-			};
-			name = Release;
-		};
-		22880E9D23C0743A0044263D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFB7F2B9E8139C3F8C54375D /* Pods-FoneUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GJ5G74VFAN;
-				INFOPLIST_FILE = FoneUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fone;
-			};
-			name = Debug;
-		};
-		22880E9E23C0743A0044263D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F32046DC753D32C7E94F2636 /* Pods-FoneUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GJ5G74VFAN;
-				INFOPLIST_FILE = FoneUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fone;
 			};
 			name = Release;
 		};
@@ -2344,7 +2221,7 @@
 			baseConfigurationReference = 619FDE9233471CAE88390960 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2362,7 +2239,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Dev;
+				PROVISIONING_PROFILE_SPECIFIER = One2;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2374,7 +2251,7 @@
 			baseConfigurationReference = 1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2392,7 +2269,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Dev;
+				PROVISIONING_PROFILE_SPECIFIER = One2;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2425,15 +2302,6 @@
 			buildConfigurations = (
 				22880E9A23C0743A0044263D /* Debug */,
 				22880E9B23C0743A0044263D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		22880E9C23C0743A0044263D /* Build configuration list for PBXNativeTarget "FoneUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				22880E9D23C0743A0044263D /* Debug */,
-				22880E9E23C0743A0044263D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
