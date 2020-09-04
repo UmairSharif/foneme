@@ -59,6 +59,7 @@ class VoiceCallVC: UIViewController {
         let configuration = CXProviderConfiguration(localizedName: "Fone")
         configuration.maximumCallGroups = 1
         configuration.maximumCallsPerCallGroup = 1
+        configuration.ringtoneSound = "iphone-original.caf"
         if let callKitIcon = UIImage(named: "iconMask80") {
             configuration.iconTemplateImageData = callKitIcon.pngData()
         }

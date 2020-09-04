@@ -45,7 +45,7 @@ class ProviderDelegate: NSObject {
   
   static var providerConfiguration: CXProviderConfiguration = {
     let providerConfiguration = CXProviderConfiguration(localizedName: "Fone")
-    
+    providerConfiguration.ringtoneSound = "iphone-original.caf"
     providerConfiguration.supportsVideo = true
     providerConfiguration.maximumCallsPerCallGroup = 1
     providerConfiguration.supportedHandleTypes = [.phoneNumber]

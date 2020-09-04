@@ -101,6 +101,11 @@ extension VideoCallVC : CXProviderDelegate {
     
     func providerDidBegin(_ provider: CXProvider) {
         logMessage(messageText: "providerDidBegin")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1) ) {
+//            self.playSound(withFileName: "iphone-original")
+//
+//        }
+
     }
     
     func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
@@ -290,7 +295,7 @@ extension VideoCallVC {
     
     func reportIncomingCall(uuid: UUID, roomName: String?, completion: ((NSError?) -> Void)? = nil) {
         
-        let callHandle = CXHandle(type: .phoneNumber, value: roomName ?? "")
+        let callHandle = CXHandle(type: .generic, value: roomName ?? "")
         let callUpdate = CXCallUpdate()
         
         callUpdate.remoteHandle = callHandle
@@ -303,7 +308,13 @@ extension VideoCallVC {
         self.isIncommingCall = true
         self.roomFCMToken = NotificationHandler.shared.fcmToken ?? ""
         callKitProvider.reportNewIncomingCall(with: uuid, update: callUpdate) { error in
-            self.playSound()
+                        
+       //  self.playSound(withFileName: "iphone-original")
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2) ) {
+//                 self.playSound(withFileName: "iphone-original")
+//            }
+            
             if error == nil {
                 NSLog("Incoming call successfully reported.")
                 
@@ -447,7 +458,7 @@ extension VideoCallVC {
             var dialerName : String?
             var dialerId : String?
             var dialerImageUrl : String?
-            
+            //sendVOIPNotification
             if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                 print(userProfileData)
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
@@ -463,7 +474,7 @@ extension VideoCallVC {
                 type = "VD"
             }
             
-            let params = ["DialerNumber": dialerNumber ?? "",
+           /* let params = ["DialerNumber": dialerNumber ?? "",
                           "ReceiverNumber": self.recieverNumber ?? "",
                           "Status": "OG",
                           "CallType" : type,
@@ -476,15 +487,21 @@ extension VideoCallVC {
                           "fcmToken":fcmToken
                 ] as [String:Any]
             
-            print("params: \(params)")
-            
-            
+            print("params: \(params)")*/
+            //                "include_player_ids":["8e115324-34f7-48da-b2bb-d8fe0a87f370"],
+//"2a237d4c-f138-4eaa-839a-c6d697a1174e"
+            //voipToken
+           //US //"6fed3c72-3e5f-4053-b3b1-bb0352de4570",
+            //Rajesh "b9d6a0e0-c53d-4dc6-ba38-e2a7987e0fdd"
+            //"telephone.caf"
+            //"d1878280-d9b6-4689-a70f-a1be87acde0a" Rajesh DEV
+            print("oneSignalSendNotification: \(oneSignalSendNotification)")
             let parameters: Parameters = [
                 "app_id": OneSignalId,
                 "contents": ["en":"English Message"],
                 "apns_push_type_override":"voip",
                 "include_player_ids":[voipToken],
-                "data": ["DialerNumber": dialerNumber ?? "",
+                "ios_sound":"iphone-original.caf","data": ["DialerNumber": dialerNumber ?? "",
                          "ReceiverNumber": self.recieverNumber ?? "",
                          "dialerName": dialerName ?? "",
                          "dialerFoneId": dialerId ?? "",
@@ -494,7 +511,7 @@ extension VideoCallVC {
                          "CallType" : type,
                          "AppType" : "IOS",
                          "ChannelName" : dialerNumber ?? "",
-                         "CallerName": dialerName,
+                         "CallerName": dialerName ?? "",
                          "UserId" : userId ?? "",
                          "CallStatusType": "APPTOAPP",
                          "room_name":roomName,
@@ -982,11 +999,11 @@ extension VideoCallVC : RoomDelegate {
             
             self.sendVOIPNotification(voipToken: self.roomVOIPToken, roomName: room.name, uuid: room.uuid!.uuidString, fcmToken: self.roomFCMToken) { (success) in
                 if success {
-                    self.sendVOIPNotification(voipToken: self.roomVOIPToken, roomName: room.name, uuid: room.uuid!.uuidString, fcmToken: self.roomFCMToken) { (success) in
-                        if success {
-                            
-                        }
-                    }
+//                    self.sendVOIPNotification(voipToken: self.roomVOIPToken, roomName: room.name, uuid: room.uuid!.uuidString, fcmToken: self.roomFCMToken) { (success) in
+//                        if success {
+//
+//                        }
+                 //   }
                 }
             }
         }

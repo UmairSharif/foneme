@@ -165,7 +165,8 @@ extension UIViewController {
                 print("Speaker error : \(error)")
             }
             let providerConfig = CXProviderConfiguration(localizedName: "Fone")
-            
+            providerConfig.ringtoneSound = "iphone-original.caf"
+
             let provider = CXProvider(configuration: providerConfig)
            // provider.setDelegate(self, queue: nil)
             let update = CXCallUpdate()

@@ -662,7 +662,7 @@ extension AppDelegate : PKPushRegistryDelegate {
             "app_id": OneSignalId,
             "identifier": voipToken,
             "device_type":"0",
-            "test_type":"1"
+            //"test_type":"1"
         ]
         let header = ["Content-Type":"application/json",
                       "charset":"utf-8"]

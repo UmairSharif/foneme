@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182AE23124FE63460084A174 /* telephone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23024FE63340084A174 /* telephone.caf */; };
+		182AE23224FE63470084A174 /* telephone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23024FE63340084A174 /* telephone.caf */; };
+		182AE23424FE63A50084A174 /* telephone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23324FE63A40084A174 /* telephone.mp3 */; };
+		182AE23524FE63A50084A174 /* telephone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23324FE63A40084A174 /* telephone.mp3 */; };
+		185F52982500E49E003D8DE7 /* iphone-original.caf in Resources */ = {isa = PBXBuildFile; fileRef = 185F52962500E49D003D8DE7 /* iphone-original.caf */; };
+		185F52992500E49E003D8DE7 /* iphone-original.caf in Resources */ = {isa = PBXBuildFile; fileRef = 185F52962500E49D003D8DE7 /* iphone-original.caf */; };
+		185F529A2500E49E003D8DE7 /* ringtone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 185F52972500E49E003D8DE7 /* ringtone.caf */; };
+		185F529B2500E49E003D8DE7 /* ringtone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 185F52972500E49E003D8DE7 /* ringtone.caf */; };
+		185F529E2500ECA2003D8DE7 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529C2500ECA2003D8DE7 /* ringtone.mp3 */; };
+		185F529F2500ECA2003D8DE7 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529C2500ECA2003D8DE7 /* ringtone.mp3 */; };
+		185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
+		185F52A12500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
 		196B06EB6108F5D262711BFC /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */; };
 		1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */; };
 		1BA0974C24817B5000E0A042 /* SettingsTimePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */; };
@@ -128,7 +140,6 @@
 		1BA097C224817B5100E0A042 /* Array+SendBird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0974724817B5000E0A042 /* Array+SendBird.swift */; };
 		1BA097C424817B5100E0A042 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0974A24817B5000E0A042 /* SplitViewController.swift */; };
 		1BA097C6248181AF00E0A042 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA097C5248181AF00E0A042 /* MainTabBarController.swift */; };
-		22142E1123DA8557008C1311 /* telephone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22142E1023DA8557008C1311 /* telephone.mp3 */; };
 		2282ECE123CBCFF100D80A97 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */; };
 		2283DC3223C91C57005070B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2283DC3123C91C57005070B1 /* GoogleService-Info.plist */; };
 		22880E6F23C074380044263D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880E6E23C074380044263D /* AppDelegate.swift */; };
@@ -261,6 +272,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		182AE23024FE63340084A174 /* telephone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = telephone.caf; sourceTree = "<group>"; };
+		182AE23324FE63A40084A174 /* telephone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = telephone.mp3; sourceTree = "<group>"; };
+		185F52962500E49D003D8DE7 /* iphone-original.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iphone-original.caf"; sourceTree = "<group>"; };
+		185F52972500E49E003D8DE7 /* ringtone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone.caf; sourceTree = "<group>"; };
+		185F529C2500ECA2003D8DE7 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
+		185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "iphone-original.mp3"; sourceTree = "<group>"; };
 		1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimeViewController.swift; sourceTree = "<group>"; };
 		1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimePickerDelegate.swift; sourceTree = "<group>"; };
 		1BA096B224817B4E00E0A042 /* UserProfileImageNameSettingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageNameSettingDelegate.swift; sourceTree = "<group>"; };
@@ -383,7 +400,6 @@
 		1BA097C5248181AF00E0A042 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		22142E1023DA8557008C1311 /* telephone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = telephone.mp3; sourceTree = "<group>"; };
 		2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		2283DC3123C91C57005070B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22880E6B23C074380044263D /* Fone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -918,7 +934,12 @@
 		22142E0F23DA8517008C1311 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
-				22142E1023DA8557008C1311 /* telephone.mp3 */,
+				182AE23324FE63A40084A174 /* telephone.mp3 */,
+				185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */,
+				185F529C2500ECA2003D8DE7 /* ringtone.mp3 */,
+				185F52962500E49D003D8DE7 /* iphone-original.caf */,
+				185F52972500E49E003D8DE7 /* ringtone.caf */,
+				182AE23024FE63340084A174 /* telephone.caf */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -1619,9 +1640,13 @@
 				1BA0978924817B5000E0A042 /* OpenChannelAdminMessageTableViewCell.xib in Resources */,
 				1BA0979224817B5000E0A042 /* OpenChannelUserMessageTableViewCell.xib in Resources */,
 				1BA097AA24817B5000E0A042 /* OpenChannel.storyboard in Resources */,
+				182AE23124FE63460084A174 /* telephone.caf in Resources */,
+				185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */,
+				185F529A2500E49E003D8DE7 /* ringtone.caf in Resources */,
 				22880E7C23C074390044263D /* LaunchScreen.storyboard in Resources */,
 				1BA0978E24817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.xib in Resources */,
 				2283DC3223C91C57005070B1 /* GoogleService-Info.plist in Resources */,
+				185F529E2500ECA2003D8DE7 /* ringtone.mp3 in Resources */,
 				1BA0977C24817B5000E0A042 /* GroupChannelIncomingUserMessageTableViewCell.xib in Resources */,
 				1BA0978124817B5000E0A042 /* GroupChannelIncomingGeneralFileMessageTableViewCell.xib in Resources */,
 				22880F1023C0A2DC0044263D /* Home.storyboard in Resources */,
@@ -1632,13 +1657,14 @@
 				4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */,
 				229AF2FE23D771E500A1D2CD /* Assets.xcassets in Resources */,
 				1BA097A924817B5000E0A042 /* Settings.storyboard in Resources */,
+				185F52982500E49E003D8DE7 /* iphone-original.caf in Resources */,
+				182AE23424FE63A50084A174 /* telephone.mp3 in Resources */,
 				1BA0977824817B5000E0A042 /* GroupChannelOutgoingImageVideoFileMessageTableViewCell.xib in Resources */,
 				1BA0978324817B5000E0A042 /* GroupChannel.storyboard in Resources */,
 				1BA0978824817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.xib in Resources */,
 				1BA097AC24817B5100E0A042 /* UserProfileViewController.xib in Resources */,
 				1BA097B024817B5100E0A042 /* SelectedUserCollectionViewCell.xib in Resources */,
 				1BA097B324817B5100E0A042 /* loading_typing.gif in Resources */,
-				22142E1123DA8557008C1311 /* telephone.mp3 in Resources */,
 				1BA097AD24817B5100E0A042 /* SelectableUserTableViewCell.xib in Resources */,
 				1BA0978C24817B5000E0A042 /* OpenChannelGeneralFileMessageTableViewCell.xib in Resources */,
 			);
@@ -1655,6 +1681,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185F529B2500E49E003D8DE7 /* ringtone.caf in Resources */,
+				182AE23524FE63A50084A174 /* telephone.mp3 in Resources */,
+				182AE23224FE63470084A174 /* telephone.caf in Resources */,
+				185F52992500E49E003D8DE7 /* iphone-original.caf in Resources */,
+				185F52A12500ECA2003D8DE7 /* iphone-original.mp3 in Resources */,
+				185F529F2500ECA2003D8DE7 /* ringtone.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2113,7 +2145,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2130,7 +2162,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Dev-Muazam";
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2144,7 +2176,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2161,7 +2193,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Dev-Muazam";
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2221,7 +2253,7 @@
 			baseConfigurationReference = 619FDE9233471CAE88390960 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2239,7 +2271,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = PPPPPPP;
+				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2251,7 +2283,7 @@
 			baseConfigurationReference = 1BCD112E27B918CDAAEA9AF1 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
@@ -2269,7 +2301,7 @@
 				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = PPPPPPP;
+				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

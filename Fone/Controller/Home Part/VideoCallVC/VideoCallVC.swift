@@ -116,7 +116,7 @@ class VideoCallVC: UIViewController {
         if let callKitIcon = UIImage(named: "iconMask80") {
             configuration.iconTemplateImageData = callKitIcon.pngData()
         }
-        configuration.ringtoneSound = "telephone.mp3"
+        configuration.ringtoneSound = "iphone-original.caf"
         
         callKitProvider = CXProvider(configuration: configuration)
         callKitCallController = CXCallController()
@@ -364,12 +364,13 @@ class VideoCallVC: UIViewController {
     }
     
     
-    func playSound() {
+    func playSound(withFileName:String = "telephone") {
         DispatchQueue.main.async {
-            guard let url = Bundle.main.url(forResource: "telephone", withExtension: "mp3") else { return }
+            guard let url = Bundle.main.url(forResource:withFileName , withExtension: "mp3") else { return }
             
             do {
-                //try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+               // try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+                print("playSound URL \(url)");
                 try AVAudioSession.sharedInstance().setActive(true)
                 
                 
@@ -380,7 +381,8 @@ class VideoCallVC: UIViewController {
                  player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
                 
                 guard let player = self.player else { return }
-                
+                //player.prepareToPlay()
+                player.numberOfLoops = -1
                 player.play()
                 
             }
