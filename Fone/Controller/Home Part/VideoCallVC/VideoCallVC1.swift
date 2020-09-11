@@ -906,4 +906,201 @@ extension VideoCallVC1: CameraSourceDelegate {
     func cameraSourceDidFail(source: CameraSource, error: Error) {
 //        logMessage(messageText: "Camera source failed with error: \(error.localizedDescription)")
     }
+    
+    // MARK:- IBActions
+    @IBAction func btnFlipCamera(sender: AnyObject) {
+        self.flipCamera()
+    }
+    
+    @IBAction func disconnect(sender: UIButton) {
+        if self.isIncommingCall {
+            self.recevierSendNotificationAPI("CE")
+        }else{
+            self.dialerSendNotificationAPI()
+        }
+        
+        if let room = room, let uuid = room.uuid {
+            userInitiatedDisconnect = true
+            let endCallAction = CXEndCallAction(call: uuid)
+            let transaction = CXTransaction(action: endCallAction)
+            room.disconnect()
+            self.camera?.stopCapture()
+            self.camera = nil
+            self.localAudioTrack = nil
+            self.localVideoTrack = nil
+            self.remoteParticipant = nil
+            self.room = nil
+            player?.stop()
+            //NotificationHandler.shared.callStatus = false
+            //logMessage(messageText: "Attempting to disconnect from room \(room?.name ?? "")")
+            self.timer?.invalidate()
+            self.timer = nil
+            callKitCallController.request(transaction) { error in
+                if let error = error {
+                    print("EndCallAction transaction request failed: \(error.localizedDescription).")
+                    self.callKitProvider.reportCall(with: uuid, endedAt: Date(), reason: .remoteEnded)
+                    
+                }
+                
+                print("EndCallAction transaction request successful")
+                self.callKitProvider.invalidate()
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true
+                        , completion: nil)
+                }
+            }
+            
+        }else{
+            DispatchQueue.main.async {
+                self.dismiss(animated: true
+                    , completion: nil)
+            }
+        }
+    }
+    
+    
+    
+    @IBAction func toggleMic(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if let localAudioTrack = self.localAudioTrack {
+              localAudioTrack.isEnabled = !sender.isSelected
+        }
+
+    }
+    
+    func muteAudio(isMuted: Bool) {
+        if let localAudioTrack = self.localAudioTrack {
+            localAudioTrack.isEnabled = !isMuted
+            
+            // Update the button title
+            if (!isMuted) {
+                self.micButton.setTitle("Mute", for: .normal)
+            } else {
+                self.micButton.setTitle("Unmute", for: .normal)
+            }
+        }
+    }
+    
+    // MARK:- Private
+    func startPreview() {
+        if PlatformUtils.isSimulator {
+            return
+        }
+        
+        let frontCamera = CameraSource.captureDevice(position: .front)
+        let backCamera = CameraSource.captureDevice(position: .back)
+        self.loadViewIfNeeded()
+        
+        if (frontCamera != nil || backCamera != nil) {
+            // Preview our local camera track in the local video preview view.
+            camera = CameraSource(delegate: self)
+            localVideoTrack = LocalVideoTrack(source: camera!, enabled: true, name: "Camera")
+            
+            // Add renderer to video track for local preview
+            localVideoTrack!.addRenderer(self.previewView)
+            localVideoTrack!.addRenderer(self.previewCallingView)
+            logMessage(messageText: "Video track created")
+            
+            if (frontCamera != nil && backCamera != nil) {
+                // We will flip camera on tap.
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCamera))
+                tapGestureRecognizer.numberOfTapsRequired = 1
+                self.previewView.isUserInteractionEnabled = true
+                self.previewView.addGestureRecognizer(tapGestureRecognizer)
+            }
+            
+            camera!.startCapture(device: frontCamera != nil ? frontCamera! : backCamera!) { (captureDevice, videoFormat, error) in
+                if let error = error {
+                    self.logMessage(messageText: "Capture failed with error.\ncode = \((error as NSError).code) error = \(error.localizedDescription)")
+                } else {
+                    self.previewView.shouldMirror = (captureDevice.position == .front)
+                    self.previewCallingView.shouldMirror = (captureDevice.position == .front)
+                }
+            }
+        }
+        else {
+            self.logMessage(messageText:"No front or back capture device found!")
+        }
+    }
+    
+    @objc func flipCamera() {
+        var newDevice: AVCaptureDevice?
+        
+        if let camera = self.camera, let captureDevice = camera.device {
+            if captureDevice.position == .front {
+                newDevice = CameraSource.captureDevice(position: .back)
+            } else {
+                newDevice = CameraSource.captureDevice(position: .front)
+            }
+            
+            if let newDevice = newDevice {
+                camera.selectCaptureDevice(newDevice) { (captureDevice, videoFormat, error) in
+                    if let error = error {
+                        self.logMessage(messageText: "Error selecting capture device.\ncode = \((error as NSError).code) error = \(error.localizedDescription)")
+                    } else {
+                        self.previewView.shouldMirror = (captureDevice.position == .front)
+                        self.previewCallingView.shouldMirror = (captureDevice.position == .front)
+                    }
+                }
+            }
+        }
+    }
+    
+    func prepareLocalMedia() {
+        // We will share local audio and video when we connect to the Room.
+        
+        // Create an audio track.
+        if (localAudioTrack == nil) {
+            localAudioTrack = LocalAudioTrack()
+            
+            if (localAudioTrack == nil) {
+                logMessage(messageText: "Failed to create audio track")
+            }
+        }
+        
+        // Create a video track which captures from the camera.
+        if (localVideoTrack == nil) {
+            if self.isVideo {
+                self.startPreview()
+            }
+        }
+    }
+    
+    
+    func renderRemoteParticipant(participant : RemoteParticipant) -> Bool {
+        // This example renders the first subscribed RemoteVideoTrack from the RemoteParticipant.
+        let videoPublications = participant.remoteVideoTracks
+        for publication in videoPublications {
+            if let subscribedVideoTrack = publication.remoteTrack,
+                publication.isTrackSubscribed {
+                setupRemoteVideoView()
+                subscribedVideoTrack.addRenderer(self.remoteCallingView!)
+                self.remoteParticipant = participant
+                self.view.layoutSubviews()
+                return true
+            }
+        }
+        return false
+    }
+    
+    func renderRemoteParticipants(participants : Array<RemoteParticipant>) {
+        for participant in participants {
+            // Find the first renderable track.
+            if participant.remoteVideoTracks.count > 0,
+                renderRemoteParticipant(participant: participant) {
+                break
+            }
+        }
+    }
+    
+    func logMessage(messageText: String) {
+        print(messageText)
+    }
+    
+    func holdCall(onHold: Bool) {
+        localAudioTrack?.isEnabled = !onHold
+        if self.isVideo {
+            localVideoTrack?.isEnabled = !onHold
+        }
+    }
 }

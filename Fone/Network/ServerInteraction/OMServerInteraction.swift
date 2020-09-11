@@ -43,15 +43,15 @@ class ServerCall {
             })
             return
         }
-        print(header)
+       // print(header)
         APIManager.sharedManager.request(completeUrl, method: convertType(type), parameters: params, encoding: JSONEncoding.default, headers: header)
             .responseString {response in
-                print(response.result,response.response as Any,response)
+               // print(response.result,response.response as Any,response)
                 let url = response.description
-                print(url)
+               // print(url)
                 UserDefaults.standard.set(url, forKey: "facebookLink")
                 UserDefaults.standard.synchronize()
-                print(header)
+               // print(header)
             }
             .responseJSON { response in
                 switch response.result {

@@ -38,7 +38,26 @@ class UserDetailsVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         print(userDetails?.userId)
-        if isSearch {
+        
+        let currUserNumber = userDetails?.phoneNumber ?? ""
+              var isContactAdded = false
+              if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+                                if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+                                    if contacts.count > 0 {
+                                        for items in contacts {
+                                            let dict = items.dictionary
+                                            let number = dict?["ContactsNumber"]?.string ?? ""
+                                          if number == currUserNumber {
+                                              isContactAdded = true
+                                              break;
+                                          }
+                                            
+                                        }
+                                    }
+                                }
+                                
+                            }
+        if isSearch && !isContactAdded{
             self.btnFriend.isHidden = false
         }else{
             self.btnFriend.isHidden = true

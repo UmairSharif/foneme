@@ -522,7 +522,7 @@ extension UIViewController {
                     
                     let params = ["Me":user.userId ?? "",
                                   "Url":url,
-                                  "Cnic" : foneId,
+                                  "Cnic" : foneId.isEmpty ? "null" : foneId ,
                                   "Friend":friendId] as [String:Any]
                     print("params: \(params)")
                     
@@ -590,8 +590,13 @@ extension UIViewController {
                                     let userImage = json["ImageUrl"].stringValue
                                     let ContactsCnic = json["Address"].stringValue
                                     let userId = json["UserId"].stringValue
+                                    let contactCNIC = json["ContactCNIC"].stringValue
+                                    
+                                    
                                     let userModel = FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic,userId: userId)
                                     profilesList.append(userModel)
+                                    
+//                                    self.removeFirend(foneId: contactCNIC, friendId: userId, url: removeMyFriend) { (model, boolVal) in   }
                                 }
                                 completion(profilesList,true)
                             }else{

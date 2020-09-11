@@ -25,6 +25,9 @@ let OneSignalId = "783cb86b-0366-4269-84b5-1029c3970e4c"//"8e245475-891c-4b63-a6
 let oneSignalSendNotification = "https://onesignal.com/api/v1/notifications"
 let oneSignalRegisterVOIP = "https://onesignal.com/api/v1/players"
 
+let Min_Contact_Number_Lenght = 6
+
+
 //****************************************//
 //******       VARIABLES           *******//
 //****************************************//

@@ -282,16 +282,19 @@ class CallLogVC: UIViewController {
                         let callerUserId = dict?["CallerUserId"]?.string ?? ""
                         let callingUserId = dict?["CallingUserId"]?.string ?? ""
 
-                        if status == "Missed"
+                       /* if status == "Missed"
                         {
                             let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.missCallArray.append(getData)
-                        }
+                        }*/
                         
                         if status != ""
                         {
                             let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.logArray.append(getData)
+                        }else {
+                            let getData = MissCallData(number: number, userImage: userImage, status: "Missed", dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
+                                self.missCallArray.append(getData)
                         }
                     }
                     

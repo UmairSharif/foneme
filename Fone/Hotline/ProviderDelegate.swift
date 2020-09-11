@@ -48,7 +48,7 @@ class ProviderDelegate: NSObject {
     providerConfiguration.ringtoneSound = "iphone-original.caf"
     providerConfiguration.supportsVideo = true
     providerConfiguration.maximumCallsPerCallGroup = 1
-    providerConfiguration.supportedHandleTypes = [.phoneNumber]
+    providerConfiguration.supportedHandleTypes = [.generic]
     
     return providerConfiguration
   }()

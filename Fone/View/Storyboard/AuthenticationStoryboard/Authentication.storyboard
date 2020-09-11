@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kJ7-s3-NwL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1019,8 +1018,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="72n-a0-sfD" secondAttribute="bottom" id="hfP-CI-B93"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FONE ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XG-wy-9FN">
-                                                        <rect key="frame" x="31" y="132" width="51" height="16"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XG-wy-9FN">
+                                                        <rect key="frame" x="31" y="132" width="101" height="16"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.035674788059999997" green="0.46035027499999998" blue="0.95928436520000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1035,8 +1034,14 @@
                                                                     <constraint firstAttribute="height" constant="1" id="Y7k-du-Ff1"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FONE ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0u-6C-Nj0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="326" height="31"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fone.me/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTn-GC-1vL">
+                                                                <rect key="frame" x="0.0" y="7.5" width="57" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" red="0.035674788059999997" green="0.46035027499999998" blue="0.95928436520000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0u-6C-Nj0">
+                                                                <rect key="frame" x="60" y="0.0" width="266" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Ubuntu" family="Ubuntu" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                             </textField>
@@ -1045,14 +1050,15 @@
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="t0u-6C-Nj0" secondAttribute="trailing" id="5ap-Zz-sgo"/>
                                                             <constraint firstAttribute="height" constant="32" id="Eaw-h9-mST"/>
+                                                            <constraint firstItem="t0u-6C-Nj0" firstAttribute="leading" secondItem="GTn-GC-1vL" secondAttribute="trailing" constant="3" id="HNe-UM-g6d"/>
+                                                            <constraint firstItem="GTn-GC-1vL" firstAttribute="leading" secondItem="OpJ-ZM-q1c" secondAttribute="leading" id="HlO-3Y-T1q"/>
                                                             <constraint firstItem="t0u-6C-Nj0" firstAttribute="top" secondItem="OpJ-ZM-q1c" secondAttribute="top" id="OYr-kD-UKC"/>
                                                             <constraint firstAttribute="bottom" secondItem="IRX-s0-D5O" secondAttribute="bottom" id="Ovj-9a-l2E"/>
                                                             <constraint firstItem="IRX-s0-D5O" firstAttribute="leading" secondItem="OpJ-ZM-q1c" secondAttribute="leading" id="RNR-uq-0wK"/>
                                                             <constraint firstAttribute="trailing" secondItem="IRX-s0-D5O" secondAttribute="trailing" id="SOq-Rd-TgL"/>
                                                             <constraint firstItem="IRX-s0-D5O" firstAttribute="top" secondItem="t0u-6C-Nj0" secondAttribute="bottom" id="TM0-HP-f5N"/>
-                                                            <constraint firstItem="t0u-6C-Nj0" firstAttribute="leading" secondItem="OpJ-ZM-q1c" secondAttribute="leading" id="Wgc-u5-WRO"/>
-                                                            <constraint firstItem="t0u-6C-Nj0" firstAttribute="leading" secondItem="OpJ-ZM-q1c" secondAttribute="leading" id="aaE-zL-W3o"/>
                                                             <constraint firstAttribute="trailing" secondItem="t0u-6C-Nj0" secondAttribute="trailing" id="qc9-lq-4AK"/>
+                                                            <constraint firstItem="GTn-GC-1vL" firstAttribute="centerY" secondItem="OpJ-ZM-q1c" secondAttribute="centerY" id="vs2-dT-FRx"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ke9-Aj-rse">

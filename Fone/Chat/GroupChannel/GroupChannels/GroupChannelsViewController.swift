@@ -506,8 +506,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
                     if contacts.count > 0 {
                         var arrayNumber = [String]()
-                        for items in contacts
-                        {
+                        for items in contacts {
                             let dict = items.dictionary
                                 
                             let number = dict?["ContactsNumber"]?.string ?? ""
