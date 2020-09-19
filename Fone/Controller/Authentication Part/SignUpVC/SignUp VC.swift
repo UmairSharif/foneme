@@ -9,6 +9,9 @@
 import UIKit
 import NVActivityIndicatorView
 import SafariServices
+import SwiftyJSON
+import Alamofire
+
 
 class SignUpVC: UIViewController,CountryDataDelegate {
 
@@ -199,4 +202,25 @@ extension SignUpVC
             }
         }
      }
+    
+    func createUserInBrainTree(){
+        
+        let header  = ["Content-Type": "application/json"]
+        APIManager.sharedManager.request(endCallUrl, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default, headers: header)
+                   .responseString {response in
+                      // print(response.result,response.response as Any,response)
+                       let url = response.description
+                      print(url)
+                      
+                      print(header)
+                   }
+                   .responseJSON { response in
+                       switch response.result {
+                       case .success: break
+                       case .failure(let error):
+                           print("Error in API: \(error.localizedDescription)")
+                       }
+               }
+        
+    }
 }

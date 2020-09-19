@@ -1,0 +1,189 @@
+//
+//  PlanListVC.swift
+//  Fone
+//
+//  Created by Bester on 08/01/2020.
+//  Copyright © 2020 Optechno. All rights reserved.
+//
+
+import UIKit
+import SwiftyJSON
+import Alamofire
+import BraintreeDropIn
+import Braintree
+
+class PlanListVC: UIViewController {
+    
+    //IBoutlet and Variables
+    @IBOutlet weak var contactTVC : UITableView!
+    var planArray = [Any]()
+   // var planArray = [SwiftyJSON.JSON]()
+
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadBrainTreePlans()
+        self.contactTVC.tableFooterView = UIView.init()
+      
+        self.contactTVC.reloadData()
+        //        // Get Contacts Friend List
+        //        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray)
+        
+        //Forcing View to light Mode
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
+    
+    func loadBrainTreePlans(){
+    
+        let header  = ["Content-Type": "application/json"]
+        // APIManager.sharedManager.request(getBrainTreePlans, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default,
+        
+        
+        ServerCall.makeCallWitoutFile(getBrainTreePlans, params: nil, type: Method.POST, currentView: nil, header: header) { (response) in
+            
+            //                                                self.refreshControl.endRefreshing()
+            //                                                self.activityIndicator.stopAnimating()
+            //                                                self.activityIndicator.isHidden = true
+            //let contacts = json["Contacts"].array
+            
+            if let json = response {
+                self.planArray = json.arrayObject ??  [Any]()
+                
+            }
+            print(self.planArray)
+            self.contactTVC.reloadData()
+        }
+        
+    }
+    
+    @IBAction func backBtnTapped(_ sender : UIButton)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func pay(withPlanId:String) {
+        // Test Values
+        // Card Number: 4111111111111111
+        // Expiration: 08/2018
+        
+        let request =  BTDropInRequest()
+        let dropIn = BTDropInController(authorization: BrainTree_toKinizationKey, request: request)
+        { [unowned self] (controller, result, error) in
+            
+            if let error = error {
+                self.show(message: error.localizedDescription)
+                
+            } else if (result?.isCancelled == true) {
+                self.show(message: "Transaction Cancelled")
+                
+            } else if let nonce = result?.paymentMethod?.nonce {
+                self.sendRequestPaymentToServer(nonce: nonce, withPlanId: withPlanId)
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
+        
+        self.present(dropIn!, animated: true, completion: nil)
+    }
+    
+    func sendRequestPaymentToServer(nonce: String, withPlanId: String) {
+        print(nonce);
+        
+        //
+        
+        let paymentURL = URL(string: "https://techmowebexperts.com/brain/createCustomer.php?")!
+        var request = URLRequest(url: paymentURL)
+        request.httpBody = "firstName=Sherlock&lastName=Homes&email=testmycode@gmail.com&phone=9999876543&planId=\(withPlanId)&payment_method_nonce=\(nonce)".data(using: String.Encoding.utf8)
+        
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) -> Void in
+            guard let data = data else {
+                self?.show(message: error!.localizedDescription)
+                return
+            }
+            let str = String(decoding: data, as: UTF8.self)
+            print("str = \(str)")
+            guard let result = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let success = result["success"] as? Bool, success == true else {
+                self?.show(message: "Transaction failed. Please try again.")
+                return
+            }
+            
+            self?.show(message: "Successfully charged. Thanks So Much :)")
+        }.resume()
+    }
+    
+    func show(message: String) {
+        DispatchQueue.main.async {
+            
+            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+
+
+
+extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.planArray.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
+         let titleLabel = cell.viewWithTag(11) as? UILabel
+        let descriptionLabel = cell.viewWithTag(12)  as? UILabel
+
+        let object = self.planArray[indexPath.row] as? [String:Any]
+        let planName = object?["name"] as? String
+        let planDescription = object?["description"] as? String
+        let price = object?["price"] as? String
+        let currencyIsoCode = object?["currencyIsoCode"] as? String
+        print(object ?? "")
+
+        titleLabel?.text = "\(planName ?? "") -- \(currencyIsoCode ?? "") \(price ?? "")"
+        descriptionLabel?.text = planDescription ?? ""
+        
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let object = self.planArray[indexPath.row] as? [String:Any]
+
+        let alertController = UIAlertController(title: "Confirm", message: "Please confirm to subscribe?", preferredStyle: .alert)
+               
+               let action1 = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
+                  let planId = object?["id"] as? String ?? ""
+                          self.pay(withPlanId: planId);
+               }
+               let action2 = UIAlertAction(title: "NO", style: .cancel) { (action:UIAlertAction) in
+                   
+               }
+               
+               alertController.addAction(action1)
+               alertController.addAction(action2)
+               self.present(alertController, animated: true, completion: nil)
+        
+       
+        
+    }
+}
+
+

@@ -31,3 +31,7 @@ let changeuservoiptoken = "\(BASEURL)api/account/v1/changeuservoiptoken"
 let changeuserdevicetoken = "\(BASEURL)api/account/v1/changeuserdevicetoken"
 let sendFcmOPt = "\(BASEURL)api/account/v1/sendFcmOPt"
 //searchuser
+
+
+let getBrainTreePlans = "https://techmowebexperts.com/brain/plans.php"
+

@@ -2,6 +2,37 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
+  - Braintree/Card (4.35.0):
+    - Braintree/Core
+  - Braintree/Core (4.35.0)
+  - Braintree/PaymentFlow (4.35.0):
+    - Braintree/Card
+    - Braintree/Core
+    - Braintree/PayPalOneTouch
+  - Braintree/PayPal (4.35.0):
+    - Braintree/Core
+    - Braintree/PayPalOneTouch
+  - Braintree/PayPalDataCollector (4.35.0):
+    - Braintree/Core
+    - Braintree/PayPalUtils
+  - Braintree/PayPalOneTouch (4.35.0):
+    - Braintree/Core
+    - Braintree/PayPalDataCollector
+    - Braintree/PayPalUtils
+  - Braintree/PayPalUtils (4.35.0)
+  - Braintree/UnionPay (4.35.0):
+    - Braintree/Card
+    - Braintree/Core
+  - BraintreeDropIn (8.1.1):
+    - BraintreeDropIn/DropIn (= 8.1.1)
+  - BraintreeDropIn/DropIn (8.1.1):
+    - Braintree/Card (~> 4.32)
+    - Braintree/Core (~> 4.32)
+    - Braintree/PaymentFlow (~> 4.32)
+    - Braintree/PayPal (~> 4.32)
+    - Braintree/UnionPay (~> 4.32)
+    - BraintreeDropIn/UIKit
+  - BraintreeDropIn/UIKit (8.1.1)
   - Branch (0.33.1):
     - Branch/Core (= 0.33.1)
   - Branch/Core (0.33.1)
@@ -132,6 +163,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.4)
+  - BraintreeDropIn
   - Branch
   - CountryPickerView
   - Firebase/Core
@@ -157,6 +189,8 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
+    - Braintree
+    - BraintreeDropIn
     - Branch
     - CountryPickerView
     - Firebase
@@ -195,6 +229,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  Braintree: 7ff6755ba50506e403dc03779ae68c5ccf6b9808
+  BraintreeDropIn: 2cf07a9041df45ff671586042dbaf7b5d2767347
   Branch: 65d05ffb137ef504777cff6bd4fb6f770f17145a
   CountryPickerView: 08ff5f391143aa79e2ae21b0eaa5c15395a80d22
   Firebase: b28e55c60efd98963cd9011fe2fac5a10c2ba124
@@ -230,6 +266,6 @@ SPEC CHECKSUMS:
   TwilioVideo: 6758bbec5a6d1838caba8a917f5c7545a11652c3
   TwilioVoice: 75fd87c05e6c9e8321e31262d27d8ec334d9dc86
 
-PODFILE CHECKSUM: b625ac4d1f23d3d3032238b9390a2877a640ac6b
+PODFILE CHECKSUM: a8ce921e3da273902ee24e072818c385da2aeee3
 
 COCOAPODS: 1.9.3

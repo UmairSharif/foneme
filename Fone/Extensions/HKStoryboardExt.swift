@@ -94,6 +94,10 @@ extension UIStoryboard {
         return self.loadFromStoryBoard(.home , "HelpVC") as! HelpVC
     }
     
+    func loadPlanVC() -> PlanListVC {
+           return self.loadFromStoryBoard(.home , "PlanListVC") as! PlanListVC
+       }
+    
     func loadEditProfileVC() -> EditProfileVC
     {
         return self.loadFromStoryBoard(.home , "EditProfileVC") as! EditProfileVC

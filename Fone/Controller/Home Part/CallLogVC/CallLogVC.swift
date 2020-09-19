@@ -240,7 +240,8 @@ class CallLogVC: UIViewController {
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
                    "Authorization" : "bearer " + loginToken!]
-        
+        print("headers: \(headers)")
+
         ServerCall.makeCallWitoutFile(getCallLogsUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
 
             self.activityIndicator.stopAnimating()

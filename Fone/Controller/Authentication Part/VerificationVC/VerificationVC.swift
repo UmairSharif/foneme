@@ -339,6 +339,9 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
             "grant_type" : "password"
         ]
         
+                        print("parameters = \(parameters) \n getAccessTokenUrl = \(getAccessTokenUrl)")
+
+        
         Alamofire.request(getAccessTokenUrl, method: .post, parameters: parameters, encoding:  URLEncoding.httpBody, headers: headers).responseJSON { (response:DataResponse<Any>) in
             
             switch(response.result) {

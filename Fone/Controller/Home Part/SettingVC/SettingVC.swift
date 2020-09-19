@@ -119,7 +119,12 @@ class SettingVC: UIViewController {
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func subscriptionBtnTapped(_ sender:UIButton){
+        let vc = UIStoryboard().loadPlanVC()
+         self.navigationController?.pushViewController(vc, animated: true)
     
+    }
+
     @IBAction func logoutBtnTapped(_ sender:UIButton)
     {
         let alertController = UIAlertController(title: "Alert", message: "Do you want to SignOut?", preferredStyle: .alert)

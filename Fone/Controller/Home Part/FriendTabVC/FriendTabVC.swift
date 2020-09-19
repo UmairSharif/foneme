@@ -25,7 +25,7 @@ class FriendTabVC: UIViewController {
     let network = NetworkManager.sharedInstance
     var netStatus : Bool?
     var refreshControl = UIRefreshControl()
-
+    
     
     override func viewDidLoad() {
         
@@ -41,7 +41,7 @@ class FriendTabVC: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         contactTVC.addSubview(refreshControl) // not required when using UITableViewController
-
+        
         
         searchBar.delegate = self
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
@@ -88,9 +88,9 @@ class FriendTabVC: UIViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-       // Code to refresh table view
+        // Code to refresh table view
         self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,6 +127,8 @@ class FriendTabVC: UIViewController {
             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
             let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic)
             self.friendList.append(getData)
+            
+            
         }
         contactTVC.reloadData()
     }
@@ -184,7 +186,7 @@ class FriendTabVC: UIViewController {
             "Contacts": contactList
             
             ] as [String:Any]
-        print(parameters)
+        // print(parameters)
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
                    "Authorization" : "bearer " + loginToken!]
@@ -197,7 +199,7 @@ class FriendTabVC: UIViewController {
             
             
             if let json = response {
-                print(json)
+                // print(json)
                 let statusCode = json["StatusCode"].string ?? ""
                 if statusCode == "401" {
                     var mobilenumber : String?
@@ -212,10 +214,24 @@ class FriendTabVC: UIViewController {
                     return
                 }
                 
-                print(json)
+                ///  print(json)
                 if let contacts = json["Contacts"].array {
                     if contacts.count > 0 {
-                        UserDefaults.standard.set(try? PropertyListEncoder().encode(contacts), forKey: "Contacts")
+                        var midConatct = [SwiftyJSON.JSON]()
+                        
+                        for items in contacts ?? [] {
+                            let dict = items.dictionary
+                            let number = dict?["ContactsNumber"]?.string ?? ""
+                            
+                            let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
+                            
+                            if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
+                                
+                                midConatct.append(items)
+                            }
+                        }
+                        
+                        UserDefaults.standard.set(try? PropertyListEncoder().encode(midConatct), forKey: "Contacts")
                         UserDefaults.standard.synchronize()
                         if self.friendList.count == 0 {
                             if let chatvc = self.tabBarController?.viewControllers?[2] as? GroupChannelsViewController {
@@ -387,7 +403,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
         self.view.isUserInteractionEnabled = false
         
         if isFiltering, filteredContacts.count > 0 {
-           
+            
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
             vc.isSearch = true
@@ -598,9 +614,9 @@ extension FriendTabVC : UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
+        
     }
-
+    
 }
 
 

@@ -6,6 +6,7 @@ target 'Fone' do
   use_frameworks!
 
   # Pods for Fone
+  pod 'BraintreeDropIn'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'IQKeyboardManagerSwift'
@@ -29,6 +30,7 @@ target 'Fone' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'OneSignal'
 
+
   target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal'
   end
@@ -38,10 +40,10 @@ target 'Fone' do
     # Pods for testing
   end
 
-  target 'FoneUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+#  target 'FoneUITests' do
+#    inherit! :search_paths
+#    # Pods for testing
+#  end
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

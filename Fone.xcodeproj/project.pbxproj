@@ -19,6 +19,7 @@
 		185F529F2500ECA2003D8DE7 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529C2500ECA2003D8DE7 /* ringtone.mp3 */; };
 		185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
 		185F52A12500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
+		18A7CDDA25162E38006308CB /* PlanListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7CDD925162E38006308CB /* PlanListVC.swift */; };
 		196B06EB6108F5D262711BFC /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EB8FA8F4D8C1392718B01E /* Pods_FoneTests.framework */; };
 		1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */; };
 		1BA0974C24817B5000E0A042 /* SettingsTimePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */; };
@@ -278,6 +279,7 @@
 		185F52972500E49E003D8DE7 /* ringtone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone.caf; sourceTree = "<group>"; };
 		185F529C2500ECA2003D8DE7 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 		185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "iphone-original.mp3"; sourceTree = "<group>"; };
+		18A7CDD925162E38006308CB /* PlanListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanListVC.swift; sourceTree = "<group>"; };
 		1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimeViewController.swift; sourceTree = "<group>"; };
 		1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimePickerDelegate.swift; sourceTree = "<group>"; };
 		1BA096B224817B4E00E0A042 /* UserProfileImageNameSettingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageNameSettingDelegate.swift; sourceTree = "<group>"; };
@@ -1292,6 +1294,7 @@
 		22880F1223C0AACA0044263D /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
+				18A7CDD925162E38006308CB /* PlanListVC.swift */,
 				22880F1323C0AADB0044263D /* SettingVC.swift */,
 			);
 			path = SettingVC;
@@ -1821,6 +1824,7 @@
 				1BA0975724817B5000E0A042 /* GroupChannelHiddenChannelTableViewCell.swift in Sources */,
 				22880EE023C074830044263D /* HKBaseViewController.swift in Sources */,
 				1BA097C224817B5100E0A042 /* Array+SendBird.swift in Sources */,
+				18A7CDDA25162E38006308CB /* PlanListVC.swift in Sources */,
 				1BA0977424817B5000E0A042 /* GroupChannelMessageTableViewCell.swift in Sources */,
 				22880EF023C0766B0044263D /* User.swift in Sources */,
 				22880ECB23C074830044263D /* CosmosDefaultSettings.swift in Sources */,
@@ -2147,7 +2151,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2159,10 +2163,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2178,7 +2182,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2190,10 +2194,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2255,7 +2259,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2268,10 +2272,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Ext_AppStore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2285,7 +2289,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2298,10 +2302,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Ext_AppStore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

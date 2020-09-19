@@ -100,7 +100,7 @@ class LocalContactVC: UIViewController {
             
             ] as [String:Any]
         
-        print("params: \(parameters)")
+       // print("params: \(parameters)")
         
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
@@ -110,7 +110,7 @@ class LocalContactVC: UIViewController {
             
             if let json = response {
                 
-                print(json)
+              //  print(json)
                 
                 self.friendList.removeAll()
                 let contacts = json["Contacts"].array
@@ -126,11 +126,15 @@ class LocalContactVC: UIViewController {
                         let dict = items.dictionary
                         
                         let number = dict?["ContactsNumber"]?.string ?? ""
-                        let name = dict?["ContactsName"]?.string ?? ""
-                        let userImage = dict?["Image"]?.string ?? ""
                         let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
-                        let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic)
-                        self.friendList.append(getData)
+
+                        if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
+                            let name = dict?["ContactsName"]?.string ?? ""
+                            let userImage = dict?["Image"]?.string ?? ""
+                            let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic)
+                            self.friendList.append(getData)
+                        }
+                        
                     }
                     
                     //Table View Reload

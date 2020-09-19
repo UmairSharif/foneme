@@ -46,7 +46,7 @@ extension VideoCallVC : CXProviderDelegate {
         }
     }
     
-    func dialerSendNotificationAPI(){
+    func dialerSendNotificationAPI_old(){
         var mobileNumber : String?
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -89,6 +89,86 @@ extension VideoCallVC : CXProviderDelegate {
            
         }
     }
+    
+  //  func sendMissedCallNotificationAPI(){
+        func dialerSendNotificationAPI(){
+            var mobileNumber : String?
+                   if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+                       print(userProfileData)
+                       if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                           mobileNumber = user.userId ?? ""
+                       }
+                   }
+
+           let parameter = [
+            "SenderMobileNumber" : self.userDetails?.mobileNumberWithoutCode ?? "",
+               "NotificationType" : "MIS",
+               "ReceiverUserId" :mobileNumber ?? ""
+               ] as [String : Any]
+           print(parameter)
+           
+           let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
+           var headers = [String:String]()
+           headers = ["Content-Type": "application/json",
+                      "Authorization" : "bearer " + loginToken!]
+           
+           ServerCall.makeCallWitoutFile(endCallUrl, params: parameter, type:Method.POST, currentView: self.view, header: headers) { (response) in
+               print(response ?? JSON.null)
+               
+               if let json = response {
+                   if !json.isEmpty {
+                       print(json)
+                       
+                       self.addMissCallsLogsAPI()
+                   }
+               }
+           }
+       }
+       
+       
+       func addMissCallsLogsAPI() {
+        
+        let receiverId = self.userDetails?.userId
+        var mobileNumber = ""
+                          if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+                              print(userProfileData)
+                              if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                                  mobileNumber = user.mobile ?? ""
+                              }
+                          }
+
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           let myString = formatter.string(from: Date())
+           let givenDate = formatter.date(from: myString)
+           formatter.dateFormat = "MMM/dd/yyyy HH:mm:ss a"
+           let dateTime = formatter.string(from: givenDate ?? Date())
+           
+           let parameter = [
+                      "SenderMobileNumber" : self.userDetails?.phoneNumber ?? "",
+                      "CallReceivingTime" : dateTime,
+                            "NotificationType" : "UNA",
+                            "ReceiverStatus" : "MIS",
+                            "ReceiverUserId" : receiverId ?? ""
+                      ] as [String : Any]
+                  print(parameter)
+                  
+                  let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
+                  var headers = [String:String]()
+                  headers = ["Content-Type": "application/json",
+                             "Authorization" : "bearer " + loginToken!]
+                  
+                  ServerCall.makeCallWitoutFile(addCallLogUrl, params: parameter, type:Method.POST, currentView: self.view, header: headers) { (response) in
+                      print(response ?? JSON.null)
+                      
+                      if let json = response {
+                          if !json.isEmpty {
+                              print(json)
+                          }
+                      }
+                  }
+       }
+       
     
     func providerDidReset(_ provider: CXProvider) {
         logMessage(messageText: "providerDidReset:")
@@ -474,7 +554,7 @@ extension VideoCallVC {
                 type = "VD"
             }
             
-           /* let params = ["DialerNumber": dialerNumber ?? "",
+            let params = ["DialerNumber": dialerNumber ?? "",
                           "ReceiverNumber": self.recieverNumber ?? "",
                           "Status": "OG",
                           "CallType" : type,
@@ -487,7 +567,7 @@ extension VideoCallVC {
                           "fcmToken":fcmToken
                 ] as [String:Any]
             
-            print("params: \(params)")*/
+            print("sendVOIPNotification: \(params)")
             //                "include_player_ids":["8e115324-34f7-48da-b2bb-d8fe0a87f370"],
 //"2a237d4c-f138-4eaa-839a-c6d697a1174e"
             //voipToken

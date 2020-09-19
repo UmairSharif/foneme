@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let BrainTree_toKinizationKey = "sandbox_ktbkxkdd_trhv6grk27vpbzkp"
 
 let APP_ID = "5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
 let CHANNEL_URL = "https://api-5A3F0F54-1ED8-43D0-A352-627AFE220EC4.sendbird.com"
