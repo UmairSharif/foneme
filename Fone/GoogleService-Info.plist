@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>147877945888-49mgflgtsjf2rq1u7gqva17ok7ma8oah.apps.googleusercontent.com</string>
+	<string>858263288372-un7brcqsnnjdb5udc5nlp8ddg5vtg9ii.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.147877945888-49mgflgtsjf2rq1u7gqva17ok7ma8oah</string>
+	<string>com.googleusercontent.apps.858263288372-un7brcqsnnjdb5udc5nlp8ddg5vtg9ii</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDQxBQ1bBzxyLzRM0i9qLBvBYbVeiRVEX0</string>
+	<string>AIzaSyBH5nQ0MBhFoKnipg5lVUFYnV7oYvcj8cM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>147877945888</string>
+	<string>858263288372</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.app.Fone</string>
+	<string>com.app.foneme</string>
 	<key>PROJECT_ID</key>
-	<string>fone-1d6ec</string>
+	<string>foneme-69a87</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fone-1d6ec.appspot.com</string>
+	<string>foneme-69a87.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:147877945888:ios:3a54542c9be7da03e29245</string>
+	<string>1:858263288372:ios:099f1950b18dc1cff62861</string>
 	<key>DATABASE_URL</key>
-	<string>https://fone-1d6ec.firebaseio.com</string>
+	<string>https://foneme-69a87.firebaseio.com</string>
 </dict>
 </plist>

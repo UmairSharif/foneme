@@ -215,22 +215,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9AB4F07A-B5FC-435D-A1D3-86BE571773CC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Hotline/ProviderDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "providerConfiguration"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F6A28795-A342-4757-91AD-82853D6C5C84"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -290,12 +274,12 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 2342353eb499677d"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of Fone.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
-                  moduleName = "Fone"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
+                  moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"
@@ -305,12 +289,12 @@
                   offsetFromSymbolStart = "43">
                </Location>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 2342353eb499677d"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of Fone.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
-                  moduleName = "Fone"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
+                  moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"

@@ -30,7 +30,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22880E6A23C074380044263D"
-               BuildableName = "Fone.app"
+               BuildableName = "FoneMe.app"
                BlueprintName = "Fone"
                ReferencedContainer = "container:Fone.xcodeproj">
             </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22880E6A23C074380044263D"
-            BuildableName = "Fone.app"
+            BuildableName = "FoneMe.app"
             BlueprintName = "Fone"
             ReferencedContainer = "container:Fone.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22880E6A23C074380044263D"
-            BuildableName = "Fone.app"
+            BuildableName = "FoneMe.app"
             BlueprintName = "Fone"
             ReferencedContainer = "container:Fone.xcodeproj">
          </BuildableReference>
