@@ -37,6 +37,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
     var userId : String?
     let network = NetworkManager.sharedInstance
     var netStatus : Bool?
+    var testSMSCode = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,14 +208,12 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
         let voipToken = UserDefaults.standard.string(forKey: "VoipToken")
         let code = tfCode1.text! + tfCode2.text! + tfCode3.text!
         let pin = tfCode4.text! + tfCode5.text! + tfCode6.text!
-        let pinCode = code + pin
-        var testUser : Bool?
-        if mobileNumber == "+923097124818"
-        {
-            testUser = true
-        }
-        else
-        {
+        var pinCode = code + pin
+        var testUser = false
+        if mobileNumber == "+18888888888" {
+           // testUser = true
+           pinCode =  self.testSMSCode
+        } else {
             testUser = false
         }
         
@@ -222,7 +221,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                       "SMSCode" : pinCode,
                       "UserId" : userId ?? "",
                       "DeviceToken" : deviceToken ?? "",
-                      "IsUserTesting": testUser ?? false,
+                      "IsUserTesting": testUser ,
                       "VOIPDeviceToken" : voipToken ?? ""] as [String:Any]
         
         print("params: \(params)")
@@ -387,6 +386,8 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 
                 if isUserRegistered
                 {
+                    self.testSMSCode = json["SMSCode"].string ?? ""
+
                     let isUserVerified = json["IsUserVerified"].bool ?? false
                     
                     if isUserVerified

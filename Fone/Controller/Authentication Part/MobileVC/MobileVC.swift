@@ -138,13 +138,15 @@ extension MobileVC
                 let statusCode = json["StatusCode"].string ?? ""
                 let isUserRegistered = json["IsUserRegistered"].bool ?? false
                 
-                if isUserRegistered
-                {
+                if isUserRegistered {
                     let userId = json["UserId"].string ?? ""
                     _ = json["IsUserVerified"].bool ?? false
                     
+                    
                     let vc = UIStoryboard().loadVerificationVC()
                     vc.userId = userId
+                    vc.testSMSCode = json["SMSCode"].string ?? ""
+
                     vc.mobileNumber = mobileNumber
 //                    SBUGlobals.CurrentUser = SBUUser(userId: userId, nickname: "nickname")
 //                               SBUMain.connect { user, error in

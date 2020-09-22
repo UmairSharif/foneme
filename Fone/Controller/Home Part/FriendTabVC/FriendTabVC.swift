@@ -358,6 +358,9 @@ class FriendTabVC: UIViewController {
                 mobilenumber = user.mobile ?? ""
             }
         }
+        if mobilenumber == "+18888888888" {
+                   return;
+        }
        // mobilenumber = "9199876543"
         let header  = ["Content-Type": "application/json"]
         // APIManager.sharedManager.request(getBrainTreePlans, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default,
@@ -379,7 +382,6 @@ class FriendTabVC: UIViewController {
                 UserDefaults.standard.set("", forKey: SubscriptionStatus)
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
                 self.openPlanListView()
-
             }
             
         }
@@ -387,6 +389,7 @@ class FriendTabVC: UIViewController {
     }
     
     func openPlanListView() {
+       
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
