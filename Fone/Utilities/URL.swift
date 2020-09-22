@@ -32,6 +32,9 @@ let changeuserdevicetoken = "\(BASEURL)api/account/v1/changeuserdevicetoken"
 let sendFcmOPt = "\(BASEURL)api/account/v1/sendFcmOPt"
 //searchuser
 
-
-let getBrainTreePlans = "https://techmowebexperts.com/brain/plans.php"
+let BrainTreeServer = "http://yogofly.com/wizride3/upload/file/brain"
+//let BrainTreeServer = "https://techmowebexperts.com/brain"
+let getBrainTreePlans = "\(BrainTreeServer)/plans.php"
+let getSubscriptions_Customer = "\(BrainTreeServer)/createCustomer.php?mode=getSubscriptions&phone="
+let setSubscriptions_Customer = "\(BrainTreeServer)/createCustomer.php?"
 

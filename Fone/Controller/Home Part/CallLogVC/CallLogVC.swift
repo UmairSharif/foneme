@@ -58,7 +58,6 @@ class CallLogVC: UIViewController {
         callLogTVC.tableFooterView = UIView.init()
         
         let fullString = NSMutableAttributedString(string:"To start calling contacts who have the Fone app, tap  ")
-
          // create our NSTextAttachment
         let image1Attachment = NSTextAttachment()
         if #available(iOS 13.0, *) {

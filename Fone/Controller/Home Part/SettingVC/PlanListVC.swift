@@ -19,7 +19,7 @@ class PlanListVC: UIViewController {
     var planArray = [Any]()
    // var planArray = [SwiftyJSON.JSON]()
 
-    
+     var  subscriptionPlan = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,8 @@ class PlanListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+    subscriptionPlan  = UserDefaults.standard.object(forKey: SubscriptionPlan) as? String ?? ""
+
     }
     
     func loadBrainTreePlans(){
@@ -69,7 +70,8 @@ class PlanListVC: UIViewController {
     
     @IBAction func backBtnTapped(_ sender : UIButton)
     {
-        self.navigationController?.popViewController(animated: true)
+       // self.dismiss(animated: true, completion: nil)
+        //self.navigationController?.popViewController(animated: true)
     }
     
     func pay(withPlanId:String) {
@@ -99,11 +101,23 @@ class PlanListVC: UIViewController {
     func sendRequestPaymentToServer(nonce: String, withPlanId: String) {
         print(nonce);
         
-        //
+        var mobilenumber = ""
+        var email = ""
+        var fName = ""
+        var lName = ""
+               if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+                   print(userProfileData)
+                   if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                       mobilenumber = user.mobile ?? ""
+                      email = user.email ?? ""
+                       fName = user.name ?? ""
+                   }
+               }
+                
         
-        let paymentURL = URL(string: "https://techmowebexperts.com/brain/createCustomer.php?")!
+        let paymentURL = URL(string: setSubscriptions_Customer)!
         var request = URLRequest(url: paymentURL)
-        request.httpBody = "firstName=Sherlock&lastName=Homes&email=testmycode@gmail.com&phone=9999876543&planId=\(withPlanId)&payment_method_nonce=\(nonce)".data(using: String.Encoding.utf8)
+        request.httpBody = "firstName=\(fName)&lastName=\(lName)&email=\(email)&phone=\(mobilenumber)&planId=\(withPlanId)&payment_method_nonce=\(nonce)".data(using: String.Encoding.utf8)
         
         request.httpMethod = "POST"
         
@@ -114,14 +128,34 @@ class PlanListVC: UIViewController {
             }
             let str = String(decoding: data, as: UTF8.self)
             print("str = \(str)")
-            guard let result = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let success = result["success"] as? Bool, success == true else {
+            let result = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            let subscriptionObj = result?["subscription"] as? [String:Any]
+            let transactionId = subscriptionObj?["transactionId"] as? String ?? ""
+            let subscriptionId = subscriptionObj?["subscriptionId"] as? String  ?? ""
+            if transactionId.isEmpty {
                 self?.show(message: "Transaction failed. Please try again.")
                 return
             }
-            
-            self?.show(message: "Successfully charged. Thanks So Much :)")
+            print("result = \(String(describing: result))")
+            UserDefaults.standard.set("Active", forKey: SubscriptionStatus)
+            UserDefaults.standard.set(withPlanId, forKey: SubscriptionPlan)
+            self?.showSuccessMessage()
+           // self?.show(message: "Successfully subscribed for app. Thanks So Much :)")
         }.resume()
     }
+    
+    func showSuccessMessage(){
+        DispatchQueue.main.async {
+
+        let alert = UIAlertController(title: "", message: "Successfully subscribed for app. Thanks So Much :)", preferredStyle: .alert)
+               let actionCancel = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+                self.dismiss(animated: true, completion: nil);
+               }
+               alert.addAction(actionCancel)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     func show(message: String) {
         DispatchQueue.main.async {
@@ -165,21 +199,28 @@ extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let object = self.planArray[indexPath.row] as? [String:Any]
 
-        let alertController = UIAlertController(title: "Confirm", message: "Please confirm to subscribe?", preferredStyle: .alert)
-               
-               let action1 = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
-                  let planId = object?["id"] as? String ?? ""
-                          self.pay(withPlanId: planId);
-               }
-               let action2 = UIAlertAction(title: "NO", style: .cancel) { (action:UIAlertAction) in
+        if subscriptionPlan.isEmpty {
+            let object = self.planArray[indexPath.row] as? [String:Any]
+
+                   let alertController = UIAlertController(title: "Confirm", message: "Please confirm to subscribe?", preferredStyle: .alert)
+                          
+                          let action1 = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
+                             let planId = object?["id"] as? String ?? ""
+                                     self.pay(withPlanId: planId);
+                          }
+                          let action2 = UIAlertAction(title: "NO", style: .cancel) { (action:UIAlertAction) in
+                              
+                          }
+                          
+                          alertController.addAction(action1)
+                          alertController.addAction(action2)
+                          self.present(alertController, animated: true, completion: nil)
                    
-               }
-               
-               alertController.addAction(action1)
-               alertController.addAction(action2)
-               self.present(alertController, animated: true, completion: nil)
+                  
+        } else {
+            self.show(message: "You already subscribed for app. you plan is \(subscriptionPlan)")
+        }
         
        
         

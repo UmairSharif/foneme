@@ -326,8 +326,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func getAccessTokenAPI(mobileNumber : String)
-    {
+    func getAccessTokenAPI(mobileNumber : String) {
         
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"

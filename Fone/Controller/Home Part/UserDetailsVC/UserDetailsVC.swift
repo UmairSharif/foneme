@@ -93,6 +93,12 @@ class UserDetailsVC: UIViewController {
     }
     
     @IBAction func btnClickVoiceCall(_ sender: UIButton) {
+        
+       // UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
+
+//        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+//        if subscription.lowercased() == "active" {
+            
         let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = false
@@ -103,6 +109,11 @@ class UserDetailsVC: UIViewController {
         vc.userDetails = contact
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
+//        } else {
+//
+//            self.show(message: "Please subscribe for app to use this feature.")
+//        }
+        
     }
     
     @IBAction func btnClickChat(_ sender: UIButton) {
@@ -184,7 +195,9 @@ class UserDetailsVC: UIViewController {
     }
     
     @IBAction func btnClickVideoCall(_ sender: UIButton) {
-        let contact = userDetails
+//        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+//      if subscription.lowercased() == "active" {
+                let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = true
         vc.recieverNumber = contact?.phoneNumber
@@ -194,7 +207,20 @@ class UserDetailsVC: UIViewController {
         vc.userDetails = contact
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
+//              } else {
+//            
+//            self.show(message: "Please subscribe for app to use this feature.")
+//        }
     }
+    
+    func show(message: String) {
+          DispatchQueue.main.async {
+              
+              let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+              alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+              self.present(alertController, animated: true, completion: nil)
+          }
+      }
 }
 
 extension UserDetailsVC : GroupChannelsUpdateListDelegate {

@@ -95,9 +95,11 @@ class FriendTabVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.getSubscriptionsForCustomer()
         isFiltering = false
         searchBar.text = ""
         loadDataFromCache()
+
     }
     
     func loadDataFromCache() {
@@ -344,6 +346,53 @@ class FriendTabVC: UIViewController {
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             self.present(activityVC, animated: true, completion: nil)
         }
+    }
+    
+    
+    func getSubscriptionsForCustomer(){
+        
+        var mobilenumber = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                mobilenumber = user.mobile ?? ""
+            }
+        }
+       // mobilenumber = "9199876543"
+        let header  = ["Content-Type": "application/json"]
+        // APIManager.sharedManager.request(getBrainTreePlans, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default,
+        let apiURL = "\(getSubscriptions_Customer)\(mobilenumber)"
+        
+        ServerCall.makeCallWitoutFile(apiURL, params: nil, type: Method.POST, currentView: nil, header: header) { (response) in
+            let isAvilabel = response?["response"] ?? false
+            print(isAvilabel)
+            print(response)
+            if isAvilabel == true {
+                let subscriptionArr = response?["subscriptions"].arrayObject
+                let subscritpionobject = subscriptionArr?.last as? [String:Any]
+                let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String
+                let subscriptionPlan = subscritpionobject?[SubscriptionPlan] as? String
+                UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
+                UserDefaults.standard.set(subscriptionPlan, forKey: SubscriptionPlan)
+
+            }else {
+                UserDefaults.standard.set("", forKey: SubscriptionStatus)
+                UserDefaults.standard.set("", forKey: SubscriptionPlan)
+                self.openPlanListView()
+
+            }
+            
+        }
+        
+    }
+    
+    func openPlanListView() {
+        let desiredVC = UIStoryboard().loadPlanVC()
+        desiredVC.modalPresentationStyle = .fullScreen
+        topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
+
+        //topViewController
+        
     }
     
 }

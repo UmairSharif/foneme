@@ -29,11 +29,9 @@ class MobileVC: UIViewController,CountryDataDelegate {
         } else {
             // Fallback on earlier versions
         }
-        
         print(UIDevice.current.identifierForVendor!.uuidString)
         
          network.reachability.whenReachable = { reachability in
-                
             self.netStatus = true
             UserDefaults.standard.set("Yes", forKey: "netStatus")
             UserDefaults.standard.synchronize()
