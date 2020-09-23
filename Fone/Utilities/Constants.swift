@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-//let BrainTree_toKinizationKey = "sandbox_ktbkxkdd_trhv6grk27vpbzkp"
-let BrainTree_toKinizationKey = "production_csr6kp5g_ysvjqxmg78mdgnbf"
+let BrainTree_toKinizationKey = "sandbox_ktbkxkdd_trhv6grk27vpbzkp"
+let BrainTree_toKinizationKey_Pro = "production_csr6kp5g_ysvjqxmg78mdgnbf"
 
 
 let SubscriptionStatus = "subscriptionStatus"
