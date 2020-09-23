@@ -112,8 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
         let isLogin = UserDefaults.standard.bool(forKey: "isLoggedIn")
         
-        if isLogin
-        {
+        if isLogin {
             //Call Local Contacts Function
             LocalContactHandler.instance.getContacts()
             
@@ -127,8 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                 print(userProfileData)
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                    USER_ID = user.mobile
-                    USER_NAME = user.name
+                    USER_ID = user.mobile ?? ""
+                    USER_NAME = user.name ?? ""
                     
                     let userDefault = UserDefaults.standard
                     userDefault.setValue(USER_ID, forKey: "sendbird_user_id")
