@@ -350,7 +350,6 @@ class FriendTabVC: UIViewController {
     
     
     func getSubscriptionsForCustomer(){
-        return;
         var mobilenumber = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)

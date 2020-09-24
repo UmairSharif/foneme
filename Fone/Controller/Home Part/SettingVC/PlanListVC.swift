@@ -78,9 +78,9 @@ class PlanListVC: UIViewController {
         // Test Values
         // Card Number: 4111111111111111
         // Expiration: 08/2018
-        
+    let token = (IS_SANDBOX == 1) ? BrainTree_toKinizationKey : BrainTree_toKinizationKey_Pro
         let request =  BTDropInRequest()
-        let dropIn = BTDropInController(authorization: BrainTree_toKinizationKey, request: request)
+        let dropIn = BTDropInController(authorization: token, request: request)
         { [unowned self] (controller, result, error) in
             
             if let error = error {
