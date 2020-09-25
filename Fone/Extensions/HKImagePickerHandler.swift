@@ -24,8 +24,7 @@ class HKImagePickerHandler: NSObject {
     //  GALLERY and CAMERA Access Permissions
     func checkPermissionForMediaPickerController() {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        switch photoAuthorizationStatus
-        {
+        switch photoAuthorizationStatus {
         case .authorized:
             print("Access is granted by user")
         case .notDetermined:
@@ -38,6 +37,8 @@ class HKImagePickerHandler: NSObject {
             print("User do not have access to photo album.")
         case .denied:
             print("User has denied the permission.")
+        default: break
+
         }
     }
     

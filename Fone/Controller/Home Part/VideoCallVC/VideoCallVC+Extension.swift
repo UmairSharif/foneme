@@ -576,7 +576,7 @@ extension VideoCallVC {
             //"telephone.caf"
             //"d1878280-d9b6-4689-a70f-a1be87acde0a" Rajesh DEV
             print("oneSignalSendNotification: \(oneSignalSendNotification)")
-            let parameters: Parameters = [
+            let parameters = [
                 "app_id": OneSignalId,
                 "contents": ["en":"English Message"],
                 "apns_push_type_override":"voip",
@@ -598,7 +598,7 @@ extension VideoCallVC {
                          "uuid":uuid ,
                          "isVideo":self.isVideo,
                          "fcmToken":fcmToken]
-            ]
+            ] as? Parameters
             print(parameters)
             let header = ["Content-Type":"application/json",
                           "Authorization":"Basic ZTI1ZGZmZWItZmE1MC00OWRjLTlhMjEtYmFlNDgyZjc0OWI0"]
