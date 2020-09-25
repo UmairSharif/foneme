@@ -383,7 +383,8 @@ class FriendTabVC: UIViewController {
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
                 self.openPlanListView()
             }
-            
+           // self.openPlanListView()
+
         }
         
     }

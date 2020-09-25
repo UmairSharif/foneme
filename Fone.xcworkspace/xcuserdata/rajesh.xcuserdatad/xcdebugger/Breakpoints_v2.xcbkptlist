@@ -274,7 +274,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6da4390febbb038"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -289,7 +289,7 @@
                   offsetFromSymbolStart = "43">
                </Location>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6da4390febbb038"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -382,8 +382,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "sendContactAPI(contactsArray:showLoader:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

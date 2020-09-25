@@ -37,6 +37,8 @@ class PlanListVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+        self.contactTVC.rowHeight = UITableView.automaticDimension
+        self.contactTVC.estimatedRowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -172,6 +174,15 @@ class PlanListVC: UIViewController {
 
 extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
 {
+    // UITableViewAutomaticDimension calculates height of label contents/text
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Swift 4.2 onwards
+        return UITableView.automaticDimension
+
+        // Swift 4.1 and below
+       // return UITableViewAutomaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.planArray.count
         
