@@ -215,22 +215,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9AB4F07A-B5FC-435D-A1D3-86BE571773CC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Hotline/ProviderDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "providerConfiguration"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F6A28795-A342-4757-91AD-82853D6C5C84"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -290,14 +274,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 2342353eb499677d"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6fbf44601f962459"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of Fone.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
-                  moduleName = "Fone"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
+                  moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
+                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"
@@ -305,14 +289,14 @@
                   offsetFromSymbolStart = "43">
                </Location>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 2342353eb499677d"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6fbf44601f962459"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of Fone.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
-                  moduleName = "Fone"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
+                  moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
+                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"
@@ -348,8 +332,8 @@
             filePath = "Fone/Extensions/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "sendFCMPush(title:description:fcmToken:params:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -364,8 +348,8 @@
             filePath = "Fone/Extensions/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "sendFCMPush(title:description:fcmToken:params:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -380,8 +364,8 @@
             filePath = "Fone/Extensions/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "sendFCMPush(title:description:fcmToken:params:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +462,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
-            landmarkName = "CallLogVC"
-            landmarkType = "3">
+            landmarkName = "refresh()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -495,6 +479,86 @@
             startingLineNumber = "383"
             endingLineNumber = "383"
             landmarkName = "resendPincodeAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7D1A357A-FA0A-46B4-80BE-39FF33DE40CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "sendRequestPaymentToServer(nonce:withPlanId:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "pay(withPlanId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493 - 4e4ebb7341458bb3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FoneMe.PlanListVC.pay(withPlanId: Swift.String) -&gt; ()"
+                  moduleName = "FoneMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/Controller/Home%20Part/SettingVC/PlanListVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "342">
+               </Location>
+               <Location
+                  uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493 - e4de36c4c99d2da0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.BTDropInController, Swift.Optional&lt;__C.BTDropInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FoneMe.PlanListVC.pay(withPlanId: Swift.String) -&gt; ()"
+                  moduleName = "FoneMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/Controller/Home%20Part/SettingVC/PlanListVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F1DBD8B7-E4C2-4425-95B0-E87DCBDB9108"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "pay(withPlanId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

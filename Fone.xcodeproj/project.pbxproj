@@ -193,7 +193,6 @@
 		2291D32123D3C2C40032AE5B /* FriendTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291D32023D3C2C40032AE5B /* FriendTabVC.swift */; };
 		229AF2FE23D771E500A1D2CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 229AF2FD23D771E500A1D2CD /* Assets.xcassets */; };
 		229AF30023D7720F00A1D2CD /* icons8-ellipsis-100 (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */; };
-		229AF30223D7721C00A1D2CD /* foneLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 229AF30123D7721C00A1D2CD /* foneLogo.png */; };
 		229BCD0523C202EF00AEF903 /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0423C202EF00AEF903 /* HelpVC.swift */; };
 		229BCD0C23C3C38D00AEF903 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0B23C3C38D00AEF903 /* EditProfileVC.swift */; };
 		229BCD0F23C3C68000AEF903 /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0E23C3C68000AEF903 /* CallVC.swift */; };
@@ -404,7 +403,7 @@
 		1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		2283DC3123C91C57005070B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		22880E6B23C074380044263D /* Fone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22880E6B23C074380044263D /* FoneMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoneMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22880E6E23C074380044263D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22880E7623C074380044263D /* Fone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fone.xcdatamodel; sourceTree = "<group>"; };
 		22880E7B23C074390044263D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -461,7 +460,6 @@
 		2291D32023D3C2C40032AE5B /* FriendTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTabVC.swift; sourceTree = "<group>"; };
 		229AF2FD23D771E500A1D2CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-ellipsis-100 (1).png"; sourceTree = "<group>"; };
-		229AF30123D7721C00A1D2CD /* foneLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foneLogo.png; sourceTree = "<group>"; };
 		229BCD0423C202EF00AEF903 /* HelpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpVC.swift; sourceTree = "<group>"; };
 		229BCD0623C3B2DF00AEF903 /* Fone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fone.entitlements; sourceTree = "<group>"; };
 		229BCD0B23C3C38D00AEF903 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -949,7 +947,6 @@
 		22880E6223C074380044263D = {
 			isa = PBXGroup;
 			children = (
-				229AF30123D7721C00A1D2CD /* foneLogo.png */,
 				229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */,
 				22880E6D23C074380044263D /* Fone */,
 				22880E8523C074390044263D /* FoneTests */,
@@ -964,7 +961,7 @@
 		22880E6C23C074380044263D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22880E6B23C074380044263D /* Fone.app */,
+				22880E6B23C074380044263D /* FoneMe.app */,
 				22880E8223C074390044263D /* FoneTests.xctest */,
 				C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */,
 			);
@@ -1542,7 +1539,7 @@
 			);
 			name = Fone;
 			productName = Fone;
-			productReference = 22880E6B23C074380044263D /* Fone.app */;
+			productReference = 22880E6B23C074380044263D /* FoneMe.app */;
 			productType = "com.apple.product-type.application";
 		};
 		22880E8123C074390044263D /* FoneTests */ = {
@@ -1635,7 +1632,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA0977624817B5000E0A042 /* GroupChannelOutgoingAudioFileMessageTableViewCell.xib in Resources */,
-				229AF30223D7721C00A1D2CD /* foneLogo.png in Resources */,
 				1BA0979B24817B5000E0A042 /* CreateOpenChannelCurrentUserTableViewCell.xib in Resources */,
 				229AF30023D7720F00A1D2CD /* icons8-ellipsis-100 (1).png in Resources */,
 				1BA0977F24817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib in Resources */,
@@ -1713,7 +1709,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/Fone/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		5CF5CB3948C814120733FF6C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2151,7 +2147,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 3.1.0;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2163,10 +2159,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
+				PRODUCT_NAME = FoneMe;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2182,7 +2178,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 3.1.0;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2194,10 +2190,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Fone_Adhoc1;
+				PRODUCT_NAME = FoneMe;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_AppStore;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e";
@@ -2259,7 +2255,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 3.1.0;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2272,10 +2268,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Ext_AppStore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2289,7 +2285,7 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 3.1.0;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2302,10 +2298,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = fone_Ext_AdHoc1;
+				PROVISIONING_PROFILE_SPECIFIER = Fone_Ext_AppStore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -6,6 +6,10 @@ target 'Fone' do
   use_frameworks!
 
   # Pods for Fone
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Crashlytics'
+  
   pod 'BraintreeDropIn'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'
@@ -13,15 +17,13 @@ target 'Fone' do
   pod 'SDWebImage', '~> 4.0'
   pod 'NVActivityIndicatorView'
   pod 'CountryPickerView'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
+ 
   pod 'TwilioChatClient', '~> 2.3.0'
   pod 'TwilioVideo'
   pod 'TwilioAccessManager', '~> 1.0.0'
   pod 'ReachabilitySwift'
   pod 'TwilioVoice', '~> 5.1.1'
   pod 'Branch'
-  pod 'Firebase/Crashlytics'
   pod 'SendBirdSDK'
   pod 'AlamofireImage', '~> 3.4'
   pod 'RSKImageCropper'

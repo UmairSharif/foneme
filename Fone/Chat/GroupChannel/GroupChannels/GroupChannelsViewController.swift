@@ -67,8 +67,8 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
             if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                USER_ID = user.mobile
-                USER_NAME = user.name
+                USER_ID = user.mobile ?? ""
+                USER_NAME = user.name ?? ""
                 
                 let userDefault = UserDefaults.standard
                 userDefault.setValue(USER_ID, forKey: "sendbird_user_id")
