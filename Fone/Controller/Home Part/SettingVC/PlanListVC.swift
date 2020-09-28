@@ -20,6 +20,7 @@ class PlanListVC: UIViewController {
    // var planArray = [SwiftyJSON.JSON]()
 
      var  subscriptionPlan = ""
+    var  subscriptionStatus = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,16 @@ class PlanListVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+        self.contactTVC.rowHeight = UITableView.automaticDimension
+        self.contactTVC.estimatedRowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     subscriptionPlan  = UserDefaults.standard.object(forKey: SubscriptionPlan) as? String ?? ""
+        subscriptionStatus  = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+
+        
 
     }
     
@@ -78,7 +84,9 @@ class PlanListVC: UIViewController {
         // Test Values
         // Card Number: 4111111111111111
         // Expiration: 08/2018
-    let token = (IS_SANDBOX == 1) ? BrainTree_toKinizationKey : BrainTree_toKinizationKey_Pro
+        
+        let token = (IS_SANDBOX == 1) ? BrainTree_toKinizationKey : BrainTree_toKinizationKey_Pro
+        print("token == \(token)")
         let request =  BTDropInRequest()
         let dropIn = BTDropInController(authorization: token, request: request)
         { [unowned self] (controller, result, error) in
@@ -139,6 +147,7 @@ class PlanListVC: UIViewController {
             print("result = \(String(describing: result))")
             UserDefaults.standard.set("Active", forKey: SubscriptionStatus)
             UserDefaults.standard.set(withPlanId, forKey: SubscriptionPlan)
+            UserDefaults.standard.set(subscriptionId, forKey: SubscriptionId)
             self?.showSuccessMessage()
            // self?.show(message: "Successfully subscribed for app. Thanks So Much :)")
         }.resume()
@@ -171,6 +180,15 @@ class PlanListVC: UIViewController {
 
 extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
 {
+    // UITableViewAutomaticDimension calculates height of label contents/text
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Swift 4.2 onwards
+        return UITableView.automaticDimension
+
+        // Swift 4.1 and below
+       // return UITableViewAutomaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.planArray.count
         
@@ -200,7 +218,7 @@ extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
-        if subscriptionPlan.isEmpty {
+        if subscriptionStatus.lowercased() != "active" {
             let object = self.planArray[indexPath.row] as? [String:Any]
 
                    let alertController = UIAlertController(title: "Confirm", message: "Please confirm to subscribe?", preferredStyle: .alert)

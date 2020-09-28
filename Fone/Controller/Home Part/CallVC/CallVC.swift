@@ -105,8 +105,11 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
         }
         else
         {
-            
-            let fullscreenAdManager = FullScreenAdManager()
+            let number = self.codeLbl.text! + self.numberTxt.text!
+            let vc = UIStoryboard().loadVoiceCallVC()
+            vc.callTo = number
+            self.present(vc, animated: true, completion: nil)
+          /*  let fullscreenAdManager = FullScreenAdManager()
             fullscreenAdManager.createAndLoadInterstitial()
             fullscreenAdManager.onadLoaded = { [weak self] (loaded) in
                 if let interstitialAd = fullscreenAdManager.interstitialAd, interstitialAd.isReady, let weakself = self {
@@ -122,7 +125,7 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
                     vc.callTo = number
                     weakself.present(vc, animated: true, completion: nil)
                 }
-            }
+            }*/
         }
     }
     

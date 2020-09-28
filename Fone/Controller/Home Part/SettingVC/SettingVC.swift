@@ -18,6 +18,11 @@ class SettingVC: UIViewController {
     @IBOutlet weak var userImage : UIImageView!
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     
+    
+    @IBOutlet weak var subscriptionLbl : UILabel!
+    @IBOutlet weak var subscriptionView : UIView!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
@@ -48,6 +53,19 @@ class SettingVC: UIViewController {
                     }
                 }
             }
+        }
+        
+        
+    let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+     let   subscriptionPlan  = UserDefaults.standard.object(forKey: SubscriptionPlan) as? String ?? ""
+
+       if subscription.lowercased() == "active" {
+        subscriptionView.isHidden = false
+        subscriptionLbl.text = "Unsubscribe for plan Fone-Out"
+       //    subscriptionLbl.text = "Unsubscribe for plan \(subscriptionPlan)"
+       } else {
+        subscriptionView.isHidden = true
+        
         }
     }
     
@@ -120,10 +138,52 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func subscriptionBtnTapped(_ sender:UIButton){
-        let vc = UIStoryboard().loadPlanVC()
-         self.navigationController?.pushViewController(vc, animated: true)
     
-    }
+       let subscriptionId  = UserDefaults.standard.object(forKey: SubscriptionId) as? String ?? ""
+
+    
+    let paymentURL = URL(string: "\(cancelSubscription_Customer)\(subscriptionId)")!
+    var request = URLRequest(url: paymentURL)
+    request.httpBody = "".data(using: String.Encoding.utf8)
+    
+    request.httpMethod = "POST"
+    
+    URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) -> Void in
+        guard let data = data else {
+           // self?.show(message: error!.localizedDescription)
+            print("error = \(error!.localizedDescription)")
+            return
+        }
+        let str = String(decoding: data, as: UTF8.self)
+        print("str = \(str)")
+        let result = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        let subscription = result?["result"] as? String ?? ""
+        if subscription.isEmpty {
+            let errormes = result?["errormessage"] as? String ?? "Subscription has already been canceled."
+            self?.showSuccessMessage(message: errormes)
+        } else {
+            let msg = result?["msg"] as? String ?? "Subscription cancelled succsessfully."
+            self?.showSuccessMessage(message: msg)
+
+        }
+
+
+       print("result = \(result)")
+
+    }.resume()
+}
+    
+    func showSuccessMessage(message:String){
+           DispatchQueue.main.async {
+
+           let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                  let actionCancel = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+                   self.dismiss(animated: true, completion: nil);
+                  }
+                  alert.addAction(actionCancel)
+               self.present(alert, animated: true, completion: nil)
+           }
+       }
 
     @IBAction func logoutBtnTapped(_ sender:UIButton)
     {
@@ -145,8 +205,7 @@ class SettingVC: UIViewController {
     }
     
     
-    func logoutAPI()
-    {
+    func logoutAPI() {
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         var userId : String?

@@ -350,6 +350,7 @@ class FriendTabVC: UIViewController {
     
     
     func getSubscriptionsForCustomer(){
+        
         var mobilenumber = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -358,7 +359,7 @@ class FriendTabVC: UIViewController {
             }
         }
         if mobilenumber == "+18888888888" {
-                   return;
+            return;
         }
        // mobilenumber = "9199876543"
         let header  = ["Content-Type": "application/json"]
@@ -372,17 +373,24 @@ class FriendTabVC: UIViewController {
             if isAvilabel == true {
                 let subscriptionArr = response?["subscriptions"].arrayObject
                 let subscritpionobject = subscriptionArr?.last as? [String:Any]
-                let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String
+                let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String  ?? ""
+                let subscriptionId = subscritpionobject?[SubscriptionId] as? String  ?? ""
                 let subscriptionPlan = subscritpionobject?[SubscriptionPlan] as? String
                 UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
                 UserDefaults.standard.set(subscriptionPlan, forKey: SubscriptionPlan)
+                UserDefaults.standard.set(subscriptionId, forKey: SubscriptionId)
+                
+                if subscriptionStatus.lowercased() != "active" {
+                self.openPlanListView()
+                }
 
             }else {
                 UserDefaults.standard.set("", forKey: SubscriptionStatus)
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
                 self.openPlanListView()
             }
-            
+           // self.openPlanListView()
+
         }
         
     }

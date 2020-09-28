@@ -8,7 +8,7 @@
 
 
 import UIKit
-import GoogleMobileAds
+//import GoogleMobileAds
 import Alamofire
 import SwiftyJSON
 
@@ -24,18 +24,12 @@ class FullScreenAdManager: NSObject {
     
     // MARK: - Properties
     
-    var onadLoaded: isCompletion?
+  /*  var onadLoaded: isCompletion?
     var onadDismissed: isCompletion?
     var interstitialAd: GADInterstitial?
     
     func createAndLoadInterstitial() {
-        
-        //        if !isAdsEnabled {
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        //                self.onadDismissed?(true)
-        //            }
-        //            return
-        //        }
+
         
         interstitialAd = GADInterstitial(adUnitID: "ca-app-pub-0169736027593374/6775235379")
         interstitialAd?.delegate = self
@@ -88,7 +82,7 @@ extension FullScreenAdManager: GADInterstitialDelegate {
     /// (such as the App Store), backgrounding the current app.
     func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
         print("interstitialWillLeaveApplication")
-    }
+    }*/
 }
 
 func hexStringToUIColor (hex:String) -> UIColor {

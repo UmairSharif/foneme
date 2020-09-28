@@ -15,6 +15,7 @@ let BrainTree_toKinizationKey_Pro = "production_csr6kp5g_ysvjqxmg78mdgnbf"
 
 let SubscriptionStatus = "subscriptionStatus"
 let SubscriptionPlan = "planId"
+let SubscriptionId = "subscriptionId"
 
 let APP_ID = "5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
 let CHANNEL_URL = "https://api-5A3F0F54-1ED8-43D0-A352-627AFE220EC4.sendbird.com"
