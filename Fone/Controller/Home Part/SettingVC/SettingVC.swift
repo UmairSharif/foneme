@@ -61,7 +61,7 @@ class SettingVC: UIViewController {
 
        if subscription.lowercased() == "active" {
         subscriptionView.isHidden = false
-        subscriptionLbl.text = "Unsubscribe for plan Fone-Out"
+        subscriptionLbl.text = "Unsubscribe for Fone-Out"
        //    subscriptionLbl.text = "Unsubscribe for plan \(subscriptionPlan)"
        } else {
         subscriptionView.isHidden = true
@@ -138,6 +138,27 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func subscriptionBtnTapped(_ sender:UIButton){
+        
+        
+        let alertController = UIAlertController(title: "Alert", message: "Are you sure you want to cancel this subscription?", preferredStyle: .alert)
+             
+             let action1 = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
+                 
+                 //Call Logout API
+                 self.cancelSubscription()
+                 
+             }
+             let action2 = UIAlertAction(title: "NO", style: .cancel) { (action:UIAlertAction) in
+                 
+             }
+             
+             alertController.addAction(action1)
+             alertController.addAction(action2)
+             self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func cancelSubscription(){
+        
     
        let subscriptionId  = UserDefaults.standard.object(forKey: SubscriptionId) as? String ?? ""
 
@@ -161,9 +182,15 @@ class SettingVC: UIViewController {
         if subscription.isEmpty {
             let errormes = result?["errormessage"] as? String ?? "Subscription has already been canceled."
             self?.showSuccessMessage(message: errormes)
+            DispatchQueue.main.async {
+                      self?.subscriptionView.isHidden = true
+                      }
         } else {
             let msg = result?["msg"] as? String ?? "Subscription cancelled succsessfully."
             self?.showSuccessMessage(message: msg)
+            DispatchQueue.main.async {
+            self?.subscriptionView.isHidden = true
+            }
 
         }
 

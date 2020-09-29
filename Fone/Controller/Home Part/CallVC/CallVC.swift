@@ -94,9 +94,9 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     @IBAction func callBtnTapped(_ sender : UIButton)
     {
-        self.ActivityIndicatorView.isHidden = false
-        self.ActivityIndicatorView.startAnimating()
-        
+//        self.ActivityIndicatorView.isHidden = false
+//        self.ActivityIndicatorView.startAnimating()
+//        
         if (numberTxt.text?.isEmpty)!
         {
             self.ActivityIndicatorView.stopAnimating()

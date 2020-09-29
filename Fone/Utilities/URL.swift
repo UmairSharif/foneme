@@ -8,7 +8,7 @@
 
 import Foundation
 
-let IS_SANDBOX = 1
+let IS_SANDBOX = 0
 let BASEURL = "https://zwilio.com/"
 //************** Authenticate Part URL *************/////
 let registerUrl = "\(BASEURL)api/account/v1/register"

@@ -291,6 +291,14 @@ class Utility {
         }
         return nil
     }
+    func diffranceBetweenDays(formatedStartDate : Date) -> Int {
+        
+        let currentDate = Date()
+        let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .month, .year])
+        let differenceOfDate = Calendar.current.dateComponents(components, from: currentDate, to: formatedStartDate )
+        return differenceOfDate.day ?? 0;
+
+    }
     
     
     func randomStringWithLength (len : Int) -> NSString {

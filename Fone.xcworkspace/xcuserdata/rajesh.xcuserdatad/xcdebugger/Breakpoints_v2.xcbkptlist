@@ -23,38 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90647F09-AA99-4DB2-B540-078265ECE92C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
-            landmarkName = "checkRecordPermission(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CF15CCE5-97DE-468E-B987-B4834FCC589A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "checkRecordPermission(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2B320A1A-E8A7-482D-91EC-7BB03FEB5B9F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -199,38 +167,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "26AB897C-CD24-489B-BB08-B6467F4EC3F7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F6A28795-A342-4757-91AD-82853D6C5C84"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "init(coder:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C58AAC26-070A-4350-BE70-75F14C6E7C4F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -274,33 +210,33 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6fbf44601f962459"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
                   moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/AppDelegate/AppDelegate.swift"
+                  urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "382"
-                  endingLineNumber = "382"
+                  startingLineNumber = "381"
+                  endingLineNumber = "381"
                   offsetFromSymbolStart = "43">
                </Location>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6fbf44601f962459"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of FoneMe.AppDelegate.application(_: __C.UIApplication, didReceiveRemoteNotification: Swift.Dictionary&lt;Swift.AnyHashable, Any&gt;) -&gt; ()"
                   moduleName = "FoneMe"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/AppDelegate/AppDelegate.swift"
+                  urlString = "file:///Volumes/Data/foneme/foneme-ios/Fone/AppDelegate/AppDelegate.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "382"
-                  endingLineNumber = "382"
+                  startingLineNumber = "381"
+                  endingLineNumber = "381"
                   offsetFromSymbolStart = "109">
                </Location>
             </Locations>
@@ -485,80 +421,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D1A357A-FA0A-46B4-80BE-39FF33DE40CC"
+            uuid = "D881F2F3-F149-4D41-B044-AE9B612F62D3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
+            filePath = "Fone/Controller/Home Part/SettingVC/SettingVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "sendRequestPaymentToServer(nonce:withPlanId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "pay(withPlanId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493 - 4e4ebb7341458bb3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FoneMe.PlanListVC.pay(withPlanId: Swift.String) -&gt; ()"
-                  moduleName = "FoneMe"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/Controller/Home%20Part/SettingVC/PlanListVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "342">
-               </Location>
-               <Location
-                  uuid = "CB018C4D-65F3-414A-A60C-AB1B5C6E0493 - e4de36c4c99d2da0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.BTDropInController, Swift.Optional&lt;__C.BTDropInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FoneMe.PlanListVC.pay(withPlanId: Swift.String) -&gt; ()"
-                  moduleName = "FoneMe"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Data/foneme/Foneme-new/Fone/Controller/Home%20Part/SettingVC/PlanListVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "23">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F1DBD8B7-E4C2-4425-95B0-E87DCBDB9108"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/SettingVC/PlanListVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "pay(withPlanId:)"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "cancelSubscription()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

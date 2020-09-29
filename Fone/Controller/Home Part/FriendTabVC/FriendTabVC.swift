@@ -373,6 +373,13 @@ class FriendTabVC: UIViewController {
             if isAvilabel == true {
                 let subscriptionArr = response?["subscriptions"].arrayObject
                 let subscritpionobject = subscriptionArr?.last as? [String:Any]
+                let subDateobject = subscritpionobject?["lastdate"] as? [String:Any]
+                let dateExpiry = subDateobject?["date"] as? String ?? ""
+                print("dateExpiry = \(dateExpiry)")
+                let dateObj = Utility.sharedInstance.getDateFromString(dateExpiry, "yyyy-MM-dd HH:mm:ss") ?? Date()
+                let diffreance = Utility.sharedInstance.diffranceBetweenDays(formatedStartDate: dateObj)
+                print("diffreance = \(diffreance)")
+
                 let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String  ?? ""
                 let subscriptionId = subscritpionobject?[SubscriptionId] as? String  ?? ""
                 let subscriptionPlan = subscritpionobject?[SubscriptionPlan] as? String
@@ -380,7 +387,7 @@ class FriendTabVC: UIViewController {
                 UserDefaults.standard.set(subscriptionPlan, forKey: SubscriptionPlan)
                 UserDefaults.standard.set(subscriptionId, forKey: SubscriptionId)
                 
-                if subscriptionStatus.lowercased() != "active" {
+                if (subscriptionStatus.lowercased() != "active") && (diffreance < 0) {
                 self.openPlanListView()
                 }
 
