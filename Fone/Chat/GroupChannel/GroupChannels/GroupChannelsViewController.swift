@@ -441,7 +441,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        if self.channels.count > 0 && indexPath.row == self.channels.count - 1 {
+        if self.channels.count > 0 && (indexPath.row == (self.channels.count - 1)) {
             self.loadChannelListNextPage(false)
         }
         
@@ -496,29 +496,32 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         if refresh {
             self.channelListQuery = nil
         }
+        //createMemberListQuery
         
         if self.channelListQuery == nil {
             self.channelListQuery = SBDGroupChannel.createMyGroupChannelListQuery()
             self.channelListQuery?.order = .latestLastMessage
             self.channelListQuery?.limit = 20
             self.channelListQuery?.includeEmptyChannel = true
-            if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+            /*if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
                 if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
                     if contacts.count > 0 {
                         var arrayNumber = [String]()
                         for items in contacts {
                             let dict = items.dictionary
                                 
-                            let number = dict?["ContactsNumber"]?.string ?? ""
+                            var number = dict?["ContactsNumber"]?.string ?? ""
+                            number = number.replacingOccurrences(of: " ", with: "")
                             arrayNumber.append(number)
                         }
+                        print(arrayNumber)
                         if arrayNumber.count > 0 {
                             self.channelListQuery?.setUserIdsIncludeFilter(arrayNumber, queryType: SBDGroupChannelListQueryType.init(rawValue: 1)!)
                         }
                     }
                 }
 
-            }
+            }*/
         }
         
         if self.channelListQuery?.hasNext == false {

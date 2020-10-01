@@ -95,7 +95,14 @@ class FriendTabVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.getSubscriptionsForCustomer()
+      
+       
+if PlatformUtils.isSimulator {
+}else {
+    self.getSubscriptionsForCustomer()
+
+}
+
         isFiltering = false
         searchBar.text = ""
         loadDataFromCache()
