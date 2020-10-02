@@ -46,8 +46,8 @@
             filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "call(_:isReconnectingWithError:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "performEndCallAction(uuid:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,24 +174,8 @@
             filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1146"
-            endingLineNumber = "1146">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D5E402F1-1E74-4CED-B12D-E5EAC54A504F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "sendCallNotificationAPI()"
-            landmarkType = "7">
+            startingLineNumber = "1149"
+            endingLineNumber = "1149">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -222,7 +206,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "381"
                   endingLineNumber = "381"
-                  offsetFromSymbolStart = "43">
+                  offsetFromSymbolStart = "56">
                </Location>
                <Location
                   uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
@@ -237,7 +221,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "381"
                   endingLineNumber = "381"
-                  offsetFromSymbolStart = "109">
+                  offsetFromSymbolStart = "104">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -252,8 +236,8 @@
             filePath = "Fone/Controller/Home Part/VoiceCallVC/VoiceCallVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "681"
-            endingLineNumber = "681"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
             landmarkName = "provider(_:perform:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -348,8 +332,8 @@
             filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "981"
-            endingLineNumber = "981"
+            startingLineNumber = "984"
+            endingLineNumber = "984"
             landmarkName = "addCallLogAPI(status:notifType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -364,8 +348,8 @@
             filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "985"
-            endingLineNumber = "985"
+            startingLineNumber = "988"
+            endingLineNumber = "988"
             landmarkName = "addCallLogAPI(status:notifType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -383,22 +367,6 @@
             startingLineNumber = "428"
             endingLineNumber = "428"
             landmarkName = "application(_:didReceiveRemoteNotification:fetchCompletionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9CDA795F-42A0-4F39-8DA8-2E8F58AE9494"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/CallLogVC/CallLogVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "refresh()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -444,9 +412,73 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannels/GroupChannelsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "621"
+            endingLineNumber = "621"
             landmarkName = "channel(_:didReceive:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3CBE9CC-1FAF-49AD-8A97-CD6427BAD717"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannels/GroupChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "788"
+            endingLineNumber = "788"
+            landmarkName = "searchBar(_:textDidChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2457501-A923-4479-8501-554BC891AEFD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Extensions/HKViewControllerExt.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "seralizeNotificationResult()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "953C5B56-5CF4-40B0-8D5A-91ED3038C469"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "reportIncomingCall(uuid:roomName:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E6AD8452-434F-43C6-8E9E-FB77E3666D7D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/VideoCallVC/VideoCallVC+Extension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "735"
+            endingLineNumber = "735"
+            landmarkName = "handleVOIPPush(payload:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

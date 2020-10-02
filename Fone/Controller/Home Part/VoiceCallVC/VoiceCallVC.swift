@@ -55,7 +55,6 @@ class VoiceCallVC: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         isSpinning = false
         voipRegistry = PKPushRegistry.init(queue: DispatchQueue.main)
-        
         let configuration = CXProviderConfiguration(localizedName: "Fone")
         configuration.maximumCallGroups = 1
         configuration.maximumCallsPerCallGroup = 1

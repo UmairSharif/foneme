@@ -410,7 +410,6 @@ if PlatformUtils.isSimulator {
     }
     
     func openPlanListView() {
-       
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
@@ -444,7 +443,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             if filteredContacts.count > 0 {
                 let contact = filteredContacts[indexPath.row]
                 cell.nameLbl.text = contact.name
-                cell.phoneLbl.text = contact.number
+                cell.phoneLbl.text =  "fone.me/\(contact.ContactsCnic!)"//contact.number
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
             }else {
                 return UITableViewCell()
@@ -457,7 +456,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                 let contact = friendList[indexPath.row]
                 
                 cell.nameLbl.text = contact.name
-                cell.phoneLbl.text = contact.number
+                cell.phoneLbl.text = "fone.me/\(contact.ContactsCnic!)"//contact.number
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
             }else {
                 return UITableViewCell()

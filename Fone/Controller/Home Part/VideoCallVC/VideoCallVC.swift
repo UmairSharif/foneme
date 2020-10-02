@@ -66,6 +66,8 @@ class VideoCallVC: UIViewController {
     var isVideo: Bool = false
     
     // MARK:- UI Element Outlets and handles
+    @IBOutlet weak var foneLogo: UIImageView!
+
     @IBOutlet weak var previewView: VideoView!
     @IBOutlet weak var btnHoldCall: UIButton!
     @IBOutlet weak var roomTextField: UITextField!
@@ -91,7 +93,8 @@ class VideoCallVC: UIViewController {
         UserNameLbl.text = self.name
         previewView.contentMode = .scaleAspectFill
         previewCallingView.contentMode = .scaleAspectFill
-        
+        self.remoteCallingView.contentMode = .scaleAspectFill
+
         previewView.backgroundColor = .black
         previewCallingView.backgroundColor = .black
         self.roomVOIPToken = userDetails?.contactVT ?? ""
@@ -112,15 +115,15 @@ class VideoCallVC: UIViewController {
         configuration.maximumCallsPerCallGroup = 1
         configuration.supportsVideo = true
         configuration.supportedHandleTypes = [.generic]
-        
-        if let callKitIcon = UIImage(named: "iconMask80") {
-            configuration.iconTemplateImageData = callKitIcon.pngData()
-        }
+        configuration.iconTemplateImageData = UIImage(named: "iconMask80")!.pngData()
+
+//        if let callKitIcon = UIImage(named: "iconMask80") {
+//            configuration.iconTemplateImageData = callKitIcon.pngData()
+//        }
         configuration.ringtoneSound = "iphone-original.caf"
         
         callKitProvider = CXProvider(configuration: configuration)
         callKitCallController = CXCallController()
-        
         callKitProvider.setDelegate(self, queue: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.startPreview()
@@ -175,25 +178,34 @@ class VideoCallVC: UIViewController {
             if self.isVideo {
                 self.previewView.contentMode = .scaleAspectFill
                 self.previewCallingView.contentMode = .scaleAspectFill
+                self.remoteCallingView.contentMode = .scaleAspectFill
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = false
                 self.remoteCallingView.isHidden = false
+                self.foneLogo.isHidden = false
             }else{
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = true
                 self.remoteCallingView.isHidden = true
+                self.foneLogo.isHidden = true
+
             }
         }else{
             if self.isVideo {
                 self.previewView.contentMode = .scaleAspectFill
                 self.previewCallingView.contentMode = .scaleAspectFill
+                self.remoteCallingView.contentMode = .scaleAspectFill
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = false
                 self.remoteCallingView.isHidden = false
+                self.foneLogo.isHidden = false
+
             }else{
                 self.previewCallingView.isHidden = true
                 self.previewView.isHidden = true
                 self.remoteCallingView.isHidden = true
+                self.foneLogo.isHidden = true
+
             }
         }
         self.remoteCallingView.backgroundColor = .black
@@ -440,6 +452,8 @@ class VideoCallVC: UIViewController {
         self.previewCallingView.isHidden = false
         self.previewView.isHidden = true
         self.remoteCallingView.isHidden = false
+        self.foneLogo.isHidden = false
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCamera))
         self.remoteCallingView?.addGestureRecognizer(tapGestureRecognizer)
         

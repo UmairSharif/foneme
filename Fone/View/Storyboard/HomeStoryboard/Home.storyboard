@@ -862,19 +862,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_call" translatesAutoresizingMaskIntoConstraints="NO" id="m30-iI-oTh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fid-dp-hS9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calling....." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsu-pJ-KhQ">
                                         <rect key="frame" x="128.66666666666666" y="100" width="118" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                        <color key="textColor" red="0.0" green="0.44705882349999998" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWE-G5-V57">
                                         <rect key="frame" x="319" y="52" width="41" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.44705882349999998" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profile" translatesAutoresizingMaskIntoConstraints="NO" id="MSw-3d-RJp">
@@ -973,10 +976,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="m30-iI-oTh" firstAttribute="top" secondItem="dGe-o6-g7r" secondAttribute="top" id="1nf-y4-X0S"/>
                             <constraint firstAttribute="bottom" secondItem="Fid-dp-hS9" secondAttribute="bottom" id="5ls-Qd-hy7"/>
                             <constraint firstItem="Fid-dp-hS9" firstAttribute="top" secondItem="dGe-o6-g7r" secondAttribute="top" id="7u5-wl-RUd"/>
+                            <constraint firstItem="m30-iI-oTh" firstAttribute="leading" secondItem="4G8-kU-ghZ" secondAttribute="leading" id="AA2-tH-ora"/>
                             <constraint firstItem="Fid-dp-hS9" firstAttribute="leading" secondItem="4G8-kU-ghZ" secondAttribute="leading" id="F10-kk-VeE"/>
+                            <constraint firstItem="m30-iI-oTh" firstAttribute="trailing" secondItem="4G8-kU-ghZ" secondAttribute="trailing" id="OnO-ca-aCo"/>
                             <constraint firstAttribute="trailing" secondItem="Fid-dp-hS9" secondAttribute="trailing" id="qIe-1m-iqo"/>
+                            <constraint firstAttribute="bottom" secondItem="m30-iI-oTh" secondAttribute="bottom" id="x0t-rY-GJT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4G8-kU-ghZ"/>
                     </view>
@@ -1108,6 +1115,27 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                             </view>
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="latestLogoFone.png" translatesAutoresizingMaskIntoConstraints="NO" id="w2a-Xs-9Nr">
+                                                <rect key="frame" x="320" y="747" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="w2a-Xs-9Nr" secondAttribute="height" multiplier="1:1" id="SdY-UK-hgh"/>
+                                                    <constraint firstAttribute="height" constant="35" id="UUe-Go-7l9"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="1.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8e-Pj-ApN">
                                                 <rect key="frame" x="332" y="80" width="30" height="26"/>
                                                 <constraints>
@@ -1124,6 +1152,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="j1z-Mz-vlx" secondAttribute="trailing" id="081-5A-TyT"/>
+                                            <constraint firstAttribute="trailing" secondItem="w2a-Xs-9Nr" secondAttribute="trailing" constant="20" id="0mN-FQ-Vkm"/>
                                             <constraint firstItem="ea3-YV-aFQ" firstAttribute="top" secondItem="BZc-em-4ZE" secondAttribute="top" constant="100" id="CQd-8a-J8W"/>
                                             <constraint firstItem="ea3-YV-aFQ" firstAttribute="centerX" secondItem="BZc-em-4ZE" secondAttribute="centerX" id="FsK-h3-4uc"/>
                                             <constraint firstItem="n8e-Pj-ApN" firstAttribute="top" secondItem="BZc-em-4ZE" secondAttribute="top" constant="80" id="HwB-P8-5YS"/>
@@ -1138,6 +1167,7 @@
                                             <constraint firstItem="56w-Ml-cnR" firstAttribute="top" secondItem="Q0B-Vl-O74" secondAttribute="bottom" constant="128.33000000000001" id="g77-bb-6OD"/>
                                             <constraint firstItem="hZ7-vK-YiX" firstAttribute="top" secondItem="BZc-em-4ZE" secondAttribute="top" id="ham-mK-Pgb"/>
                                             <constraint firstItem="Pd8-KT-1N1" firstAttribute="centerX" secondItem="ea3-YV-aFQ" secondAttribute="centerX" id="iEk-vw-TaP"/>
+                                            <constraint firstAttribute="bottom" secondItem="w2a-Xs-9Nr" secondAttribute="bottom" constant="30" id="j8l-Hg-qo3"/>
                                             <constraint firstItem="j1z-Mz-vlx" firstAttribute="leading" secondItem="BZc-em-4ZE" secondAttribute="leading" id="oPn-pv-WdN"/>
                                             <constraint firstAttribute="trailing" secondItem="Q0B-Vl-O74" secondAttribute="trailing" constant="90" id="qrb-kv-tb0"/>
                                             <constraint firstItem="Q0B-Vl-O74" firstAttribute="centerX" secondItem="BZc-em-4ZE" secondAttribute="centerX" id="rSy-0I-Xhn"/>
@@ -1175,6 +1205,7 @@
                         <outlet property="btnHoldCall" destination="n8e-Pj-ApN" id="0S0-bF-9m9"/>
                         <outlet property="callerImage" destination="Q0B-Vl-O74" id="2E2-Kl-Atm"/>
                         <outlet property="disconnectButton" destination="fI1-j8-ncm" id="e3E-IM-paG"/>
+                        <outlet property="foneLogo" destination="w2a-Xs-9Nr" id="TzQ-By-viI"/>
                         <outlet property="micButton" destination="3fs-rd-AnK" id="Nam-jL-plW"/>
                         <outlet property="previewCallingView" destination="Jx9-Jr-fah" id="miw-Ps-TRL"/>
                         <outlet property="previewView" destination="j1z-Mz-vlx" id="VcH-fJ-dDo"/>
@@ -2659,6 +2690,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <image name="icons8-add-list-64" width="64" height="64"/>
         <image name="img_btn_close_white" width="20" height="20"/>
         <image name="img_icon_edit_camera" width="30" height="30"/>
+        <image name="latestLogoFone.png" width="150" height="150"/>
         <image name="placeHolder" width="225" height="200"/>
         <image name="usa_flag" width="512" height="512"/>
     </resources>

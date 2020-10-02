@@ -13,6 +13,11 @@ import SwiftyJSON
 
 class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate {
     
+    
+       @IBOutlet weak var searchBar : UISearchBar!
+       var isFiltering = false
+       var filteredChannels: [SBDGroupChannel] = []
+
     @IBOutlet weak var groupChannelsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var toastView: UIView!
@@ -32,6 +37,12 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         title = "Chat"
         navigationController?.title = "Chat"
+        
+              searchBar.delegate = self
+              let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+              textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+              self.groupChannelsTableView.tableFooterView = UIView.init()
+             
 
         let createChannelBarButton = UIBarButtonItem.init(image: UIImage(named: "img_btn_create_group_channel_blue")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(GroupChannelsViewController.clickCreateGroupChannel(_:)))
         createChannelBarButton.tintColor = UIColor.white
@@ -286,9 +297,14 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelTableViewCell") as! GroupChannelTableViewCell
-        let channel = self.channels[indexPath.row]
+        var channel = self.channels[indexPath.row]
         
-        cell.channelNameLabel.text = Utils.createGroupChannelName(channel: channel)
+        if isFiltering {
+            channel = self.filteredChannels[indexPath.row]
+        } else {
+        }
+        
+        cell.channelNameLabel.text = channel.name//Utils.createGroupChannelName(channel: channel)
         
         let lastMessageDateFormatter = DateFormatter()
         var lastUpdatedAt: Date?
@@ -399,7 +415,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 if channelMembers.count == 2 {
                     for member in channelMembers {
                         if member.userId != currentUser.userId {
-                            cell.channelNameLabel.text = member.nickname
+                            //cell.channelNameLabel.text = member.nickname
                             if let updateCell = tableView.cellForRow(at: indexPath) as? GroupChannelTableViewCell {
                                 updateCell.profileImagView.makeCircularWithSpacing(spacing: 1)
                                 if let coverUrl = member.profileUrl, !coverUrl.hasPrefix("https://static.sendbird.com/sample/user_sdk"){
@@ -459,7 +475,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             self.emptyLabel.isHidden = true
         }
         
-        return self.channels.count
+        if isFiltering {
+            return filteredChannels.count
+        } else {
+            return self.channels.count
+        }
     }
     
     // MARK: - UITableViewDelegate
@@ -501,7 +521,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         if self.channelListQuery == nil {
             self.channelListQuery = SBDGroupChannel.createMyGroupChannelListQuery()
             self.channelListQuery?.order = .latestLastMessage
-            self.channelListQuery?.limit = 20
+            self.channelListQuery?.limit = 50
             self.channelListQuery?.includeEmptyChannel = true
             /*if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
                 if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
@@ -543,6 +563,26 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 }
                 
                 self.channels += channels!
+                //                   //  Utils.createGroupChannelName(channel: channel)
+
+                var k = 0;
+                for channel in self.channels {
+                    var channelName =  Utils.createGroupChannelName(channel: channel)
+                        if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
+                            if channelMembers.count == 2 {
+                                for member in channelMembers {
+                                    if member.userId != currentUser.userId {
+                                        channelName = member.nickname ?? ""
+                                    }
+                                }
+                            }
+                        }
+                    print(channelName);
+                    channel.name = channelName;
+                    self.channels[k] = channel;
+                    k = k + 1;
+                    }
+                
                 self.groupChannelsTableView.reloadData()
                 self.refreshControl?.endRefreshing()
             }
@@ -673,3 +713,100 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
 }
+
+
+extension GroupChannelsViewController : UISearchBarDelegate {
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isFiltering = true
+        guard let searchText = searchBar.text else {
+            isFiltering = false
+            return
+        }
+        if searchText == "" {
+            isFiltering = false
+            self.filteredChannels.removeAll()
+            self.groupChannelsTableView.reloadData()
+            return
+        }
+        self.filteredChannels.removeAll()
+
+        
+        
+        self.filteredChannels =  self.channels.filter({ $0.name.lowercased().range(of: searchText.lowercased()) != nil})
+
+        
+//        self.filteredChannels = self.channels.filter { term in
+//             return Utils.createGroupChannelName(channel: term).lowercased().contains(searchText.lowercased())
+//           }
+        
+        self.groupChannelsTableView.reloadData()
+
+        
+      /*  self.activityIndicator.startAnimating()
+        self.activityIndicator.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        self.searchFriend(byCnic: searchText) { (users, success) in
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.view.isUserInteractionEnabled = true
+            if success {
+                self.filteredChannels.removeAll()
+                self.filteredChannels = users!
+                
+                self.isFiltering = self.filteredChannels.count > 0
+                if self.isFiltering == false {
+                    self.showAlert("Not user found for this fone id.")
+                }
+                self.groupChannelsTableView.reloadData()
+            }
+        }*/
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isFiltering = false
+        searchBar.text = ""
+        self.view.endEditing(true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isFiltering = false
+        guard let firstSubview = searchBar.subviews.first else { return }
+        
+        firstSubview.subviews.forEach {
+            ($0 as? UITextField)?.clearButtonMode = .never
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isFiltering = false
+        self.view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        isFiltering = true
+               guard let searchText = searchBar.text else {
+                   isFiltering = false
+                   return
+               }
+               if searchText == "" {
+                   isFiltering = false
+                   self.filteredChannels.removeAll()
+                   self.groupChannelsTableView.reloadData()
+                   return
+               }
+               self.filteredChannels.removeAll()
+
+               self.filteredChannels =  self.channels.filter({ $0.name.lowercased().range(of: searchText.lowercased()) != nil})
+
+//               self.filteredChannels = self.channels.filter { term in
+//                    return Utils.createGroupChannelName(channel: term).lowercased().contains(searchText.lowercased())
+//                  }
+               
+               self.groupChannelsTableView.reloadData()
+
+    }
+    
+}
+

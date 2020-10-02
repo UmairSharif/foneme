@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxL-Kp-KCL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,7 +11,7 @@
         <!--Open Channels-->
         <scene sceneID="dII-vA-oMP">
             <objects>
-                <viewController storyboardIdentifier="OpenChannelsViewController" id="YxL-Kp-KCL" customClass="OpenChannelsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpenChannelsViewController" id="YxL-Kp-KCL" customClass="OpenChannelsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="efT-c8-IJ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="832"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelTableViewCell" rowHeight="84" id="QTf-wu-F7B" customClass="OpenChannelTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelTableViewCell" rowHeight="84" id="QTf-wu-F7B" customClass="OpenChannelTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QTf-wu-F7B" id="pOh-GI-oXV">
@@ -101,7 +100,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VFC-ri-NII" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VFC-ri-NII" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
@@ -136,7 +135,7 @@
         <!--Open Channel Chat View Controller-->
         <scene sceneID="w1T-3r-lFF">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="T6M-vb-pdo" customClass="OpenChannelChatViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="T6M-vb-pdo" customClass="OpenChannelChatViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wwn-Fi-Mxi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,7 +245,7 @@
                                     <constraint firstItem="nNM-Q0-PE0" firstAttribute="top" secondItem="xSX-A8-aAZ" secondAttribute="top" id="MGF-SJ-rzQ"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-ac-MJ0" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-ac-MJ0" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-YR-dMa" userLabel="Toast View">
@@ -323,7 +322,7 @@
         <!--Create Open Channel View ControllerA-->
         <scene sceneID="knp-5c-5OI">
             <objects>
-                <viewController id="bzC-kj-O4L" customClass="CreateOpenChannelViewControllerA" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bzC-kj-O4L" customClass="CreateOpenChannelViewControllerA" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Za1-1N-pk5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -422,7 +421,7 @@
         <!--Open Channel Cover Image Name Setting View Controller-->
         <scene sceneID="7gu-xh-iAv">
             <objects>
-                <viewController id="jKm-Sy-A6a" customClass="OpenChannelCoverImageNameSettingViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jKm-Sy-A6a" customClass="OpenChannelCoverImageNameSettingViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6sl-qw-b7G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -501,7 +500,7 @@
                                     <constraint firstItem="R9K-Ij-7yY" firstAttribute="leading" secondItem="8r9-Yg-IlK" secondAttribute="trailing" constant="16" id="lW7-oN-pvz"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="npm-02-gtJ" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="npm-02-gtJ" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                         </subviews>
@@ -533,19 +532,19 @@
         <!--Create Open Channel View ControllerB-->
         <scene sceneID="z9a-9f-EgW">
             <objects>
-                <viewController id="mfb-aV-Ie5" customClass="CreateOpenChannelViewControllerB" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mfb-aV-Ie5" customClass="CreateOpenChannelViewControllerB" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0so-mh-D7C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="v60-Wl-YH1" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="v60-Wl-YH1" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" sectionIndexMinimumDisplayRowCount="2" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hxe-5M-KZA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelChannelUrlTableViewCell" rowHeight="44" id="0xM-Dl-YRq" customClass="CreateOpenChannelChannelUrlTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelChannelUrlTableViewCell" rowHeight="44" id="0xM-Dl-YRq" customClass="CreateOpenChannelChannelUrlTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0xM-Dl-YRq" id="HbN-F9-4wr">
@@ -570,7 +569,7 @@
                                             <outlet property="channelUrlTextField" destination="aoQ-Qa-2DS" id="XcF-Og-gQ3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelAddOperatorTableViewCell" id="Eo1-5Y-9aJ" customClass="CreateOpenChannelAddOperatorTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelAddOperatorTableViewCell" id="Eo1-5Y-9aJ" customClass="CreateOpenChannelAddOperatorTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eo1-5Y-9aJ" id="APh-nl-zwg">
@@ -601,7 +600,7 @@
                                         </tableViewCellContentView>
                                         <viewLayoutGuide key="safeArea" id="BXa-H6-Jvp"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelUserTableViewCell" rowHeight="50" id="xax-zL-W6T" customClass="CreateOpenChannelUserTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelUserTableViewCell" rowHeight="50" id="xax-zL-W6T" customClass="CreateOpenChannelUserTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="143.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xax-zL-W6T" id="wvN-lt-IUV">
@@ -695,7 +694,7 @@
         <!--Select Operators View Controller-->
         <scene sceneID="o2w-B7-iau">
             <objects>
-                <viewController id="Sgh-zm-VIi" customClass="SelectOperatorsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Sgh-zm-VIi" customClass="SelectOperatorsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="COt-Al-Zs1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -745,7 +744,7 @@
         <!--Open Channel User List View Controller-->
         <scene sceneID="BPb-OY-GGr">
             <objects>
-                <viewController id="PWN-sO-Gwd" customClass="OpenChannelUserListViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PWN-sO-Gwd" customClass="OpenChannelUserListViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5rl-5o-PR2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,7 +753,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="OmT-pZ-q8g" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="OmT-pZ-q8g" customClass="OpenChannelSettingsUserTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OmT-pZ-q8g" id="XX7-4y-u23">
@@ -852,7 +851,7 @@
         <!--Open Channel Settings View Controller-->
         <scene sceneID="jxL-BB-dgf">
             <objects>
-                <viewController id="8Sw-7o-qXa" customClass="OpenChannelSettingsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Sw-7o-qXa" customClass="OpenChannelSettingsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nqV-qj-hJS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -862,7 +861,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="color_channel_settings_bg"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsChannelNameTableViewCell" rowHeight="108" id="cvK-1d-Oml" customClass="OpenChannelSettingsChannelNameTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsChannelNameTableViewCell" rowHeight="108" id="cvK-1d-Oml" customClass="OpenChannelSettingsChannelNameTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cvK-1d-Oml" id="TxQ-aZ-Hbs">
@@ -913,7 +912,7 @@
                                             <outlet property="enableEditButton" destination="CME-Lq-LKl" id="KtO-Sj-4s1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="YWF-Zw-TGB" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="YWF-Zw-TGB" customClass="OpenChannelSettingsUserTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="163.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWF-Zw-TGB" id="CsJ-Xz-zUs">
@@ -980,7 +979,7 @@
                                             <outlet property="profileImageView" destination="HRi-al-KPI" id="rAQ-kx-VkM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelSettingsMenuTableViewCell" id="s3X-vW-jFa" customClass="OpenChannelSettingsMenuTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelSettingsMenuTableViewCell" id="s3X-vW-jFa" customClass="OpenChannelSettingsMenuTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="207.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s3X-vW-jFa" id="M86-m6-pOG">
@@ -1026,7 +1025,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VaK-ij-hlj" userLabel="Loading Indicator View" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VaK-ij-hlj" userLabel="Loading Indicator View" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                         </subviews>
@@ -1059,7 +1058,7 @@
         <!--User Profile View Controller-->
         <scene sceneID="ItJ-yV-OEI">
             <objects>
-                <viewController id="J0f-aM-Rwm" customClass="UserProfileViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="J0f-aM-Rwm" customClass="UserProfileViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0sz-cx-uM9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1146,7 +1145,7 @@
         <!--Create Open Channel Navigation Controller-->
         <scene sceneID="Jev-j2-MeN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dle-0C-8Zz" customClass="CreateOpenChannelNavigationController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dle-0C-8Zz" customClass="CreateOpenChannelNavigationController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rwM-VT-4RA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -1181,7 +1180,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gmn-Sg-5KT"/>
+        <segue reference="zpF-0N-ngL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="img_btn_edit_channel_name" width="36" height="36"/>

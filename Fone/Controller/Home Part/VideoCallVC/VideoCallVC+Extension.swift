@@ -375,7 +375,7 @@ extension VideoCallVC {
     
     func reportIncomingCall(uuid: UUID, roomName: String?, completion: ((NSError?) -> Void)? = nil) {
         
-        let callHandle = CXHandle(type: .generic, value: roomName ?? "")
+        let callHandle = CXHandle(type: .generic, value: roomName ?? "" )
         let callUpdate = CXCallUpdate()
         
         callUpdate.remoteHandle = callHandle
@@ -570,11 +570,14 @@ extension VideoCallVC {
             print("sendVOIPNotification: \(params)")
             //                "include_player_ids":["8e115324-34f7-48da-b2bb-d8fe0a87f370"],
 //"2a237d4c-f138-4eaa-839a-c6d697a1174e"
+            //                "include_player_ids":[voipToken],
+
             //voipToken
            //US //"6fed3c72-3e5f-4053-b3b1-bb0352de4570",
             //Rajesh "b9d6a0e0-c53d-4dc6-ba38-e2a7987e0fdd"
             //"telephone.caf"
             //"d1878280-d9b6-4689-a70f-a1be87acde0a" Rajesh DEV
+            //d1878280-d9b6-4689-a70f-a1be87acde0a
             print("oneSignalSendNotification: \(oneSignalSendNotification)")
             let parameters: Parameters = [
                 "app_id": OneSignalId,
@@ -727,7 +730,7 @@ extension VideoCallVC: PushKitEventDelegate {
                 DispatchQueue.main.async {
                     
                     let update = CXCallUpdate()
-                    update.remoteHandle = CXHandle(type: .generic, value: callerName )
+                    update.remoteHandle = CXHandle(type: .generic, value: self.name  )
                     NotificationHandler.shared.isReceived = true
                     NotificationHandler.shared.receiverId = receiverId
                     NotificationHandler.shared.notificationType = notificationType
@@ -775,7 +778,7 @@ extension VideoCallVC: PushKitEventDelegate {
             self.previewView.isHidden = true
             self.remoteCallingView.isHidden = true
         }
-        self.roomName = dialerNumber
+        self.roomName = dialerName
         self.reportIncomingCall(uuid: UUID(), roomName: self.roomName) { _ in
             // Always call the completion handler when done.
             

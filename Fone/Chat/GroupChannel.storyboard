@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,23 +11,30 @@
         <!--Group Channels-->
         <scene sceneID="hLV-cw-Lnu">
             <objects>
-                <viewController storyboardIdentifier="GroupChannelsViewController" title="Group Channels" id="EhS-Sz-WvI" customClass="GroupChannelsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupChannelsViewController" title="Group Channels" id="EhS-Sz-WvI" customClass="GroupChannelsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="eLG-qZ-maB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search here..." translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
+                                <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="DIt-WY-mGL"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6r4-MH-j3S" userLabel="Group Channels Table View">
-                                <rect key="frame" x="0.0" y="20" width="414" height="876"/>
+                                <rect key="frame" x="0.0" y="70" width="414" height="826"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yPq-Ws-8k2" id="3Mb-k0-QK9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-0L-bRa" userLabel="Cover Image Container View" customClass="ProfileImageView" customModule="Fone" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-0L-bRa" userLabel="Cover Image Container View" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="12" width="56" height="56"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -190,7 +196,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no group channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8e-Li-fJv" userLabel="Empty Label">
@@ -237,12 +243,15 @@
                             <constraint firstItem="bPr-fD-mwe" firstAttribute="centerY" secondItem="eLG-qZ-maB" secondAttribute="centerY" id="7kD-Wm-o6q"/>
                             <constraint firstItem="bPr-fD-mwe" firstAttribute="centerX" secondItem="eLG-qZ-maB" secondAttribute="centerX" id="AKR-Y2-hi1"/>
                             <constraint firstItem="x8e-Li-fJv" firstAttribute="centerX" secondItem="kGU-dc-f6V" secondAttribute="centerX" id="Cn7-Jq-Wmf"/>
+                            <constraint firstItem="kGU-dc-f6V" firstAttribute="trailing" secondItem="gvT-hh-IFs" secondAttribute="trailing" constant="20" id="ELW-IR-qec"/>
                             <constraint firstItem="jJZ-tQ-QH6" firstAttribute="leading" secondItem="eLG-qZ-maB" secondAttribute="leading" id="Nzx-7r-9jY"/>
+                            <constraint firstItem="6r4-MH-j3S" firstAttribute="top" secondItem="gvT-hh-IFs" secondAttribute="bottom" id="TNh-Mr-c6P"/>
                             <constraint firstItem="jJZ-tQ-QH6" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" id="UvZ-OG-VqP"/>
                             <constraint firstAttribute="trailing" secondItem="6r4-MH-j3S" secondAttribute="trailing" id="Whh-U9-ZwV"/>
                             <constraint firstAttribute="trailing" secondItem="jJZ-tQ-QH6" secondAttribute="trailing" id="Yee-c1-y45"/>
                             <constraint firstAttribute="bottom" secondItem="jJZ-tQ-QH6" secondAttribute="bottom" id="b98-YK-4pJ"/>
-                            <constraint firstItem="6r4-MH-j3S" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" constant="20" id="qFm-2o-6te"/>
+                            <constraint firstItem="gvT-hh-IFs" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" constant="20" id="e2z-op-tFW"/>
+                            <constraint firstItem="gvT-hh-IFs" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" constant="20" id="eov-Qg-exb"/>
                             <constraint firstItem="x8e-Li-fJv" firstAttribute="centerY" secondItem="kGU-dc-f6V" secondAttribute="centerY" id="vWM-og-8QR"/>
                             <constraint firstAttribute="bottom" secondItem="6r4-MH-j3S" secondAttribute="bottom" id="wER-NF-ATZ"/>
                             <constraint firstItem="6r4-MH-j3S" firstAttribute="leading" secondItem="eLG-qZ-maB" secondAttribute="leading" id="xcc-7r-4D3"/>
@@ -254,6 +263,7 @@
                         <outlet property="emptyLabel" destination="x8e-Li-fJv" id="OtM-6H-g3g"/>
                         <outlet property="groupChannelsTableView" destination="6r4-MH-j3S" id="MlZ-RY-prH"/>
                         <outlet property="loadingIndicatorView" destination="jJZ-tQ-QH6" id="mKf-sR-q2S"/>
+                        <outlet property="searchBar" destination="gvT-hh-IFs" id="IaJ-Oo-D5O"/>
                         <outlet property="toastMessageLabel" destination="oUb-BH-sFU" id="oDh-dD-SNW"/>
                         <outlet property="toastView" destination="bPr-fD-mwe" id="b0r-0g-VSl"/>
                         <segue destination="oiI-8W-aFC" kind="showDetail" identifier="ShowGroupChat" id="lZ8-IH-JE1"/>
@@ -267,7 +277,7 @@
         <!--Create Group Channel View ControllerA-->
         <scene sceneID="8yP-Fc-6PN">
             <objects>
-                <viewController id="Fl6-Bo-p2e" customClass="CreateGroupChannelViewControllerA" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Fl6-Bo-p2e" customClass="CreateGroupChannelViewControllerA" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CZZ-Nk-GZ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,7 +329,7 @@
         <!--Create Group Channel View ControllerB-->
         <scene sceneID="Wn7-n2-2m4">
             <objects>
-                <viewController id="tAb-gt-fTY" customClass="CreateGroupChannelViewControllerB" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tAb-gt-fTY" customClass="CreateGroupChannelViewControllerB" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8XQ-du-yqF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -334,7 +344,7 @@
                                             <constraint firstAttribute="height" constant="1" id="MW9-Ze-EnY"/>
                                         </constraints>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enQ-e3-Xx7" userLabel="Profile Image View" customClass="ProfileImageView" customModule="Fone" customModuleProvider="target">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enQ-e3-Xx7" userLabel="Profile Image View" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="16" y="10" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -404,7 +414,7 @@
         <!--Group Channel Settings View Controller-->
         <scene sceneID="bLH-0x-LVR">
             <objects>
-                <viewController id="WkL-XQ-enD" customClass="GroupChannelSettingsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WkL-XQ-enD" customClass="GroupChannelSettingsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Gun-vA-b8P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,14 +423,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="139" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="139" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="139"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Gx-IQ-dRY" id="jq0-6n-4DY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-o4-DhA" customClass="ProfileImageView" customModule="Fone" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-o4-DhA" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="19.5" width="100" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -467,7 +477,7 @@
                                             <outlet property="profileImageView" destination="N1o-o4-DhA" id="wB2-qH-EOH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="194.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3iE-b0-fOz" id="ExI-Tt-16h">
@@ -519,7 +529,7 @@
                                             <outlet property="notificationSwitch" destination="aDs-5Z-AJ0" id="zjw-Fp-w4w"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="238" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCz-xY-8Ou" id="Cs5-rT-v66">
@@ -560,7 +570,7 @@
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="V39-Qs-5aR"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="281.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcM-9p-84f" id="i1s-eD-u4C">
@@ -654,7 +664,7 @@
                                             <outlet property="statusLabel" destination="IqO-z2-Bci" id="eeX-cF-aqg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="Fone" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="325" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2Q-Ab-WjV" id="O31-ib-vWw">
@@ -699,7 +709,7 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-2P-xCz" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-2P-xCz" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
@@ -731,7 +741,7 @@
         <!--Group Channel Invite Member View Controller-->
         <scene sceneID="Qpi-zN-Ouk">
             <objects>
-                <viewController id="LMb-Wy-W9e" customClass="GroupChannelInviteMemberViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LMb-Wy-W9e" customClass="GroupChannelInviteMemberViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hLs-Cx-SLb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,7 +764,7 @@
                                 <rect key="frame" x="0.0" y="158" width="414" height="738"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9c-PZ-Xm6" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9c-PZ-Xm6" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
@@ -789,7 +799,7 @@
         <!--User Profile View Controller-->
         <scene sceneID="0NW-gW-V8x">
             <objects>
-                <viewController id="A0V-Hi-H9j" customClass="UserProfileViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A0V-Hi-H9j" customClass="UserProfileViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2Ic-q1-H33">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -876,7 +886,7 @@
         <!--Group Channel Cover Image Name Setting View Controller-->
         <scene sceneID="nkL-dV-0YB">
             <objects>
-                <viewController id="uUn-AC-KUB" customClass="GroupChannelCoverImageNameSettingViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uUn-AC-KUB" customClass="GroupChannelCoverImageNameSettingViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Dju-38-emj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -884,7 +894,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0du-kn-47v" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="88" width="414" height="120"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgc-FM-u7u" customClass="ProfileImageView" customModule="Fone" customModuleProvider="target">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgc-FM-u7u" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
                                         <rect key="frame" x="15" y="10" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -934,7 +944,7 @@
                                     <constraint firstAttribute="bottom" secondItem="sWh-6V-hSL" secondAttribute="bottom" id="tqW-ZP-2le"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-HN-GE3" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-HN-GE3" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -964,7 +974,7 @@
         <!--Group Channel Chat View Controller-->
         <scene sceneID="ipV-Fx-eSg">
             <objects>
-                <viewController storyboardIdentifier="GrouplChatViewController" id="ESq-tY-gjT" customClass="GroupChannelChatViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GrouplChatViewController" id="ESq-tY-gjT" customClass="GroupChannelChatViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CQq-dl-bWx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1102,7 +1112,7 @@
                                     <constraint firstItem="zSS-G6-YAw" firstAttribute="top" secondItem="QuK-mS-w71" secondAttribute="top" id="w1O-Ni-sHs"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x4w-rc-Oaf" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x4w-rc-Oaf" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0az-YP-nSf" userLabel="Toast View">
@@ -1187,7 +1197,7 @@
         <!--Create Group Channel Navigation Controller-->
         <scene sceneID="N3H-6T-86S">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="efp-2W-Ywn" customClass="CreateGroupChannelNavigationController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="efp-2W-Ywn" customClass="CreateGroupChannelNavigationController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sbo-AA-peK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
