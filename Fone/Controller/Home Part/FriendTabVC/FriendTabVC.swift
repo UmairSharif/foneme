@@ -393,6 +393,7 @@ if PlatformUtils.isSimulator {
                 UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
                 UserDefaults.standard.set(subscriptionPlan, forKey: SubscriptionPlan)
                 UserDefaults.standard.set(subscriptionId, forKey: SubscriptionId)
+                UserDefaults.standard.set("\(diffreance)", forKey: SubscriptionDays)
                 
                 if (subscriptionStatus.lowercased() != "active") && (diffreance < 0) {
                 self.openPlanListView()
@@ -401,6 +402,8 @@ if PlatformUtils.isSimulator {
             }else {
                 UserDefaults.standard.set("", forKey: SubscriptionStatus)
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
+                UserDefaults.standard.set("0", forKey: SubscriptionDays)
+
                 self.openPlanListView()
             }
            // self.openPlanListView()
@@ -410,6 +413,7 @@ if PlatformUtils.isSimulator {
     }
     
     func openPlanListView() {
+        return;
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
