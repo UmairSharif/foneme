@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,12 +12,12 @@
         <!--Group Channels-->
         <scene sceneID="hLV-cw-Lnu">
             <objects>
-                <viewController storyboardIdentifier="GroupChannelsViewController" title="Group Channels" id="EhS-Sz-WvI" customClass="GroupChannelsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupChannelsViewController" title="Group Channels" id="EhS-Sz-WvI" customClass="GroupChannelsViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="eLG-qZ-maB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search here..." translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
+                            <searchBar contentMode="redraw" placeholder="Search here..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
                                 <rect key="frame" x="20" y="20" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="DIt-WY-mGL"/>
@@ -27,14 +28,14 @@
                                 <rect key="frame" x="0.0" y="70" width="414" height="826"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yPq-Ws-8k2" id="3Mb-k0-QK9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-0L-bRa" userLabel="Cover Image Container View" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKG-0L-bRa" userLabel="Cover Image Container View" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="12" width="56" height="56"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -43,7 +44,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7E4-Ck-oqM" userLabel="Member Count Container View">
-                                                    <rect key="frame" x="204.5" y="14" width="18" height="17"/>
+                                                    <rect key="frame" x="204" y="14" width="18" height="17"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEz-ML-kRN" userLabel="Member Count Label">
                                                             <rect key="frame" x="5" y="1.5" width="8" height="14"/>
@@ -67,10 +68,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-Bv-mUx" userLabel="Unread Message Count Container View">
-                                                    <rect key="frame" x="370.5" y="47" width="33.5" height="19"/>
+                                                    <rect key="frame" x="371" y="47" width="33" height="19"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXv-Vu-ea8" userLabel="Unread Message Count Label">
-                                                            <rect key="frame" x="5" y="2.5" width="23.5" height="14"/>
+                                                            <rect key="frame" x="5" y="2.5" width="23" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -91,7 +92,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="img_icon_nofi_off" translatesAutoresizingMaskIntoConstraints="NO" id="Dvh-2w-BGS" userLabel="Noti Off Icon Image View">
-                                                    <rect key="frame" x="230" y="16" width="13" height="13"/>
+                                                    <rect key="frame" x="229.5" y="16" width="13" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="2G0-rb-ooK"/>
                                                         <constraint firstAttribute="width" constant="13" id="ycQ-HE-lcR"/>
@@ -139,7 +140,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXY-fr-6om" userLabel="Channel Name Label">
-                                                    <rect key="frame" x="80" y="12" width="116.5" height="21"/>
+                                                    <rect key="frame" x="80" y="12" width="116" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" name="color_group_channel_name_label"/>
                                                     <nil key="highlightedColor"/>
@@ -175,10 +176,10 @@
                                                 <constraint firstItem="BAe-fj-Q30" firstAttribute="leading" secondItem="vKG-0L-bRa" secondAttribute="trailing" constant="14" id="vrV-jT-vY2"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="Lsw-eI-Mgg"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="BAe-fj-Q30" secondAttribute="trailing" id="HKg-cn-mna"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="Lsw-eI-Mgg"/>
                                         <connections>
                                             <outlet property="channelNameLabel" destination="jXY-fr-6om" id="fgR-jM-FwQ"/>
                                             <outlet property="lastMessageLabel" destination="hkB-LA-NS9" id="iUr-ip-jaw"/>
@@ -196,7 +197,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no group channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8e-Li-fJv" userLabel="Empty Label">
@@ -238,6 +239,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="kGU-dc-f6V"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bPr-fD-mwe" firstAttribute="centerY" secondItem="eLG-qZ-maB" secondAttribute="centerY" id="7kD-Wm-o6q"/>
@@ -256,7 +258,6 @@
                             <constraint firstAttribute="bottom" secondItem="6r4-MH-j3S" secondAttribute="bottom" id="wER-NF-ATZ"/>
                             <constraint firstItem="6r4-MH-j3S" firstAttribute="leading" secondItem="eLG-qZ-maB" secondAttribute="leading" id="xcc-7r-4D3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="kGU-dc-f6V"/>
                     </view>
                     <navigationItem key="navigationItem" title="Group Channels" largeTitleDisplayMode="always" id="wJY-eT-X9X"/>
                     <connections>
@@ -277,7 +278,7 @@
         <!--Create Group Channel View ControllerA-->
         <scene sceneID="8yP-Fc-6PN">
             <objects>
-                <viewController id="Fl6-Bo-p2e" customClass="CreateGroupChannelViewControllerA" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Fl6-Bo-p2e" customClass="CreateGroupChannelViewControllerA" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CZZ-Nk-GZ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,6 +302,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZJ6-9D-ZfO"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YkM-GI-1K1" firstAttribute="top" secondItem="N5j-M9-aNl" secondAttribute="bottom" id="2bD-Hn-JFz"/>
@@ -312,7 +314,6 @@
                             <constraint firstAttribute="bottom" secondItem="YkM-GI-1K1" secondAttribute="bottom" id="hha-ii-2ze"/>
                             <constraint firstItem="N5j-M9-aNl" firstAttribute="top" secondItem="ZJ6-9D-ZfO" secondAttribute="top" id="yY1-Id-vjz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ZJ6-9D-ZfO"/>
                     </view>
                     <navigationItem key="navigationItem" id="5zt-gQ-XVg"/>
                     <connections>
@@ -329,7 +330,7 @@
         <!--Create Group Channel View ControllerB-->
         <scene sceneID="Wn7-n2-2m4">
             <objects>
-                <viewController id="tAb-gt-fTY" customClass="CreateGroupChannelViewControllerB" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tAb-gt-fTY" customClass="CreateGroupChannelViewControllerB" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8XQ-du-yqF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -344,7 +345,7 @@
                                             <constraint firstAttribute="height" constant="1" id="MW9-Ze-EnY"/>
                                         </constraints>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enQ-e3-Xx7" userLabel="Profile Image View" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enQ-e3-Xx7" userLabel="Profile Image View" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="16" y="10" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -387,6 +388,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ng1-9t-I8y"/>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
                         <constraints>
                             <constraint firstItem="vxw-Hh-o7J" firstAttribute="leading" secondItem="8XQ-du-yqF" secondAttribute="leading" id="6sD-UD-Jzc"/>
@@ -399,7 +401,6 @@
                             <constraint firstAttribute="trailing" secondItem="vxw-Hh-o7J" secondAttribute="trailing" id="mEe-Yz-JPG"/>
                             <constraint firstItem="ng1-9t-I8y" firstAttribute="trailing" secondItem="KkF-zt-Z0B" secondAttribute="trailing" constant="16" id="y9i-Fm-W5p"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ng1-9t-I8y"/>
                     </view>
                     <connections>
                         <outlet property="channelNameTextField" destination="KkF-zt-Z0B" id="az0-nn-edE"/>
@@ -414,23 +415,23 @@
         <!--Group Channel Settings View Controller-->
         <scene sceneID="bLH-0x-LVR">
             <objects>
-                <viewController id="WkL-XQ-enD" customClass="GroupChannelSettingsViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WkL-XQ-enD" customClass="GroupChannelSettingsViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Gun-vA-b8P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" sectionIndexMinimumDisplayRowCount="4" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bMU-AL-XZ0">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="139" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="139" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="139"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Gx-IQ-dRY" id="jq0-6n-4DY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-o4-DhA" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-o4-DhA" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="19.5" width="100" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -477,7 +478,7 @@
                                             <outlet property="profileImageView" destination="N1o-o4-DhA" id="wB2-qH-EOH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="194.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3iE-b0-fOz" id="ExI-Tt-16h">
@@ -496,7 +497,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Va0-n7-hYZ" userLabel="Notification Setting Label">
-                                                    <rect key="frame" x="68" y="11.5" width="96.5" height="21"/>
+                                                    <rect key="frame" x="68" y="11.5" width="96" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -520,16 +521,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="aDs-5Z-AJ0" secondAttribute="trailing" constant="17" id="xei-pR-GGn"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="hPP-qV-Ik3"/>
                                         <constraints>
                                             <constraint firstItem="meT-UA-LgR" firstAttribute="leading" secondItem="3iE-b0-fOz" secondAttribute="leading" id="9IW-TN-ikb"/>
                                             <constraint firstAttribute="trailing" secondItem="meT-UA-LgR" secondAttribute="trailing" id="UwE-Sz-EvY"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="hPP-qV-Ik3"/>
                                         <connections>
                                             <outlet property="notificationSwitch" destination="aDs-5Z-AJ0" id="zjw-Fp-w4w"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="238" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCz-xY-8Ou" id="Cs5-rT-v66">
@@ -564,13 +565,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="sco-nJ-u8b" secondAttribute="trailing" id="lNW-rN-eJg"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="V39-Qs-5aR"/>
                                         <constraints>
                                             <constraint firstItem="J7v-WK-5aS" firstAttribute="leading" secondItem="hCz-xY-8Ou" secondAttribute="leading" id="ElD-cg-auI"/>
                                             <constraint firstAttribute="trailing" secondItem="J7v-WK-5aS" secondAttribute="trailing" id="gSN-yH-Csj"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="V39-Qs-5aR"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="281.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcM-9p-84f" id="i1s-eD-u4C">
@@ -650,11 +651,11 @@
                                                 <constraint firstItem="Vcd-Lw-MGj" firstAttribute="trailing" secondItem="VwN-ba-whD" secondAttribute="trailing" id="uza-ci-w66"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="Xv8-Fk-eCs"/>
                                         <constraints>
                                             <constraint firstItem="CBw-Ka-42z" firstAttribute="leading" secondItem="QcM-9p-84f" secondAttribute="leading" id="ZTb-X0-zfa"/>
                                             <constraint firstAttribute="trailing" secondItem="CBw-Ka-42z" secondAttribute="trailing" id="ZmZ-jv-lVR"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="Xv8-Fk-eCs"/>
                                         <inset key="separatorInset" minX="68" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="blockedUserCoverImageView" destination="Vcd-Lw-MGj" id="ElO-0t-Sfv"/>
@@ -664,7 +665,7 @@
                                             <outlet property="statusLabel" destination="IqO-z2-Bci" id="eeX-cF-aqg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="325" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2Q-Ab-WjV" id="O31-ib-vWw">
@@ -698,21 +699,22 @@
                                                 <constraint firstItem="ln1-Za-UHa" firstAttribute="centerY" secondItem="O31-ib-vWw" secondAttribute="centerY" id="jzt-j2-4Te"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="qfX-fP-35l"/>
                                         <constraints>
                                             <constraint firstItem="MqJ-YZ-RHt" firstAttribute="leading" secondItem="p2Q-Ab-WjV" secondAttribute="leading" id="5Zv-c1-wGf"/>
                                             <constraint firstAttribute="trailing" secondItem="MqJ-YZ-RHt" secondAttribute="trailing" id="iqO-4g-2cv"/>
                                             <constraint firstItem="wOu-wQ-kXo" firstAttribute="leading" secondItem="p2Q-Ab-WjV" secondAttribute="leading" id="skU-ee-G9X"/>
                                             <constraint firstAttribute="trailing" secondItem="wOu-wQ-kXo" secondAttribute="trailing" id="ugb-rG-NUL"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="qfX-fP-35l"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-2P-xCz" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rwK-2P-xCz" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="tYr-xU-qIQ"/>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
                         <constraints>
                             <constraint firstItem="bMU-AL-XZ0" firstAttribute="leading" secondItem="Gun-vA-b8P" secondAttribute="leading" id="4F7-7d-Sk8"/>
@@ -724,7 +726,6 @@
                             <constraint firstAttribute="bottom" secondItem="bMU-AL-XZ0" secondAttribute="bottom" id="P8c-eW-D30"/>
                             <constraint firstAttribute="bottom" secondItem="rwK-2P-xCz" secondAttribute="bottom" id="caP-7I-Zkm"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="tYr-xU-qIQ"/>
                     </view>
                     <connections>
                         <outlet property="loadingIndicatorView" destination="rwK-2P-xCz" id="XXC-dV-qQA"/>
@@ -741,7 +742,7 @@
         <!--Group Channel Invite Member View Controller-->
         <scene sceneID="Qpi-zN-Ouk">
             <objects>
-                <viewController id="LMb-Wy-W9e" customClass="GroupChannelInviteMemberViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LMb-Wy-W9e" customClass="GroupChannelInviteMemberViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hLs-Cx-SLb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -764,10 +765,11 @@
                                 <rect key="frame" x="0.0" y="158" width="414" height="738"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9c-PZ-Xm6" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9c-PZ-Xm6" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="zmx-p1-mte"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5aH-4L-jnK" firstAttribute="top" secondItem="zmx-p1-mte" secondAttribute="top" id="48F-3b-Laf"/>
@@ -783,7 +785,6 @@
                             <constraint firstAttribute="bottom" secondItem="s9c-PZ-Xm6" secondAttribute="bottom" id="t7r-Bf-Rq1"/>
                             <constraint firstItem="s9c-PZ-Xm6" firstAttribute="top" secondItem="hLs-Cx-SLb" secondAttribute="top" id="yvJ-K4-hui"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zmx-p1-mte"/>
                     </view>
                     <connections>
                         <outlet property="selectedUserListHeight" destination="6ZO-Sb-zpO" id="fNs-xN-OnF"/>
@@ -799,7 +800,7 @@
         <!--User Profile View Controller-->
         <scene sceneID="0NW-gW-V8x">
             <objects>
-                <viewController id="A0V-Hi-H9j" customClass="UserProfileViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A0V-Hi-H9j" customClass="UserProfileViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2Ic-q1-H33">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -845,6 +846,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <viewLayoutGuide key="safeArea" id="b8e-gD-aF9"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="GLs-1h-jH1" firstAttribute="leading" secondItem="JaA-TV-do5" secondAttribute="trailing" constant="5" id="1rp-MG-m0c"/>
@@ -860,16 +862,15 @@
                                     <constraint firstItem="JaA-TV-do5" firstAttribute="leading" secondItem="Y0j-cL-ZOc" secondAttribute="trailing" constant="18" id="vUL-yk-5W8"/>
                                     <constraint firstItem="SRa-QM-oN9" firstAttribute="leading" secondItem="Y0j-cL-ZOc" secondAttribute="trailing" constant="16" id="yd8-nn-MAL"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="b8e-gD-aF9"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="F8y-jc-bPj"/>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
                         <constraints>
                             <constraint firstItem="3AJ-Lz-z0z" firstAttribute="leading" secondItem="2Ic-q1-H33" secondAttribute="leading" id="CeZ-3W-MZK"/>
                             <constraint firstItem="3AJ-Lz-z0z" firstAttribute="top" secondItem="F8y-jc-bPj" secondAttribute="top" id="E3W-7O-OIc"/>
                             <constraint firstAttribute="trailing" secondItem="3AJ-Lz-z0z" secondAttribute="trailing" id="pyT-bU-6Tk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="F8y-jc-bPj"/>
                     </view>
                     <connections>
                         <outlet property="lastUpdatedLabel" destination="kLo-iG-5Qy" id="7CY-ki-vwS"/>
@@ -886,7 +887,7 @@
         <!--Group Channel Cover Image Name Setting View Controller-->
         <scene sceneID="nkL-dV-0YB">
             <objects>
-                <viewController id="uUn-AC-KUB" customClass="GroupChannelCoverImageNameSettingViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uUn-AC-KUB" customClass="GroupChannelCoverImageNameSettingViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Dju-38-emj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -894,7 +895,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0du-kn-47v" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="88" width="414" height="120"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgc-FM-u7u" customClass="ProfileImageView" customModule="FoneMe" customModuleProvider="target">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgc-FM-u7u" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="15" y="10" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -944,10 +945,11 @@
                                     <constraint firstAttribute="bottom" secondItem="sWh-6V-hSL" secondAttribute="bottom" id="tqW-ZP-2le"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-HN-GE3" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-HN-GE3" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kfo-q5-5tV"/>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0du-kn-47v" secondAttribute="trailing" id="96L-hc-auF"/>
@@ -959,7 +961,6 @@
                             <constraint firstItem="0du-kn-47v" firstAttribute="top" secondItem="Kfo-q5-5tV" secondAttribute="top" id="t2j-nY-Uza"/>
                             <constraint firstItem="0du-kn-47v" firstAttribute="leading" secondItem="Dju-38-emj" secondAttribute="leading" id="tXp-eN-SQ4"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kfo-q5-5tV"/>
                     </view>
                     <connections>
                         <outlet property="channelNameTextField" destination="Ef4-YI-Qh2" id="uu2-uD-s31"/>
@@ -974,7 +975,7 @@
         <!--Group Channel Chat View Controller-->
         <scene sceneID="ipV-Fx-eSg">
             <objects>
-                <viewController storyboardIdentifier="GrouplChatViewController" id="ESq-tY-gjT" customClass="GroupChannelChatViewController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GrouplChatViewController" id="ESq-tY-gjT" customClass="GroupChannelChatViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CQq-dl-bWx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1112,7 +1113,7 @@
                                     <constraint firstItem="zSS-G6-YAw" firstAttribute="top" secondItem="QuK-mS-w71" secondAttribute="top" id="w1O-Ni-sHs"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x4w-rc-Oaf" customClass="CustomActivityIndicatorView" customModule="FoneMe" customModuleProvider="target">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x4w-rc-Oaf" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0az-YP-nSf" userLabel="Toast View">
@@ -1148,6 +1149,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="sZa-6g-QDr"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="x4w-rc-Oaf" firstAttribute="leading" secondItem="CQq-dl-bWx" secondAttribute="leading" id="0Cq-zo-epH"/>
@@ -1170,7 +1172,6 @@
                             <constraint firstItem="jaE-X5-4Cj" firstAttribute="top" secondItem="CQq-dl-bWx" secondAttribute="top" id="yDN-sc-dep"/>
                             <constraint firstItem="x4w-rc-Oaf" firstAttribute="top" secondItem="CQq-dl-bWx" secondAttribute="top" id="zMK-Aa-BKo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="sZa-6g-QDr"/>
                     </view>
                     <navigationItem key="navigationItem" id="n18-sE-CiL"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1197,7 +1198,7 @@
         <!--Create Group Channel Navigation Controller-->
         <scene sceneID="N3H-6T-86S">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="efp-2W-Ywn" customClass="CreateGroupChannelNavigationController" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="efp-2W-Ywn" customClass="CreateGroupChannelNavigationController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sbo-AA-peK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1303,5 +1304,8 @@
         <namedColor name="color_toast_label">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

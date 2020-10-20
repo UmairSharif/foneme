@@ -194,7 +194,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6da4390febbb01f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -209,7 +209,7 @@
                   offsetFromSymbolStart = "43">
                </Location>
                <Location
-                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 5f49193419b8397a"
+                  uuid = "B2271967-16BA-46FB-BCFD-EC1CAA00D626 - 6da4390febbb01f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -302,8 +302,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "233"
             endingLineNumber = "233"
-            landmarkName = "sendContactAPI(contactsArray:showLoader:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -414,24 +414,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "621"
             endingLineNumber = "621"
-            landmarkName = "channel(_:didReceive:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F3CBE9CC-1FAF-49AD-8A97-CD6427BAD717"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Chat/GroupChannel/GroupChannels/GroupChannelsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "788"
-            endingLineNumber = "788"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -494,7 +478,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
             endingLineNumber = "98"
-            landmarkName = "callBtnTapped(_:)"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "67389B7E-DEF9-4FD7-B4B9-CF3062B7503D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/CallLogVC/CallLogVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF3F431F-90D6-487D-B675-668A25E06053"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Controller/Home Part/CallLogVC/CallLogVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

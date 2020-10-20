@@ -39,7 +39,8 @@ class CallLogVC: UIViewController {
     var refreshControl = UIRefreshControl()
     let network = NetworkManager.sharedInstance
     var netStatus : Bool?
-    
+    let dateFormatter = DateFormatter()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -332,26 +333,18 @@ extension CallLogVC : UITableViewDelegate,UITableViewDataSource
             if logArray.count > indexPath.row {
                 let log = logArray[indexPath.row]
                 
-                if log.status == "Out Going"
-                {
+                if log.status == "Out Going"  {
                     cell.callStatusLbl.text = "Out Going"
-                }
-                else if log.status == "InComing"
-                {
+                } else if log.status == "InComing" {
                     cell.callStatusLbl.text = "InComing"
-                }
-                else
-                {
+                } else {
                     cell.callStatusLbl.text = "Missed"
                 }
-                
-                let dateFormatter = DateFormatter()
-                let tempLocale = dateFormatter.locale
+                dateFormatter.timeZone = TimeZone(abbreviation: "MST")
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 let date = dateFormatter.date(from: log.dateTime ?? "")
-                dateFormatter.locale = Locale(identifier:"en_US_POSIX")
                 dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-                dateFormatter.locale = tempLocale // reset the locale
+                dateFormatter.timeZone = TimeZone.current
                 let dateString = dateFormatter.string(from: date ?? Date())
                 cell.timeLbl.text = dateString
                 cell.nameLbl.text = log.name
