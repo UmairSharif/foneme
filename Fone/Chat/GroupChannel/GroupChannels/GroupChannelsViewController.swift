@@ -520,7 +520,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         
         if self.channelListQuery == nil {
             self.channelListQuery = SBDGroupChannel.createMyGroupChannelListQuery()
-            self.channelListQuery?.order = .latestLastMessage
+            self.channelListQuery?.order = .chronological //.latestLastMessage
             self.channelListQuery?.limit = 50
             self.channelListQuery?.includeEmptyChannel = true
             /*if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
@@ -783,6 +783,8 @@ extension GroupChannelsViewController : UISearchBarDelegate {
         isFiltering = false
         self.view.endEditing(true)
     }
+    
+   
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         isFiltering = true
