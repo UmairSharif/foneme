@@ -44,7 +44,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
               self.groupChannelsTableView.tableFooterView = UIView.init()
              
 
-        let createChannelBarButton = UIBarButtonItem.init(image: UIImage(named: "img_btn_create_group_channel_blue")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(GroupChannelsViewController.clickCreateGroupChannel(_:)))
+        let createChannelBarButton = UIBarButtonItem.init(image: UIImage(named: "img_btn_create_group_channel_blue")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(GroupChannelsViewController.clickForGroupChannel(_:)))
         createChannelBarButton.tintColor = UIColor.white
         
         navigationItem.largeTitleDisplayMode = .automatic
@@ -180,10 +180,48 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+ @objc func clickForGroupChannel(_ sender: Any) {
+    
+    let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        alert.modalPresentationStyle = .popover
+        
+        let actionGroup = UIAlertAction(title: "Create Group", style: .default) { (action) in
+            self.clickCreateGroup()
+            
+        }
+        let actionChannel = UIAlertAction(title: "Create Channel", style: .default) { (action) in
+            self.clickCreateChannel()
+               
+        }
+        
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(actionGroup)
+        alert.addAction(actionChannel)
+        alert.addAction(actionCancel)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+            presenter.permittedArrowDirections = []
+        }
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 
-    @objc func clickCreateGroupChannel(_ sender: Any) {
+    @objc func clickCreateGroup() {
         performSegue(withIdentifier: "CreateGroupChannel", sender: self)
     }
+    
+    @objc func clickCreateChannel() {
+        
+        let storyboard = UIStoryboard(name: "OpenChannel", bundle: nil)
+        let myVC = storyboard.instantiateViewController(withIdentifier: "CreateOpenChannelNavigation") as! UINavigationController
+        self.present(myVC, animated: true, completion: nil)
+         //  performSegue(withIdentifier: "CreateOpenChannel", sender: nil)
+       }
     
     @objc func longPressChannel(_ recognizer: UILongPressGestureRecognizer) {
         let point = recognizer.location(in: self.groupChannelsTableView)

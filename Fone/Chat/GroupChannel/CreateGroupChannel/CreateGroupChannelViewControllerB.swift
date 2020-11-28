@@ -12,6 +12,7 @@ import RSKImageCropper
 import AlamofireImage
 import MobileCoreServices
 import Photos
+import Branch
 
 class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     var members: [SBDUser] = []
@@ -23,7 +24,24 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
 
     var coverImageData: Data?
     var createButtonItem: UIBarButtonItem?
+    var isLinkViewOpen = false
+    var createdChannel:SBDGroupChannel?
     
+     @IBOutlet weak var publicImage: UIImageView?
+     @IBOutlet weak var privateImage: UIImageView?
+     @IBOutlet weak var inviteURLField: UITextField?
+     @IBOutlet weak var privateGroupLbl: UILabel?
+    @IBOutlet weak var decriptionTextView: UITextView?
+
+    @IBOutlet weak var topView: UIView?
+    @IBOutlet weak var topViewCover: UIButton?
+
+    @IBOutlet weak var bottomView: UIView?
+    @IBOutlet weak var privateGroupView: UIView?
+    @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
+
+    var isPublicGroup = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,6 +78,44 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         
         self.profileImageView.users = members
         self.profileImageView.makeCircularWithSpacing(spacing: 1)
+        topViewCover?.isHidden = true;
+        bottomViewHeight.constant = 130
+    }
+    
+    @IBAction func publicChannelBtnClicked(_ sender: AnyObject) {
+        if channelNameTextField.text?.isEmpty ?? true {
+            return;
+        }
+        if let channel = self.createdChannel{
+            self.openCreateLinkView(channel);
+        }
+    }
+    
+    @IBAction func channelTypeBtnClicked(_ sender: AnyObject) {
+        
+        let tagValue = sender.tag
+        
+        self.privateImage?.image = UIImage(named: "img_list_unchecked")
+        self.publicImage?.image = UIImage(named: "img_list_unchecked")
+
+        
+        if tagValue == 1 {
+            self.publicImage?.image = UIImage(named: "img_list_checked")
+            isPublicGroup = true;
+            self.privateGroupView?.isHidden = true
+        }
+        else {
+            self.privateGroupView?.isHidden = false
+
+            self.privateImage?.image = UIImage(named: "img_list_checked")
+            isPublicGroup = false;
+
+        }
+        if let channel = self.createdChannel{
+            self.openCreateLinkView(channel);
+        }
+
+    
     }
     
     @objc func clickCoverImage(_ sender: AnyObject) {
@@ -95,7 +151,19 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         
     }
     
+    
+    
     @objc func clickCreateGroupChannel(_ sender: AnyObject) {
+        
+        
+        if  self.isLinkViewOpen {
+            
+            self.navigationController?.dismiss(animated: true, completion: nil)
+
+        } else {
+            
+            
+        
         self.showLoadingIndicatorView()
         
         let channelName = self.channelNameTextField.text != "" ? self.channelNameTextField.text : self.channelNameTextField.placeholder
@@ -104,7 +172,8 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         params.coverImage = self.coverImageData
         params.add(self.members)
         params.name = channelName
-        
+        params.data = decriptionTextView?.text ?? ""
+
         
         SBDGroupChannel.createChannel(with: params) { (channel, error) in
             self.hideLoadingIndicatorView()
@@ -119,15 +188,70 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
             
                 return
             }
-
+            self.isLinkViewOpen = true;
+            self.createdChannel = channel!
+            self.openCreateLinkView(channel!)
 
             if let navigationController = self.navigationController as? CreateGroupChannelNavigationController{
                 if (navigationController.channelCreationDelegate?.responds(to: #selector(CreateGroupChannelNavigationController.didChangeValue(forKey:))))! {
                     navigationController.channelCreationDelegate?.didCreateGroupChannel(channel!)
                 }
-                self.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
+            
+        }
+    }
+    
+    func openCreateLinkView(_ channel: SBDGroupChannel){
+        self.view.endEditing(true)
+        topViewCover?.isHidden = false;
+         bottomView?.isHidden = false;
+        bottomViewHeight.constant = 10
+
+        let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(channel.channelUrl)")
+        buo.title = channel.name
+        buo.contentDescription = channel.description
+        buo.imageUrl = channel.coverUrl
+                
+        let linkProperties: BranchLinkProperties = BranchLinkProperties()
+        linkProperties.channel = channel.channelUrl
+        linkProperties.feature = "sharing"
+        
+        if isPublicGroup {
+            if channelNameTextField.text?.isEmpty ?? true {
+                return;
+            }
+            buo.publiclyIndex = true
+            buo.locallyIndex = true
+            linkProperties.alias = channelNameTextField.text;
+        } else {
+            buo.publiclyIndex = false
+            buo.locallyIndex = false
+            if !(privateGroupLbl?.text?.isEmpty ?? true) {
+                return;
+            }
+        }
+   
+        
+        
+        buo.getShortUrl(with: linkProperties) { (url, error) in
+            if (error == nil) {
+                print("Got my Branch link to share: (url)")
+                if self.isPublicGroup {
+                     // self.channelNameTextField.text
+            } else {
+                    DispatchQueue.main.async {
+                                                  self.privateGroupLbl?.text = url;
+
+                          }
+            }
+                
+            } else {
+                print(String(format: "Branch error : %@", error! as CVarArg))
+            }
+            
+        }
+
     }
     
     func cropImage(_ imageData: Data) {

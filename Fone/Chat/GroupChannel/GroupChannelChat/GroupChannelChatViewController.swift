@@ -151,6 +151,16 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     func setChanelTitle(channle: SBDGroupChannel?) {
         
         if let channelMembers = channel?.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser(), channelMembers.count == 2 {
+            
+            let audioCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_top"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickAudioBarButton(_:)))
+            let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_vedio"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
+
+            
+            self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
+              
+            
+            
+            
             for member in channelMembers {
                 if member.userId != currentUser.userId {
                     self.title = member.nickname
@@ -158,6 +168,8 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             }
         }else {
             self.title = Utils.createGroupChannelName(channel: channle!)
+        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
+            self.navigationItem.rightBarButtonItem = self.settingBarButton
         }
     }
     
@@ -218,6 +230,14 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             destination.channel = self.channel
         }
     }
+    
+    @objc func clickAudioBarButton(_ sender: AnyObject) {
+
+    }
+    
+    @objc func clickVideoBarButton(_ sender: AnyObject) {
+
+       }
     
     @objc func clickSettingBarButton(_ sender: AnyObject) {
         performSegue(withIdentifier: "ShowGroupChannelSettings", sender: self)
