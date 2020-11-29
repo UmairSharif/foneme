@@ -10,7 +10,7 @@
         <!--SettingVC-->
         <scene sceneID="dQQ-Jf-uKB">
             <objects>
-                <viewController storyboardIdentifier="SettingVC" id="uao-R2-hTZ" customClass="SettingVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingVC" id="uao-R2-hTZ" customClass="SettingVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="32f-4b-eYO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -348,7 +348,7 @@
         <!--Local ContactVC-->
         <scene sceneID="tEe-Zj-AjN">
             <objects>
-                <viewController storyboardIdentifier="LocalContactVC" id="NJL-uU-r9f" customClass="LocalContactVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocalContactVC" id="NJL-uU-r9f" customClass="LocalContactVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Gg-uf-lCt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,7 +398,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="N3F-0n-34X" customClass="LocalContactTVC" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="N3F-0n-34X" customClass="LocalContactTVC" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N3F-0n-34X" id="Mms-ZI-q73">
@@ -501,7 +501,7 @@
         <!--CallVC-->
         <scene sceneID="5WP-YF-3u3">
             <objects>
-                <viewController storyboardIdentifier="CallVC" id="pta-uj-h1u" customClass="CallVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CallVC" id="pta-uj-h1u" customClass="CallVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TK2-4o-Iku">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -666,7 +666,7 @@
         <!--User DetailsVC-->
         <scene sceneID="bOJ-NK-VVb">
             <objects>
-                <viewController storyboardIdentifier="UserDetailsVC" id="8Xg-4D-QH0" customClass="UserDetailsVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserDetailsVC" id="8Xg-4D-QH0" customClass="UserDetailsVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kn4-pN-Nzn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -857,7 +857,7 @@
         <!--Voice CallVC-->
         <scene sceneID="eh9-RM-i5h">
             <objects>
-                <viewController storyboardIdentifier="VoiceCallVC" modalPresentationStyle="fullScreen" id="qcB-ca-SBU" customClass="VoiceCallVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VoiceCallVC" modalPresentationStyle="fullScreen" id="qcB-ca-SBU" customClass="VoiceCallVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dGe-o6-g7r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1000,7 +1000,7 @@
         <!--Video CallVC-->
         <scene sceneID="5dN-YC-O6n">
             <objects>
-                <viewController storyboardIdentifier="VideoCallVC" modalPresentationStyle="fullScreen" id="RRY-u7-UXV" customClass="VideoCallVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoCallVC" modalPresentationStyle="fullScreen" id="RRY-u7-UXV" customClass="VideoCallVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hY0-9o-nEQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1223,7 +1223,7 @@
         <!--Edit ProfileVC-->
         <scene sceneID="A2r-su-Om1">
             <objects>
-                <viewController storyboardIdentifier="EditProfileVC" id="JPC-oN-Mcc" customClass="EditProfileVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileVC" id="JPC-oN-Mcc" customClass="EditProfileVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FPX-wk-dQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1595,7 +1595,7 @@
         <!--ContactVC-->
         <scene sceneID="NaM-Xb-Mb9">
             <objects>
-                <viewController storyboardIdentifier="ContactVC" id="maR-yW-n4W" customClass="ContactVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactVC" id="maR-yW-n4W" customClass="ContactVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yxp-qn-VCk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1775,7 +1775,7 @@
         <!--HelpVC-->
         <scene sceneID="Nqn-Lc-PdK">
             <objects>
-                <viewController storyboardIdentifier="HelpVC" id="AXf-2Q-vMZ" customClass="HelpVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HelpVC" id="AXf-2Q-vMZ" customClass="HelpVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNw-Qs-DGe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1850,7 +1850,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <!--Call LogVC-->
         <scene sceneID="bA9-I9-Ep5">
             <objects>
-                <viewController storyboardIdentifier="CallLogVC" modalPresentationStyle="fullScreen" id="dTQ-Ld-BEg" customClass="CallLogVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CallLogVC" modalPresentationStyle="fullScreen" id="dTQ-Ld-BEg" customClass="CallLogVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IAp-gQ-Mw1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1905,7 +1905,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="logCell" rowHeight="80" id="JUf-LI-hFI" customClass="CallLogTVC" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="logCell" rowHeight="80" id="JUf-LI-hFI" customClass="CallLogTVC" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JUf-LI-hFI" id="efm-gn-b4h">
@@ -2150,7 +2150,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <!--Friend TabVC-->
         <scene sceneID="0Ln-cb-kmv">
             <objects>
-                <viewController storyboardIdentifier="FriendTabVC" id="XS1-P3-3kS" customClass="FriendTabVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendTabVC" id="XS1-P3-3kS" customClass="FriendTabVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tM5-fm-bSI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2184,7 +2184,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="jlg-eQ-9Nf" customClass="LocalContactTVC" customModule="FoneMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="jlg-eQ-9Nf" customClass="LocalContactTVC" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jlg-eQ-9Nf" id="VrT-Tv-kv5">
@@ -2437,7 +2437,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <!--ChatVC-->
         <scene sceneID="gaa-fH-ia0">
             <objects>
-                <viewController storyboardIdentifier="ChatVC" id="k5a-Vm-iEZ" customClass="ChatVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatVC" id="k5a-Vm-iEZ" customClass="ChatVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vNm-8v-4wm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2533,7 +2533,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
         <!--Plan ListVC-->
         <scene sceneID="IYH-K8-MvE">
             <objects>
-                <viewController storyboardIdentifier="PlanListVC" id="KZN-es-gd2" customClass="PlanListVC" customModule="FoneMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlanListVC" id="KZN-es-gd2" customClass="PlanListVC" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lJG-CU-JPt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

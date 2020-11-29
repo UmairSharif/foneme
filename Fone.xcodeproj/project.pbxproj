@@ -403,7 +403,7 @@
 		1C7F0EC6AED4CADEA4D7BD4D /* Pods_FoneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		2283DC3123C91C57005070B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		22880E6B23C074380044263D /* FoneMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FoneMe.app; path = "Fone Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22880E6B23C074380044263D /* Fone Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fone Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22880E6E23C074380044263D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22880E7623C074380044263D /* Fone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fone.xcdatamodel; sourceTree = "<group>"; };
 		22880E7B23C074390044263D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -961,7 +961,7 @@
 		22880E6C23C074380044263D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22880E6B23C074380044263D /* FoneMe.app */,
+				22880E6B23C074380044263D /* Fone Messenger.app */,
 				22880E8223C074390044263D /* FoneTests.xctest */,
 				C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */,
 			);
@@ -1539,7 +1539,7 @@
 			);
 			name = Fone;
 			productName = Fone;
-			productReference = 22880E6B23C074380044263D /* FoneMe.app */;
+			productReference = 22880E6B23C074380044263D /* Fone Messenger.app */;
 			productType = "com.apple.product-type.application";
 		};
 		22880E8123C074390044263D /* FoneTests */ = {

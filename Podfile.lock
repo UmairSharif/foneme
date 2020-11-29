@@ -130,6 +130,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.5)
+  - MASegmentedControl (0.0.5)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -172,6 +173,7 @@ DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
   - Google-Mobile-Ads-SDK
   - IQKeyboardManagerSwift
+  - MASegmentedControl
   - NVActivityIndicatorView
   - NYTPhotoViewer (~> 1.1.0)
   - OneSignal
@@ -210,6 +212,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - IQKeyboardManagerSwift
+    - MASegmentedControl
     - nanopb
     - NVActivityIndicatorView
     - NYTPhotoViewer
@@ -250,6 +253,7 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  MASegmentedControl: 9b58f9ba3a562a739b63b29e4ca2b9dc4d9c62cb
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
@@ -266,6 +270,6 @@ SPEC CHECKSUMS:
   TwilioVideo: 6758bbec5a6d1838caba8a917f5c7545a11652c3
   TwilioVoice: 75fd87c05e6c9e8321e31262d27d8ec334d9dc86
 
-PODFILE CHECKSUM: a8ce921e3da273902ee24e072818c385da2aeee3
+PODFILE CHECKSUM: ae8759e75410c29c58bc21bb162428e3d76586bb
 
 COCOAPODS: 1.9.3

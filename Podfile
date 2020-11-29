@@ -9,7 +9,8 @@ target 'Fone' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Firebase/Crashlytics'
-  
+  pod 'MASegmentedControl'
+
   pod 'BraintreeDropIn'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'

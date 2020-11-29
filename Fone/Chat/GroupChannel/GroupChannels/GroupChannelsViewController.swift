@@ -13,7 +13,10 @@ import SwiftyJSON
 
 class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate {
     
+        @IBOutlet weak var topSegmentCntl: UISegmentedControl?
     
+    
+
        @IBOutlet weak var searchBar : UISearchBar!
        var isFiltering = false
        var filteredChannels: [SBDGroupChannel] = []
@@ -24,6 +27,10 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var toastMessageLabel: UILabel!
     @IBOutlet weak var emptyLabel: UILabel!
     
+    @IBOutlet weak var containerView: UIView!
+
+    var openChannelVC: OpenChannelsViewController?
+
     var refreshControl: UIRefreshControl?
     var trypingIndicatorTimer: [String : Timer] = [:]
     
@@ -178,6 +185,30 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             
             destination.delegate = self
         }
+    }
+    
+    
+    @IBAction func segmentValeChanges(){
+        
+        if topSegmentCntl?.selectedSegmentIndex == 0 {
+            containerView.isHidden = true
+        } else {
+            containerView.isHidden = false
+            if openChannelVC == nil {
+                let storyboard = UIStoryboard(name: "OpenChannel", bundle: nil)
+                openChannelVC = storyboard.instantiateViewController(withIdentifier: "OpenChannelsViewController") as? OpenChannelsViewController
+            }
+            if let controller = openChannelVC {
+                controller.view.frame = self.containerView.bounds
+                containerView.addSubview(controller.view)
+                self.addChild(controller)
+                controller.didMove(toParent: self)
+                
+            }
+             
+            
+        }
+        
     }
     
  @objc func clickForGroupChannel(_ sender: Any) {
