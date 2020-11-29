@@ -1237,9 +1237,12 @@ using Foneme Search</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHATBG" translatesAutoresizingMaskIntoConstraints="NO" id="tBe-5y-agM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="689"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jaE-X5-4Cj" userLabel="Message Table View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="807"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuF-Dg-dkJ" userLabel="Typing Indicator Container View">
                                 <rect key="frame" x="0.0" y="777" width="414" height="30"/>
@@ -1409,6 +1412,8 @@ using Foneme Search</string>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="x4w-rc-Oaf" firstAttribute="leading" secondItem="CQq-dl-bWx" secondAttribute="leading" id="0Cq-zo-epH"/>
+                            <constraint firstItem="tBe-5y-agM" firstAttribute="leading" secondItem="sZa-6g-QDr" secondAttribute="leading" id="1gu-0e-hId"/>
+                            <constraint firstItem="tBe-5y-agM" firstAttribute="top" secondItem="sZa-6g-QDr" secondAttribute="top" id="3v9-aa-Tbc"/>
                             <constraint firstAttribute="trailing" secondItem="QuK-mS-w71" secondAttribute="trailing" id="5s5-Vx-WVw"/>
                             <constraint firstAttribute="bottom" secondItem="QuK-mS-w71" secondAttribute="bottom" id="A5B-FM-nF5"/>
                             <constraint firstItem="fuE-Ad-gK4" firstAttribute="leading" secondItem="sZa-6g-QDr" secondAttribute="leading" id="Gn3-Cr-pPA"/>
@@ -1416,6 +1421,7 @@ using Foneme Search</string>
                             <constraint firstAttribute="trailing" secondItem="x4w-rc-Oaf" secondAttribute="trailing" id="PA3-jg-hWZ"/>
                             <constraint firstItem="0az-YP-nSf" firstAttribute="centerX" secondItem="CQq-dl-bWx" secondAttribute="centerX" id="SRB-Ko-iXz"/>
                             <constraint firstItem="0az-YP-nSf" firstAttribute="centerY" secondItem="CQq-dl-bWx" secondAttribute="centerY" id="Y7k-Hj-2tI"/>
+                            <constraint firstItem="sZa-6g-QDr" firstAttribute="trailing" secondItem="tBe-5y-agM" secondAttribute="trailing" id="bth-0F-7KV"/>
                             <constraint firstItem="WuF-Dg-dkJ" firstAttribute="leading" secondItem="sZa-6g-QDr" secondAttribute="leading" id="d7r-NZ-fIz"/>
                             <constraint firstItem="QuK-mS-w71" firstAttribute="top" secondItem="jaE-X5-4Cj" secondAttribute="bottom" id="ehc-Qx-IlL"/>
                             <constraint firstItem="WuF-Dg-dkJ" firstAttribute="trailing" secondItem="sZa-6g-QDr" secondAttribute="trailing" id="gB6-kj-Y9s"/>
@@ -1425,6 +1431,7 @@ using Foneme Search</string>
                             <constraint firstAttribute="trailing" secondItem="jaE-X5-4Cj" secondAttribute="trailing" id="r4f-iE-UPg"/>
                             <constraint firstItem="fuE-Ad-gK4" firstAttribute="trailing" secondItem="sZa-6g-QDr" secondAttribute="trailing" id="sTS-vs-ejs"/>
                             <constraint firstItem="sZa-6g-QDr" firstAttribute="bottom" secondItem="fuE-Ad-gK4" secondAttribute="bottom" id="tjm-vM-Jbz"/>
+                            <constraint firstItem="WuF-Dg-dkJ" firstAttribute="top" secondItem="tBe-5y-agM" secondAttribute="bottom" id="wuq-lJ-pXc"/>
                             <constraint firstItem="jaE-X5-4Cj" firstAttribute="top" secondItem="CQq-dl-bWx" secondAttribute="top" id="yDN-sc-dep"/>
                             <constraint firstItem="x4w-rc-Oaf" firstAttribute="top" secondItem="CQq-dl-bWx" secondAttribute="top" id="zMK-Aa-BKo"/>
                         </constraints>
@@ -1496,6 +1503,7 @@ using Foneme Search</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kfl-4B-nFF"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYs-aL-khI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1504,6 +1512,7 @@ using Foneme Search</string>
         </scene>
     </scenes>
     <resources>
+        <image name="CHATBG" width="750" height="1624"/>
         <image name="img_blocked_user_cover" width="38" height="38"/>
         <image name="img_btn_create_group_channel_blue" width="28" height="28"/>
         <image name="img_btn_edit_channel_name" width="36" height="36"/>

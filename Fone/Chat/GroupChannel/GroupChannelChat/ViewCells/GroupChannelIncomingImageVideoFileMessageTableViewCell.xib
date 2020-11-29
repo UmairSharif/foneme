@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="292" id="KGk-i7-Jjw" customClass="GroupChannelIncomingImageVideoFileMessageTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="292" id="KGk-i7-Jjw" customClass="GroupChannelIncomingImageVideoFileMessageTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="376" height="292"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="376" height="291.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="376" height="292"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSK-hn-YkC" userLabel="Date Seperator Conatiner View">
@@ -37,10 +35,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJL-RC-V11" userLabel="Nickname Container View">
-                        <rect key="frame" x="56" y="65" width="320" height="48.5"/>
+                        <rect key="frame" x="56" y="65" width="320" height="49"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDW-ny-8gm" userLabel="Nickname Label">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" name="color_group_channel_message_nickname"/>
                                 <nil key="highlightedColor"/>
@@ -55,7 +53,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76O-z0-X0R" userLabel="Message Container View">
-                        <rect key="frame" x="49" y="119.5" width="251" height="158"/>
+                        <rect key="frame" x="49" y="120" width="251" height="158"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ev8-mE-YfW" userLabel="Image File Message Image View" customClass="FLAnimatedImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="251" height="158"/>
@@ -106,7 +104,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZL-xA-btG" userLabel="Message Status Container View">
-                        <rect key="frame" x="59" y="277.5" width="317" height="14"/>
+                        <rect key="frame" x="59" y="278" width="317" height="14"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4g-jz-lw1" userLabel="Message Date Container View">
                                 <rect key="frame" x="0.0" y="0.5" width="317" height="13.5"/>
@@ -136,7 +134,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-Wi-r3h" userLabel="Profile Container View">
-                        <rect key="frame" x="14" y="245.5" width="32" height="32"/>
+                        <rect key="frame" x="14" y="246" width="32" height="32"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="otT-Z6-zSd" userLabel="Profile Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -160,6 +158,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="76O-z0-X0R" secondAttribute="bottom" constant="14" id="0Hv-Hf-UPM"/>
                     <constraint firstItem="dJL-RC-V11" firstAttribute="top" secondItem="iSK-hn-YkC" secondAttribute="bottom" id="49t-Jf-ElN"/>

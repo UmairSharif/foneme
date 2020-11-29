@@ -153,7 +153,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         if let channelMembers = channel?.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser(), channelMembers.count == 2 {
             
             let audioCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_top"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickAudioBarButton(_:)))
-            let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_vedio"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
+            let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "Videos2"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
 
             
             self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
@@ -1121,6 +1121,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         if indexPath.row == 0 && self.messages.count > 0 && self.initialLoading == false && self.isLoading == false {
             self.loadPreviousMessages(initial: false)
         }
+        cell.backgroundColor = UIColor.clear
     
         return cell
     }

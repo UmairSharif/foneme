@@ -31,7 +31,7 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
      @IBOutlet weak var privateImage: UIImageView?
      @IBOutlet weak var inviteURLField: UITextField?
      @IBOutlet weak var privateGroupLbl: UILabel?
-    @IBOutlet weak var decriptionTextView: UITextView?
+     @IBOutlet weak var decriptionTextView: UITextView?
 
     @IBOutlet weak var topView: UIView?
     @IBOutlet weak var topViewCover: UIButton?

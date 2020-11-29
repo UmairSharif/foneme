@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="136" id="KGk-i7-Jjw" customClass="GroupChannelOutgoingAudioFileMessageTableViewCell" customModule="SendBird_iOS" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="136" id="KGk-i7-Jjw" customClass="GroupChannelOutgoingAudioFileMessageTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="339" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="339" height="135.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLn-OP-6jq" userLabel="Date Seperator Conatiner View">
-                        <rect key="frame" x="0.0" y="0.0" width="339" height="70.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="71"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Seperator Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbo-kN-xkj">
                                 <rect key="frame" x="99.5" y="27" width="140" height="17"/>
@@ -37,7 +35,7 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYq-7U-vOc" userLabel="Message Container View">
-                        <rect key="frame" x="112" y="71.5" width="221" height="50"/>
+                        <rect key="frame" x="112" y="72" width="221" height="50"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_icon_play_audio_outgoing" translatesAutoresizingMaskIntoConstraints="NO" id="oAL-3a-Iyb" userLabel="FIle Icon Image View">
                                 <rect key="frame" x="12" y="10" width="30" height="30"/>
@@ -79,7 +77,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6M-g2-1Wm" userLabel="Message Status Container View">
-                        <rect key="frame" x="11" y="121.5" width="317" height="14"/>
+                        <rect key="frame" x="11" y="122" width="317" height="14"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_outgoing_sending_flag" translatesAutoresizingMaskIntoConstraints="NO" id="kvf-pN-d9b" userLabel="Sending Flag Image View">
                                 <rect key="frame" x="214.5" y="1" width="14" height="13"/>
@@ -153,7 +151,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ai-V4-Pep" userLabel="File Transfer Progress View Container View">
                                 <rect key="frame" x="276" y="2" width="41" height="12"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-Zz-z82" userLabel="File Transfer Progress Circle View" customClass="CustomProgressCircle" customModule="SendBird_iOS" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-Zz-z82" userLabel="File Transfer Progress Circle View" customClass="CustomProgressCircle" customModule="Fone_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -196,7 +194,7 @@
                         </constraints>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76Q-Yq-HXZ" userLabel="Resend Button Container View">
-                        <rect key="frame" x="50" y="75.5" width="42" height="42"/>
+                        <rect key="frame" x="50" y="76" width="42" height="42"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btx-fD-IcF" userLabel="Resend Button">
                                 <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
@@ -226,6 +224,7 @@
                     <constraint firstItem="K6M-g2-1Wm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="x7v-HP-Pc0"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="aLn-OP-6jq" secondAttribute="trailing" id="EZh-2e-0nr"/>
                 <constraint firstItem="aLn-OP-6jq" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" id="gLt-me-XpC"/>
@@ -271,7 +270,7 @@
             <color red="0.66699999570846558" green="0.68999999761581421" blue="0.74099999666213989" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_group_channel_outgoing_message_bg">
-            <color red="0.52499997615814209" green="0.37299999594688416" blue="0.84700000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.44699999690055847" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_message_sending_fail">
             <color red="0.94099998474121094" green="0.24300000071525574" blue="0.24300000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

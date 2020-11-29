@@ -9,6 +9,8 @@
 import UIKit
 import SendBirdSDK
 import AlamofireImage
+import Branch
+
 
 class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegate, UITableViewDelegate, UITableViewDataSource, NotificationDelegate {
     var channelName: String?
@@ -22,6 +24,22 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     @IBOutlet weak var bottomMargin: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    ///Setup View for LInks
+         
+            @IBOutlet weak var publicImage: UIImageView?
+            @IBOutlet weak var privateImage: UIImageView?
+            @IBOutlet weak var inviteURLField: UITextField?
+            @IBOutlet weak var privateGroupLbl: UILabel?
+            @IBOutlet weak var decriptionTextView: UITextView?
+           @IBOutlet weak var bottomView: UIView?
+           @IBOutlet weak var privateGroupView: UIView?
+          var isPublicGroup = true
+
+         var createdChannel:SBDGroupChannel?
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +138,94 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         }
     }
     
+    
+    @IBAction func publicChannelBtnClicked(_ sender: AnyObject) {
+//          if channelName ?? true {
+//              return;
+//          }
+          if let channel = self.createdChannel{
+              self.openCreateLinkView(channel);
+          }
+      }
+      
+      @IBAction func channelTypeBtnClicked(_ sender: AnyObject) {
+          
+          let tagValue = sender.tag
+          
+          self.privateImage?.image = UIImage(named: "img_list_unchecked")
+          self.publicImage?.image = UIImage(named: "img_list_unchecked")
+
+          
+          if tagValue == 1 {
+              self.publicImage?.image = UIImage(named: "img_list_checked")
+              isPublicGroup = true;
+              self.privateGroupView?.isHidden = true
+          }
+          else {
+              self.privateGroupView?.isHidden = false
+
+              self.privateImage?.image = UIImage(named: "img_list_checked")
+              isPublicGroup = false;
+
+          }
+          if let channel = self.createdChannel{
+              self.openCreateLinkView(channel);
+          }
+
+      
+      }
+      
+    
+     func openCreateLinkView(_ channel: SBDGroupChannel){
+         self.view.endEditing(true)
+          bottomView?.isHidden = false;
+
+         let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(channel.channelUrl)")
+         buo.title = channel.name
+         buo.contentDescription = channel.description
+         buo.imageUrl = channel.coverUrl
+                 
+         let linkProperties: BranchLinkProperties = BranchLinkProperties()
+         linkProperties.channel = channel.channelUrl
+         linkProperties.feature = "sharing"
+         
+         if isPublicGroup {
+            if channelName?.isEmpty ?? true {
+                 return;
+             }
+             buo.publiclyIndex = true
+             buo.locallyIndex = true
+             linkProperties.alias = channelName;
+         } else {
+             buo.publiclyIndex = false
+             buo.locallyIndex = false
+             if !(privateGroupLbl?.text?.isEmpty ?? true) {
+                 return;
+             }
+         }
+    
+         
+         
+         buo.getShortUrl(with: linkProperties) { (url, error) in
+             if (error == nil) {
+                 print("Got my Branch link to share: (url)")
+                 if self.isPublicGroup {
+                      // self.channelNameTextField.text
+             } else {
+                     DispatchQueue.main.async {
+                                                   self.privateGroupLbl?.text = url;
+
+                           }
+             }
+                 
+             } else {
+                 print(String(format: "Branch error : %@", error! as CVarArg))
+             }
+             
+         }
+
+     }
+     
     
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {

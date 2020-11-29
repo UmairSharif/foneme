@@ -869,7 +869,8 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         if indexPath.row == 0 && self.messages.count > 0 && self.initialLoading == false && self.isLoading == false {
             self.loadPreviousMessages(initial: false)
         }
-        
+        cell.backgroundColor = UIColor.clear
+
         return cell
     }
     
