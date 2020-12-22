@@ -18,7 +18,8 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     var channel: SBDGroupChannel?
     var members: [SBDMember] = []
     var selectedUsers: [String:SBDUser] = [:]
-    
+    var groupInfoDic = [String:Any]();
+
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     
@@ -26,7 +27,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getGroupInfo();
         // Do any additional setup after loading the view.
         self.title = "Group Channel Settings"
         
@@ -42,6 +43,63 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
         
         self.settingsTableView.reloadData()
     }
+    
+    
+    func getGroupInfo(){
+        
+        var userId = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                userId = user.userId!
+            }
+        }
+
+        let groupID = self.channel?.channelUrl
+        
+        let params = ["GroupID":groupID!,
+                      "UserID": userId] as [String:Any]
+        // "CNIC": textFieldFoneId.text!,
+        
+        print("params: \(params)")
+        var headers = [String:String]()
+        headers = ["Content-Type": "application/json"]
+        
+        ServerCall.makeCallWitoutFile(getSingleGroupDetails, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+            
+            if let json = response {
+                print(json)
+                //                    self.activityIndicator.stopAnimating()
+                //                    self.activityIndicator.isHidden = true
+                
+                let statusCode = json["StatusCode"].string ?? ""
+                
+                if statusCode == "200" || statusCode == "201"{
+                   if let groupInfo = json["GroupData"].array {
+                    for items in groupInfo {
+                    self.groupInfoDic  = items.dictionaryObject ?? [String:Any]()
+                       }
+                   }
+                   
+                   print(self.groupInfoDic)
+
+                   
+                } else {
+                    if let message = json["Message"].string
+                    {
+                        print(message)
+                       // self.errorAlert("\(message)")
+                    }
+                    
+                    //                        self.activityIndicator.stopAnimating()
+                    //                        self.activityIndicator.isHidden = true
+                }
+                self.settingsTableView.reloadData()
+
+            }
+        }
+    }
+      
     
     private func rearrangeMembers() {
         self.members.removeAll()
@@ -81,17 +139,41 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             destination.user = self.members[index]
         }
     }
+    
+  func inviteBtnTapped() {
+        //Set the default sharing message.
+        let message = "Fone App"
+    
+    var groupLink = "";
+         let isPublic =  self.groupInfoDic["IsPublic"] as? String
+        if isPublic == "True" {
+        groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String ?? "")"
+       } else {
+        groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+       }
+    
+        //Set the link to share.
+        if let link = NSURL(string: groupLink)
+        {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (section == 2) ? "Members" : nil
+        return (section == 3) ? "Members" : nil
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 {
+        if section == 3 {
             return self.members.count + 1
         } else {
             return 1
@@ -133,13 +215,25 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             
             return channelCoverNameCell
         case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GroupShareInfoCell")!
+            let infoLabel = cell.viewWithTag(100) as? UILabel
+            
+            let isPublic =  self.groupInfoDic["IsPublic"] as? String
+            if isPublic == "True" {
+                infoLabel?.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+            } else {
+                infoLabel?.text = self.groupInfoDic["GroupLink"] as? String
+            }
+            return cell
+            
+        case 2:
             guard let notiCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsNotificationsTableViewCell", for: indexPath) as? GroupChannelSettingsNotificationsTableViewCell else { return UITableViewCell() }
             
             notiCell.notificationSwitch.isOn = self.channel?.myPushTriggerOption == .off ? false : true
             notiCell.delegate = self
             
             return notiCell
-        case 2:
+        case 3:
             if indexPath.row == 0{
                 return tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsInviteMemberTableViewCell", for: indexPath)
             } else {
@@ -180,7 +274,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
                 
                 return memberCell
             }
-        case 3:
+        case 4:
             return tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsLeaveChatTableViewCell", for: indexPath)
         default:
             return UITableViewCell()
@@ -202,13 +296,15 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        if indexPath.section == 2, indexPath.row == 0 {
+        if indexPath.section == 1 {
+            inviteBtnTapped()
+        } else if indexPath.section == 3, indexPath.row == 0 {
             // Invite member
             performSegue(withIdentifier: "GroupChannelInviteMember", sender: nil)
         }
-        else if indexPath.section == 2 {
+        else if indexPath.section == 3 {
             performSegue(withIdentifier: "ShowUserProfile", sender: (indexPath.row - 1))
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == 4 {
             // Leave channel
             guard let channel = self.channel else { return }
             channel.leave { (error) in

@@ -9,7 +9,7 @@
 import Foundation
 
 let IS_SANDBOX = 0
-let BASEURL = "https://zwilio.com/"
+let BASEURL =   "https://zwilio.com/"
 //************** Authenticate Part URL *************/////
 let registerUrl = "\(BASEURL)api/account/v1/register"
 let getSMSCodeUrl = "\(BASEURL)api/account/v1/getsmscode"
@@ -31,6 +31,10 @@ let searchUser = "\(BASEURL)api/account/v1/searchuser"
 let changeuservoiptoken = "\(BASEURL)api/account/v1/changeuservoiptoken"
 let changeuserdevicetoken = "\(BASEURL)api/account/v1/changeuserdevicetoken"
 let sendFcmOPt = "\(BASEURL)api/account/v1/sendFcmOPt"
+let createGroupChannel = "\(BASEURL)api/account/v1/createGroupChannel"
+let updateGroupChannel = "\(BASEURL)api/account/v1/updateGroupChannel"
+let getSingleGroupDetails = "\(BASEURL)api/account/v1/getSingleGroupDetails"
+
 //searchuser
 
 let BrainTreeServer = "http://yogofly.com/wizride3/upload/file/brain"

@@ -135,7 +135,7 @@
         <!--Open Channel Chat View Controller-->
         <scene sceneID="w1T-3r-lFF">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="T6M-vb-pdo" customClass="OpenChannelChatViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OpenChannelChatViewController" modalPresentationStyle="fullScreen" id="T6M-vb-pdo" customClass="OpenChannelChatViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wwn-Fi-Mxi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -241,13 +241,38 @@
                                             <constraint firstAttribute="height" constant="0.5" id="usN-BL-lUF"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDp-Ev-3uv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoY-TD-sdF">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="qhW-2X-tBg"/>
+                                                </constraints>
+                                                <state key="normal" title="Join Channel"/>
+                                                <connections>
+                                                    <action selector="joinGroupBtnClicked" destination="T6M-vb-pdo" eventType="touchUpInside" id="KP9-ae-kzT"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="CoY-TD-sdF" secondAttribute="trailing" id="lda-w9-nHF"/>
+                                            <constraint firstItem="CoY-TD-sdF" firstAttribute="leading" secondItem="UDp-Ev-3uv" secondAttribute="leading" id="ljg-It-EV5"/>
+                                            <constraint firstItem="CoY-TD-sdF" firstAttribute="top" secondItem="UDp-Ev-3uv" secondAttribute="top" id="td1-Gi-1ZI"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="0lw-mR-wEd" secondAttribute="trailing" id="0ti-fj-8Kd"/>
+                                    <constraint firstItem="UDp-Ev-3uv" firstAttribute="top" secondItem="xSX-A8-aAZ" secondAttribute="top" id="3X7-ut-OA0"/>
+                                    <constraint firstItem="UDp-Ev-3uv" firstAttribute="leading" secondItem="xSX-A8-aAZ" secondAttribute="leading" id="7Jp-Nq-rA5"/>
                                     <constraint firstItem="0lw-mR-wEd" firstAttribute="top" secondItem="xSX-A8-aAZ" secondAttribute="top" id="F0D-su-YpE"/>
                                     <constraint firstItem="0lw-mR-wEd" firstAttribute="leading" secondItem="xSX-A8-aAZ" secondAttribute="leading" id="HZB-sv-AhZ"/>
                                     <constraint firstItem="nNM-Q0-PE0" firstAttribute="top" secondItem="xSX-A8-aAZ" secondAttribute="top" id="MGF-SJ-rzQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="UDp-Ev-3uv" secondAttribute="trailing" id="WQd-N8-GYR"/>
+                                    <constraint firstAttribute="bottom" secondItem="UDp-Ev-3uv" secondAttribute="bottom" id="hcR-n7-9ts"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-ac-MJ0" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
@@ -315,6 +340,7 @@
                     <connections>
                         <outlet property="inputMessageInnerContainerViewBottomMargin" destination="agY-Od-4Qd" id="7h4-vb-UCb"/>
                         <outlet property="inputMessageTextField" destination="93a-uX-WxZ" id="upW-G2-E44"/>
+                        <outlet property="joinGroupView" destination="UDp-Ev-3uv" id="2oK-1t-YmE"/>
                         <outlet property="loadingIndicatorView" destination="xQK-ac-MJ0" id="1Hf-GV-PZi"/>
                         <outlet property="messageTableView" destination="lsQ-FF-wFS" id="mfm-ej-odN"/>
                         <outlet property="sendFileMessageButton" destination="HY6-1J-Olt" id="6mx-4o-p5k"/>
@@ -359,11 +385,33 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myY-Cf-FC2">
+                                        <rect key="frame" x="15" y="115" width="384" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" name="color_admin_message_text"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zyx-MY-lYO" colorLabel="IBBuiltInLabel-Blue">
+                                        <rect key="frame" x="0.0" y="148" width="414" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="ZDv-og-Dlm"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="myY-Cf-FC2" firstAttribute="top" secondItem="sIR-hV-aNg" secondAttribute="bottom" constant="20" id="4fc-Hf-8W9"/>
                                     <constraint firstAttribute="trailing" secondItem="sIR-hV-aNg" secondAttribute="trailing" constant="16" id="TQ9-bj-XDc"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zyx-MY-lYO" secondAttribute="trailing" id="X7T-Mj-AC7"/>
                                     <constraint firstItem="sIR-hV-aNg" firstAttribute="top" secondItem="Run-Sr-ppP" secondAttribute="top" constant="28" id="Xbw-Mn-axW"/>
+                                    <constraint firstAttribute="trailing" secondItem="myY-Cf-FC2" secondAttribute="trailing" constant="15" id="Y35-MK-It4"/>
+                                    <constraint firstItem="Zyx-MY-lYO" firstAttribute="leading" secondItem="Run-Sr-ppP" secondAttribute="leading" id="kEn-VC-d2U"/>
+                                    <constraint firstItem="myY-Cf-FC2" firstAttribute="leading" secondItem="Run-Sr-ppP" secondAttribute="leading" constant="15" id="qIg-uX-IbD"/>
+                                    <constraint firstItem="Zyx-MY-lYO" firstAttribute="top" secondItem="myY-Cf-FC2" secondAttribute="bottom" constant="15" id="yOM-4U-lOo"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ljo-IV-3m3" userLabel="Channel Cover Image View">
@@ -420,6 +468,7 @@
                     <connections>
                         <outlet property="channelNameTextField" destination="bmp-rS-zB9" id="VP2-ad-DTn"/>
                         <outlet property="coverImageView" destination="ljo-IV-3m3" id="Wm2-Z5-GWO"/>
+                        <outlet property="decriptionTextView" destination="Zyx-MY-lYO" id="ROo-SA-RKx"/>
                         <segue destination="mfb-aV-Ie5" kind="show" identifier="ConfigureOpenChannel" id="XE1-sT-nPC"/>
                     </connections>
                 </viewController>
@@ -1380,7 +1429,7 @@ using Foneme Search</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zpF-0N-ngL"/>
+        <segue reference="gmn-Sg-5KT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CHATBG" width="750" height="1624"/>
@@ -1400,6 +1449,9 @@ using Foneme Search</string>
         <image name="img_toast_check" width="40" height="32"/>
         <namedColor name="color_admin_message_name">
             <color red="0.20399999618530273" green="0.2199999988079071" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_admin_message_text">
+            <color red="0.61599999666213989" green="0.63899999856948853" blue="0.68199998140335083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_bar_item">
             <color red="0.0" green="0.44699999690055847" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

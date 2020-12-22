@@ -16,7 +16,7 @@ import AlamofireImage
 class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     weak var delegate: GroupChannelCoverImageNameSettingDelegate?
     var channel: SBDGroupChannel?
-
+    var groupInfoDic = [String:Any]();
     var coverImage: UIImage?
     
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
@@ -26,7 +26,7 @@ class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImage
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.getGroupInfo();
         // Do any additional setup after loading the view.
         
         self.title = "Cover Image & Name"
@@ -70,6 +70,64 @@ class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImage
         }
         self.profileImageView.makeCircularWithSpacing(spacing: 1)
     }
+    
+    
+     func getGroupInfo(){
+         
+         var userId = ""
+         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+             print(userProfileData)
+             if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                 userId = user.userId!
+             }
+         }
+
+         let groupID = self.channel?.channelUrl
+         
+         let params = ["GroupID":groupID!,
+                       "UserID": userId] as [String:Any]
+         // "CNIC": textFieldFoneId.text!,
+         
+         print("params: \(params)")
+         var headers = [String:String]()
+         headers = ["Content-Type": "application/json"]
+         
+         ServerCall.makeCallWitoutFile(getSingleGroupDetails, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+             
+             if let json = response {
+                 print(json)
+                 //                    self.activityIndicator.stopAnimating()
+                 //                    self.activityIndicator.isHidden = true
+                 
+                 let statusCode = json["StatusCode"].string ?? ""
+                 
+                 if statusCode == "200" || statusCode == "201"{
+                    if let groupInfo = json["GroupData"].array {
+                     for items in groupInfo {
+                     self.groupInfoDic  = items.dictionaryObject ?? [String:Any]()
+                        }
+                    }
+                    
+                    print(self.groupInfoDic)
+
+                    
+                 } else {
+                     if let message = json["Message"].string
+                     {
+                         print(message)
+                       //  self.errorAlert("\(message)")
+                     }
+                     
+                     //                        self.activityIndicator.stopAnimating()
+                     //                        self.activityIndicator.isHidden = true
+                 }
+
+             }
+         }
+     }
+     
+    
+    
     
     @objc func clickDoneButton(_ sender: Any) {
         self.updateChannelInfo()

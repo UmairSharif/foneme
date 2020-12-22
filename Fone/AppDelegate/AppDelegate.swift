@@ -76,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
             // do stuff with deep link data (nav to page, display content, etc)
+            print(params ?? "");
+
             if let params = params as? [String: AnyObject] {
                 if let foneId = params["ID"] as? String {
                     if let topVC = topViewController() {
@@ -90,6 +92,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                         }
                     }
+                } else if let channelURL  = params["~channel"] as? String {
+                    if channelURL.contains("sendbird_group_channel") {
+                        //Group
+                        if let topVC = topViewController() {
+
+                        SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
+                            guard error == nil else {   // Error.
+                                return
+                            }
+
+                            // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
+                            
+                            let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                             vc.channel = groupChannel
+                             vc.modalPresentationStyle = .overFullScreen
+                            let navCont = UINavigationController.init(rootViewController: vc)
+                            topVC.present(navCont, animated: true, completion: {    })
+
+
+                        }
+                        }
+                        
+                      
+                    } else {
+                        //Open Channel
+                        if let topVC = topViewController() {
+
+                        SBDOpenChannel.getWithUrl(channelURL) { (groupChannel, error) in
+                            guard error == nil else {   // Error.
+                                return
+                            }
+
+                            // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
+                            
+                            let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
+                             vc.channel = groupChannel
+                             vc.modalPresentationStyle = .overFullScreen
+                            let navCont = UINavigationController.init(rootViewController: vc)
+                            topVC.present(navCont, animated: true, completion: {    })
+
+
+                        }
+                        }
+                    }
+                    
+                    print(params);
+
+
                 }
             }
             

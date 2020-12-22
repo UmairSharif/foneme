@@ -19,6 +19,10 @@ import IQKeyboardManagerSwift
 
 class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SBDChannelDelegate, GroupChannelMessageTableViewCellDelegate, GroupChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate, SBDNetworkDelegate, SBDConnectionDelegate {
     
+    
+    @IBOutlet weak var joinGroupView: UIView!
+
+    
     @IBOutlet weak var inputMessageTextField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var typingIndicatorContainerView: UIView!
@@ -76,6 +80,12 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if channel?.myMemberState == SBDMemberState.joined {
+            joinGroupView.isHidden = true
+        } else {
+            joinGroupView.isHidden = false
+        }
 
         IQKeyboardManager.shared.enable = false
 
@@ -147,6 +157,22 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         
         self.loadPreviousMessages(initial: true)
     }
+    
+    @IBAction func joinGroupBtnClicked(){
+        
+        //SBDGroupChannel
+        
+        channel?.join(completionHandler: { (error) in
+            if let error = error {
+                Utils.showAlertController(error: error, viewController: self)
+                return
+            }
+            DispatchQueue.main.async {
+                self.joinGroupView.isHidden = true;
+            }
+        });
+    }
+    
     
     func setChanelTitle(channle: SBDGroupChannel?) {
         

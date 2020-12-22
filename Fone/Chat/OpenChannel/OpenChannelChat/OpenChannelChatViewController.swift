@@ -16,7 +16,8 @@ import AlamofireImage
 import FLAnimatedImage
 
 class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenChannelMessageTableViewCellDelegate, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate {
-    
+    @IBOutlet weak var joinGroupView: UIView!
+
     @IBOutlet weak var inputMessageTextField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var inputMessageInnerContainerViewBottomMargin: NSLayoutConstraint!
@@ -65,7 +66,30 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     //   if channel?.isOperator(withUserId: SBDMain.getCurrentUser()!.userId) == true {
+        self.joinGroupBtnClicked()
+        joinGroupView.isHidden = true
 
+   /*     let userId = SBDMain.getCurrentUser()!.userId
+        let operaters = channel?.operators ?? []
+        var isAvilable = false
+        for users in  operaters {
+            let user = users as? SBDUser
+            if user?.userId == userId {
+                isAvilable = true;
+                break;
+            }
+            
+        }
+            
+        //if  channel?.operators!.contains(SBDMain.getCurrentUser()!) ?? false   {
+            if isAvilable {
+                    joinGroupView.isHidden = true
+                } else {
+                    joinGroupView.isHidden = false
+                }
+        
+        */
         // Do any additional setup after loading the view.
         SBDMain.add(self, identifier: self.description)
         
@@ -169,7 +193,20 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             super.viewWillDisappear(animated)
         }
     }
-    
+        @IBAction func joinGroupBtnClicked(){
+            
+            //SBDGroupChannel
+            
+            channel?.enter(completionHandler: { (error) in
+                if let error = error {
+                    Utils.showAlertController(error: error, viewController: self)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.joinGroupView.isHidden = true;
+                }
+            });
+        }
     func showToast(_ message: String) {
         self.toastView.alpha = 1
         self.toastMessageLabel.text = message

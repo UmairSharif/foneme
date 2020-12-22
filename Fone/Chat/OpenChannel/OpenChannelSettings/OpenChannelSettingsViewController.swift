@@ -14,6 +14,7 @@ import AlamofireImage
 import MobileCoreServices
 
 class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, OpenChannelSettingsChannelNameTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SelectOperatorsDelegate, OpenChannelCoverImageNameSettingDelegate, NotificationDelegate, SBDChannelDelegate {
+    var groupInfoDic = [String:Any]();
 
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
@@ -42,7 +43,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 
         self.hideLoadingIndicatorView()
         self.view.bringSubviewToFront(self.loadingIndicatorView)
-        
+        getGroupInfo()
         self.refreshOperators()
     }
 
@@ -57,6 +58,83 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         
         super.viewWillDisappear(animated)
     }
+    func getGroupInfo(){
+        
+        var userId = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                userId = user.userId!
+            }
+        }
+
+        let groupID = self.channel?.channelUrl
+        
+        let params = ["GroupID":groupID!,
+                      "UserID": userId] as [String:Any]
+        // "CNIC": textFieldFoneId.text!,
+        
+        print("params: \(params)")
+        var headers = [String:String]()
+        headers = ["Content-Type": "application/json"]
+        
+        ServerCall.makeCallWitoutFile(getSingleGroupDetails, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+            
+            if let json = response {
+                print(json)
+                //                    self.activityIndicator.stopAnimating()
+                //                    self.activityIndicator.isHidden = true
+                
+                let statusCode = json["StatusCode"].string ?? ""
+                
+                if statusCode == "200" || statusCode == "201"{
+                   if let groupInfo = json["GroupData"].array {
+                    for items in groupInfo {
+                    self.groupInfoDic  = items.dictionaryObject ?? [String:Any]()
+                       }
+                   }
+                   
+                   print(self.groupInfoDic)
+
+                    self.settingsTableView.reloadData()
+                } else {
+                    if let message = json["Message"].string
+                    {
+                        print(message)
+                        //self.errorAlert("\(message)")
+                    }
+                    
+                    //                        self.activityIndicator.stopAnimating()
+                    //                        self.activityIndicator.isHidden = true
+                }
+
+            }
+        }
+    }
+    
+    func inviteBtnTapped() {
+        //Set the default sharing message.
+        let message = "Fone App"
+    
+            var groupLink = "";
+           let isPublic =  self.groupInfoDic["IsPublic"] as? String
+                 if isPublic == "True" {
+                groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String ?? "")"
+               } else {
+                groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+               }
+    
+        //Set the link to share.
+        if let link = NSURL(string: groupLink)
+        {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    
     
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
@@ -104,10 +182,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         
         switch section{
         case 0:
-            return 1
+                 return 1
         case 1:
-            return isOperator ? 3 : 1
+                          return 1
         case 2:
+            return isOperator ? 3 : 1
+        case 3:
             return isOperator ? self.operators.count + 1 : self.operators.count
         default:
             return 0
@@ -115,11 +195,11 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (section == 2) ? "Operator" : nil
+        return (section == 3) ? "Operator" : nil
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,6 +223,20 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 cell = channelNameCell
             }
         case 1:
+            if let banCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
+                banCell.settingMenuIconImageView.image = UIImage(named: "ic_info")
+                banCell.countLabel.isHidden = true
+                
+                  let isPublic =  self.groupInfoDic["IsPublic"] as? String
+                          if isPublic == "True" {
+                            banCell.settingMenuLabel.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                           } else {
+                               banCell.settingMenuLabel.text = self.groupInfoDic["GroupLink"] as? String
+                           }
+                
+                cell = banCell
+            }
+        case 2:
             if indexPath.row == 0 {
                 if let participantCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                     participantCell.settingMenuLabel.text = "Participants"
@@ -170,7 +264,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                     }
                 }
             }
-        case 2:
+        case 3:
             if channel.isOperator(with: currentUser){
                 if indexPath.row == 0{
                     if let addOperatorCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
@@ -266,9 +360,11 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         self.clickSettingsMenuTableView()
         
         tableView.deselectRow(at: indexPath, animated: false)
-        
+        //
         switch indexPath.section {
         case 1:
+            inviteBtnTapped()
+        case 2:
             if indexPath.row == 0{
                 performSegue(withIdentifier: "ShowUserList", sender: UserListType.participant)
             } else if indexPath.row == 1 {
@@ -278,7 +374,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 // Ban
                 performSegue(withIdentifier: "ShowUserList", sender: UserListType.banned)
             }
-        case 2:
+        case 3:
             if channel.isOperator(with: currentUser) {
                 if indexPath.row == 0 {
                     // Add Operators

@@ -15,6 +15,9 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var emptyLabel: UILabel!
     
+    
+
+    
     var channels: [SBDOpenChannel] = []
     var refreshControl: UIRefreshControl?
     var searchController: UISearchController?
@@ -25,6 +28,8 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        
         // Do any additional setup after loading the view.
         self.title = "Open Channels"
         self.navigationController?.title = "Open"
@@ -54,6 +59,9 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         self.loadChannelListNextPage(refresh: true, channelNameFilter: self.channelNameFilter)
 
     }
+    
+
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowOpenChat", let navigation = segue.destination as? UINavigationController, let destination = navigation.children.first as? OpenChannelChatViewController, let selectedChannel = sender as? SBDOpenChannel{

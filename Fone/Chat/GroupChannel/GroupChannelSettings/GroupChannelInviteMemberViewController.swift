@@ -289,7 +289,8 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 0 {
             self.userListQuery = SBDMain.createApplicationUserListQuery()
-            self.userListQuery?.userIdsFilter = [searchText]
+            //self.userListQuery?.userIdsFilter = [searchText]
+            self.userListQuery?.setMetaDataFilterWithKey("nickname", values: [searchText])
             self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
                 if error != nil {
                     DispatchQueue.main.async {

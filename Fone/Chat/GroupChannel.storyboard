@@ -787,8 +787,50 @@ using Foneme Search</string>
                                             <outlet property="notificationSwitch" destination="aDs-5Z-AJ0" id="zjw-Fp-w4w"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupShareInfoCell" id="rJk-7a-ICP">
                                         <rect key="frame" x="0.0" y="238" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rJk-7a-ICP" id="SlC-DF-0kl">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVa-w3-n06" userLabel="Background View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="58a-1F-uH3" userLabel="Notification Setting Icon Image View">
+                                                    <rect key="frame" x="19" y="7.5" width="30" height="29"/>
+                                                    <color key="tintColor" red="0.51097154619999996" green="0.38740390540000003" blue="0.88967186210000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="MGi-JR-aH2"/>
+                                                        <constraint firstAttribute="width" constant="30" id="pl1-3g-8hU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XO2-xJ-vY9" userLabel="Notification Setting Label">
+                                                    <rect key="frame" x="68" y="11.5" width="336" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="58a-1F-uH3" firstAttribute="leading" secondItem="SlC-DF-0kl" secondAttribute="leading" constant="19" id="Dgj-YC-lcR"/>
+                                                <constraint firstItem="XO2-xJ-vY9" firstAttribute="leading" secondItem="58a-1F-uH3" secondAttribute="trailing" constant="19" id="Gdb-Pj-P0N"/>
+                                                <constraint firstItem="OVa-w3-n06" firstAttribute="top" secondItem="SlC-DF-0kl" secondAttribute="top" id="O16-IH-OdP"/>
+                                                <constraint firstItem="XO2-xJ-vY9" firstAttribute="centerY" secondItem="OVa-w3-n06" secondAttribute="centerY" id="fsl-cK-Kk6"/>
+                                                <constraint firstAttribute="trailing" secondItem="XO2-xJ-vY9" secondAttribute="trailing" constant="10" id="mDZ-Zx-GJj"/>
+                                                <constraint firstAttribute="bottom" secondItem="OVa-w3-n06" secondAttribute="bottom" id="nrX-1U-8cJ"/>
+                                                <constraint firstItem="58a-1F-uH3" firstAttribute="centerY" secondItem="SlC-DF-0kl" secondAttribute="centerY" id="vzL-LH-cfj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="OVa-w3-n06" firstAttribute="leading" secondItem="rJk-7a-ICP" secondAttribute="leading" id="1cg-ku-dwx"/>
+                                            <constraint firstAttribute="trailing" secondItem="OVa-w3-n06" secondAttribute="trailing" id="b7K-7h-tyg"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="CEp-gw-gfI"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="281.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCz-xY-8Ou" id="Cs5-rT-v66">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -829,7 +871,7 @@ using Foneme Search</string>
                                         <viewLayoutGuide key="safeArea" id="V39-Qs-5aR"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="281.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="325" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcM-9p-84f" id="i1s-eD-u4C">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -923,7 +965,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="368.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2Q-Ab-WjV" id="O31-ib-vWw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1364,12 +1406,37 @@ using Foneme Search</string>
                                             <constraint firstAttribute="height" constant="0.5" id="AZD-ol-vzi"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-IO-cji">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5x-nj-tRP">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="ECa-iL-hPo"/>
+                                                </constraints>
+                                                <state key="normal" title="Join Group"/>
+                                                <connections>
+                                                    <action selector="joinGroupBtnClicked" destination="ESq-tY-gjT" eventType="touchUpInside" id="EJh-s6-RQ4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="B5x-nj-tRP" firstAttribute="top" secondItem="n1y-IO-cji" secondAttribute="top" id="UWC-aJ-n8f"/>
+                                            <constraint firstAttribute="trailing" secondItem="B5x-nj-tRP" secondAttribute="trailing" id="hZc-cu-fNf"/>
+                                            <constraint firstItem="B5x-nj-tRP" firstAttribute="leading" secondItem="n1y-IO-cji" secondAttribute="leading" id="ncc-p1-qlD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="n1y-IO-cji" secondAttribute="trailing" id="1uo-at-xC9"/>
                                     <constraint firstAttribute="trailing" secondItem="zSS-G6-YAw" secondAttribute="trailing" id="8h9-4Q-4aQ"/>
+                                    <constraint firstItem="n1y-IO-cji" firstAttribute="leading" secondItem="QuK-mS-w71" secondAttribute="leading" id="FCU-li-VJt"/>
                                     <constraint firstItem="fuE-Ad-gK4" firstAttribute="top" secondItem="QuK-mS-w71" secondAttribute="top" id="JHZ-4c-aOP"/>
+                                    <constraint firstItem="n1y-IO-cji" firstAttribute="top" secondItem="QuK-mS-w71" secondAttribute="top" id="Vjc-TZ-ZEl"/>
                                     <constraint firstItem="zSS-G6-YAw" firstAttribute="leading" secondItem="QuK-mS-w71" secondAttribute="leading" id="kHS-bc-O5X"/>
+                                    <constraint firstAttribute="bottom" secondItem="n1y-IO-cji" secondAttribute="bottom" id="ndt-TZ-yTJ"/>
                                     <constraint firstItem="zSS-G6-YAw" firstAttribute="top" secondItem="QuK-mS-w71" secondAttribute="top" id="w1O-Ni-sHs"/>
                                 </constraints>
                             </view>
@@ -1442,6 +1509,7 @@ using Foneme Search</string>
                     <connections>
                         <outlet property="inputMessageInnerContainerViewBottomMargin" destination="tjm-vM-Jbz" id="gZc-dm-VYI"/>
                         <outlet property="inputMessageTextField" destination="Rj9-bV-Rvg" id="HLw-RI-Vlz"/>
+                        <outlet property="joinGroupView" destination="n1y-IO-cji" id="LgL-L7-0Km"/>
                         <outlet property="loadingIndicatorView" destination="x4w-rc-Oaf" id="0JK-kw-Hig"/>
                         <outlet property="messageTableView" destination="jaE-X5-4Cj" id="6He-we-lj7"/>
                         <outlet property="messageTableViewBottomMargin" destination="ehc-Qx-IlL" id="e0r-ou-91E"/>
@@ -1529,6 +1597,7 @@ using Foneme Search</string>
         <image name="img_list_unchecked" width="24" height="24"/>
         <image name="img_online" width="6" height="6"/>
         <image name="img_toast_check" width="40" height="32"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <namedColor name="color_admin_message_name">
             <color red="0.20399999618530273" green="0.2199999988079071" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

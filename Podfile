@@ -10,6 +10,7 @@ target 'Fone' do
   pod 'Firebase/Messaging'
   pod 'Firebase/Crashlytics'
   pod 'MASegmentedControl'
+  pod 'SVProgressHUD'
 
   pod 'BraintreeDropIn'
   pod 'Alamofire', '~> 4.7'

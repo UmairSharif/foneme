@@ -18,7 +18,8 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
     var nextButton: UIBarButtonItem?
     @IBOutlet weak var channelNameTextField: UITextField!
     @IBOutlet weak var coverImageView: UIImageView!
-    
+    @IBOutlet weak var decriptionTextView: UITextView?
+
     var coverImageData: Data?
     
     override func viewDidLoad() {
@@ -144,6 +145,7 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ConfigureOpenChannel", let destination = segue.destination as? CreateOpenChannelViewControllerB{
             destination.channelName = self.channelNameTextField.text
+            destination.channelDescription = self.decriptionTextView?.text ?? ""
             destination.coverImageData = self.coverImageData ?? self.coverImageView.image?.jpegData(compressionQuality: 0.5)
         }
      }

@@ -17,6 +17,7 @@ ${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework
 ${BUILT_PRODUCTS_DIR}/RSKImageCropper/RSKImageCropper.framework
 ${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
 ${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework
 ${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

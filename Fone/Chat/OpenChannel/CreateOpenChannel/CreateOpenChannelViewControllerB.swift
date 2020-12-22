@@ -14,6 +14,7 @@ import Branch
 
 class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegate, UITableViewDelegate, UITableViewDataSource, NotificationDelegate {
     var channelName: String?
+    var channelDescription = ""
     var coverImageData: Data?
     var channelUrl: String?
     var doneButtonItem: UIBarButtonItem?
@@ -32,12 +33,11 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
             @IBOutlet weak var privateImage: UIImageView?
             @IBOutlet weak var inviteURLField: UITextField?
             @IBOutlet weak var privateGroupLbl: UILabel?
-            @IBOutlet weak var decriptionTextView: UITextView?
            @IBOutlet weak var bottomView: UIView?
            @IBOutlet weak var privateGroupView: UIView?
-          var isPublicGroup = true
+          var isPublicGroup = false
 
-         var createdChannel:SBDGroupChannel?
+         var createdChannel:SBDOpenChannel?
 
     
     
@@ -65,9 +65,84 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.createChannel()
     }
     
+    
+    func saveGroupInfo(){
+        //            self.activityIndicator.startAnimating()
+        //            self.activityIndicator.isHidden = false
+        
+        var userId = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                userId = user.userId!
+            }
+        }
+
+        
+        var groupLink = "";
+        var publicGroupLink = "";
+        if self.isPublicGroup {
+            publicGroupLink = self.inviteURLField?.text ?? ""
+        } else {
+            groupLink = self.privateGroupLbl?.text ?? ""
+        }
+        
+        let groupID = self.createdChannel?.channelUrl
+        
+          let params = ["GroupID":groupID!,
+                           "UserID": userId,
+                           "GroupName":channelName!,
+                           "GroupDescription":channelDescription,
+                           "GroupLink":groupLink,
+                           "IsPublic":isPublicGroup ? "1" : "0",
+                           "IsGroup":"0",
+                           "PublicGroupLink":publicGroupLink] as [String:Any]
+        
+        print("params: \(params)")
+        var headers = [String:String]()
+        headers = ["Content-Type": "application/json"]
+        
+        ServerCall.makeCallWitoutFile(createGroupChannel, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+            
+            if let json = response {
+                print(json)
+                //                    self.activityIndicator.stopAnimating()
+                //                    self.activityIndicator.isHidden = true
+                
+                let statusCode = json["StatusCode"].string ?? ""
+                
+                if statusCode == "200" || statusCode == "201"
+                {}
+                else
+                {
+                    if let message = json["Message"].string
+                    {
+                        print(message)
+                        self.errorAlert("\(message)")
+                    }
+                    
+                    //                        self.activityIndicator.stopAnimating()
+                    //                        self.activityIndicator.isHidden = true
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
     @objc func clickDoneButton(_ sender: AnyObject) {
+        saveGroupInfo()
+    self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+   // @objc func clickDoneButton(_ sender: AnyObject) {
+        @objc func createChannel() {
         self.activityIndicatorView.superViewSize = self.view.frame.size
         self.activityIndicatorView.updateFrame()
         
@@ -104,10 +179,11 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
                     
                     return
                 }
-                
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                self.openCreateLinkView(channel!)
+               // self.navigationController?.dismiss(animated: true, completion: nil)
                 
             })
+            self.createdChannel = channel;
         }
     }
     
@@ -176,7 +252,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
       }
       
     
-     func openCreateLinkView(_ channel: SBDGroupChannel){
+     func openCreateLinkView(_ channel: SBDOpenChannel){
          self.view.endEditing(true)
           bottomView?.isHidden = false;
 
@@ -190,7 +266,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
          linkProperties.feature = "sharing"
          
          if isPublicGroup {
-            if channelName?.isEmpty ?? true {
+            if inviteURLField?.text?.isEmpty ?? true {
                  return;
              }
              buo.publiclyIndex = true
@@ -208,7 +284,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
          
          buo.getShortUrl(with: linkProperties) { (url, error) in
              if (error == nil) {
-                 print("Got my Branch link to share: (url)")
+                print("Got my Branch link to share: \(String(describing: url))")
                  if self.isPublicGroup {
                       // self.channelNameTextField.text
              } else {
@@ -264,6 +340,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        return 0 // Comment all
         return 2
     }
     
