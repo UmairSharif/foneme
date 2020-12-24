@@ -16,16 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1CB-Q5-4oR" userLabel="Groups, Channels">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
-                                <segments>
-                                    <segment title="Groups"/>
-                                    <segment title="Channels"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentValeChanges" destination="EhS-Sz-WvI" eventType="valueChanged" id="gVK-zM-ZE6"/>
-                                </connections>
-                            </segmentedControl>
                             <searchBar contentMode="redraw" placeholder="Search here..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
                                 <rect key="frame" x="20" y="31" width="374" height="50"/>
                                 <constraints>
@@ -207,7 +197,7 @@
                                 </prototypes>
                             </tableView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-Cx-yKP">
-                                <rect key="frame" x="0.0" y="31" width="414" height="865"/>
+                                <rect key="frame" x="0.0" y="-1" width="414" height="897"/>
                             </containerView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -218,6 +208,16 @@
                                 <color key="textColor" name="color_empty_list_label"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1CB-Q5-4oR" userLabel="Groups, Channels">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                                <segments>
+                                    <segment title="Groups"/>
+                                    <segment title="Channels"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentValeChanges" destination="EhS-Sz-WvI" eventType="valueChanged" id="gVK-zM-ZE6"/>
+                                </connections>
+                            </segmentedControl>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPr-fD-mwe" userLabel="Toast View">
                                 <rect key="frame" x="147" y="392.5" width="120" height="111"/>
                                 <subviews>
@@ -268,8 +268,8 @@
                             <constraint firstItem="kGU-dc-f6V" firstAttribute="trailing" secondItem="oVx-Cx-yKP" secondAttribute="trailing" id="aax-6E-nHw"/>
                             <constraint firstAttribute="bottom" secondItem="jJZ-tQ-QH6" secondAttribute="bottom" id="b98-YK-4pJ"/>
                             <constraint firstItem="oVx-Cx-yKP" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" id="cfc-66-ugp"/>
-                            <constraint firstItem="oVx-Cx-yKP" firstAttribute="top" secondItem="1CB-Q5-4oR" secondAttribute="bottom" id="clW-0y-1hk"/>
                             <constraint firstItem="gvT-hh-IFs" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" constant="20" id="e2z-op-tFW"/>
+                            <constraint firstItem="oVx-Cx-yKP" firstAttribute="top" secondItem="1CB-Q5-4oR" secondAttribute="bottom" constant="-32" id="lB6-mj-xkC"/>
                             <constraint firstItem="1CB-Q5-4oR" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" id="lmx-4A-seL"/>
                             <constraint firstAttribute="bottom" secondItem="oVx-Cx-yKP" secondAttribute="bottom" id="nmm-Df-Tql"/>
                             <constraint firstItem="x8e-Li-fJv" firstAttribute="centerY" secondItem="kGU-dc-f6V" secondAttribute="centerY" id="vWM-og-8QR"/>

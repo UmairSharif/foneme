@@ -114,16 +114,17 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     
     func inviteBtnTapped() {
         //Set the default sharing message.
-        let message = "Fone App"
+        var message = "Fone App"
     
             var groupLink = "";
            let isPublic =  self.groupInfoDic["IsPublic"] as? String
                  if isPublic == "True" {
-                groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String ?? "")"
+                groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String )"
                } else {
                 groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
                }
-    
+    message = groupLink;
+
         //Set the link to share.
         if let link = NSURL(string: groupLink)
         {
@@ -241,7 +242,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 if let participantCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                     participantCell.settingMenuLabel.text = "Participants"
                     participantCell.settingMenuIconImageView.image = UIImage(named: "img_icon_participant")
-                    participantCell.countLabel.text = String(format: "%ld", channel.participantCount)
+                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : channel.participantCount))
                     
                     cell = participantCell
                 }
