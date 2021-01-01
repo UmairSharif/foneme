@@ -192,7 +192,6 @@
 		22880F2223C0C8BE0044263D /* ContactVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22880F2123C0C8BE0044263D /* ContactVC.swift */; };
 		2291D32123D3C2C40032AE5B /* FriendTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291D32023D3C2C40032AE5B /* FriendTabVC.swift */; };
 		229AF2FE23D771E500A1D2CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 229AF2FD23D771E500A1D2CD /* Assets.xcassets */; };
-		229AF30023D7720F00A1D2CD /* icons8-ellipsis-100 (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */; };
 		229BCD0523C202EF00AEF903 /* HelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0423C202EF00AEF903 /* HelpVC.swift */; };
 		229BCD0C23C3C38D00AEF903 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0B23C3C38D00AEF903 /* EditProfileVC.swift */; };
 		229BCD0F23C3C68000AEF903 /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229BCD0E23C3C68000AEF903 /* CallVC.swift */; };
@@ -459,7 +458,6 @@
 		22880F2123C0C8BE0044263D /* ContactVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactVC.swift; sourceTree = "<group>"; };
 		2291D32023D3C2C40032AE5B /* FriendTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTabVC.swift; sourceTree = "<group>"; };
 		229AF2FD23D771E500A1D2CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-ellipsis-100 (1).png"; sourceTree = "<group>"; };
 		229BCD0423C202EF00AEF903 /* HelpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpVC.swift; sourceTree = "<group>"; };
 		229BCD0623C3B2DF00AEF903 /* Fone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fone.entitlements; sourceTree = "<group>"; };
 		229BCD0B23C3C38D00AEF903 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -947,7 +945,6 @@
 		22880E6223C074380044263D = {
 			isa = PBXGroup;
 			children = (
-				229AF2FF23D7720F00A1D2CD /* icons8-ellipsis-100 (1).png */,
 				22880E6D23C074380044263D /* Fone */,
 				22880E8523C074390044263D /* FoneTests */,
 				22880E9023C0743A0044263D /* FoneUITests */,
@@ -1633,7 +1630,6 @@
 			files = (
 				1BA0977624817B5000E0A042 /* GroupChannelOutgoingAudioFileMessageTableViewCell.xib in Resources */,
 				1BA0979B24817B5000E0A042 /* CreateOpenChannelCurrentUserTableViewCell.xib in Resources */,
-				229AF30023D7720F00A1D2CD /* icons8-ellipsis-100 (1).png in Resources */,
 				1BA0977F24817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib in Resources */,
 				22880EF423C0775F0044263D /* Authentication.storyboard in Resources */,
 				1BA0978924817B5000E0A042 /* OpenChannelAdminMessageTableViewCell.xib in Resources */,
@@ -2147,7 +2143,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.5.3;
+				CURRENT_PROJECT_VERSION = 3.5.8;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2178,7 +2174,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fone/Fone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.5.3;
+				CURRENT_PROJECT_VERSION = 3.5.8;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

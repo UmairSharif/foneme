@@ -605,8 +605,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="282"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Type" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-by-cF9">
-                                            <rect key="frame" x="15" y="10" width="112" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link Type" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-by-cF9">
+                                            <rect key="frame" x="15" y="10" width="79" height="20.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" name="color_admin_message_name"/>
                                             <nil key="highlightedColor"/>
@@ -700,17 +700,26 @@
                                             <rect key="frame" x="15" y="165" width="384" height="44"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fone.me/" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmV-oc-JxV">
-                                                    <rect key="frame" x="15" y="12" width="77.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="10.5" width="80" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="oly-tH-zXS"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="link" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEN-IH-ewP">
-                                                    <rect key="frame" x="94.5" y="8" width="239.5" height="28"/>
+                                                    <rect key="frame" x="97" y="5" width="237" height="31"/>
                                                     <color key="textColor" name="color_user_message_name"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link Available " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="304-3H-bEd">
+                                                    <rect key="frame" x="97" y="29.5" width="237" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                    <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRJ-KJ-WOt">
                                                     <rect key="frame" x="334" y="0.0" width="50" height="44"/>
                                                     <constraints>
@@ -718,7 +727,7 @@
                                                     </constraints>
                                                     <state key="normal" image="img_list_checked"/>
                                                     <connections>
-                                                        <action selector="publicChannelBtnClicked:" destination="mfb-aV-Ie5" eventType="touchUpInside" id="At3-G4-65r"/>
+                                                        <action selector="publicChannelBtnClicked" destination="mfb-aV-Ie5" eventType="touchUpInside" id="zZq-Hx-p4y"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -731,9 +740,12 @@
                                                 <constraint firstItem="KEN-IH-ewP" firstAttribute="leading" secondItem="FmV-oc-JxV" secondAttribute="trailing" constant="2" id="HME-I1-ItI"/>
                                                 <constraint firstAttribute="bottom" secondItem="dRJ-KJ-WOt" secondAttribute="bottom" id="LHv-7W-9pV"/>
                                                 <constraint firstAttribute="trailing" secondItem="dRJ-KJ-WOt" secondAttribute="trailing" id="QLC-Oc-zXJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="304-3H-bEd" secondAttribute="bottom" id="Qgg-h9-fRl"/>
                                                 <constraint firstAttribute="trailing" secondItem="KEN-IH-ewP" secondAttribute="trailing" constant="50" id="kAF-Du-BQ1"/>
-                                                <constraint firstItem="KEN-IH-ewP" firstAttribute="top" secondItem="SAw-x2-goA" secondAttribute="top" constant="8" id="oj1-Z0-ZLc"/>
+                                                <constraint firstItem="304-3H-bEd" firstAttribute="trailing" secondItem="KEN-IH-ewP" secondAttribute="trailing" id="kin-at-Bdq"/>
+                                                <constraint firstItem="KEN-IH-ewP" firstAttribute="top" secondItem="SAw-x2-goA" secondAttribute="top" constant="5" id="oj1-Z0-ZLc"/>
                                                 <constraint firstItem="FmV-oc-JxV" firstAttribute="leading" secondItem="SAw-x2-goA" secondAttribute="leading" constant="15" id="p8s-Zs-WBv"/>
+                                                <constraint firstItem="304-3H-bEd" firstAttribute="leading" secondItem="KEN-IH-ewP" secondAttribute="leading" id="qjK-gh-xwh"/>
                                                 <constraint firstItem="KEN-IH-ewP" firstAttribute="centerY" secondItem="FmV-oc-JxV" secondAttribute="centerY" id="wKc-Ab-Lcm"/>
                                             </constraints>
                                         </view>
@@ -932,6 +944,7 @@ using Foneme Search</string>
                         <outlet property="privateGroupView" destination="uNo-IO-AWe" id="QOY-q1-qcw"/>
                         <outlet property="privateImage" destination="zWg-Lp-BPN" id="uIm-fd-Tak"/>
                         <outlet property="publicImage" destination="pUK-dJ-CkG" id="4OR-g8-wl8"/>
+                        <outlet property="publickLinkStatusLbl" destination="304-3H-bEd" id="ny5-ac-GOy"/>
                         <outlet property="tableView" destination="hxe-5M-KZA" id="PPZ-9s-M21"/>
                         <segue destination="Sgh-zm-VIi" kind="show" identifier="SelectOperators" id="zpF-0N-ngL"/>
                     </connections>
@@ -1429,7 +1442,7 @@ using Foneme Search</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gmn-Sg-5KT"/>
+        <segue reference="zpF-0N-ngL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CHATBG" width="750" height="1624"/>
