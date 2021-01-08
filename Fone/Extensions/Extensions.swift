@@ -582,9 +582,11 @@ extension UIViewController {
                                     let number = json["PhoneNumber"].stringValue
                                     let name = json["Name"].stringValue
                                     let userImage = json["ImageUrl"].stringValue
-                                    let ContactsCnic = json["Address"].stringValue
+                                    var ContactsCnic = json["Address"].stringValue
                                     let userId = json["UserId"].stringValue
-                                    let contactCNIC = json["ContactCNIC"].stringValue
+                                    if ContactsCnic.isEmpty {
+                                        ContactsCnic = json["ContactCNIC"].stringValue
+                                    }
                                     
                                     
                                     let userModel = FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic,userId: userId)

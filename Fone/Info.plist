@@ -58,6 +58,8 @@
 	<string>$(PRODUCT_NAME) would like to access your microphone to make a  voip call.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your gallery to select profile picture.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow access to save photo in your photo library</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

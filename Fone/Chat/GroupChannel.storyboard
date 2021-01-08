@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search here..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
+                            <searchBar contentMode="redraw" placeholder="Private Chat Name" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
                                 <rect key="frame" x="20" y="31" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="DIt-WY-mGL"/>
@@ -211,8 +211,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1CB-Q5-4oR" userLabel="Groups, Channels">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
                                 <segments>
-                                    <segment title="Groups"/>
-                                    <segment title="Channels"/>
+                                    <segment title="Private Chats"/>
+                                    <segment title="Public Chats"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentValeChanges" destination="EhS-Sz-WvI" eventType="valueChanged" id="gVK-zM-ZE6"/>
