@@ -26,7 +26,8 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     @IBOutlet weak var activityIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var publicGroupLink = ""
+
     ///Setup View for LInks
          
             @IBOutlet weak var publicImage: UIImageView?
@@ -36,6 +37,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
            @IBOutlet weak var bottomView: UIView?
            @IBOutlet weak var privateGroupView: UIView?
           var isPublicGroup = false
+          @IBOutlet weak var publickLinkStatusLbl: UILabel?
 
          var createdChannel:SBDOpenChannel?
 
@@ -43,9 +45,10 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        publickLinkStatusLbl?.isHidden = true;
 
         // Do any additional setup after loading the view.
-        self.title = "Create Open Channel"
+        self.title = "Create Public Chats"
         self.navigationItem.largeTitleDisplayMode = .never
        
         self.doneButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CreateOpenChannelViewControllerB.clickDoneButton(_:)))
@@ -137,8 +140,14 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     
     
     @objc func clickDoneButton(_ sender: AnyObject) {
+        
+        if self.isPublicGroup && self.publicGroupLink.isEmpty{
+            self.publicChannelBtnClicked();
+                       return;
+            }
+        
         saveGroupInfo()
-    self.navigationController?.dismiss(animated: true, completion: nil)
+       self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
    // @objc func clickDoneButton(_ sender: AnyObject) {
@@ -215,10 +224,11 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     }
     
     
-    @IBAction func publicChannelBtnClicked(_ sender: AnyObject) {
-//          if channelName ?? true {
-//              return;
-//          }
+    @IBAction func publicChannelBtnClicked() {
+        if inviteURLField?.text?.isEmpty ?? true {
+        Utils.showAlertController(title: "", message: "Please enter public link name.", viewController: self)
+          return;
+         }
           if let channel = self.createdChannel{
               self.openCreateLinkView(channel);
           }
@@ -271,7 +281,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
              }
              buo.publiclyIndex = true
              buo.locallyIndex = true
-             linkProperties.alias = channelName;
+             linkProperties.alias = inviteURLField?.text;
          } else {
              buo.publiclyIndex = false
              buo.locallyIndex = false
@@ -285,16 +295,19 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
          buo.getShortUrl(with: linkProperties) { (url, error) in
              if (error == nil) {
                 print("Got my Branch link to share: \(String(describing: url))")
-                 if self.isPublicGroup {
-                      // self.channelNameTextField.text
-             } else {
-                     DispatchQueue.main.async {
-                                                   self.privateGroupLbl?.text = url;
+            DispatchQueue.main.async {
 
-                           }
-             }
-                 
+                 if self.isPublicGroup {
+                     // self.channelNameTextField.text
+                     self.publicGroupLink = url ?? "";
+                     self.publickLinkStatusLbl?.isHidden = false;
+                 } else {
+                         self.privateGroupLbl?.text = url;
+                     }
+                 }
              } else {
+                Utils.showAlertController(title: "Error", message: "\(String(describing: error?.localizedDescription))", viewController: self)
+
                  print(String(format: "Branch error : %@", error! as CVarArg))
              }
              

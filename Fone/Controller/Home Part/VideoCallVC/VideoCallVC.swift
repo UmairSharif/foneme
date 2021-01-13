@@ -238,7 +238,7 @@ class VideoCallVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if NotificationHandler.shared.currentCallStatus == CurrentCallStatus.Incoming {
-            statusLbl.text = "calling to fone.me/\(NotificationHandler.shared.dialerFoneId ?? "")"
+            statusLbl.text = "ringing to fone.me/\(NotificationHandler.shared.dialerFoneId ?? "")"
         }else {
             statusLbl.text = "calling to fone.me/\(DialerFoneID)"
         }

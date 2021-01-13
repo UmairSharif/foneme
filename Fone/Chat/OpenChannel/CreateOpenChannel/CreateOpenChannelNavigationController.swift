@@ -14,9 +14,9 @@ class CreateOpenChannelNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationBar.tintColor = UIColor.white;
-        navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
+        //Rajesh
+       navigationBar.tintColor = UIColor.white;
+       navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
                                              NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
         navigationBar.isTranslucent = false

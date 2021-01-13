@@ -31,7 +31,14 @@ struct UserDetailModel : Codable {
         if json.isEmpty{
             return
         }
-        cnic = json["Address"].stringValue
+        var ContactsCnic = json["Address"].stringValue
+        if ContactsCnic.isEmpty {
+            ContactsCnic = json["ContactCNIC"].stringValue
+        }
+        cnic = ContactsCnic
+
+        
+        
         contactFT = json["ContactFT"].stringValue
         contactVT = json["ContactVT"].stringValue
         countryCode = json["CountryCode"].stringValue

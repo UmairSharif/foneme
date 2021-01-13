@@ -29,7 +29,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
         super.viewDidLoad()
         getGroupInfo();
         // Do any additional setup after loading the view.
-        self.title = "Group Channel Settings"
+        self.title = "Private Chat Settings"
         
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
@@ -142,16 +142,17 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     
   func inviteBtnTapped() {
         //Set the default sharing message.
-        let message = "Fone App"
+        var message = "Fone App"
     
     var groupLink = "";
          let isPublic =  self.groupInfoDic["IsPublic"] as? String
         if isPublic == "True" {
-        groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String ?? "")"
+            groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String )"
        } else {
         groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
        }
     
+    message = groupLink;
         //Set the link to share.
         if let link = NSURL(string: groupLink)
         {
@@ -280,10 +281,13 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             return UITableViewCell()
         }
     }
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+         return (section == 0) ? 0.1 : 18.0
+
+     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 121
+            return 251
         }
         else if indexPath.section == 1 {
             return 48

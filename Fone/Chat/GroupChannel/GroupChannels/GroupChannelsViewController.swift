@@ -11,7 +11,7 @@ import SendBirdSDK
 import AlamofireImage
 import SwiftyJSON
 
-class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate {
+class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate, CreateOpenChannelDelegate {
     
         @IBOutlet weak var topSegmentCntl: UISegmentedControl?
     
@@ -30,6 +30,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var containerView: UIView!
 
     var openChannelVC: OpenChannelsViewController?
+    var openChannelNav: UINavigationController?
 
     var refreshControl: UIRefreshControl?
     var trypingIndicatorTimer: [String : Timer] = [:]
@@ -193,13 +194,17 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         if topSegmentCntl?.selectedSegmentIndex == 0 {
             containerView.isHidden = true
         } else {
+            emptyLabel.isHidden = true;
             containerView.isHidden = false
             if openChannelVC == nil {
                 let storyboard = UIStoryboard(name: "OpenChannel", bundle: nil)
                 openChannelVC = storyboard.instantiateViewController(withIdentifier: "OpenChannelsViewController") as? OpenChannelsViewController
+                openChannelNav = UINavigationController.init(rootViewController: openChannelVC ?? UIViewController())
+                //openChannelNav?.isNavigationBarHidden = true;
             }
-            if let controller = openChannelVC {
-                controller.view.frame = self.containerView.bounds
+            if let controller = openChannelNav {
+                var rectvalue = CGRect(x: 0, y: -64, width: self.containerView.bounds.width, height: self.containerView.bounds.height)
+                controller.view.frame = self.containerView.bounds//rectvalue
                 containerView.addSubview(controller.view)
                 self.addChild(controller)
                 controller.didMove(toParent: self)
@@ -216,11 +221,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         alert.modalPresentationStyle = .popover
         
-        let actionGroup = UIAlertAction(title: "Create Group", style: .default) { (action) in
+        let actionGroup = UIAlertAction(title: "Create Private Chats", style: .default) { (action) in
             self.clickCreateGroup()
             
         }
-        let actionChannel = UIAlertAction(title: "Create Channel", style: .default) { (action) in
+        let actionChannel = UIAlertAction(title: "Create Public Chats", style: .default) { (action) in
             self.clickCreateChannel()
                
         }
@@ -249,7 +254,13 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     @objc func clickCreateChannel() {
         
         let storyboard = UIStoryboard(name: "OpenChannel", bundle: nil)
-        let myVC = storyboard.instantiateViewController(withIdentifier: "CreateOpenChannelNavigation") as! UINavigationController
+        let myVC = storyboard.instantiateViewController(withIdentifier: "CreateOpenChannelNavigation") as! CreateOpenChannelNavigationController
+        
+        
+        if openChannelVC != nil {
+         //let destination = myVC.children.first as? OpenChannelChatViewController
+            myVC.createChannelDelegate = openChannelVC
+        }
         self.present(myVC, animated: true, completion: nil)
          //  performSegue(withIdentifier: "CreateOpenChannel", sender: nil)
        }
@@ -537,7 +548,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.channels.count == 0 && self.toastCompleted {
+        if self.channels.count == 0 && self.toastCompleted && (topSegmentCntl?.selectedSegmentIndex == 0 ) {
             self.emptyLabel.isHidden = false
         }
         else {

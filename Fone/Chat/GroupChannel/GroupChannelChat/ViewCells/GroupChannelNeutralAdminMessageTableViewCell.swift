@@ -50,7 +50,7 @@ class GroupChannelNeutralAdminMessageTableViewCell: UITableViewCell {
         self.messageContainerView.addGestureRecognizer(longClickMessageContainerGesture)
         
         self.dateSeperatorLabel.text = Utils.getDateStringForDateSeperatorFromTimestamp((self.msg?.createdAt)!)
-        self.textMessageLabel.text = self.msg?.message
+        self.textMessageLabel.text = self.msg?.message?.replacingOccurrences(of: "channel", with: "chat")
         
         // Adjust constraints regarding the prevMessage
         if prevMessage == nil {

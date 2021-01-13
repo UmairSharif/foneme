@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Private Chat Name" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-hh-IFs">
-                                <rect key="frame" x="20" y="31" width="374" height="50"/>
+                                <rect key="frame" x="5" y="36" width="404" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="DIt-WY-mGL"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6r4-MH-j3S" userLabel="Group Channels Table View">
-                                <rect key="frame" x="0.0" y="81" width="414" height="815"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
@@ -257,10 +257,10 @@
                             <constraint firstItem="bPr-fD-mwe" firstAttribute="centerY" secondItem="eLG-qZ-maB" secondAttribute="centerY" id="7kD-Wm-o6q"/>
                             <constraint firstItem="bPr-fD-mwe" firstAttribute="centerX" secondItem="eLG-qZ-maB" secondAttribute="centerX" id="AKR-Y2-hi1"/>
                             <constraint firstItem="x8e-Li-fJv" firstAttribute="centerX" secondItem="kGU-dc-f6V" secondAttribute="centerX" id="Cn7-Jq-Wmf"/>
-                            <constraint firstItem="kGU-dc-f6V" firstAttribute="trailing" secondItem="gvT-hh-IFs" secondAttribute="trailing" constant="20" id="ELW-IR-qec"/>
-                            <constraint firstItem="gvT-hh-IFs" firstAttribute="top" secondItem="1CB-Q5-4oR" secondAttribute="bottom" id="LcA-L0-6M0"/>
+                            <constraint firstItem="kGU-dc-f6V" firstAttribute="trailing" secondItem="gvT-hh-IFs" secondAttribute="trailing" constant="5" id="ELW-IR-qec"/>
+                            <constraint firstItem="gvT-hh-IFs" firstAttribute="top" secondItem="1CB-Q5-4oR" secondAttribute="bottom" constant="5" id="LcA-L0-6M0"/>
                             <constraint firstItem="jJZ-tQ-QH6" firstAttribute="leading" secondItem="eLG-qZ-maB" secondAttribute="leading" id="Nzx-7r-9jY"/>
-                            <constraint firstItem="6r4-MH-j3S" firstAttribute="top" secondItem="gvT-hh-IFs" secondAttribute="bottom" id="TNh-Mr-c6P"/>
+                            <constraint firstItem="6r4-MH-j3S" firstAttribute="top" secondItem="gvT-hh-IFs" secondAttribute="bottom" constant="5" id="TNh-Mr-c6P"/>
                             <constraint firstItem="jJZ-tQ-QH6" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" id="UvZ-OG-VqP"/>
                             <constraint firstAttribute="trailing" secondItem="6r4-MH-j3S" secondAttribute="trailing" id="Whh-U9-ZwV"/>
                             <constraint firstAttribute="trailing" secondItem="jJZ-tQ-QH6" secondAttribute="trailing" id="Yee-c1-y45"/>
@@ -268,7 +268,7 @@
                             <constraint firstItem="kGU-dc-f6V" firstAttribute="trailing" secondItem="oVx-Cx-yKP" secondAttribute="trailing" id="aax-6E-nHw"/>
                             <constraint firstAttribute="bottom" secondItem="jJZ-tQ-QH6" secondAttribute="bottom" id="b98-YK-4pJ"/>
                             <constraint firstItem="oVx-Cx-yKP" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" id="cfc-66-ugp"/>
-                            <constraint firstItem="gvT-hh-IFs" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" constant="20" id="e2z-op-tFW"/>
+                            <constraint firstItem="gvT-hh-IFs" firstAttribute="leading" secondItem="kGU-dc-f6V" secondAttribute="leading" constant="5" id="e2z-op-tFW"/>
                             <constraint firstItem="oVx-Cx-yKP" firstAttribute="top" secondItem="1CB-Q5-4oR" secondAttribute="bottom" constant="-32" id="lB6-mj-xkC"/>
                             <constraint firstItem="1CB-Q5-4oR" firstAttribute="top" secondItem="eLG-qZ-maB" secondAttribute="top" id="lmx-4A-seL"/>
                             <constraint firstAttribute="bottom" secondItem="oVx-Cx-yKP" secondAttribute="bottom" id="nmm-Df-Tql"/>

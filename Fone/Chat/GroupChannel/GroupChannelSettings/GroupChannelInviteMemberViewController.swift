@@ -8,18 +8,22 @@
 
 import UIKit
 import SendBirdSDK
+import SwiftyJSON
 
 class GroupChannelInviteMemberViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, NotificationDelegate {
     @IBOutlet weak var selectedUserListView: UICollectionView!
     @IBOutlet weak var selectedUserListHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var updatingIndicatorView: CustomActivityIndicatorView!
+    var localUserInfo: [String:String] = [:]
 
     weak var delegate: GroupChannelInviteMemberDelegate?
     
     var selectedUsers: [String:SBDUser] = [:]
     var channel: SBDGroupChannel?
     var users: [SBDUser] = []
+    var allUsers: [SBDUser] = []
+
     var userListQuery: SBDApplicationUserListQuery?
     var refreshControl: UIRefreshControl?
     var searchController: UISearchController?
@@ -27,10 +31,10 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.title = "Invite Members"
-      
+        
         self.okButtonItem = UIBarButtonItem.init(title: "OK(0)", style: .plain, target: self, action: #selector(GroupChannelInviteMemberViewController.clickOkButton(_:)))
         self.navigationItem.rightBarButtonItem = self.okButtonItem
         
@@ -62,11 +66,19 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController?.searchBar.delegate = self
+        if #available(iOS 13.0, *) {
+            self.searchController?.searchBar.searchTextField.textColor = UIColor.white
+        } else {
+            
+            // Fallback on earlier versions
+        }
+        self.searchController?.searchBar.tintColor = .white
         self.searchController?.searchBar.placeholder = "User ID"
         self.searchController?.obscuresBackgroundDuringPresentation = false
+      //  self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
+        
         self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
         
         self.userListQuery = nil
         
@@ -80,8 +92,16 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         self.okButtonItem?.title = "OK\(Int(self.selectedUsers.count))"
         
         self.refreshUserList()
+        
+        
+        self.searchController?.searchBar.set(textColor: .black)
+        self.searchController?.searchBar.setTextField(color: .white)
+        self.searchController?.searchBar.setPlaceholder(textColor: .black)
+        self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
+        self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
+        
     }
-
+    
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         
@@ -103,8 +123,35 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         
         if self.userListQuery == nil {
             self.userListQuery = SBDMain.createApplicationUserListQuery()
-            self.userListQuery?.limit = 20
+            self.userListQuery?.limit = 200
+            
+            var arrayNumber = [String]()
+                    if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+                        if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+                            if contacts.count > 0 {
+                                for items in contacts
+                                {
+                                    let dict = items.dictionary
+                                    let number = dict?["ContactsNumber"]?.string ?? ""
+                                    let name = dict?["ContactsCnic"]?.string ?? ""
+                                    arrayNumber.append(number)
+                                    self.localUserInfo["\(number)"] = name;
+                                }
+                            }
+                        }
+
+                    }
+            self.userListQuery?.limit = UInt(arrayNumber.count)
+
+            if arrayNumber.count > 0 {
+                           self.userListQuery?.userIdsFilter = arrayNumber
+                       }else {
+                           self.userListQuery?.userIdsFilter = ["0"]
+                       }
         }
+        
+        
+        
         
         if self.userListQuery?.hasNext == false {
             return
@@ -122,13 +169,16 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
             DispatchQueue.main.async {
                 if refresh {
                     self.users.removeAll()
+                    self.allUsers.removeAll()
                 }
                 
                 for user in users ?? [] {
                     if user.userId == SBDMain.getCurrentUser()?.userId {
                         continue
                     }
+                    user.nickname = self.localUserInfo[user.userId]
                     self.users.append(user)
+                    self.allUsers.append(user)
                 }
                 
                 self.tableView.reloadData()
@@ -202,7 +252,7 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         }
     }
     
-
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectableUserTableViewCell", for: indexPath) as! SelectableUserTableViewCell
@@ -220,7 +270,8 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
                 let user = self.users[indexPath.row]
-                updateCell.nicknameLabel.text = user.nickname
+                updateCell.nicknameLabel.text = "fone.me/\(self.users[indexPath.row].nickname!)"
+
                 updateCell.profileImageView.setProfileImageView(for: user)
                 
                 if self.selectedUsers[user.userId] != nil {
@@ -288,9 +339,9 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 0 {
-            self.userListQuery = SBDMain.createApplicationUserListQuery()
-            //self.userListQuery?.userIdsFilter = [searchText]
-            self.userListQuery?.setMetaDataFilterWithKey("nickname", values: [searchText])
+          /*  self.userListQuery = SBDMain.createApplicationUserListQuery()
+            self.userListQuery?.userIdsFilter = [searchText]
+            // self.userListQuery?.setMetaDataFilterWithKey("nickname_startswith", values: [searchText.lowercased()])
             self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
                 if error != nil {
                     DispatchQueue.main.async {
@@ -299,7 +350,6 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
                     
                     return
                 }
-                
                 DispatchQueue.main.async {
                     self.users.removeAll()
                     for user in users ?? [] {
@@ -312,7 +362,19 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
                 }
-            })
-        }
+            })*/
+            
+           self.users = self.allUsers.filter({
+                         return ($0.nickname?.lowercased().contains(searchText.lowercased()) ?? false)
+                         })
+                     
+                     self.tableView.reloadData()
+                     self.refreshControl?.endRefreshing()
+                 } else {
+                     self.users = self.allUsers;
+                     self.tableView.reloadData()
+                               self.refreshControl?.endRefreshing()
+                 }
     }
-}
+    }
+

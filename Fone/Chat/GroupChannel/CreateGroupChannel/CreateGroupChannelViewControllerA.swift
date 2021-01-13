@@ -17,6 +17,9 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var selectedUserListHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     var users: [SBDUser] = []
+    var allUsers: [SBDUser] = []
+    var localUserInfo: [String:String] = [:]
+
     var userListQuery: SBDApplicationUserListQuery?
     var refreshControl: UIRefreshControl?
     var searchController: UISearchController?
@@ -53,7 +56,7 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         self.searchController?.obscuresBackgroundDuringPresentation = false
         self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
+//        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -84,7 +87,7 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         self.searchController?.searchBar.setTextField(color: .white)
         self.searchController?.searchBar.setPlaceholder(textColor: .black)
         self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
-        self.searchController?.searchBar.setClearButton(color: .white)
+        self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
 
         
     }
@@ -119,12 +122,28 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
     @objc func clickOkButton(_ sender: AnyObject) {
         
         var arrayIds = self.selectedUsers.map({ $0.userId })
+//        let nicknames = self.selectedUsers.map({ $0.nickname })
+//        var nickname = ""
         if arrayIds.count == 1 {
             if  let cUser = SBDMain.getCurrentUser() {
                 arrayIds.append(cUser.userId)
+               // nickname = "\(nicknames[0]), \(cUser.nickname)"
             }
+            
+            
+            
+//            let params = SBDGroupChannelParams()
+//                      // params.coverImage = self.coverImageData
+//                       params.add(selectedUsers)
+//                       params.name = nickname
+//                       params.data = ""
+//                       params.isPublic = true
+//            params.isDistinct = true
+//
+//        SBDGroupChannel.createChannel(with: params) { (sbdchanel, error) in
 
-            SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdchanel, error) in
+
+SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdchanel, error) in
                 
                 if let _ = sbdchanel {
                     self.dismiss(animated: true) {
@@ -171,22 +190,23 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         
         if self.userListQuery == nil {
             self.userListQuery = SBDMain.createApplicationUserListQuery()
-            self.userListQuery?.limit = 20
             var arrayNumber = [String]()
             if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
                 if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
                     if contacts.count > 0 {
-                        for items in contacts
-                        {
+                        for items in contacts {
                             let dict = items.dictionary
-                                
                             let number = dict?["ContactsNumber"]?.string ?? ""
+                            let name = dict?["ContactsCnic"]?.string ?? ""
                             arrayNumber.append(number)
+                            self.localUserInfo["\(number)"] = name;
                         }
                     }
                 }
 
             }
+            self.userListQuery?.limit = UInt(arrayNumber.count)
+            print("arrayNumber = \(arrayNumber) === \(arrayNumber.count)");
             if arrayNumber.count > 0 {
                 self.userListQuery?.userIdsFilter = arrayNumber
             }else {
@@ -211,13 +231,17 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
             DispatchQueue.main.async {
                 if refresh {
                     self.users.removeAll()
+                    self.allUsers.removeAll()
                 }
                 
                 for user in users! {
                     if user.userId == SBDMain.getCurrentUser()!.userId {
                         continue
                     }
+                    user.nickname = self.localUserInfo[user.userId]
                     self.users.append(user)
+                    self.allUsers.append(user)
+                    
                 }
                 
                 self.tableView.reloadData()
@@ -271,7 +295,7 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
-                updateCell.nicknameLabel.text = self.users[indexPath.row].nickname
+                updateCell.nicknameLabel.text = "fone.me/\(self.users[indexPath.row].nickname!)"
                 updateCell.profileImageView.setProfileImageView(for: self.users[indexPath.row])
                 
                 if let user = self.users[exists: indexPath.row] {
@@ -343,7 +367,7 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 0 {
-            self.userListQuery = SBDMain.createApplicationUserListQuery()
+          /*  self.userListQuery = SBDMain.createApplicationUserListQuery()
             self.userListQuery?.userIdsFilter = [searchText]
             self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
                 if error != nil {
@@ -366,7 +390,18 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
                 }
-            })
+            })*/
+            
+             self.users = self.allUsers.filter({
+                return ($0.nickname?.lowercased().contains(searchText.lowercased()) ?? false)
+                })
+            
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        } else {
+            self.users = self.allUsers;
+            self.tableView.reloadData()
+                      self.refreshControl?.endRefreshing()
         }
     }
 }

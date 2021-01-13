@@ -78,8 +78,8 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1351"
-            endingLineNumber = "1351"
+            startingLineNumber = "1410"
+            endingLineNumber = "1410"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
             <Locations>
@@ -126,8 +126,8 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1354"
-            endingLineNumber = "1354"
+            startingLineNumber = "1413"
+            endingLineNumber = "1413"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1377"
-            endingLineNumber = "1377"
+            startingLineNumber = "1436"
+            endingLineNumber = "1436"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1363"
-            endingLineNumber = "1363"
+            startingLineNumber = "1422"
+            endingLineNumber = "1422"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -242,22 +242,6 @@
                   offsetFromSymbolStart = "41">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A7E501CB-7E04-4CC8-9D74-11098D3D549C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

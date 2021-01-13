@@ -21,8 +21,12 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     
     
     @IBOutlet weak var joinGroupView: UIView!
-
     
+    
+    
+     var titleLabel: UILabel!
+     var lastUpdatedLabel: UILabel!
+
     @IBOutlet weak var inputMessageTextField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var typingIndicatorContainerView: UIView!
@@ -42,7 +46,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     
     weak var delegate: GroupChannelsUpdateListDelegate?
     var channel: SBDGroupChannel?
-
+    
     var keyboardShown: Bool = false
     var keyboardHeight: CGFloat = 0
     
@@ -77,7 +81,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     var pickerControllerOpened = false
     
     var typingIndicatorTimer: Timer?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,20 +90,20 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         } else {
             joinGroupView.isHidden = false
         }
-
+        
         IQKeyboardManager.shared.enable = false
-
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
-                                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
+                                                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
-
+        
         self.navigationItem.largeTitleDisplayMode = .never
-//        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
-//        
-//        self.navigationItem.rightBarButtonItem = self.settingBarButton
+        //        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
+        //
+        //        self.navigationItem.rightBarButtonItem = self.settingBarButton
         
         if self.splitViewController?.displayMode != UISplitViewController.DisplayMode.allVisible {
             self.backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.clickBackButton(_:)))
@@ -111,7 +115,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         SBDMain.add(self as SBDConnectionDelegate, identifier: self.description)
         
         setChanelTitle(channle: self.channel)
-
+        
         let image = FLAnimatedImage.init(animatedGIFData: NSData(contentsOfFile: Bundle.main.path(forResource: "loading_typing", ofType: "gif")!) as Data?)
         self.typingIndicatorImageView.animatedImage = image
         
@@ -123,17 +127,20 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         self.messageTableView.dataSource = self
         self.messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 14, right: 0)
         
+        self.messageTableView.register(GroupChannelNeutralAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelNeutralAdminMessageTableViewCell")
+        
         self.messageTableView.register(GroupChannelIncomingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingUserMessageTableViewCell")
         self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingImageFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingVideoFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
+        
+        
         self.messageTableView.register(GroupChannelOutgoingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingUserMessageTableViewCell")
-        self.messageTableView.register(GroupChannelNeutralAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelNeutralAdminMessageTableViewCell")
         self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelOutgoingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell")
-        self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelOutgoingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell")
-        self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
         
         // Input Text Field
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -173,6 +180,22 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         });
     }
     
+    lazy var titleStackView: UIStackView = {
+         self.titleLabel = UILabel()
+         self.titleLabel.textAlignment = .center
+         self.titleLabel.textColor = .white
+        self.titleLabel.font = UIFont.systemFont(ofSize: 15)
+
+         self.lastUpdatedLabel = UILabel()
+         self.lastUpdatedLabel.textAlignment = .center
+        self.lastUpdatedLabel.textColor = .white
+               self.lastUpdatedLabel.font = UIFont.systemFont(ofSize:  13)
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, lastUpdatedLabel])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
     
     func setChanelTitle(channle: SBDGroupChannel?) {
         
@@ -180,21 +203,26 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             
             let audioCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_top"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickAudioBarButton(_:)))
             let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "Videos2"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
+            
+            
+            //   self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
+            
+            
+            
+            self.navigationItem.titleView = titleStackView
 
-            
-            self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
-              
-            
-            
-            
             for member in channelMembers {
                 if member.userId != currentUser.userId {
-                    self.title = member.nickname
+                    //self.title = member.nickname
+                    self.titleLabel.text = member.nickname//"Online"
+
+                    self.loadUserDetailInfo(userId: member.userId)
                 }
             }
         }else {
+           
             self.title = Utils.createGroupChannelName(channel: channle!)
-        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
+            self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
             self.navigationItem.rightBarButtonItem = self.settingBarButton
         }
     }
@@ -225,7 +253,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             super.viewWillDisappear(animated)
         }
     }
-
+    
     func showToast(_ message: String) {
         self.toastView.alpha = 1
         self.toastMessageLabel.text = message
@@ -238,6 +266,40 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    //userId
+   
+    func loadUserDetailInfo(userId:String){
+        let query = SBDMain.createApplicationUserListQuery()
+              query?.userIdsFilter = [userId]
+              query?.loadNextPage(completionHandler: { (users, error) in
+                  if error != nil {
+                      Utils.showAlertController(error: error!, viewController: self)
+                      return
+                  }
+                  
+                  if (users?.count)! > 0 {
+                      self.refreshUserInfo(users![0])
+                  }
+              })
+        
+    }
+    func refreshUserInfo(_ user: SBDUser) {
+          
+         if user.connectionStatus == .online {
+           //  self.titleLabel.text = "Online"
+             self.lastUpdatedLabel.text = "Online"
+         }
+         else {
+            // self.titleLabel.text = "Offline"
+             if user.lastSeenAt > 0 {
+                 self.lastUpdatedLabel.text = String(format: "Last Updated %@", Utils.getDateStringForDateSeperatorFromTimestamp(user.lastSeenAt))
+                 self.lastUpdatedLabel.isHidden = false
+             }
+             else {
+                 self.lastUpdatedLabel.isHidden = true
+             }
+         }
+     }
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         guard let channel = self.channel, channelUrl == channel.channelUrl else { return }
@@ -249,7 +311,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowGroupChannelSettings", let destination = segue.destination as? GroupChannelSettingsViewController{
             destination.delegate = self
@@ -258,12 +320,12 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @objc func clickAudioBarButton(_ sender: AnyObject) {
-
+        
     }
     
     @objc func clickVideoBarButton(_ sender: AnyObject) {
-
-       }
+        
+    }
     
     @objc func clickSettingBarButton(_ sender: AnyObject) {
         performSegue(withIdentifier: "ShowGroupChannelSettings", sender: self)
@@ -403,14 +465,14 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         self.determineScrollLock()
         
         self.keyboardShown = true
-       
+        
         let (height, duration, _) = Utils.getKeyboardAnimationOptions(notification: notification)
         
         self.keyboardHeight = height ?? 0
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
-                self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
+               self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
             }, completion: nil)
             
@@ -428,7 +490,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
-                self.inputMessageInnerContainerViewBottomMargin.constant = 0
+              self.inputMessageInnerContainerViewBottomMargin.constant = 0
                 self.view.layoutIfNeeded()
             }, completion: nil)
             self.scrollToBottom(force: false)
@@ -626,7 +688,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                         failed = true
                     }
                 }
-            
+                
                 userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
                 
                 cell = userMessageCell
@@ -809,7 +871,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     audioFileMessageCell.showFailureElement()
                     audioFileMessageCell.showBottomMargin()
                     audioFileMessageCell.delegate = self
-
+                    
                     cell = audioFileMessageCell
                 }
             }
@@ -863,7 +925,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                                         guard let url = URL(string: thumbnails[0].url) else { return }
                                         updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, completion: { (response) in
                                             updateImageFileMessageCell.hideAllPlaceholders()
-
+                                            
                                             if response.error != nil {
                                                 updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
                                                 updateImageFileMessageCell.setImage(nil)
@@ -914,7 +976,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                         
                         videoFileMessageCell.channel = self.channel
                         videoFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
-
+                        
                         if self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] == nil || self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] != videoFileMessageCell.imageHash {
                             videoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
                             videoFileMessageCell.setImage(nil)
@@ -1003,7 +1065,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                                     guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
                                     guard let updateImageFileMessageCell = updateCell as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return }
                                     updateImageFileMessageCell.hideAllPlaceholders()
-
+                                    
                                     updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
                                     
                                     updateImageFileMessageCell.setAnimatedImage(image, hash: hash)
@@ -1128,7 +1190,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     else {
                         // Incoming general file message.
                         guard let generalFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell") as? GroupChannelIncomingGeneralFileMessageTableViewCell else { return cell }
-                       
+                        
                         generalFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
                         
                         cell = generalFileMessageCell
@@ -1148,7 +1210,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             self.loadPreviousMessages(initial: false)
         }
         cell.backgroundColor = UIColor.clear
-    
+        
         return cell
     }
     
@@ -1214,7 +1276,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 self.determineScrollLock()
                 UIView.setAnimationsEnabled(false)
                 self.messages.append(message)
-//                self.messageTableView.insertRows(at: [IndexPath(row: self.messages.count - 1, section: 0)], with: .none)
+                //                self.messageTableView.insertRows(at: [IndexPath(row: self.messages.count - 1, section: 0)], with: .none)
                 self.messageTableView.reloadData()
                 self.messageTableView.layoutIfNeeded()
                 self.scrollToBottom(force: false)
@@ -1271,7 +1333,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func channelWasDeleted(_ channelUrl: String, channelType: SBDChannelType) {
-        let alert = UIAlertController(title: "Channel has been deleted.", message: "This channel has been deleted. It will be closed.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Chat has been deleted.", message: "This chat has been deleted. It will be closed.", preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: "Close", style: .cancel) { (action) in
             self.navigationController?.popViewController(animated: true)
         }
@@ -1312,48 +1374,71 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    
     // MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! CFString
         
         picker.dismiss(animated: true, completion: { [unowned self] () in
             if CFStringCompare(mediaType, kUTTypeImage, []) == .compareEqualTo {
-                if let imagePath = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                if let imagePath = info[.imageURL] as? URL {
                     let imageName = imagePath.lastPathComponent
                     let ext = imageName.pathExtension()
                     guard let UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)?.takeRetainedValue() else { return }
                     guard let retainedValueMimeType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType)?.takeRetainedValue() else { return }
                     let mimeType = retainedValueMimeType as String
                     
-                    guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+                    
+                    
                     let options = PHImageRequestOptions()
                     options.isSynchronous = true
                     options.isNetworkAccessAllowed = true
                     options.deliveryMode = .highQualityFormat
                     
                     if mimeType == "image/gif" {
-                        PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
-                            if let originalImageData = imageData {
-                                self.sendImageFileMessage(imageData: originalImageData, imageName: imageName, mimeType: mimeType)
-                            }
-                        })
-                    }
-                    else {
-                        var count = 0
-                        let reqOptions = PHImageRequestOptions()
-                        reqOptions.isSynchronous = true
-                        reqOptions.isNetworkAccessAllowed = true
-                        reqOptions.deliveryMode = .highQualityFormat
-                        PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: reqOptions, resultHandler: { (result, info) in
-                            count += 1
+                        guard let imageAsset = info[.phAsset] as? PHAsset else { return }
+                        
+                        
+                        let options = PHImageRequestOptions()
+                        options.isSynchronous = true
+                        options.isNetworkAccessAllowed = true
+                        options.deliveryMode = .highQualityFormat
+                        
+                        
+                        
+                        
+                        PHImageManager.default().requestImage(for: imageAsset , targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options) { result, info in
+                            
                             if result != nil {
                                 guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
                                 self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
                             }
-                        })
+                        }
+                        
+                    } else {
+                        
+                        guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+                        guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                        //self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
+                        self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
+                        
+                        /* //Rajesh
+                         guard let imageAsset = info[.phAsset] as? PHAsset else { return }
+                         
+                         var count = 0
+                         let reqOptions = PHImageRequestOptions()
+                         reqOptions.isSynchronous = true
+                         reqOptions.isNetworkAccessAllowed = true
+                         reqOptions.deliveryMode = .highQualityFormat
+                         PHImageManager.default().requestImage(for: imageAsset , targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: reqOptions, resultHandler: { (result, info) in
+                         count += 1
+                         if result != nil {
+                         guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                         self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
+                         }
+                         })*/
                     }
-                }
-                else {
+                }else {
                     guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
                     guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
                     self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
@@ -1399,7 +1484,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     func didReconnect() {
         // TODO: Fix bug in SDK.
     }
-   
+    
     // MARK - GroupChannelSettingsDelegate
     func didLeaveChannel() {
         guard let navigationController = self.navigationController else { return }
@@ -1543,7 +1628,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             if let url = URL(string: message.url) {
                 let viewController = WebViewController()
                 viewController.url = url
-            
+                
                 self.navigationController?.pushViewController(viewController, animated: true)
             } else {
                 let alert = UIAlertController(title: "Error", message: "We do not support this file!", preferredStyle: .alert)
@@ -1699,7 +1784,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         alert.modalPresentationStyle = .popover
         alert.addAction(actionBlockUser)
         alert.addAction(actionCancel)
-
+        
         if let presenter = alert.popoverPresentationController {
             presenter.sourceView = self.view
             presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
@@ -1799,37 +1884,93 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     func didClickImageVideoFileMessage(_ message: SBDFileMessage) {
         if message.requestId == nil ||  self.resendableFileData[message.requestId!] == nil {
             if message.type.hasPrefix("image") {
-                self.loadingIndicatorView.isHidden = false
-                self.loadingIndicatorView.startAnimating()
-                let session = URLSession.shared
-                guard let url = URL(string: message.url) else {
-                    self.loadingIndicatorView.isHidden = true
-                    self.loadingIndicatorView.stopAnimating()
-                    return
-                }
-                let request = URLRequest(url: url)
-                let task = session.dataTask(with: request) { (data, response, error) in
-                    if let resp = response as? HTTPURLResponse, resp.statusCode >= 200 && resp.statusCode < 300 {
-                        let photo = PhotoViewer()
-                        photo.imageData = data
-                        
-                        DispatchQueue.main.async {
-                            let photosViewController = CustomPhotosViewController(photos: [photo])
+                
+                let alert = UIAlertController(title: "", message: "Please select.", preferredStyle: .actionSheet)
+                let actionOpen = UIAlertAction(title: "Open", style: .`default`) { (action) in
+                    
+                    
+                    self.loadingIndicatorView.isHidden = false
+                    self.loadingIndicatorView.startAnimating()
+                    let session = URLSession.shared
+                    guard let url = URL(string: message.url) else {
+                        self.loadingIndicatorView.isHidden = true
+                        self.loadingIndicatorView.stopAnimating()
+                        return
+                    }
+                    let request = URLRequest(url: url)
+                    let task = session.dataTask(with: request) { (data, response, error) in
+                        if let resp = response as? HTTPURLResponse, resp.statusCode >= 200 && resp.statusCode < 300 {
+                            let photo = PhotoViewer()
+                            photo.imageData = data
                             
-                            self.loadingIndicatorView.isHidden = true
-                            self.loadingIndicatorView.stopAnimating()
-                            
-                            self.present(photosViewController, animated: true, completion: nil)
+                            DispatchQueue.main.async {
+                                let photosViewController = CustomPhotosViewController(photos: [photo])
+                                
+                                self.loadingIndicatorView.isHidden = true
+                                self.loadingIndicatorView.stopAnimating()
+                                
+                                self.present(photosViewController, animated: true, completion: nil)
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
+                                self.loadingIndicatorView.isHidden = true
+                                self.loadingIndicatorView.stopAnimating()
+                            }
                         }
                     }
-                    else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
-                            self.loadingIndicatorView.isHidden = true
-                            self.loadingIndicatorView.stopAnimating()
+                    task.resume()
+                }
+                
+                let actionGallery = UIAlertAction(title: "Save to Photo gallery", style: .`default`) { (action) in
+                    
+                    
+                    self.loadingIndicatorView.isHidden = false
+                    self.loadingIndicatorView.startAnimating()
+                    let session = URLSession.shared
+                    guard let url = URL(string: message.url) else {
+                        self.loadingIndicatorView.isHidden = true
+                        self.loadingIndicatorView.stopAnimating()
+                        return
+                    }
+                    let request = URLRequest(url: url)
+                    let task = session.dataTask(with: request) { (data, response, error) in
+                        if let resp = response as? HTTPURLResponse, resp.statusCode >= 200 && resp.statusCode < 300 {
+                            
+                            
+                            DispatchQueue.main.async {
+                                
+                                guard let selectedImage = UIImage(data: data!) else {
+                                          print("Image not found!")
+                                          return
+                                      }
+                                UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                               
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
+                                self.loadingIndicatorView.isHidden = true
+                                self.loadingIndicatorView.stopAnimating()
+                            }
                         }
                     }
+                    task.resume()
                 }
-                task.resume()
+                
+                let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                    
+                    
+                }
+                alert.addAction(actionOpen)
+                alert.addAction(actionGallery)
+                alert.addAction(actionCancel)
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                
+                
             }
             else if message.type.hasPrefix("video") {
                 guard let url = URL(string: message.url) else {
@@ -1845,6 +1986,24 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 }
             }
         }
+    }
+    
+    //MARK: - Add image to Library
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        self.loadingIndicatorView.isHidden = true
+        self.loadingIndicatorView.stopAnimating()
+        if let error = error {
+            // we got back an error!
+            showAlertWith(title: "Save error", message: error.localizedDescription)
+        } else {
+            showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
+        }
+    }
+
+    func showAlertWith(title: String, message: String){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
     func didClickUserProfile(_ user: SBDUser) {

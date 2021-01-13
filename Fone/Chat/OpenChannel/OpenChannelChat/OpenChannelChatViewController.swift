@@ -15,7 +15,7 @@ import MobileCoreServices
 import AlamofireImage
 import FLAnimatedImage
 
-class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenChannelMessageTableViewCellDelegate, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate {
+class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenChannelMessageTableViewCellDelegate, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate , GroupChannelMessageTableViewCellDelegate{
     @IBOutlet weak var joinGroupView: UIView!
 
     @IBOutlet weak var inputMessageTextField: UITextField!
@@ -116,11 +116,34 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         self.messageTableView.dataSource = self
         self.messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 14, right: 0)
         
-        self.messageTableView.register(OpenChannelAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAdminMessageTableViewCell")
+       /* self.messageTableView.register(OpenChannelAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAdminMessageTableViewCell")
         self.messageTableView.register(OpenChannelUserMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelUserMessageTableViewCell")
         self.messageTableView.register(OpenChannelImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelImageVideoFileMessageTableViewCell")
         self.messageTableView.register(OpenChannelGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelGeneralFileMessageTableViewCell")
-        self.messageTableView.register(OpenChannelAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAudioFileMessageTableViewCell")
+        self.messageTableView.register(OpenChannelAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAudioFileMessageTableViewCell")*/
+        
+        //Rajesh
+        self.messageTableView.register(GroupChannelNeutralAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelNeutralAdminMessageTableViewCell")
+
+              self.messageTableView.register(GroupChannelIncomingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingUserMessageTableViewCell")
+              self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingImageFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingVideoFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
+
+              
+              self.messageTableView.register(GroupChannelOutgoingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingUserMessageTableViewCell")
+              self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelOutgoingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell")
+              self.messageTableView.register(GroupChannelOutgoingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell")
+              
+        
+       //Rajesh
+        
+        
+        
+        
         
         // Input Text Field
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -362,10 +385,10 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         self.keyboardHeight = height ?? 0
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
-                self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
+           /* UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
+               self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
-            }, completion: nil)
+            }, completion: nil)*/
             
             self.stopMeasuringVelocity = true
             self.scrollToBottom(force: false)
@@ -381,7 +404,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
 
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
-                self.inputMessageInnerContainerViewBottomMargin.constant = 0
+               self.inputMessageInnerContainerViewBottomMargin.constant = 0
                 self.view.layoutIfNeeded()
             }, completion: nil)
             self.scrollToBottom(force: false)
@@ -568,6 +591,567 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell = UITableViewCell()
+        
+        var prevMessage: SBDBaseMessage?
+        var nextMessage: SBDBaseMessage?
+        
+        prevMessage = self.messages[exists: indexPath.row - 1]
+        nextMessage = self.messages[exists: indexPath.row + 1]
+        
+        let currMessage = self.messages[indexPath.row]
+        
+        if currMessage is SBDAdminMessage {
+            // Admin Message
+            guard let adminMessage = self.messages[indexPath.row] as? SBDAdminMessage else { return cell }
+            guard let adminMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelNeutralAdminMessageTableViewCell") as? GroupChannelNeutralAdminMessageTableViewCell else { return cell }
+            
+            adminMessageCell.setMessage(currMessage: adminMessage, prevMessage: prevMessage)
+            adminMessageCell.delegate = self
+            
+            cell = adminMessageCell
+        }
+        else if currMessage is SBDUserMessage {
+            guard let userMessage = currMessage as? SBDUserMessage else { return cell }
+            guard let sender = userMessage.sender else { return cell }
+            if sender.userId == SBDMain.getCurrentUser()!.userId {
+                // Outgoing User Message
+                guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingUserMessageTableViewCell") as? GroupChannelOutgoingUserMessageTableViewCell else { return cell }
+                userMessageCell.delegate = self
+             //Rajesh   userMessageCell.channel = self.channel
+                
+                var failed: Bool = false
+                if let requestId = userMessage.requestId {
+                    if self.resendableMessages[requestId] != nil {
+                        failed = true
+                    }
+                }
+                
+                userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
+                
+                cell = userMessageCell
+            }
+            else {
+                // Incoming User Message
+                guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingUserMessageTableViewCell") as? GroupChannelIncomingUserMessageTableViewCell else { return cell }
+                userMessageCell.delegate = self
+                userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage)
+                
+                DispatchQueue.main.async {
+                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                    guard let updateUserMessageCell = updateCell as? GroupChannelIncomingUserMessageTableViewCell else { return }
+                    updateUserMessageCell.profileImageView.setProfileImageView(for: sender)
+                }
+                
+                cell = userMessageCell
+            }
+        }
+        else if currMessage is SBDFileMessage {
+            // File Message
+            guard let fileMessage = currMessage as? SBDFileMessage else { return cell }
+            guard let sender = fileMessage.sender else { return cell }
+            guard let fileMessageRequestId = fileMessage.requestId else { return cell }
+            guard let currentUser = SBDMain.getCurrentUser() else { return cell }
+            if let _ = self.preSendMessages[fileMessageRequestId] {
+                // Pre send outgoing message
+                guard let fileDataDict = self.preSendFileData[fileMessageRequestId] else { return cell }
+                if (fileDataDict["type"] as! String).hasPrefix("image") {
+                    // Outgoing image file message
+                    guard let imageFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                     //Rajesh     imageFileMessageCell.channel = self.channel
+                    imageFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                    imageFileMessageCell.hideReadStatus()
+                    imageFileMessageCell.hideFailureElement()
+                    imageFileMessageCell.showBottomMargin()
+                    imageFileMessageCell.hideAllPlaceholders()
+                    if let progress = self.fileTransferProgress[fileMessageRequestId] {
+                        imageFileMessageCell.showProgress(progress)
+                    }
+                    
+                    if (fileDataDict["type"] as! String).hasPrefix("image/gif") {
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                            guard let imageData = fileDataDict["data"] as? Data else { return }
+                            updateImageFileMessageCell.imageFileMessageImageView.image = nil
+                            updateImageFileMessageCell.imageFileMessageImageView.animatedImage = FLAnimatedImage(animatedGIFData: imageData)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                            guard let imageData = fileDataDict["data"] as? Data else { return }
+                            updateImageFileMessageCell.imageFileMessageImageView.image = nil
+                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                            updateImageFileMessageCell.imageFileMessageImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                    
+                    cell = imageFileMessageCell
+                }
+                else if (fileDataDict["type"] as! String).hasPrefix("video") {
+                    // Outgoing video file message
+                    guard let videoFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                     //Rajesh     videoFileMessageCell.channel = self.channel
+                    videoFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                    videoFileMessageCell.hideReadStatus()
+                    videoFileMessageCell.hideFailureElement()
+                    videoFileMessageCell.showBottomMargin()
+                    videoFileMessageCell.hideAllPlaceholders()
+                    videoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                    
+                    videoFileMessageCell.imageFileMessageImageView.image = nil
+                    videoFileMessageCell.imageFileMessageImageView.animatedImage = nil
+                    
+                    if let progress = self.fileTransferProgress[fileMessageRequestId] {
+                        videoFileMessageCell.showProgress(progress)
+                    }
+                    
+                    cell = videoFileMessageCell
+                }
+                else if (fileDataDict["type"] as! String).hasPrefix("audio") {
+                    // Outgoing audio file message
+                    guard let audioFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell") as? GroupChannelOutgoingAudioFileMessageTableViewCell else { return cell }
+                     //Rajesh     audioFileMessageCell.channel = self.channel
+                    audioFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                    audioFileMessageCell.hideReadStatus()
+                    audioFileMessageCell.hideFailureElement()
+                    audioFileMessageCell.showBottomMargin()
+                    audioFileMessageCell.delegate = nil
+                    
+                    DispatchQueue.main.async {
+                        guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                        guard let updateAudioFileMessageCell = updateCell as? GroupChannelOutgoingAudioFileMessageTableViewCell else { return }
+                        if let progress = self.fileTransferProgress[fileMessageRequestId] {
+                            updateAudioFileMessageCell.showProgress(progress)
+                        }
+                    }
+                    
+                    cell = audioFileMessageCell
+                }
+                else {
+                    // Outgoing general file message
+                    guard let generalFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell") as? GroupChannelOutgoingGeneralFileMessageTableViewCell else { return cell }
+                    //Rajesh      generalFileMessageCell.channel = self.channel
+                    generalFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                    generalFileMessageCell.hideReadStatus()
+                    generalFileMessageCell.hideFailureElement()
+                    generalFileMessageCell.showBottomMargin()
+                    generalFileMessageCell.delegate = nil
+                    
+                    DispatchQueue.main.async {
+                        guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                        guard let updateAudioFileMessageCell = updateCell as? GroupChannelOutgoingGeneralFileMessageTableViewCell else { return }
+                        if let progress = self.fileTransferProgress[fileMessageRequestId] {
+                            updateAudioFileMessageCell.showProgress(progress)
+                        }
+                    }
+                    
+                    cell = generalFileMessageCell
+                }
+            }
+            else if let _ = self.resendableFileData[fileMessageRequestId] {
+                guard let fileDataDict = self.preSendFileData[fileMessageRequestId] else { return cell }
+                if (fileDataDict["type"] as! String).hasPrefix("image") {
+                    // Failed outgoing image file message
+                    guard let imageFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                    imageFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: true)
+                    imageFileMessageCell.hideReadStatus()
+                    imageFileMessageCell.hideProgress()
+                    imageFileMessageCell.showFailureElement()
+                    imageFileMessageCell.showBottomMargin()
+                    imageFileMessageCell.hideAllPlaceholders()
+                    imageFileMessageCell.delegate = self
+                    
+                    if (fileDataDict["type"] as! String).hasPrefix("image/gif") {
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                            guard let imageData = fileDataDict["data"] as? Data else { return }
+                            updateImageFileMessageCell.imageFileMessageImageView.image = nil
+                            updateImageFileMessageCell.setAnimatedImage(FLAnimatedImage(animatedGIFData: imageData), hash: (imageData as NSData).hashValue)
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                            guard let imageData = fileDataDict["data"] as? Data else { return }
+                            updateImageFileMessageCell.imageFileMessageImageView.image = nil
+                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                            updateImageFileMessageCell.imageFileMessageImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                    
+                    cell = imageFileMessageCell
+                }
+                else if (fileDataDict["type"] as! String).hasPrefix("video") {
+                    // Failed outgoing image file message
+                    guard let videoFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                    videoFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: true)
+                    videoFileMessageCell.hideReadStatus()
+                    videoFileMessageCell.hideProgress()
+                    videoFileMessageCell.showFailureElement()
+                    videoFileMessageCell.showBottomMargin()
+                    videoFileMessageCell.hideAllPlaceholders()
+                    videoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                    videoFileMessageCell.delegate = self
+                    
+                    cell = videoFileMessageCell
+                }
+                else {
+                    // Failed outgoing audio file message
+                    guard let audioFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell") as? GroupChannelOutgoingAudioFileMessageTableViewCell else { return cell }
+                    audioFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: true)
+                    audioFileMessageCell.hideReadStatus()
+                    audioFileMessageCell.hideProgress()
+                    audioFileMessageCell.showFailureElement()
+                    audioFileMessageCell.showBottomMargin()
+                    audioFileMessageCell.delegate = self
+                    
+                    cell = audioFileMessageCell
+                }
+            }
+            else {
+                if sender.userId == currentUser.userId {
+                    // Outgoing file message
+                    if fileMessage.type.hasPrefix("image") {
+                        guard let imageFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                        imageFileMessageCell.delegate = self
+                         //Rajesh     imageFileMessageCell.channel = self.channel
+                        imageFileMessageCell.hideFailureElement()
+                        imageFileMessageCell.hideAllPlaceholders()
+                        imageFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                        
+                        if self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] == nil || self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] != imageFileMessageCell.hash {
+                            imageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                            imageFileMessageCell.setImage(nil)
+                            imageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                        }
+                        
+                        cell = imageFileMessageCell
+                        
+                        if fileMessage.type.hasPrefix("image/gif") {
+                            guard let url = URL(string: fileMessage.url) else { return cell }
+                            imageFileMessageCell.imageFileMessageImageView.setAnimatedImage(url: url, success: { (image, hash) in
+                                DispatchQueue.main.async {
+                                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                    guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                                    updateImageFileMessageCell.hideAllPlaceholders()
+                                    updateImageFileMessageCell.setAnimatedImage(image, hash: hash)
+                                    self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = hash
+                                }
+                            }) { (error) in
+                                DispatchQueue.main.async {
+                                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                    guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                                    updateImageFileMessageCell.hideAllPlaceholders()
+                                    updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                    updateImageFileMessageCell.setImage(nil)
+                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                }
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                guard let updateImageFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                                if fileMessage.thumbnails != nil && fileMessage.thumbnails!.count > 0 {
+                                    if let thumbnails = fileMessage.thumbnails {
+                                        guard let url = URL(string: thumbnails[0].url) else { return }
+                                        updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, completion: { (response) in
+                                            updateImageFileMessageCell.hideAllPlaceholders()
+                                            
+                                            if response.error != nil {
+                                                updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                                updateImageFileMessageCell.setImage(nil)
+                                                updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                                self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                                
+                                                return
+                                            }
+                                            
+                                            guard let data = response.data, let image = UIImage(data: data) else { return }
+                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                        })
+                                    }
+                                }
+                                else {
+                                    guard let url = URL(string: fileMessage.url) else { return }
+                                    updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                        updateImageFileMessageCell.hideAllPlaceholders()
+                                        
+                                        if response.error != nil {
+                                            updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                            updateImageFileMessageCell.setImage(nil)
+                                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                            self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                            
+                                            return
+                                        }
+                                        
+                                        guard let data = response.data, let image = UIImage(data: data) else { return }
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                    })
+                                }
+                            }
+                        }
+                    }
+                    else if fileMessage.type.hasPrefix("video") {
+                        guard let videoFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell") as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return cell }
+                        
+                        videoFileMessageCell.delegate = self
+                        
+                        if videoFileMessageCell.imageHash == 0 || videoFileMessageCell.imageFileMessageImageView.image == nil {
+                            videoFileMessageCell.setAnimatedImage(nil, hash: 0)
+                            videoFileMessageCell.setImage(nil)
+                        }
+                        
+                        videoFileMessageCell.hideAllPlaceholders()
+                        videoFileMessageCell.videoPlayIconImageView.isHidden = false
+                        
+                      //Rajesh        videoFileMessageCell.channel = self.channel
+                        videoFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                        
+                        if self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] == nil || self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] != videoFileMessageCell.imageHash {
+                            videoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                            videoFileMessageCell.setImage(nil)
+                            videoFileMessageCell.setAnimatedImage(nil, hash: 0)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateVideoFileMessageCell = updateCell as? GroupChannelOutgoingImageVideoFileMessageTableViewCell else { return }
+                            if fileMessage.thumbnails != nil && fileMessage.thumbnails!.count > 0 {
+                                if let thumbnails = fileMessage.thumbnails {
+                                    guard let url = URL(string: thumbnails[0].url) else { return }
+                                    updateVideoFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                        if response.error != nil {
+                                            updateVideoFileMessageCell.videoPlayIconImageView.isHidden = true
+                                            updateVideoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                                            updateVideoFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                            updateVideoFileMessageCell.setImage(nil)
+                                            self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                            
+                                            return
+                                        }
+                                        
+                                        updateVideoFileMessageCell.hideAllPlaceholders()
+                                        updateVideoFileMessageCell.videoPlayIconImageView.isHidden = false
+                                        guard let data = response.data else { return }
+                                        guard let image = UIImage(data: data) else { return }
+                                        updateVideoFileMessageCell.setImage(image)
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                    })
+                                }
+                            }
+                            else {
+                                // Without thumbnails.
+                                updateVideoFileMessageCell.hideAllPlaceholders()
+                                updateVideoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                                updateVideoFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                updateVideoFileMessageCell.setImage(nil)
+                                self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                            }
+                        }
+                        
+                        cell = videoFileMessageCell
+                    }
+                    else if fileMessage.type.hasPrefix("audio") {
+                        // Outgoing audio file message
+                        guard let audioFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell") as? GroupChannelOutgoingAudioFileMessageTableViewCell else { return cell }
+                        audioFileMessageCell.delegate = self
+                       //Rajesh       audioFileMessageCell.channel = self.channel
+                        audioFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                        audioFileMessageCell.showProgress(1.0)
+                        
+                        cell = audioFileMessageCell
+                    }
+                    else {
+                        // Outgoing general file message
+                        guard let generalFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell") as? GroupChannelOutgoingGeneralFileMessageTableViewCell else { return cell }
+                        generalFileMessageCell.delegate = self
+                        //Rajesh      generalFileMessageCell.channel = self.channel
+                        generalFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: false)
+                        generalFileMessageCell.showProgress(1.0)
+                        
+                        cell = generalFileMessageCell
+                    }
+                }
+                else {
+                    
+                    if fileMessage.type.hasPrefix("image") {
+                        // Incoming image file message
+                        guard let imageFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingImageFileMessageTableViewCell") as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return cell }
+                        imageFileMessageCell.setMessage(currMessage: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage)
+                        imageFileMessageCell.delegate = self
+                        imageFileMessageCell.hideAllPlaceholders()
+                        
+                        if self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] == nil || self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] != imageFileMessageCell.imageHash {
+                            imageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                            imageFileMessageCell.setImage(nil)
+                            imageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                        }
+                        
+                        cell = imageFileMessageCell
+                        if fileMessage.type == "image/gif" {
+                            guard let url = URL(string: fileMessage.url) else { return cell }
+                            imageFileMessageCell.imageFileMessageImageView.setAnimatedImage(url: url, success: { (image, hash) in
+                                DispatchQueue.main.async {
+                                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                    guard let updateImageFileMessageCell = updateCell as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return }
+                                    updateImageFileMessageCell.hideAllPlaceholders()
+                                    
+                                    updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                                    
+                                    updateImageFileMessageCell.setAnimatedImage(image, hash: hash)
+                                    self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = hash
+                                }
+                            }) { (error) in
+                                DispatchQueue.main.async {
+                                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                    guard let updateImageFileMessageCell = updateCell as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return }
+                                    updateImageFileMessageCell.hideAllPlaceholders()
+                                    updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                    updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                                    updateImageFileMessageCell.setImage(nil)
+                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                }
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                                guard let updateImageFileMessageCell = updateCell as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return }
+                                updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                                if fileMessage.thumbnails != nil && fileMessage.thumbnails!.count > 0 {
+                                    if let thumbnails = fileMessage.thumbnails {
+                                        guard let url = URL(string: thumbnails[0].url) else { return }
+                                        updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                            updateImageFileMessageCell.hideAllPlaceholders()
+                                            updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                                            
+                                            if response.error != nil {
+                                                updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                                updateImageFileMessageCell.setImage(nil)
+                                                updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                                self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                                
+                                                return
+                                            }
+                                            
+                                            guard let data = response.data else { return }
+                                            guard let image = UIImage(data: data) else { return }
+                                            updateImageFileMessageCell.setImage(image)
+                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                        })
+                                    }
+                                }
+                                else {
+                                    // Without thunbnail.
+                                    updateImageFileMessageCell.hideAllPlaceholders()
+                                    updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                    updateImageFileMessageCell.setImage(nil)
+                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                }
+                            }
+                        }
+                    }
+                    else if fileMessage.type.hasPrefix("video") {
+                        // Incoming video file message
+                        guard let videoFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingVideoFileMessageTableViewCell") as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return cell }
+                        
+                        videoFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
+                        
+                        videoFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                        videoFileMessageCell.hideAllPlaceholders()
+                        
+                        if self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] == nil || self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] != videoFileMessageCell.imageHash {
+                            videoFileMessageCell.setImage(nil)
+                            videoFileMessageCell.setAnimatedImage(nil, hash: 0)
+                        }
+                        
+                        cell = videoFileMessageCell
+                        DispatchQueue.main.async {
+                            guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                            guard let updateImageFileMessageCell = updateCell as? GroupChannelIncomingImageVideoFileMessageTableViewCell else { return }
+                            
+                            updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                            if fileMessage.thumbnails != nil && fileMessage.thumbnails!.count > 0 {
+                                if let thumbnails = fileMessage.thumbnails {
+                                    guard let url = URL(string: thumbnails[0].url) else { return }
+                                    updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                        updateImageFileMessageCell.hideAllPlaceholders()
+                                        updateImageFileMessageCell.videoPlayIconImageView.isHidden = true
+                                        updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                                        updateImageFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                                        
+                                        if response.error != nil {
+                                            updateImageFileMessageCell.setImage(nil)
+                                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                            self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                            
+                                            return
+                                        }
+                                        
+                                        guard let data = response.data else { return }
+                                        guard let image = UIImage(data: data) else { return }
+                                        updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = true
+                                        updateImageFileMessageCell.videoPlayIconImageView.isHidden = false
+                                        updateImageFileMessageCell.setImage(image)
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                    })
+                                }
+                            }
+                            else {
+                                // Without thunbnail.
+                                updateImageFileMessageCell.hideAllPlaceholders()
+                                updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+                                updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                updateImageFileMessageCell.setImage(nil)
+                                self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                            }
+                        }
+                    }
+                    else if fileMessage.type.hasPrefix("audio") {
+                        // Incoming audio file message.
+                        guard let audioFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell") as? GroupChannelIncomingAudioFileMessageTableViewCell else { return cell }
+                        
+                        audioFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
+                        
+                        cell = audioFileMessageCell
+                    }
+                    else {
+                        // Incoming general file message.
+                        guard let generalFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell") as? GroupChannelIncomingGeneralFileMessageTableViewCell else { return cell }
+                        
+                        generalFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
+                        
+                        cell = generalFileMessageCell
+                    }
+                    DispatchQueue.main.async {
+                        guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                        guard let updateGeneralFileMessageCell = updateCell as? GroupChannelIncomingMessageTableViewCell else { return }
+                        
+                        updateGeneralFileMessageCell.profileImageView.setProfileImageView(for: sender)
+                        
+                    }
+                }
+            }
+        }
+        
+        if indexPath.row == 0 && self.messages.count > 0 && self.initialLoading == false && self.isLoading == false {
+            self.loadPreviousMessages(initial: false)
+        }
+        cell.backgroundColor = UIColor.clear
+        
+        return cell
+    }
+   /* {
         var cell: UITableViewCell = UITableViewCell()
         
         if self.messages[indexPath.row] is SBDAdminMessage {
@@ -909,7 +1493,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         cell.backgroundColor = UIColor.clear
 
         return cell
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages.count
@@ -1304,20 +1888,28 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     func didClickImageVideoFileMessage(_ message: SBDFileMessage) {
         if message.type.hasPrefix("image") {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-            let session = URLSession.shared
-            let request = URLRequest(url: URL(string: message.url)!)
             
-            let task = session.dataTask(with: request) { (data, response, error) in
-                if let resp = response as? HTTPURLResponse {
-                    if resp.statusCode >= 200 && resp.statusCode < 300 {
+            let alert = UIAlertController(title: "", message: "Please select.", preferredStyle: .actionSheet)
+            let actionOpen = UIAlertAction(title: "Open", style: .`default`) { (action) in
+                
+                
+                self.loadingIndicatorView.isHidden = false
+                self.loadingIndicatorView.startAnimating()
+                let session = URLSession.shared
+                guard let url = URL(string: message.url) else {
+                    self.loadingIndicatorView.isHidden = true
+                    self.loadingIndicatorView.stopAnimating()
+                    return
+                }
+                let request = URLRequest(url: url)
+                let task = session.dataTask(with: request) { (data, response, error) in
+                    if let resp = response as? HTTPURLResponse, resp.statusCode >= 200 && resp.statusCode < 300 {
                         let photo = PhotoViewer()
                         photo.imageData = data
                         
                         DispatchQueue.main.async {
                             let photosViewController = CustomPhotosViewController(photos: [photo])
-
+                            
                             self.loadingIndicatorView.isHidden = true
                             self.loadingIndicatorView.stopAnimating()
                             
@@ -1325,12 +1917,64 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         }
                     }
                     else {
-                        self.loadingIndicatorView.isHidden = true
-                        self.loadingIndicatorView.stopAnimating()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
+                            self.loadingIndicatorView.isHidden = true
+                            self.loadingIndicatorView.stopAnimating()
+                        }
                     }
                 }
+                task.resume()
             }
-            task.resume()
+            
+            let actionGallery = UIAlertAction(title: "Save to Photo gallery", style: .`default`) { (action) in
+                
+                
+                self.loadingIndicatorView.isHidden = false
+                self.loadingIndicatorView.startAnimating()
+                let session = URLSession.shared
+                guard let url = URL(string: message.url) else {
+                    self.loadingIndicatorView.isHidden = true
+                    self.loadingIndicatorView.stopAnimating()
+                    return
+                }
+                let request = URLRequest(url: url)
+                let task = session.dataTask(with: request) { (data, response, error) in
+                    if let resp = response as? HTTPURLResponse, resp.statusCode >= 200 && resp.statusCode < 300 {
+                        
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let selectedImage = UIImage(data: data!) else {
+                                      print("Image not found!")
+                                      return
+                                  }
+                            UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
+                            self.loadingIndicatorView.isHidden = true
+                            self.loadingIndicatorView.stopAnimating()
+                        }
+                    }
+                }
+                task.resume()
+            }
+            
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                
+                
+            }
+            alert.addAction(actionOpen)
+            alert.addAction(actionGallery)
+            alert.addAction(actionCancel)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            
+            
         }
         else if message.type.hasPrefix("video") {
             if let videoUrl = URL(string: message.url) {
@@ -1340,6 +1984,24 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             return
         }
     }
+    
+    //MARK: - Add image to Library
+      @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        self.loadingIndicatorView.isHidden = true
+        self.loadingIndicatorView.stopAnimating()
+          if let error = error {
+              // we got back an error!
+              showAlertWith(title: "Save error", message: error.localizedDescription)
+          } else {
+              showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
+          }
+      }
+
+      func showAlertWith(title: String, message: String){
+          let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          ac.addAction(UIAlertAction(title: "OK", style: .default))
+          present(ac, animated: true)
+      }
     
     func didClickGeneralFileMessage(_ message: SBDFileMessage) {
         if message.type.hasPrefix("audio") {
@@ -1480,26 +2142,41 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     guard let retainedValueMimeType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType)?.takeRetainedValue() else { return }
                     let mimeType = retainedValueMimeType as String
                     
-                    guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
                     let options = PHImageRequestOptions()
                     options.isSynchronous = true
                     options.isNetworkAccessAllowed = true
                     options.deliveryMode = .highQualityFormat
                     
                     if mimeType == "image/gif" {
-                        PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
-                            if let originalImageData = imageData {
-                                self.sendImageFileMessage(imageData: originalImageData, imageName: imageName, mimeType: mimeType)
-                            }
-                        })
-                    }
-                    else {
+                        guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+
+//                        PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
+//                            if let originalImageData = imageData {
+//                                self.sendImageFileMessage(imageData: originalImageData, imageName: imageName, mimeType: mimeType)
+//                            }
+//                        })
+                        
+                        PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: nil, resultHandler: { (result, info) in
+                                                   if result != nil {
+                                                       guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                                                       self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
+                                                   }
+                                               })
+                        
+                        
+                    }  else {
+                        guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+                                           guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                                           self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
+                        
+                      /*  guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+
                         PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: nil, resultHandler: { (result, info) in
                             if result != nil {
                                 guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
                                 self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
                             }
-                        })
+                        })*/
                     }
                 }
                 else {

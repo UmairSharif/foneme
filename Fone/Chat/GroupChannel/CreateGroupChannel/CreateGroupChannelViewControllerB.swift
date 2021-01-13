@@ -26,13 +26,15 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
     var createButtonItem: UIBarButtonItem?
     var isLinkViewOpen = false
     var createdChannel:SBDGroupChannel?
+    var publicGroupLink = ""
     
     @IBOutlet weak var publicImage: UIImageView?
     @IBOutlet weak var privateImage: UIImageView?
     @IBOutlet weak var inviteURLField: UITextField?
     @IBOutlet weak var privateGroupLbl: UILabel?
     @IBOutlet weak var decriptionTextView: UITextView?
-    
+    @IBOutlet weak var publickLinkStatusLbl: UILabel?
+
     @IBOutlet weak var topView: UIView?
     @IBOutlet weak var topViewCover: UIButton?
     
@@ -44,8 +46,8 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Create Group"
+        publickLinkStatusLbl?.isHidden = true;
+        self.title = "Create Private Chats"
         self.navigationItem.largeTitleDisplayMode = .never
         
         self.createButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(CreateGroupChannelViewControllerB.clickCreateGroupChannel(_ :)))
@@ -82,8 +84,9 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         bottomViewHeight.constant = 130
     }
     
-    @IBAction func publicChannelBtnClicked(_ sender: AnyObject) {
-        if channelNameTextField.text?.isEmpty ?? true {
+    @IBAction func publicChannelBtnClicked() {
+        if inviteURLField?.text?.isEmpty ?? true {
+            Utils.showAlertController(title: "", message: "Please enter public link name.", viewController: self)
             return;
         }
         if let channel = self.createdChannel{
@@ -221,6 +224,10 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         
         
         if  self.isLinkViewOpen {
+            if self.isPublicGroup && self.publicGroupLink.isEmpty {
+                self.publicChannelBtnClicked();
+                 return;
+            }
             
             self.saveGroupInfo();
             self.navigationController?.dismiss(animated: true, completion: nil)
@@ -288,7 +295,7 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
             }
             buo.publiclyIndex = true
             buo.locallyIndex = true
-            linkProperties.alias = channelNameTextField.text;
+            linkProperties.alias = inviteURLField?.text;
         } else {
             buo.publiclyIndex = false
             buo.locallyIndex = false
@@ -301,17 +308,21 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         
         buo.getShortUrl(with: linkProperties) { (url, error) in
             if (error == nil) {
-                print("Got my Branch link to share: (url)")
+                print("Got my Branch link to share: \(url)")
+                DispatchQueue.main.async {
+
                 if self.isPublicGroup {
                     // self.channelNameTextField.text
+                    self.publicGroupLink = url ?? "";
+                    self.publickLinkStatusLbl?.isHidden = false;
+
                 } else {
-                    DispatchQueue.main.async {
                         self.privateGroupLbl?.text = url;
-                        
                     }
                 }
                 
             } else {
+                Utils.showAlertController(title: "Error", message: "\(String(describing: error?.localizedDescription))", viewController: self)
                 print(String(format: "Branch error : %@", error! as CVarArg))
             }
             

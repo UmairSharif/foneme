@@ -59,15 +59,19 @@ class GroupChannelOutgoingMessageTableViewCell: GroupChannelMessageTableViewCell
         guard let sender = self.msg?.getSender() else { return }
         
         if let nextMessage = nextMessage {
-
-            if nextMessageSender?.userId == sender.userId {
-                let nextReadCount = self.channel?.getReadMembers(with: nextMessage, includeAllMembers: false).count
-                let currReadCount = self.channel?.getReadMembers(with: self.msg!, includeAllMembers: false).count
-                
-                if nextReadCount == currReadCount {
-                    hideReadCount = true
-                }
+            if let _ = self.channel {
+                if nextMessageSender?.userId == sender.userId {
+                               let nextReadCount = self.channel?.getReadMembers(with: nextMessage, includeAllMembers: false).count
+                               let currReadCount = self.channel?.getReadMembers(with: self.msg!, includeAllMembers: false).count
+                               
+                               if nextReadCount == currReadCount {
+                                   hideReadCount = true
+                               }
+                           }
+            } else {
+                //hideReadCount = true
             }
+           
         }
         
         if let prevCreatedAt = prevMessage?.createdAt, let msgCreatedAt = self.msg?.createdAt, Utils.checkDayChangeDayBetweenOldTimestamp(oldTimestamp: prevCreatedAt, newTimestamp: msgCreatedAt) {
@@ -137,7 +141,11 @@ class GroupChannelOutgoingMessageTableViewCell: GroupChannelMessageTableViewCell
             } else {
                 self.messageDateLabel.text = Utils.getMessageDateStringFromTimestamp((self.msg?.createdAt)!)
                 self.readStatusContainerView.isHidden = false
-                self.showReadStatus(readCount: (self.channel?.getReadMembers(with: self.msg!, includeAllMembers: false).count)!)
+                if let _ = self.channel {
+                    self.showReadStatus(readCount: (self.channel?.getReadMembers(with: self.msg!, includeAllMembers: false).count)!)
+                } else {
+                     self.readStatusLabel.text = ""
+                }
                 self.resendButtonContainerView.isHidden = true
                 self.resendButton.isEnabled = false
                 self.sendingFailureContainerViewConstraint.isActive = false

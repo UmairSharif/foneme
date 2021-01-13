@@ -95,18 +95,18 @@ class FriendTabVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-      
-       
-if PlatformUtils.isSimulator {
-}else {
-    self.getSubscriptionsForCustomer()
-
-}
-
+        
+        
+        if PlatformUtils.isSimulator {
+        }else {
+            self.getSubscriptionsForCustomer()
+            
+        }
+        
         isFiltering = false
         searchBar.text = ""
         loadDataFromCache()
-
+        
     }
     
     func loadDataFromCache() {
@@ -118,16 +118,12 @@ if PlatformUtils.isSimulator {
         }
         self.friendList.removeAll()
         
-        if contacts.count == 0
-        {
+        if contacts.count == 0 {
             self.inviteView.isHidden = false
-        }
-        else
-        {
+        } else {
             self.inviteView.isHidden = true
         }
-        for items in contacts
-        {
+        for items in contacts {
             let dict = items.dictionary
             
             let number = dict?["ContactsNumber"]?.string ?? ""
@@ -139,6 +135,7 @@ if PlatformUtils.isSimulator {
             
             
         }
+        print("self.friendList = \(self.friendList.count)");
         contactTVC.reloadData()
     }
     
@@ -188,13 +185,16 @@ if PlatformUtils.isSimulator {
         //
         //         contactList.append(parameter)
         
-        
-        let parameters = [
-            
+        var parameters = [
             "UserId" : userId ?? "",
             "Contacts": contactList
             
             ] as [String:Any]
+        if showLoader {
+            parameters = [ "UserId" : userId ?? ""] as [String:Any]
+        }
+        
+        
         // print(parameters)
         var headers = [String:String]()
         headers = ["Content-Type": "application/json",
@@ -228,14 +228,14 @@ if PlatformUtils.isSimulator {
                     if contacts.count > 0 {
                         var midConatct = [SwiftyJSON.JSON]()
                         
-                        for items in contacts ?? [] {
+                        for var items in contacts {
                             let dict = items.dictionary
-                            let number = dict?["ContactsNumber"]?.string ?? ""
-                            
+                            var number = dict?["ContactsNumber"]?.string ?? ""
+                            number = number.replacingOccurrences(of: " ", with: "")
                             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
-                            
+                            //let json = JSON(number)                            
+                            items["ContactsNumber"] = JSON(number) ;
                             if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
-                                
                                 midConatct.append(items)
                             }
                         }
@@ -261,7 +261,7 @@ if PlatformUtils.isSimulator {
                             self.inviteView.isHidden = false
                             return
                     }
-                    guard let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) else {
+                    guard let _ = try? PropertyListDecoder().decode([JSON].self, from: contactData) else {
                         self.inviteView.isHidden = false
                         return
                     }
@@ -368,7 +368,7 @@ if PlatformUtils.isSimulator {
         if mobilenumber == "+18888888888" {
             return;
         }
-       // mobilenumber = "9199876543"
+        // mobilenumber = "9199876543"
         let header  = ["Content-Type": "application/json"]
         // APIManager.sharedManager.request(getBrainTreePlans, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default,
         let apiURL = "\(getSubscriptions_Customer)\(mobilenumber)"
@@ -386,7 +386,7 @@ if PlatformUtils.isSimulator {
                 let dateObj = Utility.sharedInstance.getDateFromString(dateExpiry, "yyyy-MM-dd HH:mm:ss") ?? Date()
                 let diffreance = Utility.sharedInstance.diffranceBetweenDays(formatedStartDate: dateObj)
                 print("diffreance = \(diffreance)")
-
+                
                 let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String  ?? ""
                 let subscriptionId = subscritpionobject?[SubscriptionId] as? String  ?? ""
                 let subscriptionPlan = subscritpionobject?[SubscriptionPlan] as? String
@@ -396,18 +396,18 @@ if PlatformUtils.isSimulator {
                 UserDefaults.standard.set("\(diffreance)", forKey: SubscriptionDays)
                 
                 if (subscriptionStatus.lowercased() != "active") && (diffreance < 0) {
-                self.openPlanListView()
+                    self.openPlanListView()
                 }
-
+                
             }else {
                 UserDefaults.standard.set("", forKey: SubscriptionStatus)
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
                 UserDefaults.standard.set("0", forKey: SubscriptionDays)
-
+                
                 self.openPlanListView()
             }
-           // self.openPlanListView()
-
+            // self.openPlanListView()
+            
         }
         
     }
@@ -417,7 +417,7 @@ if PlatformUtils.isSimulator {
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
-
+        
         //topViewController
         
     }

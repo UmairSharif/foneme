@@ -27,7 +27,7 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
 
         // Do any additional setup after loading the view.
         
-        self.title = "Create Open Channel"
+        self.title = "Create Public Chats"
         self.navigationItem.largeTitleDisplayMode = .never
         
         self.cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CreateOpenChannelViewControllerA.clickCancelButton(_:)))
@@ -43,7 +43,7 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
             self.nextButton?.isEnabled = false
         }
         
-        self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Channel Name", attributes: [
+        self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Public Chat Name", attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .regular),
             NSAttributedString.Key.foregroundColor: UIColor(named: "color_channelname_nickname_placeholder") as Any
             ])
@@ -54,7 +54,7 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
         self.coverImageView.addGestureRecognizer(clickCoverImageRecognizer)
         
         // Set the default cover image randomly.
-        let r = arc4random() % 5
+       /* let r = arc4random() % 5
         switch r {
         case 0:
             self.coverImageView.image = UIImage(named: "img_default_cover_image_1")
@@ -74,7 +74,10 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
         default:
             self.coverImageView.image = UIImage(named: "img_default_cover_image_1")
             break
-        }
+        }*/
+      
+        self.coverImageView.image = UIImage(named: "ic_profile")
+
     }
     
     @objc func clickCancelButton(_ sender: AnyObject) {

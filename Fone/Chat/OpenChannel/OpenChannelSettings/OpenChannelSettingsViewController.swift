@@ -33,7 +33,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.title = "Open Channel Settings"
+        self.title = "Public Chat Settings"
         self.navigationItem.largeTitleDisplayMode = .automatic
 
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
@@ -242,7 +242,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 if let participantCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                     participantCell.settingMenuLabel.text = "Participants"
                     participantCell.settingMenuIconImageView.image = UIImage(named: "img_icon_participant")
-                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : channel.participantCount))
+                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + 1)))
                     
                     cell = participantCell
                 }
@@ -350,8 +350,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (section == 0) ? 0.1 : 18.0
+
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {     
-        return (indexPath.section == 0) ? 121 : 48
+        return (indexPath.section == 0) ? 251 : 48
     }
     
     // MARK: - UITableViewDataSource
@@ -445,13 +449,24 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 options.isNetworkAccessAllowed = true
                 options.deliveryMode = .highQualityFormat
                 
-                PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
-                    guard let data = imageData else { return }
-                    guard let image = UIImage(data: data) else { return }
-                    guard let originalImage = image.jpegData(compressionQuality: 1.0) else { return }
-                    
-                    self.cropImage(originalImage)
-                })
+                
+                
+                PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: nil, resultHandler: { (result, info) in
+                                         if result != nil {
+                                             guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                                             self.cropImage(imageData)
+                                         }
+                                     })
+                
+                
+                
+//                PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
+//                    guard let data = imageData else { return }
+//                    guard let image = UIImage(data: data) else { return }
+//                    guard let originalImage = image.jpegData(compressionQuality: 1.0) else { return }
+//                    
+//                    self.cropImage(originalImage)
+//                })
             }
         })
     }

@@ -15,9 +15,6 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var emptyLabel: UILabel!
     
-    
-
-    
     var channels: [SBDOpenChannel] = []
     var refreshControl: UIRefreshControl?
     var searchController: UISearchController?
@@ -27,16 +24,14 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
         // Do any additional setup after loading the view.
-        self.title = "Open Channels"
-        self.navigationController?.title = "Open"
+        self.title = ""
+        self.navigationController?.title = ""
         self.navigationItem.largeTitleDisplayMode = .automatic
         
         self.createChannelBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_create_public_group_channel_blue"), style: .plain, target: self, action: #selector(OpenChannelsViewController.clickCreateOpenChannel(_:)))
-        self.navigationItem.rightBarButtonItem = self.createChannelBarButton
+     //   self.navigationItem.rightBarButtonItem = self.createChannelBarButton
         
         self.openChannelsTableView.delegate = self
         self.openChannelsTableView.dataSource = self
@@ -48,31 +43,59 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController?.searchBar.delegate = self
-        self.searchController?.searchBar.placeholder = "Channel Name"
+        if #available(iOS 13.0, *) {
+            self.searchController?.searchBar.searchTextField.textColor = UIColor.white
+        } else {
+            // Fallback on earlier versions
+        }
+       // self.searchController?.searchBar.tintColor = .white
+        self.searchController?.searchBar.placeholder = "Public Chat Name"
         self.searchController?.obscuresBackgroundDuringPresentation = false
+        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
+        self.searchController?.searchBar.showsCancelButton = true
         self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
         
+        self.searchController?.hidesNavigationBarDuringPresentation = false
+        self.searchController?.isActive = true
         self.loadingIndicatorView.isHidden = true
         self.view.bringSubviewToFront(self.loadingIndicatorView)
         
         self.loadChannelListNextPage(refresh: true, channelNameFilter: self.channelNameFilter)
-
+        
+        self.searchController?.searchBar.set(textColor: .black)
+        self.searchController?.searchBar.setTextField(color: .white)
+       // self.searchController?.searchBar.setPlaceholder(textColor: .black)
+//        self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
+//        self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
+        
+        
     }
     
-
+    func setUp(navCont:UINavigationController){
+        
+        navCont.navigationBar.tintColor = UIColor.white;
+              navCont.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
+               navCont.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
+                                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
+               navCont.navigationBar.isTranslucent = false
+               navCont.navigationBar.prefersLargeTitles = false
+         
+    }
     
-
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowOpenChat", let navigation = segue.destination as? UINavigationController, let destination = navigation.children.first as? OpenChannelChatViewController, let selectedChannel = sender as? SBDOpenChannel{
             destination.channel = selectedChannel
             destination.hidesBottomBarWhenPushed = true
             destination.delegate = self
+            self.setUp(navCont: navigation)
         } else if segue.identifier == "CreateOpenChannel", let destination = segue.destination as? CreateOpenChannelNavigationController{
             destination.createChannelDelegate = self
         }
     }
-
+    
     @objc func clickCreateOpenChannel(_ sender: AnyObject) {
         performSegue(withIdentifier: "CreateOpenChannel", sender: nil)
     }
@@ -90,16 +113,13 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelTableViewCell") as! OpenChannelTableViewCell
         cell.coverImage.image = nil
-        
         let channel = self.channels[indexPath.row]
-        
         cell.channelNameLabel.text = channel.name
         
         if channel.participantCount > 1 {
-            cell.participantCountLabel.text = String(format: "%ld participants", channel.participantCount)
-        }
-        else {
-            cell.participantCountLabel.text = String(format: "%ld participant", channel.participantCount)
+            cell.participantCountLabel.text = String(format: "%ld participants", (channel.participantCount + 1))
+        } else {
+            cell.participantCountLabel.text = String(format: "%ld participant", ((channel.participantCount == 0) ? 1 : (channel.participantCount + 1) ) )
         }
         
         var asOperator: Bool = false
@@ -151,7 +171,7 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.channels.count == 0 {
             if self.channelNameFilter == nil {
-                self.emptyLabel.text = "There are no open channels"
+                self.emptyLabel.text = "There are no public chat"
             }
             else {
                 self.emptyLabel.text = "Search results not found"

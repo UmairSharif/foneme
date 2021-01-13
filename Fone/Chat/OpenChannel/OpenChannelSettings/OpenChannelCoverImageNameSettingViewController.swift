@@ -42,7 +42,7 @@ class OpenChannelCoverImageNameSettingViewController: UIViewController, UIImageP
         
         guard let channel = self.channel else { return }
         self.channelNameTextField.text = channel.name
-        self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Channel Name", attributes: [
+        self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Public Chat Name", attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .regular),
             NSAttributedString.Key.foregroundColor: UIColor(named: "color_channelname_nickname_placeholder") as Any
             ])
