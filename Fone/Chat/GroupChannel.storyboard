@@ -43,7 +43,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7E4-Ck-oqM" userLabel="Member Count Container View">
-                                                    <rect key="frame" x="204" y="14" width="18" height="17"/>
+                                                    <rect key="frame" x="237" y="14" width="18" height="17"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEz-ML-kRN" userLabel="Member Count Label">
                                                             <rect key="frame" x="5" y="1.5" width="8" height="14"/>
@@ -91,7 +91,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="img_icon_nofi_off" translatesAutoresizingMaskIntoConstraints="NO" id="Dvh-2w-BGS" userLabel="Noti Off Icon Image View">
-                                                    <rect key="frame" x="229.5" y="16" width="13" height="13"/>
+                                                    <rect key="frame" x="262.5" y="16" width="13" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="13" id="2G0-rb-ooK"/>
                                                         <constraint firstAttribute="width" constant="13" id="ycQ-HE-lcR"/>
@@ -138,8 +138,8 @@
                                                         <constraint firstAttribute="height" constant="0.5" id="Rd0-QI-I2R"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXY-fr-6om" userLabel="Channel Name Label">
-                                                    <rect key="frame" x="80" y="12" width="116" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Chat Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXY-fr-6om" userLabel="Channel Name Label">
+                                                    <rect key="frame" x="80" y="12" width="149" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" name="color_group_channel_name_label"/>
                                                     <nil key="highlightedColor"/>
@@ -396,7 +396,7 @@
                                             <constraint firstAttribute="width" constant="28" id="qn1-gg-Lv9"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Channel Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="KkF-zt-Z0B" userLabel="Channel Name Text Field">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Private Chat Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="KkF-zt-Z0B" userLabel="Channel Name Text Field">
                                         <rect key="frame" x="113" y="38.5" width="285" height="23"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -693,15 +693,18 @@ using Foneme Search</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="139" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="139"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="250" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Gx-IQ-dRY" id="jq0-6n-4DY">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_call" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ly8-FD-Vrg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                                </imageView>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-o4-DhA" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="19.5" width="100" height="100"/>
+                                                    <rect key="frame" x="157" y="75" width="100" height="100"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="fck-fI-6dd"/>
@@ -713,16 +716,11 @@ using Foneme Search</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Channel Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z39-88-Mvd" userLabel="Channel Name Text Field">
-                                                    <rect key="frame" x="132" y="58" width="218" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOZ-VG-aDZ" userLabel="Enable Edit Button">
-                                                    <rect key="frame" x="358" y="51.5" width="36" height="36"/>
+                                                    <rect key="frame" x="363" y="15" width="36" height="36"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="XLv-to-wFl"/>
-                                                        <constraint firstAttribute="width" constant="36" id="ZC4-Il-NiS"/>
+                                                        <constraint firstAttribute="width" constant="36" id="CLD-dY-oR3"/>
+                                                        <constraint firstAttribute="width" secondItem="kOZ-VG-aDZ" secondAttribute="height" multiplier="1:1" id="dLf-ha-qL5"/>
                                                     </constraints>
                                                     <state key="normal" image="img_btn_edit_channel_name"/>
                                                     <state key="disabled" image="img_btn_edit_channel_name"/>
@@ -730,15 +728,26 @@ using Foneme Search</string>
                                                         <action selector="clickEnableEditButton:" destination="8Gx-IQ-dRY" eventType="touchUpInside" id="E2f-FQ-oNQ"/>
                                                     </connections>
                                                 </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Private Chat Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z39-88-Mvd" userLabel="Channel Name Text Field">
+                                                    <rect key="frame" x="10" y="185" width="394" height="23"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="kOZ-VG-aDZ" firstAttribute="centerY" secondItem="jq0-6n-4DY" secondAttribute="centerY" id="Ed9-pS-zlD"/>
-                                                <constraint firstItem="kOZ-VG-aDZ" firstAttribute="leading" secondItem="z39-88-Mvd" secondAttribute="trailing" constant="8" id="MuS-NI-wRM"/>
-                                                <constraint firstItem="N1o-o4-DhA" firstAttribute="centerY" secondItem="jq0-6n-4DY" secondAttribute="centerY" id="Zvw-C2-8V9"/>
-                                                <constraint firstAttribute="trailing" secondItem="kOZ-VG-aDZ" secondAttribute="trailing" constant="20" id="doq-68-mA9"/>
-                                                <constraint firstItem="z39-88-Mvd" firstAttribute="leading" secondItem="N1o-o4-DhA" secondAttribute="trailing" constant="17" id="gRX-kN-1pQ"/>
-                                                <constraint firstItem="z39-88-Mvd" firstAttribute="centerY" secondItem="jq0-6n-4DY" secondAttribute="centerY" id="sLI-zJ-tiz"/>
-                                                <constraint firstItem="N1o-o4-DhA" firstAttribute="leading" secondItem="jq0-6n-4DY" secondAttribute="leading" constant="15" id="slD-xz-quZ"/>
+                                                <constraint firstItem="kOZ-VG-aDZ" firstAttribute="top" secondItem="jq0-6n-4DY" secondAttribute="top" constant="15" id="2ww-Wl-jMM"/>
+                                                <constraint firstItem="ly8-FD-Vrg" firstAttribute="leading" secondItem="jq0-6n-4DY" secondAttribute="leading" id="3C7-wo-iB7"/>
+                                                <constraint firstItem="ly8-FD-Vrg" firstAttribute="top" secondItem="jq0-6n-4DY" secondAttribute="top" id="BZj-Ct-Zxo"/>
+                                                <constraint firstItem="z39-88-Mvd" firstAttribute="top" secondItem="N1o-o4-DhA" secondAttribute="bottom" constant="10" id="TY7-8x-Pk6"/>
+                                                <constraint firstAttribute="trailing" secondItem="z39-88-Mvd" secondAttribute="trailing" constant="10" id="a9H-mE-DYy"/>
+                                                <constraint firstItem="N1o-o4-DhA" firstAttribute="centerY" secondItem="jq0-6n-4DY" secondAttribute="centerY" id="b2I-xM-B3V"/>
+                                                <constraint firstItem="z39-88-Mvd" firstAttribute="leading" secondItem="jq0-6n-4DY" secondAttribute="leading" constant="10" id="db3-Xz-rnf"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="z39-88-Mvd" secondAttribute="bottom" constant="10" id="j3h-cw-n1V"/>
+                                                <constraint firstItem="N1o-o4-DhA" firstAttribute="centerX" secondItem="jq0-6n-4DY" secondAttribute="centerX" id="uEx-5k-FIO"/>
+                                                <constraint firstAttribute="bottom" secondItem="ly8-FD-Vrg" secondAttribute="bottom" id="vA7-gN-hsS"/>
+                                                <constraint firstAttribute="trailing" secondItem="kOZ-VG-aDZ" secondAttribute="trailing" constant="15" id="vZt-c6-v6a"/>
+                                                <constraint firstAttribute="trailing" secondItem="ly8-FD-Vrg" secondAttribute="trailing" id="yYD-uH-ytZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <viewLayoutGuide key="safeArea" id="AFy-ai-JQM"/>
@@ -748,7 +757,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="194.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="305.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3iE-b0-fOz" id="ExI-Tt-16h">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -800,7 +809,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupShareInfoCell" id="rJk-7a-ICP">
-                                        <rect key="frame" x="0.0" y="238" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="349" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rJk-7a-ICP" id="SlC-DF-0kl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -842,7 +851,7 @@ using Foneme Search</string>
                                         <viewLayoutGuide key="safeArea" id="CEp-gw-gfI"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="281.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="392.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCz-xY-8Ou" id="Cs5-rT-v66">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -883,7 +892,7 @@ using Foneme Search</string>
                                         <viewLayoutGuide key="safeArea" id="V39-Qs-5aR"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="436" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcM-9p-84f" id="i1s-eD-u4C">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -977,7 +986,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="368.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="479.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2Q-Ab-WjV" id="O31-ib-vWw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1048,7 +1057,7 @@ using Foneme Search</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5P-HH-rpo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3729" y="3863"/>
+            <point key="canvasLocation" x="-3730.434782608696" y="3862.5"/>
         </scene>
         <!--Group Channel Invite Member View Controller-->
         <scene sceneID="Qpi-zN-Ouk">
@@ -1226,7 +1235,7 @@ using Foneme Search</string>
                                             <constraint firstAttribute="height" constant="30" id="pqV-HM-9ZF"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Open Channel Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-YI-Qh2" userLabel="Channel Name Text Field">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Private Chat Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-YI-Qh2" userLabel="Channel Name Text Field">
                                         <rect key="frame" x="131" y="46" width="268" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="7zm-Vk-Rt0"/>
@@ -1593,6 +1602,7 @@ using Foneme Search</string>
     </scenes>
     <resources>
         <image name="CHATBG" width="750" height="1624"/>
+        <image name="bg_call" width="414" height="792"/>
         <image name="img_blocked_user_cover" width="38" height="38"/>
         <image name="img_btn_create_group_channel_blue" width="28" height="28"/>
         <image name="img_btn_edit_channel_name" width="36" height="36"/>

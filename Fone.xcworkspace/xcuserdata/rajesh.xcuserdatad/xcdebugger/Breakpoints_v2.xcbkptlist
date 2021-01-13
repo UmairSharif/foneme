@@ -14,8 +14,8 @@
             filePath = "Fone/Chat/GroupChannel/GroupChannelSettings/GroupChannelSettingsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -65,7 +65,7 @@
             startingLineNumber = "575"
             endingLineNumber = "575"
             landmarkName = "tableView(_:trailingSwipeActionsConfigurationForRowAt:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -247,16 +247,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A958D53F-0714-4DAC-99BF-830303353234"
+            uuid = "A7E501CB-7E04-4CC8-9D74-11098D3D549C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fone/Chat/OpenChannel/OpenChannelChat/OpenChannelChatViewController.swift"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelChat/GroupChannelChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1890"
-            endingLineNumber = "1890"
-            landmarkName = "didClickImageVideoFileMessage(_:)"
+            startingLineNumber = "611"
+            endingLineNumber = "611"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
