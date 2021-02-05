@@ -444,7 +444,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             if error != nil {
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }
-                    guard let requestId = preSendMsg.requestId else { return }
+                    guard let requestId = preSendMsg.requestId as? String else { return }
                     
                     self.preSendMessages.removeValue(forKey: requestId)
                     self.resendableMessages[requestId] = preSendMsg
@@ -456,7 +456,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             }
             
             guard let message = userMessage else { return }
-            guard let requestId = message.requestId else { return }
+            guard let requestId = message.requestId as? String else { return }
 
             DispatchQueue.main.async {
                 self.determineScrollLock()
@@ -475,7 +475,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         DispatchQueue.main.async {
             self.determineScrollLock()
             if let preSendMsg = preSendMessage {
-                if let requestId = preSendMsg.requestId {
+                if let requestId = preSendMsg.requestId as? String {
                     self.preSendMessages[requestId] = preSendMsg
                     self.messages.append(preSendMsg)
                     self.messageTableView.reloadData()
@@ -621,7 +621,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
              //Rajesh   userMessageCell.channel = self.channel
                 
                 var failed: Bool = false
-                if let requestId = userMessage.requestId {
+                if let requestId = userMessage.requestId as? String{
                     if self.resendableMessages[requestId] != nil {
                         failed = true
                     }
@@ -650,7 +650,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             // File Message
             guard let fileMessage = currMessage as? SBDFileMessage else { return cell }
             guard let sender = fileMessage.sender else { return cell }
-            guard let fileMessageRequestId = fileMessage.requestId else { return cell }
+            guard let fileMessageRequestId = fileMessage.requestId as? String else { return cell }
             guard let currentUser = SBDMain.getCurrentUser() else { return cell }
             if let _ = self.preSendMessages[fileMessageRequestId] {
                 // Pre send outgoing message
@@ -1175,7 +1175,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 
                 if sender.userId == SBDMain.getCurrentUser()!.userId {
                     // Outgoing message
-                    if let requestId = userMessage.requestId {
+                    if let requestId = usermessage.requestId as? String {
                         if self.resendableMessages[requestId] != nil {
                             userMessageCell.showElementsForFailure()
                         }
@@ -1201,7 +1201,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         }
         else if let fileMessage = self.messages[indexPath.row] as? SBDFileMessage {
             guard let sender = fileMessage.sender else { return cell }
-            guard let fileMessageRequestId = fileMessage.requestId else { return cell }
+            guard let fileMessageRequestId = filemessage.requestId as? String else { return cell }
             guard let currentUser = SBDMain.getCurrentUser() else { return cell }
             
             if sender.userId == currentUser.userId, self.preSendMessages[fileMessageRequestId] != nil {
@@ -1535,14 +1535,14 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     // MARK: - OpenChannelMessageTableViewCellDelegate
     func didClickResendUserMessageButton(_ message: SBDUserMessage) {
-        if let messageText = message.message {
+        if let messageText = message.message as? String {
             var preSendMessage: SBDUserMessage?
             if let channel = self.channel {
                 preSendMessage = channel.sendUserMessage(messageText, completionHandler: { (userMessage, error) in
                     self.inputMessageTextField.text = ""
                     if error != nil {
                         DispatchQueue.main.async {
-                            self.resendableMessages.removeValue(forKey: message.requestId!)
+                            self.resendableMessages.removeValue(forKey: message.requestId)
                             self.preSendMessages.removeValue(forKey: (preSendMessage?.requestId)!)
                             self.resendableMessages[(preSendMessage?.requestId)!] = preSendMessage
                             self.messageTableView.reloadData()
@@ -1563,7 +1563,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 
                 DispatchQueue.main.async {
                     self.messages[self.messages.firstIndex(of: message)!] = preSendMessage!
-                    self.resendableMessages.removeValue(forKey: message.requestId!)
+                    self.resendableMessages.removeValue(forKey: message.requestId)
                     self.determineScrollLock()
                     self.preSendMessages[(preSendMessage?.requestId)!] = preSendMessage!
                     self.messageTableView.reloadData()
@@ -1574,7 +1574,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func didClickResendImageFileMessageButton(_ message: SBDFileMessage) {
-        guard let requestId = message.requestId else {  return }
+        guard let requestId = message.requestId as? String else {  return }
         guard let fileDataDict = self.resendableFileData[requestId] else { return }
         guard let imageData: Data = fileDataDict["data"] as? Data else { return }
         guard let filename: String = fileDataDict["filename"] as? String else { return }
@@ -1583,7 +1583,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         /***********************************/
         /* Thumbnail is a premium feature. */
         /***********************************/
-        let thumbnailSize = SBDThumbnailSize.make(withMaxWidth: 320.0, maxHeight: 320.0)!
+        let thumbnailSize = SBDThumbnailSize.make(withMaxWidth: 320.0, maxHeight: 320.0)
         
         var preSendMessage: SBDFileMessage?
         if let channel = self.channel {
@@ -1596,7 +1596,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             fileMessageParams.customType = nil
             preSendMessage = channel.sendFileMessage(with: fileMessageParams, progressHandler: { (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
                 DispatchQueue.main.async {
-                    guard let requestId = preSendMessage!.requestId else { return }
+                    guard let requestId = preSendMessage!.requestId as? String else { return }
                     self.fileTransferProgress[requestId] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
                     for index in stride(from: self.messages.count - 1, to: -1, by: -1) {
                         let baseMessage: SBDBaseMessage = self.messages[index]
@@ -1606,7 +1606,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                 continue
                             }
                             
-                            if fileMessage.requestId != nil && fileMessage.requestId == preSendMessage!.requestId! {
+                            if fileMessage.requestId != nil && fileMessage.requestId == preSendMessage!.requestId {
                                 let indexPath = IndexPath(row: index, section: 0)
                                 guard let cell = self.messageTableView.cellForRow(at: indexPath) as? OpenChannelImageVideoFileMessageTableViewCell else {
                                     continue
@@ -1620,7 +1620,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 150 * NSEC_PER_MSEC), execute: {
                     DispatchQueue.main.async {
                         if error != nil {
-                            if let requestId = preSendMessage!.requestId {
+                            if let requestId = preSendMessage!.requestId as? String {
                                 self.resendableFileData[requestId] = [
                                     "data": imageData,
                                     "filename": filename,
@@ -1674,7 +1674,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             })
             
             DispatchQueue.main.async {
-                if let requestId = message.requestId {
+                if let requestId = message.requestId as? String {
                     self.resendableFileData.removeValue(forKey: requestId)
                     self.resendableMessages.removeValue(forKey: requestId)
                     
@@ -2257,13 +2257,13 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 params.fileSize = UInt(fileData.count)
                 preSendMessage = channel.sendFileMessage(with: params, progressHandler: { (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
                     DispatchQueue.main.async {
-                        guard let preSendMessageRequestId = preSendMessage!.requestId else { return }
+                        guard let preSendMessageRequestId = preSendMessage!.requestId as? String else { return }
                         self.fileTransferProgress[preSendMessageRequestId] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
                         for index in stride(from: self.messages.count - 1, to: -1, by: -1) {
                             let baseMessage = self.messages[index]
                             if baseMessage is SBDFileMessage {
                                 guard let fileMessage = (baseMessage as? SBDFileMessage) else { continue }
-                                guard let fileMessageRequestId = fileMessage.requestId else { continue }
+                                guard let fileMessageRequestId = fileMessage.requestId  as? String else { continue }
                                 
                                 if fileMessageRequestId == preSendMessageRequestId {
                                     self.determineScrollLock()
@@ -2275,7 +2275,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     }
                 }, completionHandler: { (fileMessage, error) in
                     guard let message = fileMessage else { return }
-                    guard let fileMessageRequestId = message.requestId else { return }
+                    guard let fileMessageRequestId = message.requestId as? String else { return }
                     let preSendMessage = self.preSendMessages[fileMessageRequestId] as? SBDFileMessage
                     self.preSendMessages.removeValue(forKey: fileMessageRequestId)
                     
@@ -2300,7 +2300,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         
                         guard let message = fileMessage else { return }
                         DispatchQueue.main.async {
-                            guard let fileMessageRequestId = message.requestId else { return }
+                            guard let fileMessageRequestId = message.requestId as? String else { return }
                             
                             self.resendableMessages.removeValue(forKey: fileMessageRequestId)
                             self.resendableFileData.removeValue(forKey: fileMessageRequestId)
@@ -2316,7 +2316,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }
-                    guard let preSendMsgRequestId = preSendMsg.requestId else { return }
+                    guard let preSendMsgRequestId = preSendMsg.requestId as? String else { return }
                     
                     self.fileTransferProgress[preSendMsgRequestId] = 0
                     self.preSendFileData[preSendMsgRequestId] = [
@@ -2383,7 +2383,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         guard let channel = self.channel else { return }
         preSendMessage = channel.sendFileMessage(with: fileMessageParams, progressHandler: { [unowned self] (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
             DispatchQueue.main.async {
-                guard let preSendMessageRequestId = preSendMessage!.requestId else { return }
+                guard let preSendMessageRequestId = preSendMessage!.requestId as? String else { return }
                 
                 if self.sendingImageVideoMessage[preSendMessageRequestId] == nil {
                     self.sendingImageVideoMessage[preSendMessageRequestId] = false
@@ -2394,7 +2394,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     let baseMessage = self.messages[index]
                     if baseMessage is SBDFileMessage {
                         let fileMessage = baseMessage as! SBDFileMessage
-                        guard let fileMessageRequestId = fileMessage.requestId else { return }
+                        guard let fileMessageRequestId = fileMessage.requestId as? String else { return }
                         if fileMessageRequestId == preSendMessageRequestId {
                             self.determineScrollLock()
                             let indexPath = IndexPath(row: index, section: 0)
@@ -2416,15 +2416,15 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             }
         }, completionHandler: { [unowned self] (fileMessage, error) in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 150 * NSEC_PER_MSEC), execute: {
-                let preSendMessage = self.preSendMessages[fileMessage!.requestId!] as! SBDFileMessage
+                let preSendMessage = self.preSendMessages[fileMessage!.requestId] as! SBDFileMessage
                 
-                self.preSendMessages.removeValue(forKey: fileMessage!.requestId!)
-                self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId!)
+                self.preSendMessages.removeValue(forKey: fileMessage!.requestId)
+                self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId)
                 
                 if error != nil {
                     DispatchQueue.main.async {
-                        self.resendableMessages[fileMessage!.requestId!] = preSendMessage
-                        self.resendableFileData[preSendMessage.requestId!] = [
+                        self.resendableMessages[fileMessage!.requestId] = preSendMessage
+                        self.resendableFileData[preSendMessage.requestId] = [
                             "data": imageData,
                             "type": mimeType,
                             "filename": imageName
@@ -2439,8 +2439,8 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 if fileMessage != nil {
                     DispatchQueue.main.async {
                         self.determineScrollLock()
-                        self.resendableMessages.removeValue(forKey: fileMessage!.requestId!)
-                        self.resendableFileData.removeValue(forKey: fileMessage!.requestId!)
+                        self.resendableMessages.removeValue(forKey: fileMessage!.requestId)
+                        self.resendableFileData.removeValue(forKey: fileMessage!.requestId)
                         self.messages[self.messages.firstIndex(of: preSendMessage)!] = fileMessage!
                         let indexPath = IndexPath(row: self.messages.firstIndex(of: fileMessage!)!, section: 0)
                         self.messageTableView.reloadRows(at: [indexPath], with: .none)
@@ -2452,13 +2452,13 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         
         DispatchQueue.main.async {
             self.determineScrollLock()
-            self.fileTransferProgress[preSendMessage!.requestId!] = 0
-            self.preSendFileData[preSendMessage!.requestId!] = [
+            self.fileTransferProgress[preSendMessage!.requestId] = 0
+            self.preSendFileData[preSendMessage!.requestId] = [
                 "data": imageData,
                 "type": mimeType,
                 "filename": imageName
                 ] as [String : AnyObject]
-            self.preSendMessages[preSendMessage!.requestId!] = preSendMessage
+            self.preSendMessages[preSendMessage!.requestId] = preSendMessage
             self.messages.append(preSendMessage!)
             self.messageTableView.reloadData()
             self.scrollToBottom(force: false)
@@ -2493,21 +2493,21 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             fileMessageParams.customType = nil
             preSendMessage = channel.sendFileMessage(with: fileMessageParams, progressHandler: { [unowned self] (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
                 DispatchQueue.main.async {
-                    if self.sendingImageVideoMessage[preSendMessage!.requestId!] == nil {
-                        self.sendingImageVideoMessage[preSendMessage!.requestId!] = false
+                    if self.sendingImageVideoMessage[preSendMessage!.requestId] == nil {
+                        self.sendingImageVideoMessage[preSendMessage!.requestId] = false
                     }
                     
-                    self.fileTransferProgress[preSendMessage!.requestId!] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
+                    self.fileTransferProgress[preSendMessage!.requestId] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
                     for index in stride(from: self.messages.count - 1, to: -1, by: -1) {
                         let baseMessage = self.messages[index]
                         if baseMessage is SBDFileMessage {
                             let fileMessage = baseMessage as! SBDFileMessage
-                            if fileMessage.requestId != nil && fileMessage.requestId! == preSendMessage!.requestId! {
+                            if fileMessage.requestId != nil && fileMessage.requestId == preSendMessage!.requestId {
                                 self.determineScrollLock()
                                 let indexPath = IndexPath(row: index, section: 0)
-                                if self.sendingImageVideoMessage[preSendMessage!.requestId!] == false {
+                                if self.sendingImageVideoMessage[preSendMessage!.requestId] == false {
                                     self.messageTableView.reloadRows(at: [indexPath], with: .none)
-                                    self.sendingImageVideoMessage[preSendMessage!.requestId!] = true
+                                    self.sendingImageVideoMessage[preSendMessage!.requestId] = true
                                     self.scrollToBottom(force: false)
                                 }
                                 else {
@@ -2522,15 +2522,15 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }, completionHandler: { [unowned self] (fileMessage, error) in
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150), execute: {
-                    let preSendMessage = self.preSendMessages[fileMessage!.requestId!] as! SBDFileMessage
+                    let preSendMessage = self.preSendMessages[fileMessage!.requestId] as! SBDFileMessage
                     
-                    self.preSendMessages.removeValue(forKey: fileMessage!.requestId!)
-                    self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId!)
+                    self.preSendMessages.removeValue(forKey: fileMessage!.requestId)
+                    self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId)
                     
                     if error != nil {
                         DispatchQueue.main.async {
-                            self.resendableMessages[fileMessage!.requestId!] = preSendMessage
-                            self.resendableFileData[preSendMessage.requestId!] = [
+                            self.resendableMessages[fileMessage!.requestId] = preSendMessage
+                            self.resendableFileData[preSendMessage.requestId] = [
                                 "data": videoFileData,
                                 "type": mimeType,
                                 "filename": videoName
@@ -2541,7 +2541,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     }
                 
                     if let message = fileMessage {
-                        if let requestId = message.requestId {
+                        if let requestId  = message.requestId as? String {
                             DispatchQueue.main.async {
                                 self.determineScrollLock()
                                 self.resendableMessages.removeValue(forKey: requestId)
@@ -2559,14 +2559,14 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             })
             
             DispatchQueue.main.async {
-                self.fileTransferProgress[(preSendMessage?.requestId!)!] = 0
+                self.fileTransferProgress[(preSendMessage?.requestId)!] = 0
                 self.preSendFileData[(preSendMessage?.requestId)!] = [
                     "data": videoFileData,
                     "type": mimeType,
                     "filename": videoName
                     ] as [String:AnyObject]
                 self.determineScrollLock()
-                self.preSendMessages[(preSendMessage?.requestId!)!] = preSendMessage
+                self.preSendMessages[(preSendMessage?.requestId)!] = preSendMessage
                 self.messages.append(preSendMessage!)
                 self.messageTableView.reloadData()
                 self.scrollToBottom(force: false)

@@ -10,7 +10,8 @@ import UIKit
 import SwiftyJSON
 import NVActivityIndicatorView
 import Alamofire
-
+import SendBirdSDK
+import Branch
 class FriendTabVC: UIViewController {
     
     //IBoutlet and Variables
@@ -26,7 +27,9 @@ class FriendTabVC: UIViewController {
     var netStatus : Bool?
     var refreshControl = UIRefreshControl()
     
-    
+    var userListQuery: SBDApplicationUserListQuery?
+    var userDetails:UserDetailModel?
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -441,7 +444,8 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LocalContactTVC
-        
+        cell.btnCall.isHidden = true
+        cell.btnVideo.isHidden = true
         if isFiltering {
             
             if filteredContacts.count > 0 {
@@ -486,9 +490,26 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             vc.delegate = self
             self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
                 if success {
+                    self.view.isUserInteractionEnabled = true
+                    
+                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC{
+
+                        if cell.userImage.image != nil
+                        {
+                            let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
+                            self.btnClickChat(user ,img: imgdata,cont: contact)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
+
+                            return
+
+                    }
+                        return
+                }
+                        
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
-                    self.view.isUserInteractionEnabled = true
+
                     vc.userDetails = user!
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
@@ -506,9 +527,25 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             vc.delegate = self
             self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
                 if success {
+                    self.view.isUserInteractionEnabled = true
+                    
+                    
+                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC{
+
+                        if cell.userImage.image != nil
+                        {
+                            let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
+                            self.btnClickChat(user ,img: imgdata, cont: contact)
+                          
+
+                            return
+
+                    }
+                        return
+                }
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
-                    self.view.isUserInteractionEnabled = true
+
                     vc.userDetails = user!
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
@@ -631,6 +668,91 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             
         }
     }
+    
+    //MARK:- NEW CHANGE FOR CALL DIRECT :-
+    func btnClickChat(_ userMd: UserDetailModel?, img: Data?,cont: FriendList?) {
+        var userId = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                userId = user.userId!
+            }
+        }
+        let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+        vc.delegate = self
+        vc.userDetails = userMd
+        vc.contact = cont
+        self.userListQuery = SBDMain.createApplicationUserListQuery()
+        self.userListQuery?.limit = 100
+        var arrayNumber = [String]()
+        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+                if contacts.count > 0 {
+                    for items in contacts
+                    {
+                        let dict = items.dictionary
+                            
+                        let number = dict?["ContactsNumber"]?.string ?? ""
+                        arrayNumber.append(number)
+                    }
+                }
+            }
+
+        }
+        if arrayNumber.count > 0 {
+            self.userListQuery?.userIdsFilter = [userMd!.phoneNumber]
+        }else {
+            self.userListQuery?.userIdsFilter = ["0"]
+        }
+        var selecteduser = SBDUser()
+        self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Error")
+                return
+            }
+            
+            DispatchQueue.main.async {
+              
+                for user in users! {
+                    if user.userId == SBDMain.getCurrentUser()!.userId {
+                        continue
+                    }
+                    //User user here
+                    selecteduser = user
+                }
+                
+                let params = SBDGroupChannelParams()
+                params.coverImage =  img
+                params.add(selecteduser)
+                params.name = userMd?.name
+                
+                SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
+                    
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    if let error = error {
+                        let alertController = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
+                        let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+                        alertController.addAction(actionCancel)
+                        DispatchQueue.main.async {
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                        
+                        return
+                    }
+                    vc.channel = channel
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
+                }
+                
+            }
+        })
+        
+    }
+    
+    
+    
 }
 
 extension FriendTabVC : UISearchBarDelegate {
@@ -701,5 +823,8 @@ extension FriendTabVC : AddFriendDelegate {
         self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: false)
     }
     
+    
+}
+extension FriendTabVC : GroupChannelsUpdateListDelegate {
     
 }

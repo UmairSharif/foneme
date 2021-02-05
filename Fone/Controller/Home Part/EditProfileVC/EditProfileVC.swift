@@ -65,6 +65,8 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                         }
                       }
                   }
+            
+//            self.callUserprofileAPi()
               }
         
         network.reachability.whenReachable = { reachability in
@@ -197,15 +199,15 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
             self.errorAlert("Please enter your name!")
             return false
         }
-        else if (emailTxt.text?.isEmpty)!
-        {
-            self.errorAlert("Please enter your email!")
-            return false
-        }
-        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
-            self.errorAlert("Please enter a valid email!")
-            return false
-        }
+//        else if (emailTxt.text?.isEmpty)!
+//        {
+//            self.errorAlert("Please enter your email!")
+//            return false
+//        }
+//        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
+//            self.errorAlert("Please enter a valid email!")
+//            return false
+//        }
         else if (numberTxt.text?.isEmpty)!
         {
             self.errorAlert("Please enter your phone number!")
@@ -328,4 +330,24 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
             }
         }
     }
+    
+   func callUserprofileAPi()
+   {
+    self.getUserProfile(cnic: userProfile.address ?? "", friend: "") { (userModel, success) in
+        if success {
+        
+            userProfile.name = userModel?.name
+            userProfile.email = userModel?.email
+//            userProfile.
+            
+             if let userProfileData = try? PropertyListEncoder().encode(userModel) {
+                 UserDefaults.standard.set(userProfileData, forKey: key_User_Profile)
+                 UserDefaults.standard.synchronize()
+             }
+        }
+
+        }
+//    GetUserProfile
+   }
+    
 }

@@ -103,11 +103,11 @@ class SignUpVC: UIViewController,CountryDataDelegate {
             self.errorAlert("Please enter your name!")
             return false
         }
-        else if (emailTxt.text?.isEmpty)!
-        {
-            self.errorAlert("Please enter your email!")
-            return false
-        }
+//        else if (emailTxt.text?.isEmpty)!
+//        {
+//            self.errorAlert("Please enter your email!")
+//            return false
+//        }
         else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
             self.errorAlert("Please enter a valid email!")
             return false
@@ -137,7 +137,6 @@ extension SignUpVC
         var mobileNumber = codeLbl.text! + phoneTxt.text!
         mobileNumber.remove(at: mobileNumber.startIndex)
         let params = ["Name": nameTxt.text!,
-                      "Email": emailTxt.text!,
                       "CNIC": textFieldFoneId.text!,
                       "PhoneNumber": mobileNumber,
                       "Password": "",

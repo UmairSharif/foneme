@@ -33,7 +33,7 @@ target 'Fone' do
   pod 'FLAnimatedImage', '~> 1.0'
   pod 'Google-Mobile-Ads-SDK'
   pod 'OneSignal'
-
+  pod 'GoogleAnalytics'
 
   target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal'

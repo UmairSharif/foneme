@@ -289,6 +289,7 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         linkProperties.channel = channel.channelUrl
         linkProperties.feature = "sharing"
         
+        
         if isPublicGroup {
             if inviteURLField?.text?.isEmpty ?? true {
                 return;

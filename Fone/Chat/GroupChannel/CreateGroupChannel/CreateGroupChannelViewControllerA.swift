@@ -200,8 +200,11 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
                             let name = dict?["ContactsCnic"]?.string ?? ""
                             arrayNumber.append(number)
                             self.localUserInfo["\(number)"] = name;
+                            self.localUserInfo["friendname" + "\(number)"] =  dict?["ContactsName"]?.string ?? ""
+
                         }
                     }
+//                    key    String    "ContactsName"
                 }
 
             }
@@ -235,10 +238,11 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
                 }
                 
                 for user in users! {
-                    if user.userId == SBDMain.getCurrentUser()!.userId {
+                    if user.userId == SBDMain.getCurrentUser()?.userId {
                         continue
                     }
                     user.nickname = self.localUserInfo[user.userId]
+                    user.friendName = self.localUserInfo["friendname" + user.userId]
                     self.users.append(user)
                     self.allUsers.append(user)
                     
@@ -259,7 +263,7 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: SelectedUserCollectionViewCell.cellReuseIdentifier(), for: indexPath)) as! SelectedUserCollectionViewCell
         
         cell.profileImageView.setProfileImageView(for: selectedUsers[indexPath.row])
-        cell.nicknameLabel.text = selectedUsers[indexPath.row].nickname
+        cell.nicknameLabel.text = selectedUsers[indexPath.row].friendName
         
         return cell
     }
@@ -295,7 +299,8 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
-                updateCell.nicknameLabel.text = "fone.me/\(self.users[indexPath.row].nickname!)"
+                updateCell.nicknameLabel.text = self.users[indexPath.row].friendName
+                    //"fone.me/\(self.users[indexPath.row].nickname!)"
                 updateCell.profileImageView.setProfileImageView(for: self.users[indexPath.row])
                 
                 if let user = self.users[exists: indexPath.row] {
