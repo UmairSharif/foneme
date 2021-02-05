@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class SBDPreviousMessageListQuery;
+@class SBDMessageListParams;
+
 /// An object that represents the parameters for the [`getMessageChangeLogsSinceTimestamp:params:completionHandler:`](../Classes/SBDBaseChannel.html#//api/name/getMessageChangeLogsSinceTimestamp:params:completionHandler:) and the [`getMessageChangeLogsSinceToken:params:completionHandler:`](../Classes/SBDBaseChannel.html#//api/name/getMessageChangeLogsSinceToken:params:completionHandler:) methods. The methods return updated messages and the IDs of deleted messages along with additional data according to the properties in this object.
 /// @note This class is available from 3.0.181
-@interface SBDMessageChangeLogsParams : NSObject
+@interface SBDMessageChangeLogsParams : NSObject <NSCopying>
 
 /// Determines whether to include the metaarray information of the updated messages in the results.
 /// @note The default value is `NO`.
@@ -36,5 +39,19 @@
 /// @note The default value is `NO`.
 /// @since 3.0.181
 @property (atomic) BOOL includeThreadInfo;
+
+
+/// Create `SBDPreviousMessageListQuery` from a given SBDPreviousMessageListQuery instance.
+/// @param query previous message list query
+/// @return A created instance of `SBDMessageChangeLogsParams`
+/// @since 3.0.185
++ (nonnull SBDMessageChangeLogsParams *)createWithPreviousMessageListQuery:(nullable SBDPreviousMessageListQuery *)query;
+
+/// Create `SBDMessageListParams` from a given SBDMessageListParams instance.
+/// @param params previous message list query
+/// @return A created instance of `SBDMessageChangeLogsParams`
+/// @since 3.0.185
++ (nonnull SBDMessageChangeLogsParams *)createWithMessageListParams:(nullable SBDMessageListParams *)params;
+
 
 @end

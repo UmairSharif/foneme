@@ -20,13 +20,16 @@ import IQKeyboardManagerSwift
 class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SBDChannelDelegate, GroupChannelMessageTableViewCellDelegate, GroupChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate, SBDNetworkDelegate, SBDConnectionDelegate {
     
     
+    @IBOutlet weak var btnvideo: UIBarButtonItem!
+    @IBOutlet weak var btnCall: UIBarButtonItem!
     @IBOutlet weak var joinGroupView: UIView!
-    
-    
-    
-     var titleLabel: UILabel!
-     var lastUpdatedLabel: UILabel!
+    var contact :FriendList?
+    var userDetails:UserDetailModel?
+    var titleLabel: UILabel!
+    var lastUpdatedLabel: UILabel!
 
+    @IBOutlet weak var viewLeft: UIView!
+    @IBOutlet weak var imguser: UIImageView!
     @IBOutlet weak var inputMessageTextField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var typingIndicatorContainerView: UIView!
@@ -105,6 +108,25 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         //
         //        self.navigationItem.rightBarButtonItem = self.settingBarButton
         
+        
+        if userDetails == nil
+        {
+            btnvideo.isEnabled = false
+            btnvideo.image = nil
+            btnCall.isEnabled = false
+            btnCall.image = nil
+            viewLeft.isHidden = true
+            viewLeft.isUserInteractionEnabled = false
+        }
+        else
+        {
+            DispatchQueue.main.async {
+                self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
+                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                self.imguser.layer.masksToBounds = true
+            }
+           
+        }
         if self.splitViewController?.displayMode != UISplitViewController.DisplayMode.allVisible {
             self.backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.clickBackButton(_:)))
             self.backButton?.tintColor = UIColor.white
@@ -184,19 +206,26 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
          self.titleLabel = UILabel()
          self.titleLabel.textAlignment = .center
          self.titleLabel.textColor = .white
-        self.titleLabel.font = UIFont.systemFont(ofSize: 15)
-
+        self.titleLabel.font = UIFont.systemFont(ofSize: 13)
+//        if userDetails != nil{
+//            self.titleLabel.isUserInteractionEnabled = true
+//            let tap = UITapGestureRecognizer(target: self, action: Selector(("tapFunction:")))
+//            self.titleLabel.addGestureRecognizer(tap)
+//
+//        }
          self.lastUpdatedLabel = UILabel()
          self.lastUpdatedLabel.textAlignment = .center
         self.lastUpdatedLabel.textColor = .white
-               self.lastUpdatedLabel.font = UIFont.systemFont(ofSize:  13)
+               self.lastUpdatedLabel.font = UIFont.systemFont(ofSize:  11)
 
         let stackView = UIStackView(arrangedSubviews: [titleLabel, lastUpdatedLabel])
         stackView.axis = .vertical
         return stackView
     }()
     
-    
+    func tapFunction(sender:UITapGestureRecognizer) {
+        btnProfile(self)
+    }
     func setChanelTitle(channle: SBDGroupChannel?) {
         
         if let channelMembers = channel?.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser(), channelMembers.count == 2 {
@@ -205,7 +234,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "Videos2"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
             
             
-            //   self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
+//               self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
             
             
             
@@ -229,6 +258,15 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(_ animated: Bool) {
         IQKeyboardManager.shared.enable = false
+    }
+    @IBAction func btnProfile(_ sender: Any) {
+        let vc = UIStoryboard().loadUserDetailsVC()
+        vc.isSearch = true
+//        vc.delegate = self
+        vc.userDetails = userDetails
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -279,6 +317,12 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                   
                   if (users?.count)! > 0 {
                       self.refreshUserInfo(users![0])
+//                    if self.userDetails == nil
+//                    {
+////                        userDetails?.cnic = users![0].userId
+////                        userDetails?.phoneNumber = users![0].userId
+//                        self.userDetails = users![0]
+//                    }
                   }
               })
         
@@ -300,6 +344,45 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
              }
          }
      }
+    
+    //MARK:- CALL AUDIO/VIDEO
+    
+    @IBAction func btnCallClicked(_ sender:Any){
+        //        self.activityIndicator.startAnimating()
+        //        self.activityIndicator.isHidden = false
+        
+        let vc = UIStoryboard().loadVideoCallVC()
+        vc.isVideo = false
+        vc.recieverNumber = contact?.number
+        vc.name = contact?.name ?? ""
+        vc.userImage = contact?.userImage
+        vc.DialerFoneID = contact?.ContactsCnic ?? ""
+        vc.userDetails = userDetails!
+        vc.modalPresentationStyle = .fullScreen
+        NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
+        self.present(vc, animated: true, completion: nil)
+        
+    }
+            
+    
+    @IBAction func btnVideoClicked(_ sender:Any){
+
+        let vc = UIStoryboard().loadVideoCallVC()
+        vc.isVideo = true
+        vc.recieverNumber = contact?.number
+        vc.userImage = contact?.userImage
+        vc.DialerFoneID = contact?.ContactsCnic ?? ""
+        
+        vc.userDetails = userDetails!
+        vc.modalPresentationStyle = .fullScreen
+        NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
+        self.present(vc, animated: true, completion: nil)
+                
+            }
+            
+    
+    
+    
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         guard let channel = self.channel, channelUrl == channel.channelUrl else { return }
@@ -533,7 +616,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             if error != nil {
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }
-                    guard let requestId = preSendMsg.requestId else { return }
+                    guard let requestId = preSendMsg.requestId as? String else { return }
                     
                     self.preSendMessages.removeValue(forKey: requestId)
                     self.resendableMessages[requestId] = preSendMsg
@@ -545,7 +628,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             }
             
             guard let message = userMessage else { return }
-            guard let requestId = message.requestId else { return }
+            guard let requestId = userMessage?.requestId else { return }
             
             DispatchQueue.main.async {
                 self.determineScrollLock()
@@ -564,7 +647,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         DispatchQueue.main.async {
             self.determineScrollLock()
             if let preSendMsg = preSendMessage {
-                if let requestId = preSendMsg.requestId {
+                if let requestId = preSendMsg.requestId as? String {
                     self.preSendMessages[requestId] = preSendMsg
                     self.messages.append(preSendMsg)
                     self.messageTableView.reloadData()
@@ -683,7 +766,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 userMessageCell.channel = self.channel
                 
                 var failed: Bool = false
-                if let requestId = userMessage.requestId {
+                if let requestId = userMessage.requestId as? String {
                     if self.resendableMessages[requestId] != nil {
                         failed = true
                     }
@@ -712,7 +795,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             // File Message
             guard let fileMessage = currMessage as? SBDFileMessage else { return cell }
             guard let sender = fileMessage.sender else { return cell }
-            guard let fileMessageRequestId = fileMessage.requestId else { return cell }
+            guard let fileMessageRequestId = fileMessage.requestId as? String else { return cell }
             guard let currentUser = SBDMain.getCurrentUser() else { return cell }
             if let _ = self.preSendMessages[fileMessageRequestId] {
                 // Pre send outgoing message
@@ -1608,7 +1691,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickVideoFileMessage(_ message: SBDFileMessage) {
-        if self.resendableFileData[message.requestId!] == nil && message.url.count > 0 {
+        if self.resendableFileData[message.requestId] == nil && message.url.count > 0 {
             if let videoUrl = URL(string: message.url) {
                 self.playMedia(videoUrl)
             }
@@ -1616,7 +1699,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickAudioFileMessage(_ message: SBDFileMessage) {
-        if self.resendableFileData[message.requestId!] == nil && message.url.count > 0 {
+        if self.resendableFileData[message.requestId] == nil && message.url.count > 0 {
             if let audioUrl = URL(string: message.url) {
                 self.playMedia(audioUrl)
             }
@@ -1624,7 +1707,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickGeneralFileMessage(_ message: SBDFileMessage) {
-        if message.requestId == nil ||  self.resendableFileData[message.requestId!] == nil{
+        if message.requestId == nil ||  self.resendableFileData[message.requestId] == nil{
             if let url = URL(string: message.url) {
                 let viewController = WebViewController()
                 viewController.url = url
@@ -1650,7 +1733,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func didLongClickGeneralFileMessage(_ message: SBDFileMessage) {
-        guard let requestId = message.requestId else { return }
+        guard let requestId = message.requestId as? String else { return }
         guard let url = URL(string: message.url) else { return }
         guard let sender = message.sender else { return }
         guard let currentUser = SBDMain.getCurrentUser() else { return }
@@ -1724,7 +1807,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickResendUserMessage(_ message: SBDUserMessage) {
-        guard let messageText = message.message else { return }
+        guard let messageText = message.message as? String else { return }
         guard let channel = self.channel else { return }
         guard let params = SBDUserMessageParams(message: messageText) else { return }
         var preSendMessage: SBDUserMessage?
@@ -1760,7 +1843,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         DispatchQueue.main.async {
             self.determineScrollLock()
             self.messages[self.messages.firstIndex(of: message)!] = preSendMessage!
-            self.resendableMessages.removeValue(forKey: (message.requestId)!)
+            self.resendableMessages.removeValue(forKey: (message.requestId))
             self.preSendMessages[(preSendMessage?.requestId)!] = preSendMessage
             self.messageTableView.reloadData()
             self.scrollToBottom(force: false)
@@ -1797,7 +1880,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didLongClickImageVideoFileMessage(_ message: SBDFileMessage) {
-        guard let messageRequestId = message.requestId else { return }
+        guard let messageRequestId = message.requestId  as? String else { return }
         if self.resendableFileData[messageRequestId] == nil {
             var alert: UIAlertController?
             var deleteMessageActionTitle: String?
@@ -1882,7 +1965,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickImageVideoFileMessage(_ message: SBDFileMessage) {
-        if message.requestId == nil ||  self.resendableFileData[message.requestId!] == nil {
+        if message.requestId == nil ||  self.resendableFileData[message.requestId] == nil {
             if message.type.hasPrefix("image") {
                 
                 let alert = UIAlertController(title: "", message: "Please select.", preferredStyle: .actionSheet)
@@ -2016,7 +2099,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickResendImageVideoFileMessage(_ message: SBDFileMessage) {
-        guard let messageRequestId = message.requestId else { return }
+        guard let messageRequestId = message.requestId as? String else { return }
         guard let imageData = self.resendableFileData[messageRequestId]!["data"] as? Data else { return }
         guard let filename = self.resendableFileData[messageRequestId]!["filename"] as? String else { return }
         guard let mimeType = self.resendableFileData[messageRequestId]!["type"] as? String else { return }
@@ -2056,7 +2139,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     DispatchQueue.main.async {
                         self.determineScrollLock()
                         self.resendableMessages[fileMessageRequestId] = preSendMessage
-                        guard let preSendMessageRequestId = preSendMessage.requestId else { return }
+                        guard let preSendMessageRequestId = preSendMessage.requestId as? String else { return }
                         self.resendableFileData[preSendMessageRequestId] = [
                             "data": imageData,
                             "type": mimeType,
@@ -2108,7 +2191,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didClickResendAudioGeneralFileMessage(_ message: SBDFileMessage) {
-        guard let messageRequestId = message.requestId else { return }
+        guard let messageRequestId = message.requestId as? String else { return }
         guard let fileData = self.resendableFileData[messageRequestId]!["data"] as? Data else { return }
         guard let filename = self.resendableFileData[messageRequestId]!["filename"] as? String else { return }
         guard let mimeType = self.resendableFileData[messageRequestId]!["type"] as? String else { return }
@@ -2146,7 +2229,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     DispatchQueue.main.async {
                         self.determineScrollLock()
                         self.resendableMessages[fileMessageRequestId] = preSendMessage
-                        guard let preSendMessageRequestId = preSendMessage.requestId else { return }
+                        guard let preSendMessageRequestId = preSendMessage.requestId as? String else { return }
                         self.resendableFileData[preSendMessageRequestId] = [
                             "data": fileData,
                             "type": mimeType,
@@ -2240,13 +2323,13 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 params.fileSize = UInt(fileData.count)
                 preSendMessage = channel.sendFileMessage(with: params, progressHandler: { (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
                     DispatchQueue.main.async {
-                        guard let preSendMessageRequestId = preSendMessage!.requestId else { return }
+                        guard let preSendMessageRequestId = preSendMessage!.requestId as? String else { return }
                         self.fileTransferProgress[preSendMessageRequestId] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
                         for index in stride(from: self.messages.count - 1, to: -1, by: -1) {
                             let baseMessage = self.messages[index]
                             if baseMessage is SBDFileMessage {
                                 guard let fileMessage = (baseMessage as? SBDFileMessage) else { continue }
-                                guard let fileMessageRequestId = fileMessage.requestId else { continue }
+                                guard let fileMessageRequestId = fileMessage.requestId  as? String else { continue }
                                 
                                 if fileMessageRequestId == preSendMessageRequestId {
                                     let indexPath = IndexPath(row: index, section: 0)
@@ -2258,7 +2341,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     }
                 }, completionHandler: { (fileMessage, error) in
                     guard let message = fileMessage else { return }
-                    guard let fileMessageRequestId = message.requestId else { return }
+                    guard let fileMessageRequestId = message.requestId as? String else { return }
                     let preSendMessage = self.preSendMessages[fileMessageRequestId] as? SBDFileMessage
                     self.preSendMessages.removeValue(forKey: fileMessageRequestId)
                     
@@ -2284,7 +2367,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                         
                         guard let message = fileMessage else { return }
                         DispatchQueue.main.async {
-                            guard let fileMessageRequestId = message.requestId else { return }
+                            guard let fileMessageRequestId = message.requestId as? String else { return }
                             
                             self.resendableMessages.removeValue(forKey: fileMessageRequestId)
                             self.resendableFileData.removeValue(forKey: fileMessageRequestId)
@@ -2300,7 +2383,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }
-                    guard let preSendMsgRequestId = preSendMsg.requestId else { return }
+                    guard let preSendMsgRequestId = preSendMsg.requestId as? String else { return }
                     
                     self.fileTransferProgress[preSendMsgRequestId] = 0
                     self.preSendFileData[preSendMsgRequestId] = [
@@ -2367,7 +2450,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         guard let channel = self.channel else { return }
         preSendMessage = channel.sendFileMessage(with: fileMessageParams, progressHandler: { [weak self] (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
             DispatchQueue.main.async {
-                guard let preSendMessageRequestId = preSendMessage!.requestId else { return }
+                guard let preSendMessageRequestId = preSendMessage!.requestId as? String else { return }
                 
                 guard let strongSelf = self else { return }
                 
@@ -2380,7 +2463,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     let baseMessage = strongSelf.messages[index]
                     if baseMessage is SBDFileMessage {
                         let fileMessage = baseMessage as! SBDFileMessage
-                        guard let fileMessageRequestId = fileMessage.requestId else { return }
+                        guard let fileMessageRequestId = fileMessage.requestId as? String else { return }
                         if fileMessageRequestId == preSendMessageRequestId {
                             strongSelf.determineScrollLock()
                             let indexPath = IndexPath(row: index, section: 0)
@@ -2412,7 +2495,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     if error != nil {
                         DispatchQueue.main.async {
                             strongSelf.resendableMessages[fileMessageRequestId] = preSendMessage
-                            strongSelf.resendableFileData[preSendMessage.requestId!] = [
+                            strongSelf.resendableFileData[preSendMessage.requestId] = [
                                 "data": imageData,
                                 "type": mimeType,
                                 "filename": imageName
@@ -2441,13 +2524,13 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         
         DispatchQueue.main.async {
             self.determineScrollLock()
-            self.fileTransferProgress[preSendMessage!.requestId!] = 0
-            self.preSendFileData[preSendMessage!.requestId!] = [
+            self.fileTransferProgress[preSendMessage!.requestId] = 0
+            self.preSendFileData[preSendMessage!.requestId] = [
                 "data": imageData,
                 "type": mimeType,
                 "filename": imageName
                 ] as [String : AnyObject]
-            self.preSendMessages[preSendMessage!.requestId!] = preSendMessage
+            self.preSendMessages[preSendMessage!.requestId] = preSendMessage
             self.messages.append(preSendMessage!)
             self.messageTableView.reloadData()
             self.messageTableView.layoutIfNeeded()
@@ -2483,21 +2566,21 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             fileMessageParams.customType = nil
             preSendMessage = channel.sendFileMessage(with: fileMessageParams, progressHandler: { [unowned self] (bytesSent, totalBytesSent, totalBytesExpectedToSend) in
                 DispatchQueue.main.async {
-                    if self.sendingImageVideoMessage[preSendMessage!.requestId!] == nil {
-                        self.sendingImageVideoMessage[preSendMessage!.requestId!] = false
+                    if self.sendingImageVideoMessage[preSendMessage!.requestId] == nil {
+                        self.sendingImageVideoMessage[preSendMessage!.requestId] = false
                     }
                     
-                    self.fileTransferProgress[preSendMessage!.requestId!] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
+                    self.fileTransferProgress[preSendMessage!.requestId] = CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend)
                     for index in stride(from: self.messages.count - 1, to: -1, by: -1) {
                         let baseMessage = self.messages[index]
                         if baseMessage is SBDFileMessage {
                             let fileMessage = baseMessage as! SBDFileMessage
-                            if fileMessage.requestId != nil && fileMessage.requestId! == preSendMessage!.requestId! {
+                            if fileMessage.requestId != nil && fileMessage.requestId == preSendMessage!.requestId {
                                 self.determineScrollLock()
                                 let indexPath = IndexPath(row: index, section: 0)
-                                if self.sendingImageVideoMessage[preSendMessage!.requestId!] == false {
+                                if self.sendingImageVideoMessage[preSendMessage!.requestId] == false {
                                     self.messageTableView.reloadRows(at: [indexPath], with: .none)
-                                    self.sendingImageVideoMessage[preSendMessage!.requestId!] = true
+                                    self.sendingImageVideoMessage[preSendMessage!.requestId] = true
                                     self.scrollToBottom(force: false)
                                 }
                                 else {
@@ -2512,15 +2595,15 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 }
                 }, completionHandler: { [unowned self] (fileMessage, error) in
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150), execute: {
-                        let preSendMessage = self.preSendMessages[fileMessage!.requestId!] as! SBDFileMessage
+                        let preSendMessage = self.preSendMessages[fileMessage!.requestId] as! SBDFileMessage
                         
-                        self.preSendMessages.removeValue(forKey: fileMessage!.requestId!)
-                        self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId!)
+                        self.preSendMessages.removeValue(forKey: fileMessage!.requestId)
+                        self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId)
                         
                         if error != nil {
                             DispatchQueue.main.async {
-                                self.resendableMessages[fileMessage!.requestId!] = preSendMessage
-                                self.resendableFileData[preSendMessage.requestId!] = [
+                                self.resendableMessages[fileMessage!.requestId] = preSendMessage
+                                self.resendableFileData[preSendMessage.requestId] = [
                                     "data": videoFileData,
                                     "type": mimeType,
                                     "filename": videoName
@@ -2531,7 +2614,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                         }
                         
                         if let message = fileMessage {
-                            if let requestId = message.requestId {
+                            if let requestId = message.requestId as? String {
                                 DispatchQueue.main.async {
                                     self.determineScrollLock()
                                     self.resendableMessages.removeValue(forKey: requestId)
@@ -2549,14 +2632,14 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
             })
             
             DispatchQueue.main.async {
-                self.fileTransferProgress[(preSendMessage?.requestId!)!] = 0
+                self.fileTransferProgress[(preSendMessage?.requestId)!] = 0
                 self.preSendFileData[(preSendMessage?.requestId)!] = [
                     "data": videoFileData,
                     "type": mimeType,
                     "filename": videoName
                     ] as [String:AnyObject]
                 self.determineScrollLock()
-                self.preSendMessages[(preSendMessage?.requestId!)!] = preSendMessage
+                self.preSendMessages[(preSendMessage?.requestId)!] = preSendMessage
                 self.messages.append(preSendMessage!)
                 self.messageTableView.reloadData()
                 self.scrollToBottom(force: false)

@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "FIRCLSReportManager.h"
-#import "FIRCLSReportUploader.h"
+#import "Crashlytics/Crashlytics/Controllers/FIRCLSReportManager.h"
+#import "Crashlytics/Crashlytics/Controllers/FIRCLSReportUploader.h"
 
 @class FIRCLSInstallIdentifierModel;
 
-@interface FIRCLSReportManager () <FIRCLSReportUploaderDelegate, FIRCLSReportUploaderDataSource>
+@interface FIRCLSReportManager () <FIRCLSReportUploaderDataSource>
 
 @property(nonatomic, strong) NSOperationQueue *operationQueue;
-@property(nonatomic, strong) FIRCLSNetworkClient *networkClient;
 @property(nonatomic, readonly) FIRCLSReportUploader *uploader;
 @property(nonatomic, strong) FIRCLSFileManager *fileManager;
 

@@ -10,7 +10,7 @@ import UIKit
 import SendBirdSDK
 import SwiftyJSON
 import Branch
-
+import NVActivityIndicatorView
 protocol AddFriendDelegate {
     func addFriendRefresh()
 }
@@ -32,13 +32,39 @@ class UserDetailsVC: UIViewController {
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
     var delegate : AddFriendDelegate?
+    var isFromLink = false
+    var FoneID = ""
+    var activityIndicatorView : NVActivityIndicatorView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     override func viewWillAppear(_ animated: Bool) {
         print(userDetails?.userId)
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect.init(x: self.view.center.x - 30, y: self.view.center.y - 30, width: 60, height: 60), type: .ballPulse, color: .blue)
+        self.view.addSubview(activityIndicatorView!)
+        if isFromLink == true
+        {
+            activityIndicatorView?.startAnimating()
+            isFromLink = false
+            
+            self.getUserDetail(cnic: FoneID, friend: "") { (userModel, success) in
+                if success {
+                    self.activityIndicatorView?.stopAnimating()
+                    self.userDetails = userModel
+                    self.UpdateDetails()
+                }
+            }
+        }
+        else{
+            self.UpdateDetails()
+        }
         
+    }
+    
+    //MARK:- Update Details
+    func UpdateDetails()
+    {
         let currUserNumber = userDetails?.phoneNumber ?? ""
               var isContactAdded = false
               if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
@@ -60,13 +86,13 @@ class UserDetailsVC: UIViewController {
         if isSearch && !isContactAdded{
             self.btnFriend.isHidden = false
         }else{
-            self.btnFriend.isHidden = true
+            self.btnFriend.isHidden = false
+            self.btnFriend.isSelected = true
         }
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
         self.btnFonemeID.setTitle("fone.me/\(userDetails?.cnic ?? "")", for: .normal)
-        
     }
     
     @IBAction func btnClickBack(_ sender: UIButton) {

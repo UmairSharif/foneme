@@ -20,6 +20,7 @@ let twimlParamTo = "to"
 
 class VoiceCallVC: UIViewController {
 
+    @IBOutlet weak var stackCALL: UIStackView!
     //IBOutlet and Variables
     var callTo : String?
     
@@ -126,7 +127,12 @@ class VoiceCallVC: UIViewController {
     
        self.timerLbl.isHidden = true
        self.seconds = 86400
-       self.callerImage.sd_setImage(with: URL(string: userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+        self.callerImage.sd_setImage(with: URL(string: userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+        DispatchQueue.main.async {
+            self.callerImage.layer.cornerRadius = self.callerImage.frame.height/2
+            self.callerImage.layer.masksToBounds = true
+        }
+      
     }
     
     
@@ -773,39 +779,41 @@ extension VoiceCallVC {
     @IBAction func speakerBtnTapped(_ sender: Any) {
            if mute {
                mute = false
-               self.speakerButton.setImage(UIImage(named: "ic_loaud_selected"), for: UIControl.State.normal)
+               self.speakerButton.setImage(UIImage(named: "SpeekerSel"), for: UIControl.State.normal)
                let session = AVAudioSession.sharedInstance()
                var _: Error?
                try? session.setCategory(AVAudioSession.Category.playAndRecord)
                try? session.setMode(AVAudioSession.Mode.voiceChat)
-               
                try? session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-               
                try? session.setActive(true)
            }
            else if !mute
            {
                
                mute = true
-               self.speakerButton.setImage(UIImage(named: "ic_loaud"), for: UIControl.State.normal)
+               self.speakerButton.setImage(UIImage(named: "SpeekNormal"), for: UIControl.State.normal)
                let session = AVAudioSession.sharedInstance()
                var _: Error?
                try? session.setCategory(AVAudioSession.Category.playAndRecord)
                try? session.setMode(AVAudioSession.Mode.voiceChat)
-               
                try? session.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
-               
                try? session.setActive(true)
-               
            }
        }
     
     @IBAction func endBtnTapped(_ sender : UIButton)
     {
         
+        
         if let call = call {
+            stackCALL.alpha = 0.5
             call.disconnect()
         }else {
+            
+            
+            stackCALL.alpha = 0.5
+            sleep(2)
+
             self.dismiss(animated: true, completion: nil)
         }
     }

@@ -38,7 +38,13 @@ class HKImagePickerHandler: NSObject {
             print("User do not have access to photo album.")
         case .denied:
             print("User has denied the permission.")
+        case .limited:
+            print("User has limited the permission.")
+
+        @unknown default:
+            break
         }
+        
     }
     
     

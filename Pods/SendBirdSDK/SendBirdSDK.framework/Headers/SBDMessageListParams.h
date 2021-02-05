@@ -11,7 +11,7 @@
 
 /// An object that represents the parameters for the [`getMessagesByTimestamp:params:completionHandler:`](../Classes/SBDBaseChannel.html#//api/name/getMessagesByTimestamp:params:completionHandler:) and the [`getMessagesByMessageId:params:completionHandler:`](../Classes/SBDBaseChannel.html#//api/name/getMessagesByMessageId:params:completionHandler:) methods. The methods return messages according to the properties in this object.
 /// @note This class is available from 3.0.181
-@interface SBDMessageListParams : NSObject
+@interface SBDMessageListParams : NSObject <NSCopying>
 
 /// The number of messages to retrieve that were sent before the specified timestamp or message ID.
 /// @note The default value is `0`.
@@ -72,5 +72,16 @@
 /// @note The default value is `NO`.
 /// @since 3.0.181
 @property (atomic) BOOL includeThreadInfo;
+
+/// Determines whether to include only messages from the subChannel to which you belong in the results.
+/// @note The default value is `NO`.
+/// @warning This value is only used in open channels.
+/// @since 3.0.204
+@property (atomic) BOOL showSubChannelMessagesOnly;
+
+/// Restricts the search scope only to retrieve the messages with the multiple specified custom message types. When the custom type filtering is not needed, the value should be set to `nil`.
+/// @note The default value is `nil`.
+/// @since 3.0.213
+@property (strong, nonatomic, nullable) NSArray<NSString *> *customTypes;
 
 @end

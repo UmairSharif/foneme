@@ -270,7 +270,7 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
                 let user = self.users[indexPath.row]
-                updateCell.nicknameLabel.text = "fone.me/\(self.users[indexPath.row].nickname!)"
+                updateCell.nicknameLabel.text = self.users[indexPath.row].friendName// "fone.me/\(self.users[indexPath.row].nickname!)"
 
                 updateCell.profileImageView.setProfileImageView(for: user)
                 

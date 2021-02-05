@@ -22,6 +22,7 @@ class VideoCallVC: UIViewController {
     var maxAudioBitrate = UInt()
     var maxVideoBitrate = UInt()
     
+    @IBOutlet weak var stackCall: UIStackView!
     // Configure remote URL to fetch token from
     
     // Video SDK components
@@ -80,6 +81,7 @@ class VideoCallVC: UIViewController {
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var previewCallingView: VideoView!
     @IBOutlet weak var remoteCallingView: VideoView!
+    @IBOutlet weak var btnAddFriend: UIButton!
     let panGesture = UIPanGestureRecognizer()
     // MARK:- UIViewController
     override func viewDidLoad() {
@@ -88,6 +90,7 @@ class VideoCallVC: UIViewController {
         panGesture.addTarget(self, action: #selector(self.panView))
         self.previewCallingView.isUserInteractionEnabled = true
         self.previewCallingView.addGestureRecognizer(panGesture)
+        
         callerImage.layer.cornerRadius = callerImage.frame.size.height / 2
         callerImage.clipsToBounds = true
         UserNameLbl.text = self.name
@@ -245,14 +248,20 @@ class VideoCallVC: UIViewController {
         if !(NotificationHandler.shared.callStatus ?? false)
         {
             _ = NotificationHandler.shared.dialerImageUrl
+            
             self.callerImage.sd_setImage(with: URL(string: userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         }
         else
         {
             self.callerImage.sd_setImage(with: URL(string: userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         }
-        //callerImage.layer.cornerRadius = callerImage.bounds.size.width/2.0
-        callerImage.layer.masksToBounds = true
+        
+        DispatchQueue.main.async {
+            self.callerImage.layer.cornerRadius = self.callerImage.bounds.size.width/2.0
+            self.callerImage.layer.masksToBounds = true
+        }
+        
+        
         self.timerLbl.isHidden = true
         self.seconds = 86400
         self.setupCall()
@@ -470,7 +479,8 @@ class VideoCallVC: UIViewController {
         }else{
             self.dialerSendNotificationAPI()
         }
-        
+        self.stackCall.alpha = 0.5
+
         if let room = room, let uuid = room.uuid {
             userInitiatedDisconnect = true
             let endCallAction = CXEndCallAction(call: uuid)
@@ -504,6 +514,9 @@ class VideoCallVC: UIViewController {
             
         }else{
             DispatchQueue.main.async {
+                self.stackCall.alpha = 0.5
+                sleep(2)
+                
                 self.dismiss(animated: true
                     , completion: nil)
             }
@@ -533,6 +546,9 @@ class VideoCallVC: UIViewController {
         }
     }
     
+    @IBAction func AddFriendaction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
     // MARK:- Private
     func startPreview() {
         if PlatformUtils.isSimulator {
@@ -552,7 +568,7 @@ class VideoCallVC: UIViewController {
             localVideoTrack!.addRenderer(self.previewView)
             localVideoTrack!.addRenderer(self.previewCallingView)
             logMessage(messageText: "Video track created")
-            
+            speakerButton.isSelected = true
             if (frontCamera != nil && backCamera != nil) {
                 // We will flip camera on tap.
                 let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCamera))

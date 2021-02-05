@@ -31,6 +31,8 @@ class CallLogVC: UIViewController {
     @IBOutlet weak var callLogTVC : UITableView!
     @IBOutlet weak var emptyLbl : UILabel!
     @IBOutlet weak var callBtn : UIButton!
+    @IBOutlet weak var Segment : UISegmentedControl!
+
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     var logArray = [CallLog]()
     var missCallArray = [MissCallData]()
@@ -125,7 +127,18 @@ class CallLogVC: UIViewController {
         //Get Call Logs API
        
     }
-    
+   @IBAction func segmentSelected(sender: UISegmentedControl)
+    {
+    if sender.selectedSegmentIndex == 0
+    {
+        self.status = "All"
+        self.callLogTVC.reloadData()
+    }
+    else{
+        self.status = "Missed"
+        self.callLogTVC.reloadData()
+    }
+    }
     func loadCallLogsFromCache(){
         
 
@@ -333,6 +346,7 @@ extension CallLogVC : UITableViewDelegate,UITableViewDataSource
             if logArray.count > indexPath.row {
                 let log = logArray[indexPath.row]
                 
+                debugPrint("")
                 if log.status == "Out Going"  {
                     cell.callStatusLbl.text = "Out Going"
                 } else if log.status == "InComing" {

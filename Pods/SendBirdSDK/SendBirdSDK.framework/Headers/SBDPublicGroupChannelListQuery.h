@@ -15,7 +15,7 @@
  *  The `SBDPublicGroupChannelListQuery` class is a query class for getting the list of public group channels.
  *  The instance of this class is created by [`createPublicGroupChannelListQuery`](../Classes/SBDGroupChannel.html#//api/name/createPublicGroupChannelListQuery) in `SBDGroupChannel` class.
  */
-@interface SBDPublicGroupChannelListQuery : NSObject
+@interface SBDPublicGroupChannelListQuery : NSObject <NSCopying>
 
 /**
  *  Sets the number of channels per page.
@@ -40,6 +40,12 @@
  *  @see Combined with `setIncludeEmptyChannel:`.
  */
 @property (nonatomic) BOOL includeEmptyChannel;
+
+/**
+ *  If the value is YES, the channel list includes frozen channel. Default is YES
+ *  @since 3.0.182
+ */
+@property (atomic) BOOL includeFrozenChannel;
 
 /**
  *  If the value is YES, the channel list includes their members.

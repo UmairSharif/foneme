@@ -239,7 +239,8 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
         
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
-                updateCell.nicknameLabel.text = "fone.me/\(self.users[indexPath.row].nickname!)"
+                updateCell.nicknameLabel.text = self.users[indexPath.row].friendName// "fone.me/\(self.users[indexPath.row].nickname!)"
+                
                 updateCell.profileImageView.setProfileImageView(for: self.users[indexPath.row])
                 
                 if self.selectedUsers[self.users[indexPath.row].userId] != nil {

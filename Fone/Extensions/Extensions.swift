@@ -449,6 +449,51 @@ extension UIViewController {
         }
     }
     
+    //MARK:- GET USER PROFILE
+    func getUserProfile(cnic foneId: String = "" ,friend friendId : String = "" ,_ completion : @escaping (_ model : UserDetailModel? , _ success : Bool) -> Void )
+    {
+        
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                
+                if let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String, loginToken.isEmpty == false {
+                    
+                    let params = ["Me":user.userId ?? "",
+                                  "Url":"",
+                                  "Cnic" : foneId,
+                                  "Friend":friendId] as [String:Any]
+                    print("params: \(params)")
+                    
+                    var headers = [String:String]()
+                    headers = ["Content-Type": "application/json",
+                               "Authorization" : "bearer " + loginToken]
+                    
+                    ServerCall.makeCallWitoutFile(GetUserProfile, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
+                        
+                        if let json = response {
+                            print(json)
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                let profileData = json["UserProfileData"]
+                                var userModel = UserDetailModel(fromJson: profileData)
+                                if foneId != "" {
+                                    userModel.cnic = foneId
+                                }
+                                completion(userModel,true)
+                            }
+                            else{
+                                completion(nil,false)
+                            }
+                        }else{
+                            completion(nil,false)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func addFirend( foneId: String , friendId : String,url : String ,_ completion : @escaping (_ model : UserDetailModel? , _ success : Bool) -> Void )
     {
         

@@ -579,29 +579,31 @@ extension VideoCallVC {
             //"d1878280-d9b6-4689-a70f-a1be87acde0a" Rajesh DEV
             //d1878280-d9b6-4689-a70f-a1be87acde0a
             print("oneSignalSendNotification: \(oneSignalSendNotification)")
-            let parameters: Parameters = [
-                "app_id": OneSignalId,
-                "contents": ["en":"English Message"],
-                "apns_push_type_override":"voip",
-                "include_player_ids":[voipToken],
-                "ios_sound":"iphone-original.caf","data": ["DialerNumber": dialerNumber ?? "",
-                         "ReceiverNumber": self.recieverNumber ?? "",
-                         "dialerName": dialerName ?? "",
-                         "dialerFoneId": dialerId ?? "",
-                         "dialerImage": dialerImageUrl ?? "",
-                         "Status": "OG",
-                         "NotificationType":"CLLCN",
-                         "CallType" : type,
-                         "AppType" : "IOS",
-                         "ChannelName" : dialerNumber ?? "",
-                         "CallerName": dialerName ?? "",
-                         "UserId" : userId ?? "",
-                         "CallStatusType": "APPTOAPP",
-                         "room_name":roomName,
-                         "uuid":uuid ,
-                         "isVideo":self.isVideo,
-                         "fcmToken":fcmToken]
-            ]
+            
+            let Dataparam : [String : Any] = ["DialerNumber": dialerNumber ?? "",
+                                              "ReceiverNumber": self.recieverNumber ?? "",
+                                              "dialerName": dialerName ?? "",
+                                              "dialerFoneId": dialerId ?? "",
+                                              "dialerImage": dialerImageUrl ?? "",
+                                              "Status": "OG",
+                                              "NotificationType":"CLLCN",
+                                              "CallType" : type,
+                                              "AppType" : "IOS",
+                                              "ChannelName" : dialerNumber ?? "",
+                                              "CallerName": dialerName ?? "",
+                                              "UserId" : userId ?? "",
+                                              "CallStatusType": "APPTOAPP",
+                                              "room_name":roomName,
+                                              "uuid":uuid ,
+                                              "isVideo":self.isVideo,
+                                              "fcmToken":fcmToken]
+            let  param : [ String : Any] = ["app_id": OneSignalId,
+                                            "contents": ["en":"English Message"],
+                                            "apns_push_type_override":"voip",
+                                            "include_player_ids":[voipToken],
+                                            "ios_sound":"iphone-original.caf","data": Dataparam]
+            let parameters: Parameters = param
+            
             print(parameters)
             let header = ["Content-Type":"application/json",
                           "Authorization":"Basic ZTI1ZGZmZWItZmE1MC00OWRjLTlhMjEtYmFlNDgyZjc0OWI0"]

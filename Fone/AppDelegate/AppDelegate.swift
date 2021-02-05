@@ -12,6 +12,7 @@ import PushKit
 import CoreData
 import Firebase
 import FirebaseCore
+import FirebaseMessaging
 import UserNotifications
 import SystemConfiguration
 import IQKeyboardManagerSwift
@@ -31,7 +32,7 @@ protocol PushKitEventDelegate: AnyObject {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
     
     var window: UIWindow?
     var userInfo : [AnyHashable : Any]?
@@ -49,9 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         OneSignal.setLogLevel(.LL_INFO, visualLevel: .LL_NONE)
+
+          // OneSignal initialization NEW CODE : 16 JAN
+          OneSignal.initWithLaunchOptions(launchOptions)
+          OneSignal.setAppId(OneSignalId)
         
         //START OneSignal initialization code
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
+     //   OLD ONE .......
+/*        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false, kOSSettingsKeyInAppLaunchURL: false]
         
         // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
         OneSignal.initWithLaunchOptions(launchOptions,
@@ -60,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+ */
         OneSignal.consentGranted(true)
         // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 6)
         OneSignal.promptForPushNotifications(userResponse: { accepted in
@@ -80,35 +87,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             if let params = params as? [String: AnyObject] {
                 if let foneId = params["ID"] as? String {
+                        
                     if let topVC = topViewController() {
-                        topVC.getUserDetail(cnic: foneId, friend: "") { (userModel, success) in
-                            if success {
-                                let vc = UIStoryboard().loadUserDetailsVC()
-                                vc.userDetails = userModel!
-                                vc.modalPresentationStyle = .overFullScreen
-                                topVC.present(vc, animated: true, completion: {
-                                })
+                        topVC.view.alpha = 0.2
+                        let vc = UIStoryboard().loadUserDetailsVC()
+//                        vc.userDetails = userModel!
+                        vc.FoneID = foneId
+                        vc.isFromLink = true
+                        vc.modalPresentationStyle = .overFullScreen
+                        vc.modalTransitionStyle = .crossDissolve
+                        
+                        topVC.present(vc, animated: false, completion: {
+                            
+                            topVC.view.alpha = 1
+                        })
 
-                            }
-                        }
                     }
                 } else if let channelURL  = params["~channel"] as? String {
                     if channelURL.contains("sendbird_group_channel") {
                         //Group
                         if let topVC = topViewController() {
-
+//                            topVC.view.alpha = 0.1
                         SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
-                            guard error == nil else {   // Error.
+                            guard error == nil else {
+                                // Error.
+//                                topVC.view.alpha = 1
                                 return
                             }
-
                             // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
                             
                             let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
                              vc.channel = groupChannel
                              vc.modalPresentationStyle = .overFullScreen
+                            vc.modalTransitionStyle = .crossDissolve
                             let navCont = UINavigationController.init(rootViewController: vc)
-                            topVC.present(navCont, animated: true, completion: {    })
+                            topVC.present(navCont, animated: false, completion: {
+//                                topVC.view.alpha = 1
+                            })
 
 
                         }
@@ -118,9 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                         //Open Channel
                         if let topVC = topViewController() {
-
+//                            topVC.view.alpha = 0.1
                         SBDOpenChannel.getWithUrl(channelURL) { (groupChannel, error) in
-                            guard error == nil else {   // Error.
+                            guard error == nil else {
+//                                topVC.view.alpha = 1
+                                // Error.
                                 return
                             }
 
@@ -129,10 +146,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
                              vc.channel = groupChannel
                              vc.modalPresentationStyle = .overFullScreen
+                            vc.modalTransitionStyle = .crossDissolve
                             let navCont = UINavigationController.init(rootViewController: vc)
-                            topVC.present(navCont, animated: true, completion: {    })
-
-
+                            
+                            topVC.present(navCont, animated: false, completion: {
+                                topVC.view.alpha = 1
+                            })
                         }
                         }
                     }
@@ -253,6 +272,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    
+
+    
+    
     func initializePushKit() {
         voipRegistry.delegate = self
         voipRegistry.desiredPushTypes = [.voIP]
@@ -274,8 +298,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
         Branch.getInstance().application(app, open: url, options: options)
     }
+    
+  
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -586,7 +613,7 @@ extension AppDelegate : SBDChannelDelegate {
             let sender = userMessage.sender
             
             type = "MESG"
-            body = String(format: "%@: %@", (sender?.nickname)!, userMessage.message!)
+            body = String(format: "%@: %@", (sender?.nickname)!, userMessage.message ?? "")
             customType = userMessage.customType!
         }
         else if message is SBDFileMessage {
@@ -610,7 +637,7 @@ extension AppDelegate : SBDChannelDelegate {
             let adminMessage = message as! SBDAdminMessage
             
             title = ""
-            body = adminMessage.message!
+            body = adminMessage.message ?? ""
         }
         
         let content = UNMutableNotificationContent()
@@ -643,16 +670,18 @@ extension AppDelegate : SBDChannelDelegate {
 
 extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(fcmToken)")
         
         //HKCallHandler.shared.fcmToken = fcmToken
         UserDefaults.standard.set(fcmToken, forKey: Key_FCM_token)
         UserDefaults.standard.synchronize()
-        let dataDict:[String: String] = ["token": fcmToken]
-        
-        self.updateFCMDeviceToken(token: fcmToken)
+        if let strval = fcmToken {
+        let dataDict:[String: String] = ["token": strval]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+
+        }
+        self.updateFCMDeviceToken(token: fcmToken ?? "")
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }

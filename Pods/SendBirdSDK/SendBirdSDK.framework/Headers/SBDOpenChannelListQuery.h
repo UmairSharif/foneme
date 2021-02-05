@@ -13,12 +13,19 @@
 /**
  *  The `SBDOpenChannelListQuery` class is a query class for getting the list of open channels. The instance of this class is created by [`createOpenChannelListQuery`](../Classes/SBDOpenChannel.html#//api/name/createOpenChannelListQuery) in `SBDOpenChannel` class.
  */
-@interface SBDOpenChannelListQuery : NSObject
+@interface SBDOpenChannelListQuery : NSObject <NSCopying>
 
 /**
  *  Sets the number of channels per page.
  */
 @property (atomic) NSUInteger limit;
+
+/**
+ *  Whether the result contains frozen channel or not. Default is YES
+ *  @since 3.0.182
+ */
+@property (atomic) BOOL includeFrozenChannel;
+
 
 /**
  *  Shows if there is a next page.

@@ -11,6 +11,7 @@ import SendBirdSDK
 import Photos
 import AlamofireImage
 import MobileCoreServices
+import Branch
 
 class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GroupChannelInviteMemberDelegate, GroupChannelSettingsTableViewCellDelegate, GroupChannelCoverImageNameSettingDelegate, NotificationDelegate, SBDChannelDelegate {
 
@@ -145,11 +146,57 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
         var message = "Fone App"
     
     var groupLink = "";
+    
+    
+    let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(self.groupInfoDic["PublicGroupLink"] as! String )")
+    buo.title = "Group"
+    buo.publiclyIndex = true
+    buo.locallyIndex = true
+    buo.contentMetadata.customMetadata["key1"] = self.groupInfoDic["GroupLink"] as? String ?? ""
+    let lp: BranchLinkProperties = BranchLinkProperties()
+    lp.channel = "https://fone.me/\(self.groupInfoDic["PublicGroupLink"] as! String )"
+    lp.feature = "sharing"
+
+//    let message = "Check out this link"
+    buo.showShareSheet(with: lp, andShareText: message, from: self) { (activityType, completed) in
+      print(activityType ?? "")
+    }
          let isPublic =  self.groupInfoDic["IsPublic"] as? String
         if isPublic == "True" {
             groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String )"
+            
+//            let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(self.groupInfoDic["PublicGroupLink"] as! String )")
+//            buo.title = "Group"
+//            buo.publiclyIndex = true
+//            buo.locallyIndex = true
+//            buo.contentMetadata.customMetadata["key1"] = self.groupInfoDic["GroupLink"] as? String ?? ""
+//            let lp: BranchLinkProperties = BranchLinkProperties()
+//            lp.channel = "https://fone.me/\(self.groupInfoDic["PublicGroupLink"] as! String )"
+//            lp.feature = "sharing"
+//
+//        //    let message = "Check out this link"
+//            buo.showShareSheet(with: lp, andShareText: message, from: self) { (activityType, completed) in
+//              print(activityType ?? "")
+//            }
+//            return
+            
        } else {
         groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+        
+//        let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(self.groupInfoDic["GroupLink"] as! String )")
+//        buo.title = "Group"
+//        buo.publiclyIndex = true
+//        buo.locallyIndex = true
+//        buo.contentMetadata.customMetadata["key1"] = self.groupInfoDic["GroupLink"] as? String ?? ""
+//        let lp: BranchLinkProperties = BranchLinkProperties()
+//        lp.channel = "https://fone.me/\(self.groupInfoDic["GroupLink"] as! String )"
+//        lp.feature = "sharing"
+//
+//    //    let message = "Check out this link"
+//        buo.showShareSheet(with: lp, andShareText: message, from: self) { (activityType, completed) in
+//          print(activityType ?? "")
+//        }
+//        return
        }
     
     message = groupLink;
