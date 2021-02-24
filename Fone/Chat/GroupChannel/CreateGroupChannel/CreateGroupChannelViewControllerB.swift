@@ -233,11 +233,7 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
             self.navigationController?.dismiss(animated: true, completion: nil)
             
         } else {
-            
-            
-            
             self.showLoadingIndicatorView()
-            
             let channelName = self.channelNameTextField.text != "" ? self.channelNameTextField.text : self.channelNameTextField.placeholder
             
             let params = SBDGroupChannelParams()
@@ -311,17 +307,14 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
             if (error == nil) {
                 print("Got my Branch link to share: \(url)")
                 DispatchQueue.main.async {
-
-                if self.isPublicGroup {
-                    // self.channelNameTextField.text
-                    self.publicGroupLink = url ?? "";
-                    self.publickLinkStatusLbl?.isHidden = false;
-
-                } else {
+                    if self.isPublicGroup {
+                        // self.channelNameTextField.text
+                        self.publicGroupLink = url ?? "";
+                        self.publickLinkStatusLbl?.isHidden = false;
+                    } else {
                         self.privateGroupLbl?.text = url;
                     }
                 }
-                
             } else {
                 Utils.showAlertController(title: "Error", message: "\(String(describing: error?.localizedDescription))", viewController: self)
                 print(String(format: "Branch error : %@", error! as CVarArg))

@@ -70,7 +70,11 @@ extension UIStoryboard {
     {
         return self.loadFromStoryBoard(.authentication , "PolicyVC") as! PolicyVC
     }
-    
+     func loadAboutVC() -> AboutMeVC
+    {
+    return self.loadFromStoryBoard(.authentication , "AboutMeVC") as! AboutMeVC
+
+    }
     
     
     //// ******* Home Storyboard ****** ////
@@ -102,6 +106,11 @@ extension UIStoryboard {
     {
         return self.loadFromStoryBoard(.home , "EditProfileVC") as! EditProfileVC
     }
+    func loadaboutProfileVC() -> AboutmeProfileVC
+    {
+        return self.loadFromStoryBoard(.home , "AboutmeProfileVC") as! AboutmeProfileVC
+    }
+    
     
     func loadCallVC() -> CallVC
     {

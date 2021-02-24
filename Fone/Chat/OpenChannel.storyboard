@@ -1370,6 +1370,12 @@ using Foneme Search</string>
                                         <color key="textColor" name="color_online_state_label"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7t-Nk-IYo">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
+                                        <connections>
+                                            <action selector="OpenProfile:" destination="J0f-aM-Rwm" eventType="touchUpInside" id="RcU-6c-Abg"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsQ-HI-ehc" userLabel="Last Updated Label">
                                         <rect key="frame" x="131" y="82" width="65" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -1381,13 +1387,17 @@ using Foneme Search</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="rEv-hE-83j" firstAttribute="leading" secondItem="GGT-zG-w8U" secondAttribute="leading" constant="15" id="BgC-Sw-92V"/>
+                                    <constraint firstItem="u7t-Nk-IYo" firstAttribute="top" secondItem="GGT-zG-w8U" secondAttribute="top" id="CAJ-AB-9oO"/>
                                     <constraint firstItem="3v7-LZ-ARk" firstAttribute="leading" secondItem="rEv-hE-83j" secondAttribute="trailing" constant="16" id="Fcy-eV-uFb"/>
                                     <constraint firstItem="IsQ-HI-ehc" firstAttribute="top" secondItem="SJG-Xr-JeN" secondAttribute="bottom" constant="9" id="JYb-LJ-Km5"/>
+                                    <constraint firstItem="u7t-Nk-IYo" firstAttribute="bottom" secondItem="GGT-zG-w8U" secondAttribute="bottom" id="KJi-KF-MsC"/>
                                     <constraint firstItem="MDf-Oj-S9w" firstAttribute="leading" secondItem="rEv-hE-83j" secondAttribute="trailing" constant="18" id="KU9-j8-tcR"/>
                                     <constraint firstItem="rEv-hE-83j" firstAttribute="centerY" secondItem="1bi-6Z-7Nr" secondAttribute="centerY" id="Mf8-EI-zwL"/>
                                     <constraint firstAttribute="height" constant="121" id="PLS-aR-XaK"/>
+                                    <constraint firstItem="GGT-zG-w8U" firstAttribute="trailing" secondItem="u7t-Nk-IYo" secondAttribute="trailing" id="U0p-Nw-XdU"/>
                                     <constraint firstItem="IsQ-HI-ehc" firstAttribute="leading" secondItem="rEv-hE-83j" secondAttribute="trailing" constant="16" id="cTk-43-shw"/>
                                     <constraint firstItem="SJG-Xr-JeN" firstAttribute="leading" secondItem="MDf-Oj-S9w" secondAttribute="trailing" constant="5" id="ceL-X4-FB7"/>
+                                    <constraint firstItem="u7t-Nk-IYo" firstAttribute="leading" secondItem="GGT-zG-w8U" secondAttribute="leading" id="eas-d4-d4c"/>
                                     <constraint firstItem="3v7-LZ-ARk" firstAttribute="top" secondItem="1bi-6Z-7Nr" secondAttribute="top" constant="26" id="tIQ-qS-Qvm"/>
                                     <constraint firstItem="SJG-Xr-JeN" firstAttribute="top" secondItem="3v7-LZ-ARk" secondAttribute="bottom" constant="10" id="uIz-aL-6oF"/>
                                     <constraint firstItem="MDf-Oj-S9w" firstAttribute="top" secondItem="3v7-LZ-ARk" secondAttribute="bottom" constant="15" id="uxC-Xq-mF0"/>
@@ -1413,7 +1423,7 @@ using Foneme Search</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgb-L4-7qn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-707" y="4286"/>
+            <point key="canvasLocation" x="-707.24637681159425" y="4285.7142857142853"/>
         </scene>
         <!--Create Open Channel Navigation Controller-->
         <scene sceneID="Jev-j2-MeN">

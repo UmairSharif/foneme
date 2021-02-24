@@ -38,7 +38,8 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
     let network = NetworkManager.sharedInstance
     var netStatus : Bool?
     var testSMSCode = ""
-    
+    var isfromsignup = false
+    var isnewuseer = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -200,6 +201,15 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
         }
     }
     
+    
+    
+    
+    
+    func ABoutmeOpen()
+    {
+        
+    }
+    
     func verifyPincodeAPI()
     {
         self.activityIndicator.startAnimating()
@@ -348,14 +358,25 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 let json = JSON(data)
                 let accessToken = json["access_token"].string ?? ""
                 //Call Local Contacts Function
-                LocalContactHandler.instance.getContacts()
                 
                 UserDefaults.standard.set(accessToken, forKey: "AccessToken")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
-                let tabBarVC = UIStoryboard().loadTabBarController()
-                appDeleg.window?.rootViewController = tabBarVC
-                appDeleg.window?.makeKeyAndVisible()
+                
+                
+                if self.isnewuseer == true
+                {
+                //AboutMeVC
+                let vc = UIStoryboard().loadAboutVC()
+                vc.Userid = self.userId ?? ""
+                self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    LocalContactHandler.instance.getContacts()
+                    let tabBarVC = UIStoryboard().loadTabBarController()
+                    appDeleg.window?.rootViewController = tabBarVC
+                    appDeleg.window?.makeKeyAndVisible()
+                }
+           
             case.failure(let error):
                 print("Not Success",error)
                 self.errorAlert("\(error)")

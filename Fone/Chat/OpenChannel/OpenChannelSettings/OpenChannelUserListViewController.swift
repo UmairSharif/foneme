@@ -160,6 +160,9 @@ class OpenChannelUserListViewController: UIViewController, UITableViewDelegate, 
                 let userProfileVC = UserProfileViewController.init(nibName: "UserProfileViewController", bundle: nil)
                 userProfileVC.user = bannedUser
                 DispatchQueue.main.async {
+                    
+                    
+                    
                     guard let navigationController = self.navigationController else { return }
                     navigationController.pushViewController(userProfileVC, animated: true)
                 }
@@ -224,8 +227,13 @@ class OpenChannelUserListViewController: UIViewController, UITableViewDelegate, 
             let userProfileVC = UserProfileViewController.init(nibName: "UserProfileViewController", bundle: nil)
             userProfileVC.user = participant
             DispatchQueue.main.async {
+                
+                
+                self.OpenProfile(participant)
+
+                
                 guard let navigationController = self.navigationController else { return }
-                navigationController.pushViewController(userProfileVC, animated: true)
+//                navigationController.pushViewController(userProfileVC, animated: true)
             }
         }
         
@@ -234,5 +242,32 @@ class OpenChannelUserListViewController: UIViewController, UITableViewDelegate, 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+    
+    
+    func OpenProfile(_ usernew: SBDUser) {
+       let userM = usernew
+
+        
+//        self.view.isUserInteractionEnabled = false
+//        return;
+            
+        debugPrint("USER",userM.userId,userM.friendDiscoveryKey,userM.metaData,userM.friendName, userM.nickname)
+        let vc = UIStoryboard().loadUserDetailsVC()
+        self.getUserDetailPhone(cnic:userM.userId , friend: "" ) { (user, success) in
+            if success {
+                self.view.isUserInteractionEnabled = true
+
+                vc.userDetails = user!
+                vc.modalPresentationStyle = .fullScreen
+         
+                self.present(vc, animated: true, completion: nil)
+            }else{
+//                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true
+//                self.view.isUserInteractionEnabled = true
+            }
+        }
+        
     }
 }

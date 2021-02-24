@@ -18,6 +18,7 @@ class SettingVC: UIViewController {
     @IBOutlet weak var userImage : UIImageView!
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     
+    @IBOutlet weak var lblAboutme: UILabel!
     
     @IBOutlet weak var subscriptionLbl : UILabel!
     @IBOutlet weak var subscriptionView : UIView!
@@ -37,11 +38,19 @@ class SettingVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        
+        
+        if let  about = UserDefaults.standard.value(forKey: "about") as? String{
+            lblAboutme.text = about
+        }
         DispatchQueue.main.async {
             if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                 print(userProfileData)
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
                     self.nameLbl.text = user.name
+//                    self.lblAboutme.text = user.a
+                    
+                    debugPrint("Aboutme",user.aboutme)
                     
                     if let url = URL(string: user.userImage ?? "") {
                         self.downloadImage(from: url)
@@ -67,6 +76,22 @@ class SettingVC: UIViewController {
         subscriptionView.isHidden = true
         
         }
+    }
+    @IBAction func btnAboutme(_ sender: Any) {
+        
+        
+        let vc = UIStoryboard().loadaboutProfileVC()
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+//                userId = user.userId
+                vc.Userid = user.userId ?? ""
+            }
+        }
+       
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     @IBAction func profileBtnTapped(_ sender:UIButton)

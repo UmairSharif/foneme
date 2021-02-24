@@ -19,7 +19,8 @@ class MobileVC: UIViewController,CountryDataDelegate {
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     let network = NetworkManager.sharedInstance
     var netStatus : Bool?
-    
+    var isfromsignup = false
+    var isnewuseer = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,9 +68,11 @@ class MobileVC: UIViewController,CountryDataDelegate {
     
     @IBAction func signUpBtnTapped(_ sender: UIButton)
     {
-//        let vc = UIStoryboard().loadSignUpVC()
-//        self.navigationController?.pushViewController(vc, animated: true)
-        self.navigationController?.popViewController(animated: true)
+        if isfromsignup == false{
+        let vc = UIStoryboard().loadSignUpVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            self.navigationController?.popViewController(animated: true)}
     }
     
     @IBAction func flagBtnTapped(_ sender: UIButton)
@@ -146,7 +149,7 @@ extension MobileVC
                     let vc = UIStoryboard().loadVerificationVC()
                     vc.userId = userId
                     vc.testSMSCode = json["SMSCode"].string ?? ""
-
+                    vc.isfromsignup =  true  //self.isfromsignup
                     vc.mobileNumber = mobileNumber
 //                    SBUGlobals.CurrentUser = SBUUser(userId: userId, nickname: "nickname")
 //                               SBUMain.connect { user, error in

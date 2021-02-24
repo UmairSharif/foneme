@@ -32,7 +32,7 @@ protocol PushKitEventDelegate: AnyObject {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationManagerDelegate {
     
     var window: UIWindow?
     var userInfo : [AnyHashable : Any]?
@@ -44,7 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
     var pushKitEventDelegate: PushKitEventDelegate?
     var voipRegistry = PKPushRegistry.init(queue: DispatchQueue.main)
     let viewController = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "VideoCallVC") as! VideoCallVC
-    
+    var locManager = CLLocationManager()
+    var changeLocAuthoriseStatus : ((CLAuthorizationStatus) -> ())?
+    var updateLocBlock : ((CLLocation) -> ())?
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -73,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
             print("User accepted notifications: \(accepted)")
         })
         
-        
+        LocationAcess()
         // Voip Push Call Registry
         // self.voipRegistration()
         TwilioVideoSDK.audioDevice = self.audioDevice;
@@ -185,6 +188,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
             //Call Local Contacts Function
             LocalContactHandler.instance.getContacts()
             
+//            let vc = UIStoryboard().loadAboutVC()
+//            vc.Userid = self.userId ?? ""
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+            
+            
             let tabBarVC = UIStoryboard().loadTabBarController()
             appDeleg.window?.rootViewController = tabBarVC
             appDeleg.window?.makeKeyAndVisible()
@@ -197,6 +206,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
                     USER_ID = user.mobile ?? ""
                     USER_NAME = user.name ?? ""
+                    
+//                    let vc = UIStoryboard().loadAboutVC()
+//                    vc.Userid = USER_ID ?? ""
+//                    self.navigationController?.pushViewController(vc, animated: true)
                     
                     let userDefault = UserDefaults.standard
                     userDefault.setValue(USER_ID, forKey: "sendbird_user_id")
@@ -301,8 +314,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate {
         
         Branch.getInstance().application(app, open: url, options: options)
     }
+    //MARK:- LOCATION METHODS
+    var isLocationPermissionGranted : Bool
+    {
+        guard CLLocationManager.locationServicesEnabled() else { return false }
+        return [.authorizedAlways, .authorizedWhenInUse].contains(CLLocationManager.authorizationStatus())
+    }
     
-  
+    var isUserDeniedLocation : Bool {
+        guard CLLocationManager.locationServicesEnabled() else { return true }
+        return [.denied, .restricted].contains(CLLocationManager.authorizationStatus())
+    }
+    
+    //Get Location access
+    func getLocationAccess() {
+        locManager.delegate = self
+        locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locManager.requestWhenInUseAuthorization()
+        locManager.startUpdatingLocation()
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let loc = locations.last {
+            updateLocBlock?(loc)
+            //               GLBLocation = loc
+            GLBLatitude = loc.coordinate.latitude
+            GLBLongitude = loc.coordinate.longitude
+            debugPrint("\n Current Location >>>>>>>",GLBLatitude , GLBLongitude)
+            manager.stopUpdatingLocation()
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.changeLocAuthoriseStatus?(status)
+    }
+    
+    
+    func LocationAcess()
+    {
+     if appDelegateShareInst.isUserDeniedLocation {
+         DispatchQueue.main.async {
+             let alertController = UIAlertController(title: nil, message: "Turn on Location Services to Allow Fone Messenger to Determine Your Location", preferredStyle: .alert)
+             alertController.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (action) in
+                 DispatchQueue.main.async {
+                     if let settingsUrl = URL(string: UIApplication.openSettingsURLString) , UIApplication.shared.canOpenURL(settingsUrl) {
+                         UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                     }
+                 }
+             }))
+             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+             
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+         }
+     } else {
+         appDelegateShareInst.getLocationAccess()
+     }
+    }
+    
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

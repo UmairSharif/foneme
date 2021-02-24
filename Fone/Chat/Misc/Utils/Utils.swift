@@ -57,7 +57,7 @@ class Utils: NSObject {
         }
         
         messageDateFormatter.dateStyle = .long
-        messageDateFormatter.timeStyle = .none
+        messageDateFormatter.timeStyle = .short
         messageDateString = messageDateFormatter.string(from: messageDate!)
         
         return messageDateString

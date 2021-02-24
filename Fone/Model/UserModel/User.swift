@@ -19,4 +19,5 @@ class User: Codable {
     var userImage : String?
     var numberWithOutCode : String?
     var coutryCode : String?
+    var aboutme : String?
 }

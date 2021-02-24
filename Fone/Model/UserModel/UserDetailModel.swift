@@ -23,7 +23,7 @@ struct UserDetailModel : Codable {
     var phoneNumber : String!
     var statusCode : String!
     var userId : String!
-
+    var aboutme: String!
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
@@ -37,8 +37,6 @@ struct UserDetailModel : Codable {
         }
         cnic = ContactsCnic
 
-        
-        
         contactFT = json["ContactFT"].stringValue
         contactVT = json["ContactVT"].stringValue
         countryCode = json["CountryCode"].stringValue
@@ -50,6 +48,11 @@ struct UserDetailModel : Codable {
         phoneNumber = json["PhoneNumber"].stringValue
         statusCode = json["StatusCode"].stringValue
         userId = json["UserId"].stringValue
+        
+        if let dict = json["AboutMe"].dictionaryObject
+        {
+            aboutme = dict["AboutMe"] as? String ?? ""
+        }
     }
 
 

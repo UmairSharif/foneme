@@ -80,6 +80,7 @@ class SignUpVC: UIViewController,CountryDataDelegate {
     {
         //self.navigationController?.popViewController(animated: true)
         let vc = UIStoryboard().loadMobileVC()
+        vc.isfromsignup = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -108,10 +109,10 @@ class SignUpVC: UIViewController,CountryDataDelegate {
 //            self.errorAlert("Please enter your email!")
 //            return false
 //        }
-        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
-            self.errorAlert("Please enter a valid email!")
-            return false
-        }
+//        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
+//            self.errorAlert("Please enter a valid email!")
+//            return false
+//        }
         else if (textFieldFoneId.text?.isEmpty)!
         {
             self.errorAlert("Please enter your Fone Id!")
@@ -171,6 +172,7 @@ extension SignUpVC
                         let vc = UIStoryboard().loadVerificationVC()
                         vc.userId = userId
                         vc.mobileNumber = number
+                        vc.isnewuseer = true
 //                        SBUGlobals.CurrentUser = SBUUser(userId: userId, nickname: self.nameTxt.text!)
 //                                         SBUMain.connect { user, error in
 //                              

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134198D925D19D6000FECCB5 /* AboutMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134198D825D19D6000FECCB5 /* AboutMeVC.swift */; };
+		1395322E25DD9662006D506F /* NewChatCNCTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395322D25DD9662006D506F /* NewChatCNCTVC.swift */; };
+		13EC3CC425D32E7E001C9D95 /* AboutmeProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EC3CC325D32E7E001C9D95 /* AboutmeProfileVC.swift */; };
 		182AE23124FE63460084A174 /* telephone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23024FE63340084A174 /* telephone.caf */; };
 		182AE23224FE63470084A174 /* telephone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23024FE63340084A174 /* telephone.caf */; };
 		182AE23424FE63A50084A174 /* telephone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 182AE23324FE63A40084A174 /* telephone.mp3 */; };
@@ -274,7 +277,10 @@
 		0F4ADBA1AA4F9E534B2809AA /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		133DF3DC25C4C24F003CB2EE /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
 		133DF3DD25C4C26E003CB2EE /* Fone MessengerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone MessengerRelease.entitlements"; sourceTree = "<group>"; };
+		134198D825D19D6000FECCB5 /* AboutMeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeVC.swift; sourceTree = "<group>"; };
+		1395322D25DD9662006D506F /* NewChatCNCTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatCNCTVC.swift; sourceTree = "<group>"; };
 		13B6BF1525BF71DB003D8876 /* OneSignalNotificationServiceExtension.appex.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = OneSignalNotificationServiceExtension.appex.dSYM; path = "../../Library/Developer/Xcode/DerivedData/Fone-fvptgtdmzczbxqergdkmjrqmwhlc/Build/Products/Release-iphoneos/OneSignalNotificationServiceExtension.appex.dSYM"; sourceTree = "<group>"; };
+		13EC3CC325D32E7E001C9D95 /* AboutmeProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutmeProfileVC.swift; sourceTree = "<group>"; };
 		182AE23024FE63340084A174 /* telephone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = telephone.caf; sourceTree = "<group>"; };
 		182AE23324FE63A40084A174 /* telephone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = telephone.mp3; sourceTree = "<group>"; };
 		185F52962500E49D003D8DE7 /* iphone-original.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iphone-original.caf"; sourceTree = "<group>"; };
@@ -554,6 +560,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		134198D725D19D2500FECCB5 /* AboutMe */ = {
+			isa = PBXGroup;
+			children = (
+				134198D825D19D6000FECCB5 /* AboutMeVC.swift */,
+			);
+			path = AboutMe;
+			sourceTree = "<group>";
+		};
+		1395322C25DD9630006D506F /* NewChatContact */ = {
+			isa = PBXGroup;
+			children = (
+				1395322D25DD9662006D506F /* NewChatCNCTVC.swift */,
+			);
+			path = NewChatContact;
+			sourceTree = "<group>";
+		};
 		1BA096AE24817ADA00E0A042 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +634,7 @@
 		1BA096BE24817B4F00E0A042 /* GroupChannel */ = {
 			isa = PBXGroup;
 			children = (
+				1395322C25DD9630006D506F /* NewChatContact */,
 				1BA096BF24817B4F00E0A042 /* GroupChannelsHidden */,
 				1BA096C224817B4F00E0A042 /* GroupChannels */,
 				1BA096C724817B4F00E0A042 /* CreateGroupChannel */,
@@ -1184,6 +1207,7 @@
 		22880EF723C08A5C0044263D /* Authentication Part */ = {
 			isa = PBXGroup;
 			children = (
+				134198D725D19D2500FECCB5 /* AboutMe */,
 				22880F1D23C0C45C0044263D /* PolicyVC */,
 				22880F0B23C0A0DB0044263D /* ForgotPasswordVC */,
 				22880F0823C08D0B0044263D /* SignUpVC */,
@@ -1291,6 +1315,7 @@
 			children = (
 				18A7CDD925162E38006308CB /* PlanListVC.swift */,
 				22880F1323C0AADB0044263D /* SettingVC.swift */,
+				13EC3CC325D32E7E001C9D95 /* AboutmeProfileVC.swift */,
 			);
 			path = SettingVC;
 			sourceTree = "<group>";
@@ -1823,6 +1848,7 @@
 				22880ECB23C074830044263D /* CosmosDefaultSettings.swift in Sources */,
 				1BA0977524817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift in Sources */,
 				1BA0976924817B5000E0A042 /* GroupChannelSettingsMemberTableViewCell.swift in Sources */,
+				1395322E25DD9662006D506F /* NewChatCNCTVC.swift in Sources */,
 				4F16BC8B249D1744001C4708 /* Audio.swift in Sources */,
 				1BA097B224817B5100E0A042 /* LoginViewController.swift in Sources */,
 				1BA0976D24817B5000E0A042 /* GroupChannelNeutralAdminMessageTableViewCell.swift in Sources */,
@@ -1902,10 +1928,12 @@
 				1BA097A324817B5000E0A042 /* OpenChannelSettingsMenuTableViewCell.swift in Sources */,
 				1BA0979724817B5000E0A042 /* CreateOpenChannelViewControllerA.swift in Sources */,
 				1BA0977024817B5000E0A042 /* GroupChannelIncomingMessageTableViewCell.swift in Sources */,
+				134198D925D19D6000FECCB5 /* AboutMeVC.swift in Sources */,
 				22CCC95523C671CC00592614 /* VideoCallVC1.swift in Sources */,
 				22AB54F823CF8E9400823EF8 /* FriendTVC.swift in Sources */,
 				1BA0976224817B5000E0A042 /* GroupChannelInviteMemberDelegate.swift in Sources */,
 				1BA097B524817B5100E0A042 /* CustomProgressCircle.swift in Sources */,
+				13EC3CC425D32E7E001C9D95 /* AboutmeProfileVC.swift in Sources */,
 				22880F0A23C08D190044263D /* SignUp VC.swift in Sources */,
 				22880F0723C08D070044263D /* VerificationVC.swift in Sources */,
 				1BA0974D24817B5000E0A042 /* UserProfileImageNameSettingDelegate.swift in Sources */,
@@ -2146,7 +2174,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.6.6;
+				CURRENT_PROJECT_VERSION = 3.6.13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2159,7 +2187,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2179,7 +2207,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.6.6;
+				CURRENT_PROJECT_VERSION = 3.6.13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2192,7 +2220,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = FonemessgrDistribution;
@@ -2260,7 +2288,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.6.6;
+				CURRENT_PROJECT_VERSION = 3.6.13;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2273,7 +2301,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2293,7 +2321,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.6.6;
+				CURRENT_PROJECT_VERSION = 3.6.13;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2306,7 +2334,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = OneDist;

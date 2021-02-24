@@ -39,7 +39,7 @@ let getSingleGroupDetails = "\(BASEURL)api/account/v1/getSingleGroupDetails"
 let GetUserProfile = "\(BASEURL)api/account/v1/cnctoprofile"
 //searchuser
 let updateAboutme = "\(BASEURL)api/account/v1/updateAboutme"
-
+let getuserdetail = "\(BASEURL)api/account/v1/phoneNumberToProfile"
 
 let BrainTreeServer = "http://yogofly.com/wizride3/upload/file/brain"
 //let BrainTreeServer = "https://techmowebexperts.com/brain"

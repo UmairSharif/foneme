@@ -28,6 +28,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var UserImage: UIImageView!
+    @IBOutlet weak var lblAboutme: UILabel!
     var userDetails:UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
@@ -92,7 +93,14 @@ class UserDetailsVC: UIViewController {
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
+        if FoneID.isEmpty{
         self.btnFonemeID.setTitle("fone.me/\(userDetails?.cnic ?? "")", for: .normal)
+        }
+        else{
+            self.btnFonemeID.setTitle("fone.me/\(userDetails?.name ?? "")", for: .normal)
+
+        }
+        self.lblAboutme.text = userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
     }
     
     @IBAction func btnClickBack(_ sender: UIButton) {

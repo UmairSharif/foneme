@@ -18,7 +18,7 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
     @IBOutlet weak var onlineStateLabel: UILabel!
     @IBOutlet weak var onlineStateImageView: UIImageView!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
-    
+    var userNew:SBDUser?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,7 +50,7 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
         self.profileImageView.setProfileImageView(for: user)
         
         self.nicknameLabel.text = user.nickname
-        
+        userNew = user
         if user.connectionStatus == .online {
             self.onlineStateImageView.image = UIImage(named: "img_online")
             self.onlineStateLabel.text = "Online"
@@ -68,7 +68,31 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
             }
         }
     }
+    @IBAction func OpenProfile(_ sender: Any) {
+        guard let userM = self.userNew else { return }
 
+        
+//        self.view.isUserInteractionEnabled = false
+//        return;
+            
+        debugPrint("USER",userM.userId,userM.friendDiscoveryKey,userM.metaData,userM.friendName, userM.nickname)
+        let vc = UIStoryboard().loadUserDetailsVC()
+        self.getUserDetailPhone(cnic:userM.userId , friend: "" ) { (user, success) in
+            if success {
+                self.view.isUserInteractionEnabled = true
+
+                vc.userDetails = user!
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }else{
+//                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true
+//                self.view.isUserInteractionEnabled = true
+            }
+        }
+        
+    }
+    
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         if let navigationController = self.navigationController {

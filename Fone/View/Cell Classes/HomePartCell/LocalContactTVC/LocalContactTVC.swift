@@ -16,7 +16,9 @@ class LocalContactTVC: UITableViewCell {
     @IBOutlet weak var phoneLbl : UILabel!
     @IBOutlet weak var btnCall : UIButton!
     @IBOutlet weak var btnVideo : UIButton!
-    
+    @IBOutlet weak var lastseen : UILabel!
+    @IBOutlet weak var online : UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
