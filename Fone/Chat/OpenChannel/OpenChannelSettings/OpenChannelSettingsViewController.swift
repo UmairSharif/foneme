@@ -126,9 +126,10 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     message = groupLink;
 
         //Set the link to share.
-        if let link = NSURL(string: groupLink)
+        
+        if let link = NSURL(string: "https://fone.me/g/" + (self.groupInfoDic["GroupName"] as! String ) )
         {
-            let objectsToShare = [message,link] as [Any]
+            let objectsToShare = [link] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             self.present(activityVC, animated: true, completion: nil)
@@ -230,9 +231,26 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 
                   let isPublic =  self.groupInfoDic["IsPublic"] as? String
                           if isPublic == "True" {
-                            banCell.settingMenuLabel.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                            
+                            if let val = self.groupInfoDic["PublicGroupLink"] as? String{
+                            banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
+                            }
+                            else
+                            {
+                                banCell.settingMenuLabel.text =  "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                            }
                            } else {
-                               banCell.settingMenuLabel.text = self.groupInfoDic["GroupLink"] as? String
+//                            if let val = self.groupInfoDic["PublicGroupLink"] as? String{
+//                               banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
+//                            }
+//                            else
+//                            {
+                                if let val = self.groupInfoDic["GroupName"] as? String{
+                                   banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
+                                }else{
+                                banCell.settingMenuLabel.text =  self.groupInfoDic["GroupLink"] as? String
+                                }
+//                            }
                            }
                 
                 cell = banCell

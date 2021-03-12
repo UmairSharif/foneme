@@ -135,10 +135,6 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         }
     }
     
-    
-    
-    
-    
     @objc func clickDoneButton(_ sender: AnyObject) {
         
         if self.isPublicGroup && self.publicGroupLink.isEmpty{

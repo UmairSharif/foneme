@@ -269,7 +269,6 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                    {
                        user.userId = userId
                    }
-                   
                    if let name = userInfo?["Name"]?.string {
                        user.name = name
                    }

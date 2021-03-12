@@ -50,6 +50,19 @@ class SettingVC: UIViewController {
                     self.nameLbl.text = user.name
 //                    self.lblAboutme.text = user.a
                     
+                    
+                    self.getUserDetail(cnic: user.address ?? "", friend: "") { (userModel, success) in
+                        if success {
+                            debugPrint("USER",userModel?.aboutme)
+                            self.lblAboutme.text = userModel?.aboutme
+                        
+                            UserDefaults.standard.setValue(userModel?.aboutme, forKey: "about")
+                            UserDefaults.standard.setValue(userModel?.profession, forKey: "profession")
+
+                            UserDefaults.standard.synchronize()
+                        }
+                    }
+                    
                     debugPrint("Aboutme",user.aboutme)
                     
                     if let url = URL(string: user.userImage ?? "") {

@@ -9,21 +9,28 @@
 import UIKit
 import CoreLocation
 import NVActivityIndicatorView
-class AboutmeProfileVC: UIViewController,UITextViewDelegate {
+class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var lblcount: UILabel!
     @IBOutlet weak var txtaboutme: UITextView!
     @IBOutlet weak var imgvvv: UIImageView!
     @IBOutlet weak var imgyconst: NSLayoutConstraint!
+    @IBOutlet weak var txtProfession: UITextField!
+
     var Userid = ""
     var locationtext = ""
+    var isupdtval = true
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        txtProfession.delegate = self
         
         if let aboutme =  UserDefaults.standard.value(forKey: "about") as? String
         {
             self.txtaboutme.text = aboutme
+        }
+        if let prof = UserDefaults.standard.value(forKey: "profession") as? String
+        {
+            self.txtProfession.text = prof
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -42,9 +49,26 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
                 }
                 
                 debugPrint("Location",placemark.areasOfInterest,placemark.city,placemark.name,placemark.postalAddress,placemark.postalAddressFormatted)
+                
+                var locattext = ""
+//                if let name = placemark.name
+//                {
+//                    locattext = name
+//                }
+                if let city = placemark.city
+                {
+                    locattext = locattext + " " + city
+                }
+               if let state = placemark.state{
+                locattext = locattext + ", " + state
+                }
+                if let state = placemark.country{
+                    locattext = locattext + ", " + state
+                 }
+                 
     //            location = placemark
-                self.locationtext = placemark.postalAddressFormatted ?? (placemark.name ?? "Unknwon")
-                print(placemark.postalAddressFormatted ?? "")
+                self.locationtext = locattext //placemark.postalAddressFormatted ?? (placemark.name ?? "Unknwon")
+//                print(placemark.postalAddressFormatted ?? "")
             }
             
         }
@@ -58,11 +82,20 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
         lblcount.text =  "37/180"
         // Do any additional setup after loading the view.
     }
-    
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isupdtval = false
+        if imgyconst.constant != 100 {
+            imgyconst.constant = 100
+            self.view.layoutIfNeeded()
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        isupdtval = true
+    }
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
+            if imgyconst.constant == 100 && isupdtval == true {
                 imgyconst.constant -=  140
                 self.view.layoutIfNeeded()
 
@@ -71,8 +104,8 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        if imgyconst.constant != 0 {
-            imgyconst.constant = 0
+        if imgyconst.constant != 100 {
+            imgyconst.constant = 100
             self.view.layoutIfNeeded()
         }
     }
@@ -100,6 +133,7 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        isupdtval = true
         if textView.text == "Hey there! I am using Fone Messenger."
         {
             textView.text = ""
@@ -107,9 +141,8 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
         
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        
         if textView.text == ""
-        {
+        {    isupdtval = false
             textView.text = "Hey there! I am using Fone Messenger."
         }
     }
@@ -127,11 +160,13 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
     {
         let current = UIDevice.modelName
         activityIndicator.startAnimating()
-        let param : [String: Any] = ["UserID":Userid,"Location":locationtext,"PhoneModel":current,"PhoneBrand":"iPhone","AboutMe":txtaboutme.text ?? "Hey there! I am using Fone Messenger."]
+        let param : [String: Any] = ["UserID":Userid,"Address":locationtext,"PhoneModel":current,"PhoneBrand":"iPhone","AboutMe":txtaboutme.text ?? "Hey there! I am using Fone Messenger.","Profession": txtProfession.text ?? ""]
+        
         
         var headers = [String:String]()
         headers = ["Content-Type": "application/json"]
         
+        debugPrint("PARAM", param)
         ServerCall.makeCallWitoutFile(updateAboutme, params: param, type: Method.POST, currentView: nil, header: headers) { (response) in
             
             if let json = response {
@@ -143,6 +178,8 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate {
                 if statusCode == "200" || statusCode == "201"
                 {
                     UserDefaults.standard.setValue(self.txtaboutme.text, forKey: "about")
+                    UserDefaults.standard.setValue(self.txtProfession.text, forKey: "profession")
+
                     UserDefaults.standard.synchronize()
 //                    self.callTABBAR()
                     self.navigationController?.popViewController(animated: true)

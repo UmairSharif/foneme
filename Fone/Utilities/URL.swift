@@ -40,13 +40,13 @@ let GetUserProfile = "\(BASEURL)api/account/v1/cnctoprofile"
 //searchuser
 let updateAboutme = "\(BASEURL)api/account/v1/updateAboutme"
 let getuserdetail = "\(BASEURL)api/account/v1/phoneNumberToProfile"
-
+let SearchGroupbyName = "\(BASEURL)api/account/v1/getGroupByName"
+ 
 let BrainTreeServer = "http://yogofly.com/wizride3/upload/file/brain"
 //let BrainTreeServer = "https://techmowebexperts.com/brain"
 let getBrainTreePlans = "\(BrainTreeServer)/plans.php?sandbox=\(IS_SANDBOX)"
 let getSubscriptions_Customer = "\(BrainTreeServer)/createCustomer.php?mode=getSubscriptions&sandbox=\(IS_SANDBOX)&phone="
 let setSubscriptions_Customer = "\(BrainTreeServer)/createCustomer.php?sandbox=\(IS_SANDBOX)"
 let cancelSubscription_Customer = "\(BrainTreeServer)/cancelSubscription.php?sandbox=\(IS_SANDBOX)&subscriptionId="
-
 
 //d/file/brain/cancelSubscription.php?subscriptionId=3zybdg&sandbox=1

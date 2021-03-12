@@ -158,9 +158,9 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     lp.feature = "sharing"
 
 //    let message = "Check out this link"
-    buo.showShareSheet(with: lp, andShareText: message, from: self) { (activityType, completed) in
-      print(activityType ?? "")
-    }
+//    buo.showShareSheet(with: lp, andShareText: message, from: self) { (activityType, completed) in
+//      print(activityType ?? "")
+//    }
          let isPublic =  self.groupInfoDic["IsPublic"] as? String
         if isPublic == "True" {
             groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String )"
@@ -201,13 +201,17 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     
     message = groupLink;
         //Set the link to share.
-        if let link = NSURL(string: groupLink)
+   
+    if let val = self.groupInfoDic["GroupName"]  as? String
+    {
+        if let link1 = NSURL(string: "https://fone.me/g/" + val)
         {
-            let objectsToShare = [message,link] as [Any]
+            let objectsToShare = [link1] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             self.present(activityVC, animated: true, completion: nil)
         }
+    }
     }
     
     
@@ -268,9 +272,32 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             
             let isPublic =  self.groupInfoDic["IsPublic"] as? String
             if isPublic == "True" {
-                infoLabel?.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                
+                if let val =  self.groupInfoDic["PublicGroupLink"] as? String {
+                infoLabel?.text =  "https://fone.me/g/" + val
+                }
+                else
+                {
+                    if let val = self.groupInfoDic["GroupName"] as? String{
+                        infoLabel?.text =  "https://fone.me/g/" + val
+                    }else{
+                    infoLabel?.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                    }
+                }//
+               
             } else {
-                infoLabel?.text = self.groupInfoDic["GroupLink"] as? String
+//                if let val =  self.groupInfoDic["PublicGroupLink"] as? String {
+//                infoLabel?.text =  "https://fone.me/g/" + val
+//                }
+//                else
+//                {
+                    if let val = self.groupInfoDic["GroupName"] as? String{
+                        infoLabel?.text =  "https://fone.me/g/" + val
+                    }else{
+                        infoLabel?.text =  self.groupInfoDic["GroupLink"] as? String
+                    }
+//                    infoLabel?.text =  self.groupInfoDic["GroupLink"] as? String
+//                }
             }
             return cell
             

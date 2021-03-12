@@ -32,7 +32,7 @@ protocol PushKitEventDelegate: AnyObject {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationManagerDelegate, GroupChannelsUpdateListDelegate {
     
     var window: UIWindow?
     var userInfo : [AnyHashable : Any]?
@@ -89,22 +89,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
             print(params ?? "");
 
             if let params = params as? [String: AnyObject] {
-                if let foneId = params["ID"] as? String {
-                        
+                
+            if let GroupId = params["GroupnName"] as? String   {
+                
+                self.RedirectToGroup(GrpName: GroupId)
+             }
+              else if let foneId = params["ID"] as? String {
                     if let topVC = topViewController() {
                         topVC.view.alpha = 0.2
+                        topVC.view.sd_showActivityIndicatorView()
                         let vc = UIStoryboard().loadUserDetailsVC()
 //                        vc.userDetails = userModel!
                         vc.FoneID = foneId
                         vc.isFromLink = true
                         vc.modalPresentationStyle = .overFullScreen
                         vc.modalTransitionStyle = .crossDissolve
-                        
                         topVC.present(vc, animated: false, completion: {
-                            
                             topVC.view.alpha = 1
                         })
-
                     }
                 } else if let channelURL  = params["~channel"] as? String {
                     if channelURL.contains("sendbird_group_channel") {
@@ -143,7 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
                                 // Error.
                                 return
                             }
-
                             // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
                             
                             let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
@@ -158,10 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
                         }
                         }
                     }
-                    
                     print(params);
-
-
                 }
             }
             
@@ -286,8 +284,122 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
     }
     
     
-    
+    func RedirectToGroup(GrpName:String)
+    {
+        let parameters = [
+            "GroupName": GrpName
+        ] as [String:Any]
+        var  activity: UIActivityIndicatorView?
+        // print("params: \(parameters)")
+      if  let topVC = topViewController()
+        {
+         activity = UIActivityIndicatorView.init(frame: CGRect.init(x: topVC.view.frame.width/2 - 30, y: topVC.view.frame.height/2, width: 60, height: 60))
+        activity?.style = .gray
+//                            topVC.view.alpha = 0.8
+        activity?.startAnimating()
+        activity?.hidesWhenStopped = true
+        topVC.view.addSubview(activity!)
 
+        }
+        var headers = [String:String]()
+        headers = ["Content-Type": "application/json"]
+      
+        ServerCall.makeCallWitoutFile(SearchGroupbyName, params: parameters, type: Method.POST, currentView: nil, header: headers) { (response) in
+            
+            if let json = response {
+                
+                  debugPrint(json)
+                
+                let statusCode = json["StatusCode"].string ?? ""
+                if let arr = json.dictionary
+                {
+                    if let vall = arr["GroupData"]?.array
+                    {
+                        
+                        if  vall.count > 0
+                        {
+                            var channame = GrpName
+                            var grouptype = "false"
+                            if let chanel = vall[0].dictionary
+                            {
+                                channame = chanel["GroupID"]?.string ?? ""
+                                grouptype = chanel["IsPublic"]?.string ?? ""
+//                            channame =  GrpName //OXvlz0AVieb
+                            }
+                        if let topVC = topViewController() {
+                            
+                          
+                            if grouptype != "False"{
+                                var channel: SBDOpenChannel?
+
+                                
+                        SBDOpenChannel.getWithUrl(channame) { (groupChannel, error) in
+                            guard error == nil else {
+//                                topVC.view.alpha = 1
+                                // Error.
+                                return
+                            }
+                            channel = groupChannel
+                            debugPrint("groupChannel",groupChannel?.name)
+                            
+                            topVC.view.alpha = 1.0
+                            activity?.stopAnimating()
+                            let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
+                             vc.channel = channel
+                            
+                             vc.modalPresentationStyle = .overFullScreen
+                            vc.modalTransitionStyle = .crossDissolve
+                            let navCont = UINavigationController.init(rootViewController: vc)
+                            
+                            topVC.present(navCont, animated: false, completion: {
+                                topVC.view.alpha = 1
+                            })
+                            
+                        }}
+                            else{
+                                
+                                var channel: SBDGroupChannel?
+                                SBDGroupChannel.getWithUrl(channame) { (groupChannel, error) in
+                                    guard error == nil else {
+        //                                topVC.view.alpha = 1
+                                        // Error.
+                                        return
+                                    }
+                                    channel = groupChannel
+                                    debugPrint("groupChannel",groupChannel?.name)
+                                    topVC.view.alpha = 1.0
+                                    activity?.stopAnimating()
+
+                                    let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                                     vc.channel = channel
+                                    vc.isfromNotif = true
+                                     vc.modalPresentationStyle = .overFullScreen
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    let navCont = UINavigationController.init(rootViewController: vc)
+                                    topVC.present(navCont, animated: false, completion: {
+        //                                topVC.view.alpha = 1
+                                    })
+                                }
+                            }
+                            // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
+                            
+
+                        }
+                        }
+                        
+                    }
+                    }
+                    
+                
+                if statusCode == "200" || statusCode == "201"
+                {
+                    
+                }
+                //Table View Reload
+            }
+        }
+    
+    }
     
     
     func initializePushKit() {

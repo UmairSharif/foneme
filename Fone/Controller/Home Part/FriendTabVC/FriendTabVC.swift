@@ -601,8 +601,6 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
-                    
-                    
                     if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC{
 
                         if cell.userImage.image != nil

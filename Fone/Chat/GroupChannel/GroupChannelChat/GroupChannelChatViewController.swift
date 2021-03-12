@@ -27,7 +27,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     var userDetails:UserDetailModel?
     var titleLabel: UILabel!
     var lastUpdatedLabel: UILabel!
-
+var isfromNotif = false
     @IBOutlet weak var viewLeft: UIView!
     @IBOutlet weak var imguser: UIImageView!
     @IBOutlet weak var inputMessageTextField: UITextField!
@@ -84,7 +84,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     var pickerControllerOpened = false
     
     var typingIndicatorTimer: Timer?
-    
+    var isloadingnot = true
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -440,6 +440,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         var timestamp: Int64 = 0
         if initial {
             self.hasPrevious = true
+            
             timestamp = Int64.max
         }
         else {
@@ -469,6 +470,38 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                     if delegate.responds(to: #selector(GroupChannelsUpdateListDelegate.updateGroupChannelList)) {
                         delegate.updateGroupChannelList!()
                     }
+                    
+                    if messages.count > 0 {
+                        DispatchQueue.main.async {
+                            self.messages.removeAll()
+                            
+                            for message in messages {
+                                self.messages.append(message)
+                                
+                                if self.minMessageTimestamp > message.createdAt {
+                                    self.minMessageTimestamp = message.createdAt
+                                }
+                            }
+                            
+                            if self.resendableMessages.count > 0 {
+                                for message in self.resendableMessages.values {
+                                    self.messages.append(message)
+                                }
+                            }
+                            
+                            self.initialLoading = true
+                            
+                            self.messageTableView.reloadData()
+                            self.messageTableView.layoutIfNeeded()
+                            
+                            self.messageTableView.scrollToRow(at: IndexPath(row: messages.count-1, section: 0), at: .top, animated: false)
+                            self.initialLoading = false
+                            self.isLoading = false
+                        }
+                    }
+                }
+                else{
+                   //MARK:- ML for Deeplink:-
                     
                     if messages.count > 0 {
                         DispatchQueue.main.async {
@@ -609,6 +642,14 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         self.sendUserMessageButton.isEnabled = false
         
         var preSendMessage: SBDUserMessage?
+//
+//        let params = SBDUserMessageParams(message: messageText)
+//        params?.mentionedUserIds = channel.members as! [String]
+//
+//        guard let paramsBinded: SBDUserMessageParams = params else {
+//            return
+//        }
+        
         preSendMessage = channel.sendUserMessage(messageText) { (userMessage, error) in
             if let channel = self.channel {
                 channel.endTyping()
@@ -1566,6 +1607,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: - SBDNetworkDelegate
     func didReconnect() {
         // TODO: Fix bug in SDK.
+        
     }
     
     // MARK - GroupChannelSettingsDelegate

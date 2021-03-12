@@ -9,13 +9,16 @@
 import UIKit
 import CoreLocation
 import NVActivityIndicatorView
-class AboutMeVC: UIViewController,UITextViewDelegate {
+class AboutMeVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
 
     @IBOutlet weak var lblcount: UILabel!
     @IBOutlet weak var txtaboutme: UITextView!
     var Userid = ""
     var locationtext = ""
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
+    @IBOutlet weak var imgyconst: NSLayoutConstraint!
+    @IBOutlet weak var txtProfession: UITextField!
+    var isupdtval = true
 
 //    let location = CLLocation()
     override func viewDidLoad() {
@@ -32,13 +35,29 @@ class AboutMeVC: UIViewController,UITextViewDelegate {
                     print("Error:", error ?? "nil")
                     return
                 }
-                
                 debugPrint("Location",placemark.areasOfInterest,placemark.city,placemark.name,placemark.postalAddress,placemark.postalAddressFormatted)
     //            location = placemark
                 self.locationtext = placemark.postalAddressFormatted ?? (placemark.name ?? "Unknwon")
+                
+                var locattext = ""
+//                if let name = placemark.name
+//                {
+//                    locattext = name
+//                }
+                if let city = placemark.city
+                {
+                    locattext = locattext + "" + city
+                }
+               if let state = placemark.state{
+                locattext = locattext + ", " + state
+                }
+                if let state = placemark.country{
+                    locattext = locattext + ", " + state
+                 }
+                self.locationtext = locattext
+                
                 print(placemark.postalAddressFormatted ?? "")
             }
-            
         }
         else{
             locationstatus()
@@ -46,6 +65,19 @@ class AboutMeVC: UIViewController,UITextViewDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isupdtval = false
+        if imgyconst.constant != 100 {
+            imgyconst.constant = 100
+            self.view.layoutIfNeeded()
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        isupdtval = true
+    }
+    
     func locationstatus()
     {
         if appDelegateShareInst.isUserDeniedLocation {
@@ -97,7 +129,7 @@ class AboutMeVC: UIViewController,UITextViewDelegate {
     {
         let current = UIDevice.modelName
         activityIndicator.startAnimating()
-        let param : [String: Any] = ["UserID":Userid,"Location":locationtext,"PhoneModel":current,"PhoneBrand":"iPhone","AboutMe":txtaboutme.text ?? "Hey there! I am using fone messenger."]
+        let param : [String: Any] = ["UserID":Userid,"Address":locationtext,"PhoneModel":current,"PhoneBrand":"iPhone","AboutMe":txtaboutme.text ?? "Hey there! I am using fone messenger.", "Profession": txtProfession.text ?? ""]
         
         var headers = [String:String]()
         headers = ["Content-Type": "application/json"]

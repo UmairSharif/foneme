@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fone</string>
+	<string>FoneMe</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -101,6 +101,7 @@
 		<string>foneme-alternate.app.link</string>
 		<string>foneme-test.app.link</string>
 		<string>foneme-alternate.test.app.link</string>
+		<string>fone.me.app.link</string>
 	</array>
 </dict>
 </plist>

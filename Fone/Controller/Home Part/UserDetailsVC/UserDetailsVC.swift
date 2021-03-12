@@ -27,8 +27,11 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var btnFriend: UIButton!
     @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var LbluserName: UILabel!
+    @IBOutlet weak var lblAdress: UILabel!
     @IBOutlet weak var UserImage: UIImageView!
     @IBOutlet weak var lblAboutme: UILabel!
+    @IBOutlet weak var lblprofession: UILabel!
+    @IBOutlet weak var viewLoc: UIView!
     var userDetails:UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
@@ -51,6 +54,7 @@ class UserDetailsVC: UIViewController {
             
             self.getUserDetail(cnic: FoneID, friend: "") { (userModel, success) in
                 if success {
+//                    debugPrint("USER",)
                     self.activityIndicatorView?.stopAnimating()
                     self.userDetails = userModel
                     self.UpdateDetails()
@@ -100,7 +104,16 @@ class UserDetailsVC: UIViewController {
             self.btnFonemeID.setTitle("fone.me/\(userDetails?.name ?? "")", for: .normal)
 
         }
-        self.lblAboutme.text = userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
+        self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
+        self.lblprofession.text = self.userDetails?.profession ?? ""
+        viewLoc.isHidden = true
+
+        if self.userDetails?.location != "" &&  self.userDetails?.location != nil && self.userDetails?.location != "null"
+        {
+            viewLoc.isHidden = false
+            self.lblAdress.text = self.userDetails?.location ?? ""
+        }
+     
     }
     
     @IBAction func btnClickBack(_ sender: UIButton) {
