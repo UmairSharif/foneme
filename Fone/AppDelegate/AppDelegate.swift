@@ -94,6 +94,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
                 
                 self.RedirectToGroup(GrpName: GroupId)
              }
+            else if let GroupId = params["GroupName"] as? String   {
+                self.RedirectToGroup(GrpName: GroupId)
+             }
               else if let foneId = params["ID"] as? String {
                     if let topVC = topViewController() {
                         topVC.view.alpha = 0.2

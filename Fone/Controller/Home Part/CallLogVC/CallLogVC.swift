@@ -203,6 +203,9 @@ class CallLogVC: UIViewController {
     @IBAction func missBtnTapped(_ sender : UIButton)
     {
         self.status = "Missed"
+        if missCallArray.count == 0{
+        getCallLogAPI(showLoader: true)
+        }
         self.callLogTVC.reloadData()
     }
     
