@@ -322,11 +322,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 }
                 else
                 {
-                    if let message = json["Message"].string
-                    {
-                        print(message)
-                        self.errorAlert("\(message)")
-                    }
+                    self.errorAlert("Verification code not accepted. Please carefully check the code and submit again")
                     
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
