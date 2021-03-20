@@ -263,6 +263,11 @@ extension String {
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
     
+    func hasDigits() -> Bool {
+        let digitsRegex = ".*[0-9]+.*"
+        return NSPredicate(format: "SELF MATCHES %@", digitsRegex).evaluate(with: self)
+    }
+    
     func isValidPasswordWithLength(length: Int) -> Bool {
         return (self.count > length) ? true : false
     }

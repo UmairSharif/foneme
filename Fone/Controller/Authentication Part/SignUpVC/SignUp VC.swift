@@ -99,28 +99,19 @@ class SignUpVC: UIViewController,CountryDataDelegate {
 
     func isVerifiedFields() -> Bool
     {
-        if (nameTxt.text?.isEmpty)!
-        {
+        if nameTxt.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
             self.errorAlert("Please enter your name!")
             return false
         }
-//        else if (emailTxt.text?.isEmpty)!
-//        {
-//            self.errorAlert("Please enter your email!")
-//            return false
-//        }
-//        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
-//            self.errorAlert("Please enter a valid email!")
-//            return false
-//        }
-        else if (textFieldFoneId.text?.isEmpty)!
-        {
+        else if nameTxt.text?.hasDigits() ?? false {
+            self.errorAlert("No digits in name please!")
+            return false
+        }
+        else if textFieldFoneId.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
             self.errorAlert("Please enter your Fone Id!")
             return false
         }
-
-        else if (phoneTxt.text?.isEmpty)!
-        {
+        else if phoneTxt.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true {
             self.errorAlert("Please enter your phone number!")
             return false
         }
