@@ -107,10 +107,23 @@ class FriendTabVC: UIViewController {
             
         }
         
-        isFiltering = false
-        searchBar.text = ""
         loadDataFromCache()
         
+    }
+    
+    func updateView() {
+        
+        // if there is data for table view then show table view
+        if isFiltering && filteredContacts.count > 0 || !isFiltering && friendList.count > 0 {
+            contactTVC.isHidden = false
+            inviteView.isHidden = true
+            contactTVC.reloadData()
+        }
+        // otherwise show invite view
+        else {
+            contactTVC.isHidden = true
+            inviteView.isHidden = false
+        }
     }
     
     func loadDataFromCache() {
@@ -121,12 +134,7 @@ class FriendTabVC: UIViewController {
             return
         }
         self.friendList.removeAll()
-        
-        if contacts.count == 0 {
-            self.inviteView.isHidden = false
-        } else {
-            self.inviteView.isHidden = true
-        }
+
         for items in contacts {
             let dict = items.dictionary
             
@@ -143,13 +151,8 @@ class FriendTabVC: UIViewController {
             
         }
         print("self.friendList = \(self.friendList.count)");
-        contactTVC.reloadData()
+        updateView()
     }
-    
-    //    func removeSpecialCharsFromString(text: String) -> String {
-    //        let okayChars = Set("1234567890+")
-    //        return text.filter {okayChars.contains($0) }
-    //    }
     
     func sendContactAPI(contactsArray : [Contacts], showLoader: Bool)
     {
@@ -185,12 +188,6 @@ class FriendTabVC: UIViewController {
             
             contactList.append(parameter)
         }
-        
-        //        let parameter = ["ContactsName": "Saru",
-        //                "ContactsNumber": "+919638529701"
-        //            ]
-        //
-        //         contactList.append(parameter)
         
         var parameters = [
             "UserId" : userId ?? "",
@@ -263,27 +260,10 @@ class FriendTabVC: UIViewController {
                 let contacts = json["Contacts"].array
                 if contacts?.count == 0
                 {
-                    guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data
-                        
-                        else {
-                            self.inviteView.isHidden = false
-                            return
-                    }
-                    guard let _ = try? PropertyListDecoder().decode([JSON].self, from: contactData) else {
-                        self.inviteView.isHidden = false
-                        return
-                    }
-                    //                    if contacts.count > 0 {
-                    self.inviteView.isHidden = true
-                    //                    }
-                    //                    else {
-                    //                        self.inviteView.isHidden = false
-                    //                    }
-                    
+                    self.updateView()
                 }
                 else
                 {
-                    self.inviteView.isHidden = true
                     self.loadDataFromCache()
                     self.getUSERSTATUS()
                     
@@ -321,7 +301,9 @@ class FriendTabVC: UIViewController {
             if (users?.count)! > 0 {
                 self.user.removeAll()
                 self.user = users!
-                self.contactTVC.reloadData()
+            }
+            DispatchQueue.main.async {
+                self.updateView()
             }
         })
         }
@@ -860,12 +842,13 @@ extension FriendTabVC : UISearchBarDelegate {
         isFiltering = true
         guard let searchText = searchBar.text else {
             isFiltering = false
+            updateView()
             return
         }
         if searchText == "" {
             isFiltering = false
             self.filteredContacts.removeAll()
-            self.contactTVC.reloadData()
+            updateView()
             return
         }
         
@@ -884,7 +867,7 @@ extension FriendTabVC : UISearchBarDelegate {
                 if self.isFiltering == false {
                     self.showAlert("Not user found for this fone id.")
                 }
-                self.contactTVC.reloadData()
+                self.updateView()
             }
         }
         
@@ -911,7 +894,11 @@ extension FriendTabVC : UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        if searchText.isEmpty {
+            isFiltering = false
+            self.filteredContacts.removeAll()
+            updateView()
+        }
     }
     
 }
