@@ -108,6 +108,11 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
     @IBAction func resendBtnTapped(_ sender : UIButton)
     {
         //Resend Pincode API
+        time = 120
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+        btnResend.isHidden = true
+        btnSubmit.isHidden = false
+
         self.resendPincodeAPI()
     }
     
@@ -173,11 +178,6 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
             btnResend.isHidden = false
             btnSubmit.isHidden = true
             timer.invalidate()
-        }
-        else
-        {
-            btnResend.isHidden = true
-            btnSubmit.isHidden = false
         }
         labelTimer.text = String(time)
     }
@@ -413,7 +413,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                     }
                     else
                     {
-                        self.showAlert("New pincode is resend to your numnber.")
+                        self.showAlert("New pincode is resent to your numnber.")
                     }
                 }
                 else
