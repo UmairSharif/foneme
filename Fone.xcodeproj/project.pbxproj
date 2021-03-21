@@ -2174,7 +2174,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.6.22;
+				CURRENT_PROJECT_VERSION = 3.7.5.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2187,7 +2187,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.22;
+				MARKETING_VERSION = 3.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2205,9 +2205,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.6.22;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3.7.5.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2220,10 +2220,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.6.22;
+				MARKETING_VERSION = 3.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
-				PROVISIONING_PROFILE_SPECIFIER = FonemessgrDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e x86_64 ";
@@ -2319,8 +2319,8 @@
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3.6.22;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2337,7 +2337,7 @@
 				MARKETING_VERSION = 3.6.22;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = OneDist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
