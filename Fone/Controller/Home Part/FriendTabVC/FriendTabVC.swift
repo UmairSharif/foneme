@@ -677,7 +677,6 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
               var isContactAdded = false
               if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
                                 if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                                    _ = contacts.map({ (j) -> String in j.dictionary?["ContactsNumber"]?.string ?? ""}).firstIndex(of: "+92318 1529152")
                                     if contacts.count > 0 {
                                         for items in contacts {
                                             let dict = items.dictionary
