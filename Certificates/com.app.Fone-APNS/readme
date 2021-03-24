@@ -1,0 +1,6 @@
+Hi fellow developer.
+
+This folder contains cert request, certificate and private key for voip push.
+This set was created specifically for use with OneSignal.com. Once logged into their dashboard go to Settings and under Native platforms find Apple iOS.
+When you click on edit for this section you'll see option to change optional sandbox certificate. There you can .p12 file from this folder.
+
