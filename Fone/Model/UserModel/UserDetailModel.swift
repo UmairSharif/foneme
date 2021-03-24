@@ -47,7 +47,7 @@ struct UserDetailModel : Codable {
         imageUrl = json["ImageUrl"].stringValue
         mobileNumberWithoutCode = json["MobileNumberWithoutCode"].stringValue
         name = json["Name"].stringValue
-        phoneNumber = json["PhoneNumber"].stringValue.replacingOccurrences(of: " ", with: "") // unify number format with that loaded as a list of contacts. no spaces
+        phoneNumber = json["PhoneNumber"].stringValue
         statusCode = json["StatusCode"].stringValue
         userId = json["UserId"].stringValue
         
