@@ -136,6 +136,9 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
                                     let name = dict?["ContactsCnic"]?.string ?? ""
                                     arrayNumber.append(number)
                                     self.localUserInfo["\(number)"] = name;
+                                    // FM-3 populate friendName
+                                    // to use down the logic execution
+                                    self.localUserInfo["friendname\(number)"] =  dict?["ContactsName"]?.string ?? ""
                                 }
                             }
                         }
@@ -177,6 +180,9 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
                         continue
                     }
                     user.nickname = self.localUserInfo[user.userId]
+                    // FM-3. friendName
+                    // this way we populate friendName from userdefaults (see how the self.localUserInfo is populated)
+                    user.friendName = self.localUserInfo["friendname\(user.userId)"]
                     self.users.append(user)
                     self.allUsers.append(user)
                 }
@@ -270,8 +276,15 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         DispatchQueue.main.async {
             if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
                 let user = self.users[indexPath.row]
-                updateCell.nicknameLabel.text = self.users[indexPath.row].friendName// "fone.me/\(self.users[indexPath.row].nickname!)"
-
+                // FM-3.
+                // use user.nickname to populate label instead of
+                // user.friendName.
+                // Reason - in the private channel settings screen
+                // the nickname is used.
+                // To move to user.friendName display need to do:
+                // 1. Change private channel settings screen to show friend name instead of nickname
+                // 2. use user.friendName below instead of nickname
+                updateCell.nicknameLabel.text = user.nickname
                 updateCell.profileImageView.setProfileImageView(for: user)
                 
                 if self.selectedUsers[user.userId] != nil {
