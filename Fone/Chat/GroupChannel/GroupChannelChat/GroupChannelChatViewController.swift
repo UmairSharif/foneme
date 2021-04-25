@@ -261,8 +261,7 @@ var isfromNotif = false
     }
     @IBAction func btnProfile(_ sender: Any) {
         let vc = UIStoryboard().loadUserDetailsVC()
-        vc.isSearch = true
-//        vc.delegate = self
+        // @rackuka: vs.isSearch = true removed. Reason - user details are opened from group channel chat. not from search
         vc.userDetails = userDetails
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)

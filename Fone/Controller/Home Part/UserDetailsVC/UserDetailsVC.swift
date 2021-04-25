@@ -14,6 +14,16 @@ import NVActivityIndicatorView
 protocol AddFriendDelegate {
     func addFriendRefresh()
 }
+
+// @rackuka: introduce isFriendAdded - app specific property designating if button should let add friend OR depict that the friend is added
+class UIFriendButton: UIButton {
+    var isFriendAdded: Bool = false {
+        didSet {
+            self.isSelected = isFriendAdded
+            self.isUserInteractionEnabled = !isFriendAdded
+        }
+    }
+}
 class UserDetailsVC: UIViewController {
 
     //MARK:-Outlets
@@ -24,7 +34,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var btnVideoCall: UIButton!
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnChat: UIButton!
-    @IBOutlet weak var btnFriend: UIButton!
+    @IBOutlet weak var btnFriend: UIFriendButton!
     @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var lblAdress: UILabel!
@@ -70,39 +80,31 @@ class UserDetailsVC: UIViewController {
     //MARK:- Update Details
     func UpdateDetails()
     {
+        guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data else {return}
+        
         let currUserNumber = userDetails?.phoneNumber ?? ""
-              var isContactAdded = false
-              if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
-                                if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                                    if contacts.count > 0 {
-                                        for items in contacts {
-                                            let dict = items.dictionary
-                                            let number = dict?["ContactsNumber"]?.string ?? ""
-                                          if number == currUserNumber {
-                                              isContactAdded = true
-                                              break;
-                                          }
-                                            
-                                        }
-                                    }
-                                }
-                                
-                            }
-        if isSearch && !isContactAdded{
-            self.btnFriend.isHidden = false
-        }else{
-            self.btnFriend.isHidden = false
-            self.btnFriend.isSelected = true
+        var isContactAdded = false
+        
+        if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+            // @rackuka: rewritten with contacts.contains - syntax sugar
+            isContactAdded = contacts.contains(where: { (items) -> Bool in
+                let dict = items.dictionary
+                return currUserNumber == (dict?["ContactsNumber"]?.string ?? "")
+            })
         }
+        // @rackuka: show add friend button only when opening from search friends results
+        self.btnFriend.isHidden = !self.isSearch
+        
+        self.btnFriend.isFriendAdded = isContactAdded
+
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
         if FoneID.isEmpty{
-        self.btnFonemeID.setTitle("fone.me/\(userDetails?.cnic ?? "")", for: .normal)
+            self.btnFonemeID.setTitle("fone.me/\(userDetails?.cnic ?? "")", for: .normal)
         }
         else{
             self.btnFonemeID.setTitle("fone.me/\(userDetails?.name ?? "")", for: .normal)
-
         }
         self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
         self.lblprofession.text = self.userDetails?.profession ?? ""
@@ -113,7 +115,6 @@ class UserDetailsVC: UIViewController {
             viewLoc.isHidden = false
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
-     
     }
     
     @IBAction func btnClickBack(_ sender: UIButton) {
@@ -129,6 +130,8 @@ class UserDetailsVC: UIViewController {
     @IBAction func btnClickFriend(_ sender: UIButton) {
         self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: (btnFonemeID.titleLabel?.text)!) { (user, success) in
             if success {
+                // @rackuka: reflect state change - now friend has been added
+                self.btnFriend.isFriendAdded = true
                 self.showAlert("Friend add successfully")
                 if self.delegate != nil {
                     self.delegate?.addFriendRefresh()
