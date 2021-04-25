@@ -2177,7 +2177,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.5.4;
+				CURRENT_PROJECT_VERSION = 3.7.6.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2190,7 +2190,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.5;
+				MARKETING_VERSION = 3.7.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2210,7 +2210,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.5.4;
+				CURRENT_PROJECT_VERSION = 3.7.6.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2223,7 +2223,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.5;
+				MARKETING_VERSION = 3.7.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
