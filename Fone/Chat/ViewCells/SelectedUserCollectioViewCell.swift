@@ -33,6 +33,6 @@ class SelectedUserCollectionViewCell: UICollectionViewCell {
         else {
             self.profileImageView.image = UIImage(named: "img_profile")
         }
-        self.nicknameLabel.text = self.user.nickname
+        self.nicknameLabel.text = self.user.nickname ?? "No name"
     }
 }

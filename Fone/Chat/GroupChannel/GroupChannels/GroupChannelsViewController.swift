@@ -384,7 +384,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
         }
         
-        cell.channelNameLabel.text = channel.name//Utils.createGroupChannelName(channel: channel)
+         cell.channelNameLabel.text = channel.name//Utils.createGroupChannelName(channel: channel)
         
         let lastMessageDateFormatter = DateFormatter()
         var lastUpdatedAt: Date?
@@ -430,6 +430,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             if channel.lastMessage != nil {
                 if channel.lastMessage is SBDUserMessage {
                     let lastMessage = channel.lastMessage as! SBDUserMessage
+
                     cell.lastMessageLabel.text = lastMessage.message
                 }
                 else if channel.lastMessage is SBDFileMessage {
@@ -461,7 +462,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             cell.unreadMessageCountLabel.text = "+99"
         }
         else if channel.unreadMessageCount > 0 {
-            cell.unreadMessageCountLabel.text = String(channel.unreadMessageCount)
+           
+            cell.unreadMessageCountLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            cell.unreadMessageCountLabel.text =  "\(channel.unreadMessageCount)"
+//
+//            cell.unreadMessageCountLabel.text = String(channel.unreadMessageCount)
         }
         else {
             cell.unreadMessageCountContainerView.isHidden = true

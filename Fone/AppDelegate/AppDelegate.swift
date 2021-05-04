@@ -308,9 +308,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BranchDelegate,CLLocationM
         headers = ["Content-Type": "application/json"]
       
         ServerCall.makeCallWitoutFile(SearchGroupbyName, params: parameters, type: Method.POST, currentView: nil, header: headers) { (response) in
-            
             if let json = response {
-                
                   debugPrint(json)
                 
                 let statusCode = json["StatusCode"].string ?? ""

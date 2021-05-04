@@ -577,7 +577,12 @@ var isfromNotif = false
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        self.determineScrollLock()
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//               if self.view.frame.origin.y == 0 {
+//                   self.view.frame.origin.y -= keyboardSize.height
+//               }
+//           }
+//        self.determineScrollLock()
         
         self.keyboardShown = true
         
@@ -590,7 +595,7 @@ var isfromNotif = false
                self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            
+
             self.stopMeasuringVelocity = true
             self.scrollToBottom(force: false)
             self.keyboardShown = true
@@ -598,11 +603,15 @@ var isfromNotif = false
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
+//        if self.view.frame.origin.y != 0 {
+//                self.view.frame.origin.y = 0
+//            }
+        
         self.keyboardShown = false
         self.keyboardHeight = 0
         
         let (_, duration, _) = Utils.getKeyboardAnimationOptions(notification: notification)
-        
+
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
               self.inputMessageInnerContainerViewBottomMargin.constant = 0

@@ -125,9 +125,9 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                }
     message = groupLink;
 
-        //Set the link to share.
         
-        if let link = NSURL(string: "https://fone.me/g/" + (self.groupInfoDic["GroupName"] as! String ) )
+        
+        if let link = NSURL(string: "https://fone.me/g/" + (self.groupInfoDic["PublicGroupLink"] as! String ) )
         {
             let objectsToShare = [link] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
@@ -260,7 +260,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 if let participantCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                     participantCell.settingMenuLabel.text = "Participants"
                     participantCell.settingMenuIconImageView.image = UIImage(named: "img_icon_participant")
-                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + 1)))
+                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + channel.operators!.count ?? 0)))
                     
                     cell = participantCell
                 }
@@ -314,11 +314,8 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                             if let nickname = self.operators[opIndex].nickname {
                                 operatorCell.nicknameLabel.text = nickname
                             }
-                            
                             operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
-                            
                             operatorCell.accessoryType = .disclosureIndicator
-                            
                             operatorCell.profileCoverView.isHidden = true
                             
                             cell = operatorCell

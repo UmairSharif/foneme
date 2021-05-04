@@ -181,7 +181,8 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
 //            return
             
        } else {
-        groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+//        groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+        groupLink = self.groupInfoDic["GroupLink"] as! String 
         
 //        let buo = BranchUniversalObject.init(canonicalIdentifier: "content/\(self.groupInfoDic["GroupLink"] as! String )")
 //        buo.title = "Group"
@@ -202,9 +203,9 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
     message = groupLink;
         //Set the link to share.
    
-    if let val = self.groupInfoDic["GroupName"]  as? String
+    if let val = self.groupInfoDic["GroupLink"]  as? String
     {
-        if let link1 = NSURL(string: "https://fone.me/g/" + val)
+        if let link1 = NSURL(string: groupLink )
         {
             let objectsToShare = [link1] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
