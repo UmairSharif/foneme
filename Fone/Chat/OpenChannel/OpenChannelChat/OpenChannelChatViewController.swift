@@ -431,16 +431,18 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         guard let messageText = self.inputMessageTextField.text else { return }
         guard let channel = self.channel else { return }
         
-        self.inputMessageTextField.text = ""
-        self.sendUserMessageButton.isEnabled = false
-        
         if messageText.count == 0 {
             return
         }
         
+        self.inputMessageTextField.text = ""
+        self.sendUserMessageButton.isEnabled = false
+        
+       
+        
         var preSendMessage: SBDUserMessage?
         preSendMessage = channel.sendUserMessage(messageText) { (userMessage, error) in
-            
+           
             if error != nil {
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }

@@ -198,7 +198,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-Cx-yKP">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-Cx-yKP">
                                 <rect key="frame" x="0.0" y="18" width="414" height="878"/>
                             </containerView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-tQ-QH6" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
@@ -1708,7 +1708,7 @@ using Foneme Search</string>
                                 </button>
                             </barButtonItem>
                             <barButtonItem style="plain" id="60r-Pz-tIZ">
-                                <view key="customView" contentMode="scaleToFill" id="0iw-Op-X8t">
+                                <view key="customView" contentMode="scaleToFill" id="0iw-Op-X8t" customClass="ProfileImageView" customModule="Fone_Messenger" customModuleProvider="target">
                                     <rect key="frame" x="51.5" y="2" width="40" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>

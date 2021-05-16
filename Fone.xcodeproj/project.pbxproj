@@ -231,6 +231,7 @@
 		4F83FD3724ACA39D00121486 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */; };
 		4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */; };
 		4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E874F248FFF7000C62904 /* latestLogoFone.png */; };
+		51F27B7F264AC0A700E1E017 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F27B7E264AC0A700E1E017 /* UITextView.swift */; };
 		C2B159DAA9A8F380BB3616FC /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1214EE57BD824E2C118D689B /* Pods_Fone.framework */; };
 		C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5517CB524C9F592004C42BA /* UserDetailModel.swift */; };
 		C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B524C2FEF000400874 /* VideoCallVC.swift */; };
@@ -505,6 +506,7 @@
 		4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		4F9E874F248FFF7000C62904 /* latestLogoFone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestLogoFone.png; sourceTree = "<group>"; };
+		51F27B7E264AC0A700E1E017 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		AA06ECB32609BBFB00B2018E /* Fone Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone Messenger.entitlements"; sourceTree = "<group>"; };
 		C5517CB524C9F592004C42BA /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
 		C56F34B524C2FEF000400874 /* VideoCallVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallVC.swift; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 		22880E6D23C074380044263D /* Fone */ = {
 			isa = PBXGroup;
 			children = (
+				51F27B7D264AC08D00E1E017 /* = */,
 				AA06ECB32609BBFB00B2018E /* Fone Messenger.entitlements */,
 				133DF3DD25C4C26E003CB2EE /* Fone MessengerRelease.entitlements */,
 				4F16BC75249D1744001C4708 /* Hotline */,
@@ -1516,6 +1519,14 @@
 			path = ChatVC;
 			sourceTree = "<group>";
 		};
+		51F27B7D264AC08D00E1E017 /* = */ = {
+			isa = PBXGroup;
+			children = (
+				51F27B7E264AC0A700E1E017 /* UITextView.swift */,
+			);
+			path = "=";
+			sourceTree = "<group>";
+		};
 		C14853701DC185DAA4A2975A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1935,6 +1946,7 @@
 				1BA097B524817B5100E0A042 /* CustomProgressCircle.swift in Sources */,
 				13EC3CC425D32E7E001C9D95 /* AboutmeProfileVC.swift in Sources */,
 				22880F0A23C08D190044263D /* SignUp VC.swift in Sources */,
+				51F27B7F264AC0A700E1E017 /* UITextView.swift in Sources */,
 				22880F0723C08D070044263D /* VerificationVC.swift in Sources */,
 				1BA0974D24817B5000E0A042 /* UserProfileImageNameSettingDelegate.swift in Sources */,
 				1BA0978024817B5000E0A042 /* GroupChannelIncomingImageVideoFileMessageTableViewCell.swift in Sources */,
@@ -2175,7 +2187,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.2;
+				CURRENT_PROJECT_VERSION = 3.7.7.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2208,7 +2220,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.2;
+				CURRENT_PROJECT_VERSION = 3.7.7.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2291,7 +2303,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.2;
+				CURRENT_PROJECT_VERSION = 3.7.7.3;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2324,7 +2336,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.2;
+				CURRENT_PROJECT_VERSION = 3.7.7.3;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

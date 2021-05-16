@@ -12,6 +12,7 @@ import SendBirdSDK
 
 class SettingVC: UIViewController {
 
+    @IBOutlet weak var professionLabel: UILabel!
     //IBOutlet and Variables
     @IBOutlet weak var nameLbl : UILabel!
     @IBOutlet weak var statusLbl : UILabel!
@@ -48,6 +49,7 @@ class SettingVC: UIViewController {
                 print(userProfileData)
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
                     self.nameLbl.text = user.name
+//                    self.professionLabel.text = user.name
 //                    self.lblAboutme.text = user.a
                     
                     
@@ -58,8 +60,12 @@ class SettingVC: UIViewController {
                         
                             UserDefaults.standard.setValue(userModel?.aboutme, forKey: "about")
                             UserDefaults.standard.setValue(userModel?.profession, forKey: "profession")
+                         
+                            
 
                             UserDefaults.standard.synchronize()
+                            let profession =   UserDefaults.standard.value(forKey: "profession") as? String
+                            self.professionLabel.text = profession ?? ""
                         }
                     }
                     

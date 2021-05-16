@@ -108,6 +108,7 @@ class FriendTabVC: UIViewController {
         }
         
         loadDataFromCache()
+//        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
         
     }
     
@@ -339,7 +340,7 @@ class FriendTabVC: UIViewController {
                 UserDefaults.standard.set(accessToken, forKey: "AccessToken")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
-                self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: false)
+                self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
                 
             case.failure(let error):
                 print("Not Success",error)

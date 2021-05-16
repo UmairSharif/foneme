@@ -76,10 +76,11 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
             locationstatus()
         }
         
-      
+//        txtaboutme.delegate = self
           // here you can call the start location function
-
-        lblcount.text =  "37/180"
+//        txtaboutme.placeholder = "Hey there! I am using Fone Messenger."
+        txtaboutme.text = "Hey there! I am using Fone Messenger."
+        lblcount.text =  "\(txtaboutme.text.count)/180"
         // Do any additional setup after loading the view.
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -136,9 +137,10 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
         isupdtval = true
         if textView.text == "Hey there! I am using Fone Messenger."
         {
+            lblcount.text =  "0/180"
             textView.text = ""
         }
-        
+
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == ""

@@ -605,7 +605,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         
         if self.channelListQuery == nil {
             self.channelListQuery = SBDGroupChannel.createMyGroupChannelListQuery()
-            self.channelListQuery?.order = .chronological //.latestLastMessage
+            self.channelListQuery?.order = .latestLastMessage //.latestLastMessage
             self.channelListQuery?.limit = 50
             self.channelListQuery?.includeEmptyChannel = true
             /*if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {

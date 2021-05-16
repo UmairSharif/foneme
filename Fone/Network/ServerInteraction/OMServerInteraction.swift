@@ -46,7 +46,7 @@ class ServerCall {
        // print(header)
         APIManager.sharedManager.request(completeUrl, method: convertType(type), parameters: params, encoding: JSONEncoding.default, headers: header)
             .responseString {response in
-               // print(response.result,response.response as Any,response)
+                print(response.result.value,response.response as Any,response)
                 let url = response.description
                // print(url)
                 UserDefaults.standard.set(url, forKey: "facebookLink")

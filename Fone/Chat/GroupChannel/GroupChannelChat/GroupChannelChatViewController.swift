@@ -115,15 +115,42 @@ var isfromNotif = false
             btnvideo.image = nil
             btnCall.isEnabled = false
             btnCall.image = nil
-            viewLeft.isHidden = true
+//            viewLeft.isHidden = true
             viewLeft.isUserInteractionEnabled = false
+            DispatchQueue.main.async {
+                if (self.channel?.coverUrl!.count)! > 0 && !(self.channel?.coverUrl!.hasPrefix("https://static.sendbird.com"))!{
+                    self.imguser.af_setImage(withURL: URL.init(string: self.channel?.coverUrl ?? "")!)
+                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                    self.imguser.layer.masksToBounds = true
+                }else{
+                    self.imguser.image =  UIImage(named: "ic_profile")
+                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                    self.imguser.layer.masksToBounds = true
+                }
+//                if self.channel?.coverUrl ?? "" == ""{
+//
+//
+//                }else{
+//
+//
+//                }
+               
+            }
         }
         else
         {
             DispatchQueue.main.async {
-                self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
-                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
-                self.imguser.layer.masksToBounds = true
+                if self.userDetails?.imageUrl ?? "" == ""{
+                    self.imguser.image =  UIImage(named: "ic_profile")
+                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                    self.imguser.layer.masksToBounds = true
+                }else{
+                    self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
+                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                    self.imguser.layer.masksToBounds = true
+                    
+                }
+               
             }
            
         }
@@ -670,7 +697,7 @@ var isfromNotif = false
                     self.preSendMessages.removeValue(forKey: requestId)
                     self.resendableMessages[requestId] = preSendMsg
                     self.messageTableView.reloadData()
-                    self.scrollToBottom(force: false)
+                    self.scrollToBottom(force: true)
                 }
                 
                 return

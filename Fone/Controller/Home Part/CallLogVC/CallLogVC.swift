@@ -124,6 +124,7 @@ class CallLogVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         loadCallLogsFromCache()
+//        self.getCallLogAPI(showLoader: true)
         //Get Call Logs API
        
     }

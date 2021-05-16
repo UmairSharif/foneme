@@ -93,7 +93,7 @@ class UserDetailsVC: UIViewController {
             })
         }
         // @rackuka: show add friend button only when opening from search friends results
-        self.btnFriend.isHidden = !self.isSearch
+//        self.btnFriend.isHidden = !self.isSearch
         
         self.btnFriend.isFriendAdded = isContactAdded
 

@@ -24,8 +24,8 @@ class AboutMeVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
-        lblcount.text =  "37/180"
+        txtaboutme.delegate = self
+        lblcount.text =  "0/180"
         if appDelegateShareInst.isLocationPermissionGranted{
         appDelegateShareInst.getLocationAccess()
             
@@ -66,6 +66,7 @@ class AboutMeVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+ 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         isupdtval = false
         if imgyconst.constant != 100 {
@@ -99,12 +100,13 @@ class AboutMeVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
         }
     }
     
-
-    
+  
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Hey there! I am using Fone Messenger."
         {
+            
             textView.text = ""
+          
         }
         
     }
@@ -119,6 +121,7 @@ class AboutMeVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         let numberOfChars = newText.count
+    
         lblcount.text = String(numberOfChars) + "/180"
         return numberOfChars < 180    // 10 Limit Value
     }
