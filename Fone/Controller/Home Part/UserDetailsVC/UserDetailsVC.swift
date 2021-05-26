@@ -96,7 +96,6 @@ class UserDetailsVC: UIViewController {
 //        self.btnFriend.isHidden = !self.isSearch
         
         self.btnFriend.isFriendAdded = isContactAdded
-
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""

@@ -218,6 +218,8 @@
 		22E1602B23C8FA9600D2E54C /* LocalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */; };
 		22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602D23C8FC8D00D2E54C /* CallLog.swift */; };
 		22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */; };
+		257C78628C69087A563D00DB /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23525E8D7E754207F7A6DC2A /* Pods_Fone.framework */; };
+		26203CFF41F18C88DC50B715 /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BA35A3C9429044DD68B7A9 /* Pods_FoneTests.framework */; };
 		4F16BC84249D1744001C4708 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC76249D1744001C4708 /* CallManager.swift */; };
 		4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC77249D1744001C4708 /* CallsViewController.swift */; };
 		4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC79249D1744001C4708 /* CallTableViewCell.swift */; };
@@ -232,15 +234,13 @@
 		4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */; };
 		4F9E8750248FFF7000C62904 /* latestLogoFone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F9E874F248FFF7000C62904 /* latestLogoFone.png */; };
 		51F27B7F264AC0A700E1E017 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F27B7E264AC0A700E1E017 /* UITextView.swift */; };
-		C2B159DAA9A8F380BB3616FC /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1214EE57BD824E2C118D689B /* Pods_Fone.framework */; };
+		B17E2292F7A4B4C517A4743E /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF68090F6514FE2D737B55F /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
 		C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5517CB524C9F592004C42BA /* UserDetailModel.swift */; };
 		C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B524C2FEF000400874 /* VideoCallVC.swift */; };
 		C56F34B824C2FEF000400874 /* VideoCallVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */; };
 		C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B924C3170D00400874 /* VideoCallSetings.swift */; };
 		C56F34D724C397AB00400874 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34D624C397AB00400874 /* NotificationService.swift */; };
 		C56F34DB24C397AB00400874 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		FBDEFFE6577D52535BF6AEAB /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E045940266595BC0DD729A40 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
-		FDE0962264BCD31AD0FAAC95 /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3364179CCB650C278508C055 /* Pods_FoneTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,7 +275,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1214EE57BD824E2C118D689B /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		133DF3DC25C4C24F003CB2EE /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
 		133DF3DD25C4C26E003CB2EE /* Fone MessengerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone MessengerRelease.entitlements"; sourceTree = "<group>"; };
 		134198D825D19D6000FECCB5 /* AboutMeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeVC.swift; sourceTree = "<group>"; };
@@ -288,6 +287,7 @@
 		185F529C2500ECA2003D8DE7 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 		185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "iphone-original.mp3"; sourceTree = "<group>"; };
 		18A7CDD925162E38006308CB /* PlanListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanListVC.swift; sourceTree = "<group>"; };
+		1A74D85817B2C470D54723A4 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimeViewController.swift; sourceTree = "<group>"; };
 		1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimePickerDelegate.swift; sourceTree = "<group>"; };
 		1BA096B224817B4E00E0A042 /* UserProfileImageNameSettingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileImageNameSettingDelegate.swift; sourceTree = "<group>"; };
@@ -408,6 +408,7 @@
 		1BA0974724817B5000E0A042 /* Array+SendBird.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+SendBird.swift"; sourceTree = "<group>"; };
 		1BA0974A24817B5000E0A042 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		1BA097C5248181AF00E0A042 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		1FF68090F6514FE2D737B55F /* Pods_Fone_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		2283DC3123C91C57005070B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22880E6B23C074380044263D /* Fone Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fone Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -491,8 +492,8 @@
 		22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactHandler.swift; sourceTree = "<group>"; };
 		22E1602D23C8FC8D00D2E54C /* CallLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLog.swift; sourceTree = "<group>"; };
 		22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallHandler.swift; sourceTree = "<group>"; };
-		30BC2494260648B60E24B51C /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
-		3364179CCB650C278508C055 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23525E8D7E754207F7A6DC2A /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49996AEA82706140BD51B3FB /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
 		4F16BC76249D1744001C4708 /* CallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		4F16BC77249D1744001C4708 /* CallsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsViewController.swift; sourceTree = "<group>"; };
 		4F16BC79249D1744001C4708 /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
@@ -507,7 +508,10 @@
 		4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		4F9E874F248FFF7000C62904 /* latestLogoFone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = latestLogoFone.png; sourceTree = "<group>"; };
 		51F27B7E264AC0A700E1E017 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		56BA35A3C9429044DD68B7A9 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FC9FDEC8535044C359133A9 /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA06ECB32609BBFB00B2018E /* Fone Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone Messenger.entitlements"; sourceTree = "<group>"; };
+		BDFDF446584C9D63778FBC6D /* Pods-FoneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.debug.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C5517CB524C9F592004C42BA /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
 		C56F34B524C2FEF000400874 /* VideoCallVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallVC.swift; sourceTree = "<group>"; };
 		C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCallVC+Extension.swift"; sourceTree = "<group>"; };
@@ -515,12 +519,8 @@
 		C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C56F34D624C397AB00400874 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C56F34D824C397AB00400874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DAB32A910ECFC5FAFC731916 /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
-		E045940266595BC0DD729A40 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6F27D28669B1B285520E875 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		EC557BD99B5C8AD5B144BB19 /* Pods-FoneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.debug.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FC05D0C87CE365D86FCFA813 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		FC6008A2214A3FDBE3D5686A /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
+		C644082F2660B9EA9FB22B7F /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
+		CB56E3319D2CF9666A135B5A /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,7 +539,7 @@
 				22CCC95E23C798DC00592614 /* AudioToolbox.framework in Frameworks */,
 				22CCC95C23C798CE00592614 /* CoreTelephony.framework in Frameworks */,
 				22CCC95A23C798C600592614 /* PushKit.framework in Frameworks */,
-				C2B159DAA9A8F380BB3616FC /* Pods_Fone.framework in Frameworks */,
+				257C78628C69087A563D00DB /* Pods_Fone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +547,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDE0962264BCD31AD0FAAC95 /* Pods_FoneTests.framework in Frameworks */,
+				26203CFF41F18C88DC50B715 /* Pods_FoneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +555,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBDEFFE6577D52535BF6AEAB /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				B17E2292F7A4B4C517A4743E /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1482,9 +1482,9 @@
 				22CCC95D23C798DC00592614 /* AudioToolbox.framework */,
 				22CCC95B23C798CE00592614 /* CoreTelephony.framework */,
 				22CCC95923C798C600592614 /* PushKit.framework */,
-				1214EE57BD824E2C118D689B /* Pods_Fone.framework */,
-				E045940266595BC0DD729A40 /* Pods_Fone_OneSignalNotificationServiceExtension.framework */,
-				3364179CCB650C278508C055 /* Pods_FoneTests.framework */,
+				23525E8D7E754207F7A6DC2A /* Pods_Fone.framework */,
+				1FF68090F6514FE2D737B55F /* Pods_Fone_OneSignalNotificationServiceExtension.framework */,
+				56BA35A3C9429044DD68B7A9 /* Pods_FoneTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1530,12 +1530,12 @@
 		C14853701DC185DAA4A2975A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FC6008A2214A3FDBE3D5686A /* Pods-Fone.debug.xcconfig */,
-				30BC2494260648B60E24B51C /* Pods-Fone.release.xcconfig */,
-				E6F27D28669B1B285520E875 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				FC05D0C87CE365D86FCFA813 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */,
-				EC557BD99B5C8AD5B144BB19 /* Pods-FoneTests.debug.xcconfig */,
-				DAB32A910ECFC5FAFC731916 /* Pods-FoneTests.release.xcconfig */,
+				49996AEA82706140BD51B3FB /* Pods-Fone.debug.xcconfig */,
+				C644082F2660B9EA9FB22B7F /* Pods-Fone.release.xcconfig */,
+				1A74D85817B2C470D54723A4 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				CB56E3319D2CF9666A135B5A /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */,
+				BDFDF446584C9D63778FBC6D /* Pods-FoneTests.debug.xcconfig */,
+				7FC9FDEC8535044C359133A9 /* Pods-FoneTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1557,13 +1557,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22880E9623C0743A0044263D /* Build configuration list for PBXNativeTarget "Fone" */;
 			buildPhases = (
-				0C74632B0CB4C947FD584C47 /* [CP] Check Pods Manifest.lock */,
+				3225D8834E191073F96E9019 /* [CP] Check Pods Manifest.lock */,
 				22880E6723C074380044263D /* Sources */,
 				22880E6823C074380044263D /* Frameworks */,
 				22880E6923C074380044263D /* Resources */,
 				1BE5D5C1248032A50080AACF /* ShellScript */,
 				C56F34DF24C397AB00400874 /* Embed App Extensions */,
-				D593AD77B097F17EB0296862 /* [CP] Embed Pods Frameworks */,
+				B187BADF6577455C214334B8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1579,7 +1579,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22880E9923C0743A0044263D /* Build configuration list for PBXNativeTarget "FoneTests" */;
 			buildPhases = (
-				2212D110BF095C9E7E0C24C2 /* [CP] Check Pods Manifest.lock */,
+				A1BFFF712104C0B285BD77EC /* [CP] Check Pods Manifest.lock */,
 				22880E7E23C074390044263D /* Sources */,
 				22880E7F23C074390044263D /* Frameworks */,
 				22880E8023C074390044263D /* Resources */,
@@ -1598,7 +1598,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C56F34DC24C397AB00400874 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
-				6410FDE61CBBA299C3BE7F5B /* [CP] Check Pods Manifest.lock */,
+				D4997F87FBEF62E3C3C93A0D /* [CP] Check Pods Manifest.lock */,
 				C56F34D024C397AB00400874 /* Sources */,
 				C56F34D124C397AB00400874 /* Frameworks */,
 				C56F34D224C397AB00400874 /* Resources */,
@@ -1724,7 +1724,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C74632B0CB4C947FD584C47 /* [CP] Check Pods Manifest.lock */ = {
+		1BE5D5C1248032A50080AACF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+		3225D8834E191073F96E9019 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1746,27 +1766,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1BE5D5C1248032A50080AACF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
-		};
-		2212D110BF095C9E7E0C24C2 /* [CP] Check Pods Manifest.lock */ = {
+		A1BFFF712104C0B285BD77EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1788,7 +1788,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6410FDE61CBBA299C3BE7F5B /* [CP] Check Pods Manifest.lock */ = {
+		B187BADF6577455C214334B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4997F87FBEF62E3C3C93A0D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1808,23 +1825,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D593AD77B097F17EB0296862 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2179,7 +2179,7 @@
 		};
 		22880E9723C0743A0044263D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC6008A2214A3FDBE3D5686A /* Pods-Fone.debug.xcconfig */;
+			baseConfigurationReference = 49996AEA82706140BD51B3FB /* Pods-Fone.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
@@ -2187,7 +2187,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2200,7 +2200,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.7;
+				MARKETING_VERSION = 3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2212,7 +2212,7 @@
 		};
 		22880E9823C0743A0044263D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30BC2494260648B60E24B51C /* Pods-Fone.release.xcconfig */;
+			baseConfigurationReference = C644082F2660B9EA9FB22B7F /* Pods-Fone.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
@@ -2220,7 +2220,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.7.7.3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2233,7 +2233,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.7.7;
+				MARKETING_VERSION = 3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2245,7 +2245,7 @@
 		};
 		22880E9A23C0743A0044263D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC557BD99B5C8AD5B144BB19 /* Pods-FoneTests.debug.xcconfig */;
+			baseConfigurationReference = BDFDF446584C9D63778FBC6D /* Pods-FoneTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2271,7 +2271,7 @@
 		};
 		22880E9B23C0743A0044263D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAB32A910ECFC5FAFC731916 /* Pods-FoneTests.release.xcconfig */;
+			baseConfigurationReference = 7FC9FDEC8535044C359133A9 /* Pods-FoneTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2297,7 +2297,7 @@
 		};
 		C56F34DD24C397AB00400874 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6F27D28669B1B285520E875 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 1A74D85817B2C470D54723A4 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
@@ -2329,7 +2329,7 @@
 		};
 		C56F34DE24C397AB00400874 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC05D0C87CE365D86FCFA813 /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = CB56E3319D2CF9666A135B5A /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;

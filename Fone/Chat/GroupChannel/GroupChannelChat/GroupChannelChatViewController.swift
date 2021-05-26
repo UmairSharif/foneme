@@ -145,7 +145,8 @@ var isfromNotif = false
                     self.imguser.layer.cornerRadius = self.imguser.frame.height/2
                     self.imguser.layer.masksToBounds = true
                 }else{
-                    self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
+                    self.imguser.sd_setImage(with: URL(string: self.userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+//                    self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
                     self.imguser.layer.cornerRadius = self.imguser.frame.height/2
                     self.imguser.layer.masksToBounds = true
                     

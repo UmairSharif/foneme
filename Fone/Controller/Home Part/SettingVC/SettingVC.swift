@@ -43,6 +43,8 @@ class SettingVC: UIViewController {
         
         if let  about = UserDefaults.standard.value(forKey: "about") as? String{
             lblAboutme.text = about
+        }else{
+            print("")
         }
         DispatchQueue.main.async {
             if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
@@ -50,7 +52,7 @@ class SettingVC: UIViewController {
                 if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
                     self.nameLbl.text = user.name
 //                    self.professionLabel.text = user.name
-//                    self.lblAboutme.text = user.a
+//                    self.lblAboutme.text = user.aboutme
                     
                     
                     self.getUserDetail(cnic: user.address ?? "", friend: "") { (userModel, success) in
