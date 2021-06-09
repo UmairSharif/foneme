@@ -80,12 +80,11 @@ class UserDetailsVC: UIViewController {
     //MARK:- Update Details
     func UpdateDetails()
     {
-        guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data else {return}
-        
         let currUserNumber = userDetails?.phoneNumber ?? ""
         var isContactAdded = false
         
-        if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data,
+            let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
             // @rackuka: rewritten with contacts.contains - syntax sugar
             isContactAdded = contacts.contains(where: { (items) -> Bool in
                 let dict = items.dictionary

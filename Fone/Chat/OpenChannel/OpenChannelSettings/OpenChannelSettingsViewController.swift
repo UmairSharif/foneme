@@ -14,21 +14,21 @@ import AlamofireImage
 import MobileCoreServices
 
 class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, OpenChannelSettingsChannelNameTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SelectOperatorsDelegate, OpenChannelCoverImageNameSettingDelegate, NotificationDelegate, SBDChannelDelegate {
-    var groupInfoDic = [String:Any]();
+    var groupInfoDic = [String: Any]();
 
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
-    
+
     static let OPERATOR_MENU_COUNT = 7
     static let REGULAR_PARTICIPANT_MENU_COUNT = 4
-    
+
     var operators: [SBDUser] = []
-    var selectedUsers: [String:SBDUser] = [:]
-    
+    var selectedUsers: [String: SBDUser] = [:]
+
     weak var delegate: OpenChannelSettingsDelegate?
-    
+
     var channel: SBDOpenChannel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,7 +37,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         self.navigationItem.largeTitleDisplayMode = .automatic
 
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
-        
+
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
 
@@ -55,11 +55,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 delegate.didUpdateOpenChannel!()
             }
         }
-        
+
         super.viewWillDisappear(animated)
     }
-    func getGroupInfo(){
-        
+
+    func getGroupInfo() {
+
         var userId = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -69,32 +70,32 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         }
 
         let groupID = self.channel?.channelUrl
-        
-        let params = ["GroupID":groupID!,
-                      "UserID": userId] as [String:Any]
+
+        let params = ["GroupID": groupID!,
+            "UserID": userId] as [String: Any]
         // "CNIC": textFieldFoneId.text!,
-        
+
         print("params: \(params)")
-        var headers = [String:String]()
+        var headers = [String: String]()
         headers = ["Content-Type": "application/json"]
-        
+
         ServerCall.makeCallWitoutFile(getSingleGroupDetails, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-            
+
             if let json = response {
                 print(json)
                 //                    self.activityIndicator.stopAnimating()
                 //                    self.activityIndicator.isHidden = true
-                
+
                 let statusCode = json["StatusCode"].string ?? ""
-                
-                if statusCode == "200" || statusCode == "201"{
-                   if let groupInfo = json["GroupData"].array {
-                    for items in groupInfo {
-                    self.groupInfoDic  = items.dictionaryObject ?? [String:Any]()
-                       }
-                   }
-                   
-                   print(self.groupInfoDic)
+
+                if statusCode == "200" || statusCode == "201" {
+                    if let groupInfo = json["GroupData"].array {
+                        for items in groupInfo {
+                            self.groupInfoDic = items.dictionaryObject ?? [String: Any]()
+                        }
+                    }
+
+                    print(self.groupInfoDic)
 
                     self.settingsTableView.reloadData()
                 } else {
@@ -103,7 +104,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                         print(message)
                         //self.errorAlert("\(message)")
                     }
-                    
+
                     //                        self.activityIndicator.stopAnimating()
                     //                        self.activityIndicator.isHidden = true
                 }
@@ -111,33 +112,18 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
-    func inviteBtnTapped() {
-        //Set the default sharing message.
-        var message = "Fone App"
-    
-            var groupLink = "";
-           let isPublic =  self.groupInfoDic["IsPublic"] as? String
-                 if isPublic == "True" {
-                groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String )"
-               } else {
-                groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
-               }
-    message = groupLink;
 
-        
-        
-        if let link = NSURL(string: "https://fone.me/g/" + (self.groupInfoDic["PublicGroupLink"] as? String ?? "") )
-        {
-            let objectsToShare = [link] as [Any]
+    func inviteBtnTapped() {
+        if let deepLink = self.groupInfoDic["DeepLink"] as? String {
+            let objectsToShare = [deepLink] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             self.present(activityVC, animated: true, completion: nil)
         }
     }
-    
-    
-    
+
+
+
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         guard let navigationController = self.navigationController else { return }
@@ -148,12 +134,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SelectOperators", let destination = segue.destination as? SelectOperatorsViewController{
+        if segue.identifier == "SelectOperators", let destination = segue.destination as? SelectOperatorsViewController {
             destination.title = "Add an operator"
             destination.delegate = self
-            
+
             guard let channel = self.channel, let operators = channel.operators as? [SBDUser] else { return }
-            
+
             for user in operators {
                 destination.selectedUsers[user.userId] = user
             }
@@ -167,7 +153,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             destination.channel = self.channel
         }
     }
-    
+
     func clickSettingsMenuTableView() {
         guard let cell = self.settingsTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? OpenChannelSettingsChannelNameTableViewCell else { return }
         cell.channelNameTextField.resignFirstResponder()
@@ -179,14 +165,14 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let channel = self.channel else { return 0 }
-        
+
         let isOperator = channel.isOperator(with: SBDMain.getCurrentUser()!)
-        
-        switch section{
+
+        switch section {
         case 0:
-                 return 1
+            return 1
         case 1:
-                          return 1
+            return 1
         case 2:
             return isOperator ? 3 : 1
         case 3:
@@ -195,20 +181,20 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             return 0
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return (section == 3) ? "Operator" : nil
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         guard let channel = self.channel else { return cell }
         guard let currentUser = SBDMain.getCurrentUser() else { return cell }
-        
+
         switch indexPath.section {
         case 0:
             if let channelNameCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsChannelNameTableViewCell", for: indexPath) as? OpenChannelSettingsChannelNameTableViewCell {
@@ -221,38 +207,38 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                 else {
                     channelNameCell.channelCoverImageView.image = UIImage(named: "img_cover_image_placeholder_1")
                 }
-                
+
                 cell = channelNameCell
             }
         case 1:
             if let banCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                 banCell.settingMenuIconImageView.image = UIImage(named: "ic_info")
                 banCell.countLabel.isHidden = true
-                
-                  let isPublic =  self.groupInfoDic["IsPublic"] as? String
-                          if isPublic == "True" {
-                            
-                            if let val = self.groupInfoDic["PublicGroupLink"] as? String{
-                            banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
-                            }
-                            else
-                            {
-                                banCell.settingMenuLabel.text =  "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
-                            }
-                           } else {
+
+                let isPublic = self.groupInfoDic["IsPublic"] as? String
+                if isPublic == "True" {
+
+                    if let val = self.groupInfoDic["PublicGroupLink"] as? String {
+                        banCell.settingMenuLabel.text = "https://fone.me/g/" + val
+                    }
+                    else
+                    {
+                        banCell.settingMenuLabel.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                    }
+                } else {
 //                            if let val = self.groupInfoDic["PublicGroupLink"] as? String{
 //                               banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
 //                            }
 //                            else
 //                            {
-                                if let val = self.groupInfoDic["GroupName"] as? String{
-                                   banCell.settingMenuLabel.text =  "https://fone.me/g/" + val
-                                }else{
-                                banCell.settingMenuLabel.text =  self.groupInfoDic["GroupLink"] as? String
-                                }
+                    if let val = self.groupInfoDic["GroupName"] as? String {
+                        banCell.settingMenuLabel.text = "https://fone.me/g/" + val
+                    } else {
+                        banCell.settingMenuLabel.text = self.groupInfoDic["GroupLink"] as? String
+                    }
 //                            }
-                           }
-                
+                }
+
                 cell = banCell
             }
         case 2:
@@ -262,32 +248,32 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                     participantCell.settingMenuIconImageView.image = UIImage(named: "img_icon_participant")
 //                    participantCell.countLabel.text = String(format: "%ld", channel.participantCount)
 
-                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount  + channel.operators!.count ?? 0) - 1))
-                    
+                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + channel.operators!.count ?? 0) - 1))
+
                     cell = participantCell
                 }
             } else if channel.isOperator(with: currentUser) {
-                if indexPath.row == 1{
+                if indexPath.row == 1 {
                     if let muteCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                         muteCell.settingMenuLabel.text = "Muted Users"
                         muteCell.settingMenuIconImageView.image = UIImage(named: "img_icon_mute")
                         muteCell.countLabel.isHidden = true
-                        
+
                         cell = muteCell
                     }
-                } else if indexPath.row == 2{
+                } else if indexPath.row == 2 {
                     if let banCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                         banCell.settingMenuLabel.text = "Banned Users"
                         banCell.settingMenuIconImageView.image = UIImage(named: "bannedUsers")
                         banCell.countLabel.isHidden = true
-                        
+
                         cell = banCell
                     }
                 }
             }
         case 3:
-            if channel.isOperator(with: currentUser){
-                if indexPath.row == 0{
+            if channel.isOperator(with: currentUser) {
+                if indexPath.row == 0 {
                     if let addOperatorCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsMenuTableViewCell", for: indexPath) as? OpenChannelSettingsMenuTableViewCell {
                         addOperatorCell.settingMenuLabel.text = "Add an operator"
                         addOperatorCell.settingMenuLabel.textColor = UIColor(named: "color_settings_menu_add_operator")
@@ -295,7 +281,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                         addOperatorCell.settingMenuIconImageView.tintColor = UIColor(named: "color_settings_menu_add_operator")
                         addOperatorCell.accessoryType = .none
                         addOperatorCell.countLabel.isHidden = true
-                        
+
                         cell = addOperatorCell
                     }
                 } else {
@@ -305,9 +291,9 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                             if let nickname = self.operators[opIndex].nickname {
                                 operatorCell.nicknameLabel.text = nickname
                             }
-                            
+
                             operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
-                            
+
                             cell = operatorCell
                         }
                     } else {
@@ -319,24 +305,24 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                             operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
                             operatorCell.accessoryType = .disclosureIndicator
                             operatorCell.profileCoverView.isHidden = true
-                            
+
                             cell = operatorCell
-                            
+
                             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(OpenChannelSettingsViewController.longPress(_:)))
                             cell.addGestureRecognizer(longPressGesture)
                         }
                     }
                 }
-            } else{
+            } else {
                 let opIndex = indexPath.row
                 if self.operators[opIndex].userId == currentUser.userId {
                     if let operatorCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsUserTableViewCell", for: indexPath) as? OpenChannelSettingsUserTableViewCell {
                         if let nickname = self.operators[opIndex].nickname {
                             operatorCell.nicknameLabel.text = nickname
                         }
-                        
+
                         operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
-                        
+
                         cell = operatorCell
                     }
                 }
@@ -346,13 +332,13 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                         if let nickname = self.operators[opIndex].nickname {
                             operatorCell.nicknameLabel.text = nickname
                         }
-                       
-                       operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
-                        
+
+                        operatorCell.profileImageView.setProfileImageView(for: self.operators[opIndex])
+
                         operatorCell.accessoryType = .disclosureIndicator
-                        
+
                         operatorCell.profileCoverView.isHidden = true
-                        
+
                         cell = operatorCell
 
                         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(OpenChannelSettingsViewController.longPress(_:)))
@@ -363,31 +349,31 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
         default:
             break
         }
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return (section == 0) ? 0.1 : 18.0
 
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (indexPath.section == 0) ? 251 : 48
     }
-    
+
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let currentUser = SBDMain.getCurrentUser() else { return }
         guard let channel = self.channel else { return }
         self.clickSettingsMenuTableView()
-        
+
         tableView.deselectRow(at: indexPath, animated: false)
         //
         switch indexPath.section {
         case 1:
             inviteBtnTapped()
         case 2:
-            if indexPath.row == 0{
+            if indexPath.row == 0 {
                 performSegue(withIdentifier: "ShowUserList", sender: UserListType.participant)
             } else if indexPath.row == 1 {
                 // Mute
@@ -411,29 +397,29 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             break
         }
     }
-    
+
     // MARK: - UITextFieldDelegate
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         guard let channel = self.channel else { return false }
         self.showLoadingIndicatorView()
         channel.update(withName: textField.text, coverImage: nil, coverImageName: nil, data: nil, operatorUserIds: nil, customType: nil, progressHandler: nil) { (channel, error) in
             self.hideLoadingIndicatorView()
-            
+
             guard error == nil else { return }
 
             DispatchQueue.main.async {
                 self.settingsTableView.reloadData()
             }
         }
-        
+
         return true
     }
-    
+
     // MARK: - OpenChannelSettingsChannelNameTableViewCellDelegate
     func didClickChannelCoverImageNameEdit() {
         performSegue(withIdentifier: "CoverImageNameSetting", sender: nil)
     }
-    
+
     // MARK: - Crop Image
     func cropImage(_ imageData: Data) {
         if let image = UIImage(data: imageData) {
@@ -443,11 +429,11 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             self.present(imageCropVC, animated: false, completion: nil)
         }
     }
-    
+
     // MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! CFString
-        
+
         picker.dismiss(animated: true, completion: { [unowned self] () in
             if CFStringCompare(mediaType, kUTTypeImage, []) == .compareEqualTo {
 //                if let imagePath = info[UIImagePickerController.InfoKey.imageURL] as? URL {
@@ -459,90 +445,90 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 //
 //
 //                }
-                
+
                 guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
                 let options = PHImageRequestOptions()
                 options.isSynchronous = true
                 options.isNetworkAccessAllowed = true
                 options.deliveryMode = .highQualityFormat
-                
-                
-                
+
+
+
                 PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: nil, resultHandler: { (result, info) in
-                                         if result != nil {
-                                             guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
-                                             self.cropImage(imageData)
-                                         }
-                                     })
-                
-                
-                
+                    if result != nil {
+                        guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                        self.cropImage(imageData)
+                    }
+                })
+
+
+
 //                PHImageManager.default().requestImageData(for: imageAsset, options: options, resultHandler: { (imageData, dataUTI, orientation, info) in
 //                    guard let data = imageData else { return }
 //                    guard let image = UIImage(data: data) else { return }
 //                    guard let originalImage = image.jpegData(compressionQuality: 1.0) else { return }
-//                    
+//
 //                    self.cropImage(originalImage)
 //                })
             }
         })
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
+
     // MARK: - RSKImageCropViewControllerDelegate
     // Crop image has been canceled.
     func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
         controller.dismiss(animated: false, completion: nil)
     }
-    
+
     // The original image has been cropped.
     func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
         self.updateChannelCoverImage(croppedImage: croppedImage, controller: controller)
     }
-    
+
     // The original image will be cropped.
     func imageCropViewController(_ controller: RSKImageCropViewController, willCropImage originalImage: UIImage) {
         // Use when `applyMaskToCroppedImage` set to YES.
     }
-    
+
     func updateChannelCoverImage(croppedImage: UIImage, controller: RSKImageCropViewController) {
         let coverImageData = croppedImage.jpegData(compressionQuality: 0.5)
-        
+
         self.showLoadingIndicatorView()
         guard let channel = self.channel else { return }
         channel.update(withName: nil, coverImage: coverImageData, coverImageName: "image.jpg", data: nil, operatorUserIds: nil, customType: nil, progressHandler: nil) { (channel, error) in
             self.hideLoadingIndicatorView()
-            
+
             if error != nil {
                 return
             }
-            
+
             DispatchQueue.main.async {
                 self.settingsTableView.reloadData()
             }
         }
-        
+
         controller.dismiss(animated: false, completion: nil)
     }
-    
+
     // MARK: - SelectOperatorsDelegate
-    func didSelectUsers(_ users: [String : SBDUser]) {
+    func didSelectUsers(_ users: [String: SBDUser]) {
         self.showLoadingIndicatorView()
-        
+
         guard let currentUser = SBDMain.getCurrentUser() else { return }
-        
+
         var operators: [SBDUser] = Array(users.values)
         operators.append(currentUser)
-        
+
         guard let channel = self.channel else { return }
         channel.update(withName: nil, coverUrl: nil, data: nil, operatorUsers: operators) { (channel, error) in
             self.hideLoadingIndicatorView()
-            
+
             guard error == nil else { return }
-            
+
             DispatchQueue.main.async {
                 self.operators.removeAll()
                 for op in channel!.operators! as! [SBDUser] {
@@ -553,12 +539,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                         self.operators.append(op)
                     }
                 }
-                
+
                 self.settingsTableView.reloadData()
             }
         }
     }
-    
+
     // MARK: - UIAlertController for operators
     @objc func longPress(_ recognizer: UILongPressGestureRecognizer) {
         if recognizer.state == .began {
@@ -566,28 +552,28 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             if cell is OpenChannelSettingsUserTableViewCell {
                 guard let operatorCell = cell as? OpenChannelSettingsUserTableViewCell else { return }
                 guard let removedOperator = operatorCell.user else { return }
-                var operators:[SBDUser] = []
+                var operators: [SBDUser] = []
                 guard let channel = self.channel else { return }
                 for user in channel.operators! as? [SBDUser] ?? [] {
                     if user.userId == removedOperator.userId {
                         continue
                     }
-                    
+
                     operators.append(user)
                 }
-                
+
                 let alert = UIAlertController(title: removedOperator.nickname, message: nil, preferredStyle: .actionSheet)
                 let actionRemoveUser = UIAlertAction(title: "Remove from operators", style: .destructive) { (action) in
                     self.showLoadingIndicatorView()
-                    
+
                     guard let channel = self.channel else { return }
                     channel.update(withName: nil, coverUrl: nil, data: nil, operatorUsers: operators, completionHandler: { (channel, error) in
                         if error != nil {
                             self.hideLoadingIndicatorView()
-                            
+
                             return
                         }
-                        
+
                         DispatchQueue.main.async {
                             self.hideLoadingIndicatorView()
                             self.operators.removeAll()
@@ -605,20 +591,20 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                     })
                 }
                 let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                
+
                 alert.addAction(actionRemoveUser)
                 alert.addAction(actionCancel)
-                
+
                 DispatchQueue.main.async {
                     self.present(alert, animated: true, completion: nil)
                 }
             }
         }
     }
-    
+
     func refreshOperators() {
         self.operators.removeAll()
-        
+
         guard let channel = self.channel else { return }
         if let operators = channel.operators as? [SBDUser] {
             for op: SBDUser in operators {
@@ -631,14 +617,14 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
+
     // MARK: - OpenChannelCoverImageNameSettingDelegate
     func didUpdateOpenChannel() {
         DispatchQueue.main.async {
             self.settingsTableView.reloadData()
         }
     }
-    
+
     // MARK: - SBDChannelDelegate
     func channel(_ sender: SBDOpenChannel, userDidExit user: SBDUser) {
         if sender == self.channel {
@@ -647,7 +633,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
+
     func channel(_ sender: SBDBaseChannel, userWasBanned user: SBDUser) {
         if sender == self.channel {
             DispatchQueue.main.async {
@@ -655,7 +641,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
+
     func channel(_ sender: SBDOpenChannel, userDidEnter user: SBDUser) {
         if sender == self.channel {
             DispatchQueue.main.async {
@@ -663,7 +649,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
+
     func channelWasChanged(_ sender: SBDBaseChannel) {
         if sender == self.channel {
             DispatchQueue.main.async {
@@ -672,18 +658,18 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-    
+
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
         self.loadingIndicatorView.superViewSize = self.view.frame.size
         self.loadingIndicatorView.updateFrame()
-        
+
         DispatchQueue.main.async {
             self.loadingIndicatorView.isHidden = false
             self.loadingIndicatorView.startAnimating()
         }
     }
-    
+
     private func hideLoadingIndicatorView() {
         DispatchQueue.main.async {
             self.loadingIndicatorView.isHidden = true

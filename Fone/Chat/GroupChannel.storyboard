@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EhS-Sz-WvI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GroupChannelTableViewCell" rowHeight="80" id="yPq-Ws-8k2" customClass="GroupChannelTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yPq-Ws-8k2" id="3Mb-k0-QK9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -353,7 +353,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="6wb-A8-GAw">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6wb-A8-GAw" id="DZu-f5-zM7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -378,7 +378,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="6Im-S4-qr7">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="45.5"/>
+                                        <rect key="frame" x="0.0" y="84.5" width="414" height="45.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Im-S4-qr7" id="2yk-QE-xLS">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="45.5"/>
@@ -402,7 +402,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="69" id="KRh-Ue-tx9">
-                                        <rect key="frame" x="0.0" y="133.5" width="414" height="69"/>
+                                        <rect key="frame" x="0.0" y="130" width="414" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KRh-Ue-tx9" id="wrI-gc-8Ch">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
@@ -857,7 +857,7 @@ using Foneme Search</string>
                                 <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsChannelCoverNameTableViewCell" rowHeight="250" id="8Gx-IQ-dRY" customClass="GroupChannelSettingsChannelCoverNameTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="250"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Gx-IQ-dRY" id="jq0-6n-4DY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
@@ -920,7 +920,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsNotificationsTableViewCell" id="3iE-b0-fOz" customClass="GroupChannelSettingsNotificationsTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="305.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3iE-b0-fOz" id="ExI-Tt-16h">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -972,7 +972,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupShareInfoCell" id="rJk-7a-ICP">
-                                        <rect key="frame" x="0.0" y="349" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="343" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rJk-7a-ICP" id="SlC-DF-0kl">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1014,7 +1014,7 @@ using Foneme Search</string>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsInviteMemberTableViewCell" id="hCz-xY-8Ou" customClass="GroupChannelSettingsInviteMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="392.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="386.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCz-xY-8Ou" id="Cs5-rT-v66">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1055,7 +1055,7 @@ using Foneme Search</string>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsMemberTableViewCell" id="QcM-9p-84f" customClass="GroupChannelSettingsMemberTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="436" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="430" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QcM-9p-84f" id="i1s-eD-u4C">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1149,7 +1149,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChannelSettingsLeaveChatTableViewCell" id="p2Q-Ab-WjV" customClass="GroupChannelSettingsLeaveChatTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="479.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="473.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p2Q-Ab-WjV" id="O31-ib-vWw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>

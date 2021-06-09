@@ -2188,7 +2188,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.1.2;
+				CURRENT_PROJECT_VERSION = 3.8.1.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2222,7 +2222,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.1.2;
+				CURRENT_PROJECT_VERSION = 3.8.1.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				FRAMEWORK_SEARCH_PATHS = (

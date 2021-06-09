@@ -7,32 +7,240 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CD0B7914-4A21-435C-8FBA-E2F1753076C1"
+            uuid = "CB34608B-50B8-48B9-B641-A3765FDC6203"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fone/AppDelegate/AppDelegate.swift"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "loadChannelListNextPage(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CB34608B-50B8-48B9-B641-A3765FDC6203 - 2a4c8ced226e2159"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.SBDGroupChannel&gt;&gt;, Swift.Optional&lt;__C.SBDError&gt;) -&gt; () in Fone_Messenger.GroupChannelPublicChannelsViewController.loadChannelListNextPage(Swift.Bool) -&gt; ()"
+                  moduleName = "Fone Messenger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thule/Documents/workspace/Upwork/FoneMe/src/foneme-ios/Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "712">
+               </Location>
+               <Location
+                  uuid = "CB34608B-50B8-48B9-B641-A3765FDC6203 - d6cde512a8b889d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.SBDGroupChannel) -&gt; Swift.Bool in closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.SBDGroupChannel&gt;&gt;, Swift.Optional&lt;__C.SBDError&gt;) -&gt; () in Fone_Messenger.GroupChannelPublicChannelsViewController.loadChannelListNextPage(Swift.Bool) -&gt; ()"
+                  moduleName = "Fone Messenger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thule/Documents/workspace/Upwork/FoneMe/src/foneme-ios/Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B171BFE4-C32F-476A-A61F-3518B2142C10"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "loadChannelListNextPage(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "214E4FBC-53A8-4F15-8C2B-CD81E2128CFA"
+            uuid = "B10F054E-0359-4583-96EB-3A6BF818785D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "refreshChannelList()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90A4173C-FB28-4098-8DA4-4B2F6239518C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelsPublic/GroupChannelPublicChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5480001D-9E36-400C-8DF2-614042E0D45D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannels/GroupChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "807"
+            endingLineNumber = "807"
+            landmarkName = "searchBarTextDidEndEditing(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "959D6790-F8DC-407F-A801-46AAE56994E8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannels/GroupChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
+            landmarkName = "searchBar(_:textDidChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0988C0A7-81BF-4E0D-85D0-572D387D7AAB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/OpenChannel/OpenChannels/OpenChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "loadChannelListNextPage(refresh:channelNameFilter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC079CF9-93AA-4F41-9B72-260E478B4EC1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/OpenChannel/OpenChannels/OpenChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "loadChannelListNextPage(refresh:channelNameFilter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7ABF6FC1-9649-43CA-8964-C455A219826E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/OpenChannel/OpenChannels/OpenChannelsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65DC2AA0-1FD0-40B5-A77B-F7223266783F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelSettings/GroupChannelSettingsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getGroupInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A7FE141-EFBC-421A-823E-4F439CE01824"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelSettings/GroupChannelSettingsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F31ECF1-314A-4EEA-817C-1FE303995F6E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/OpenChannel/OpenChannelSettings/OpenChannelCoverImageNameSettingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "getGroupInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2780F76C-3FD6-4477-A0F9-7A6584B65544"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Chat/GroupChannel/GroupChannelSettings/GroupChannelSettingsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "inviteBtnTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

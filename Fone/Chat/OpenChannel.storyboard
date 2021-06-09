@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxL-Kp-KCL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxL-Kp-KCL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -29,10 +29,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelTableViewCell" rowHeight="84" id="QTf-wu-F7B" customClass="OpenChannelTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="84"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QTf-wu-F7B" id="pOh-GI-oXV">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_icon_operator" translatesAutoresizingMaskIntoConstraints="NO" id="FNE-eg-xrV" userLabel="Opearator Mark Image View">
@@ -49,7 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Participant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDw-vV-aDE" userLabel="Participant Count Label">
-                                                    <rect key="frame" x="72" y="42" width="290" height="18"/>
+                                                    <rect key="frame" x="72" y="42" width="291.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="color_open_channel_participants_count_label"/>
                                                     <nil key="highlightedColor"/>
@@ -701,23 +701,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAw-x2-goA">
                                             <rect key="frame" x="15" y="165" width="384" height="44"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fone.me/" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmV-oc-JxV">
-                                                    <rect key="frame" x="15" y="10.5" width="80" height="20.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="oly-tH-zXS"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fone.me/g/" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmV-oc-JxV">
+                                                    <rect key="frame" x="15" y="10.5" width="92" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="link" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEN-IH-ewP">
-                                                    <rect key="frame" x="97" y="5" width="237" height="31"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="link" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEN-IH-ewP">
+                                                    <rect key="frame" x="109" y="5" width="225" height="31"/>
                                                     <color key="textColor" name="color_user_message_name"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link Available " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="304-3H-bEd">
-                                                    <rect key="frame" x="97" y="29.5" width="237" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Link Available " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="304-3H-bEd">
+                                                    <rect key="frame" x="109" y="29.5" width="225" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                     <color key="textColor" systemColor="systemGreenColor"/>
                                                     <nil key="highlightedColor"/>
@@ -802,7 +799,7 @@ using Foneme Search</string>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelChannelUrlTableViewCell" rowHeight="44" id="0xM-Dl-YRq" customClass="CreateOpenChannelChannelUrlTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="337.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="331.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0xM-Dl-YRq" id="HbN-F9-4wr">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -827,7 +824,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelAddOperatorTableViewCell" id="Eo1-5Y-9aJ" customClass="CreateOpenChannelAddOperatorTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="381.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="375.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eo1-5Y-9aJ" id="APh-nl-zwg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -858,7 +855,7 @@ using Foneme Search</string>
                                         <viewLayoutGuide key="safeArea" id="BXa-H6-Jvp"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateOpenChannelUserTableViewCell" rowHeight="50" id="xax-zL-W6T" customClass="CreateOpenChannelUserTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="425.5" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="419.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xax-zL-W6T" id="wvN-lt-IUV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -1018,7 +1015,7 @@ using Foneme Search</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="OmT-pZ-q8g" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OmT-pZ-q8g" id="XX7-4y-u23">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1126,7 +1123,7 @@ using Foneme Search</string>
                                 <color key="sectionIndexBackgroundColor" name="color_channel_settings_bg"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsChannelNameTableViewCell" rowHeight="250" id="cvK-1d-Oml" customClass="OpenChannelSettingsChannelNameTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="250"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cvK-1d-Oml" id="TxQ-aZ-Hbs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
@@ -1186,7 +1183,7 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OpenChannelSettingsUserTableViewCell" id="YWF-Zw-TGB" customClass="OpenChannelSettingsUserTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="305.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="299.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWF-Zw-TGB" id="CsJ-Xz-zUs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1253,10 +1250,10 @@ using Foneme Search</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="OpenChannelSettingsMenuTableViewCell" id="s3X-vW-jFa" customClass="OpenChannelSettingsMenuTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="349.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="343.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s3X-vW-jFa" id="M86-m6-pOG">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="agc-8s-iyQ" userLabel="Setting Menu Icon Image View">
@@ -1273,7 +1270,7 @@ using Foneme Search</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEY-az-qOv" userLabel="Count Label">
-                                                    <rect key="frame" x="364" y="13" width="19" height="18"/>
+                                                    <rect key="frame" x="365.5" y="13" width="19" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" name="open_channe_settings_count_label_color"/>
                                                     <nil key="highlightedColor"/>
@@ -1463,7 +1460,7 @@ using Foneme Search</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gmn-Sg-5KT"/>
+        <segue reference="zpF-0N-ngL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CHATBG" width="750" height="1624"/>
