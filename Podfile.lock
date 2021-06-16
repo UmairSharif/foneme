@@ -147,6 +147,7 @@ PODS:
   - SendBirdSDK (3.0.213)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.3.0)
+  - Toast-Swift (5.0.1)
   - TwilioAccessManager (1.0.0)
   - TwilioChatClient (2.3.3)
   - TwilioVideo (4.1.0)
@@ -175,6 +176,7 @@ DEPENDENCIES:
   - SendBirdSDK
   - SVProgressHUD
   - SwiftyJSON (~> 4.0)
+  - Toast-Swift (~> 5.0.1)
   - TwilioAccessManager (~> 1.0.0)
   - TwilioChatClient (~> 2.3.0)
   - TwilioVideo
@@ -216,6 +218,7 @@ SPEC REPOS:
     - SendBirdSDK
     - SVProgressHUD
     - SwiftyJSON
+    - Toast-Swift
     - TwilioAccessManager
     - TwilioChatClient
     - TwilioVideo
@@ -256,11 +259,12 @@ SPEC CHECKSUMS:
   SendBirdSDK: 64b79e0f0b697c9714416202916d61eb21aacbde
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   TwilioAccessManager: fc7fd8b86de78a795976fc3c7d37dfa0e821c461
   TwilioChatClient: 9e3562773da96cfd3f34b2112104ee76820f0ab3
   TwilioVideo: 17bfe3dcac945c6c1235c4584dc37e07a28ccb61
   TwilioVoice: 75fd87c05e6c9e8321e31262d27d8ec334d9dc86
 
-PODFILE CHECKSUM: 6fa865147252f61ed95ad62b5dbc48bf1b4b2f89
+PODFILE CHECKSUM: 70f7d4097506355fa1fab0af2e7da5386f36a4d9
 
 COCOAPODS: 1.10.1

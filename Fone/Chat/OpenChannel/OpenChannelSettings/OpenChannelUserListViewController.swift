@@ -254,14 +254,16 @@ class OpenChannelUserListViewController: UIViewController, UITableViewDelegate, 
             
         debugPrint("USER",userM.userId,userM.friendDiscoveryKey,userM.metaData,userM.friendName, userM.nickname)
         let vc = UIStoryboard().loadUserDetailsVC()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isHidden = true
         self.getUserDetailPhone(cnic:userM.userId , friend: "" ) { (user, success) in
             if success {
                 self.view.isUserInteractionEnabled = true
 
                 vc.userDetails = user!
-                vc.modalPresentationStyle = .fullScreen
+                nav.modalPresentationStyle = .fullScreen
          
-                self.present(vc, animated: true, completion: nil)
+                self.present(nav, animated: true, completion: nil)
             }else{
 //                self.activityIndicator.stopAnimating()
 //                self.activityIndicator.isHidden = true

@@ -715,6 +715,141 @@ extension UIViewController {
             }
         }
     }
+    
+    func addSocialLink(links: [SocialLink], _ completion : @escaping (_ success : Bool) -> Void) {
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data,
+           let user = try? PropertyListDecoder().decode(User.self, from: userProfileData),
+           let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String,
+            loginToken.isEmpty == false {
+            var params = [[String: Any]]()
+            links.forEach { link in
+                params.append([
+                    "UserID": user.userId!,
+                    "Name": link.name,
+                    "SocialLink": link.url,
+                    ] as [String: Any])
+            }
+            print("params: \(params)")
+            
+            var request = try! URLRequest(url: addSocialLinkUrl, method: .post)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("bearer " + loginToken, forHTTPHeaderField: "Authorization")
+            request.httpBody = try! JSONSerialization.data(withJSONObject: params)
+            
+            APIManager.sharedManager.request(request)
+                .responseJSON(completionHandler: { response in
+                    switch response.result {
+                    case .success:
+                        if let data = response.data,
+                           let json = try? JSON(data: data) {
+                            print("json: \(json)")
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                completion(true)
+                            }
+                            else{
+                                completion(false)
+                            }
+                        } else {
+                            completion(false)
+                        }
+                    case .failure(let error):
+                        print("Error in API: \(error.localizedDescription)")
+                        completion(false)
+                    }
+                })
+        } else {
+            completion(false)
+        }
+    }
+    
+    func deleteSocialLink(link: SocialLink, _ completion : @escaping (_ success : Bool) -> Void) {
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data,
+           let user = try? PropertyListDecoder().decode(User.self, from: userProfileData),
+           let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String,
+            loginToken.isEmpty == false {
+            var params = [String: Any]()
+            params = [
+                "UserID": user.userId!,
+                "Id": link.id
+            ]
+            print("params: \(params)")
+            
+            var request = try! URLRequest(url: deleteSocialLinkUrl, method: .post)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("bearer " + loginToken, forHTTPHeaderField: "Authorization")
+            request.httpBody = try! JSONSerialization.data(withJSONObject: params)
+            APIManager.sharedManager.request(request)
+                .responseJSON(completionHandler: { response in
+                    switch response.result {
+                    case .success:
+                        if let data = response.data,
+                           let json = try? JSON(data: data) {
+                            print("json: \(json)")
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                completion(true)
+                            }
+                            else{
+                                completion(false)
+                            }
+                        } else {
+                            completion(false)
+                        }
+                    case .failure(let error):
+                        print("Error in API: \(error.localizedDescription)")
+                        completion(false)
+                    }
+                })
+        } else {
+            completion(false)
+        }
+    }
+    
+    func updateSocialLink(link: SocialLink, _ completion : @escaping (_ success : Bool) -> Void) {
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data,
+           let user = try? PropertyListDecoder().decode(User.self, from: userProfileData),
+           let loginToken = UserDefaults.standard.object(forKey: "AccessToken") as? String,
+            loginToken.isEmpty == false {
+            var params = [String: Any]()
+            params = [
+                "UserID": user.userId!,
+                "Id": link.id,
+                "Name": link.name,
+                "SocialLink": link.url
+            ]
+            print("params: \(params)")
+            
+            var request = try! URLRequest(url: updateSocialLinkUrl, method: .post)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("bearer " + loginToken, forHTTPHeaderField: "Authorization")
+            request.httpBody = try! JSONSerialization.data(withJSONObject: params)
+            APIManager.sharedManager.request(request)
+                .responseJSON(completionHandler: { response in
+                    switch response.result {
+                    case .success:
+                        if let data = response.data,
+                           let json = try? JSON(data: data) {
+                            print("json: \(json)")
+                            let statusCode = json["StatusCode"].string ?? ""
+                            if statusCode == "200" {
+                                completion(true)
+                            }
+                            else{
+                                completion(false)
+                            }
+                        } else {
+                            completion(false)
+                        }
+                    case .failure(let error):
+                        print("Error in API: \(error.localizedDescription)")
+                        completion(false)
+                    }
+                })
+        } else {
+            completion(false)
+        }
+    }
 }
 
 

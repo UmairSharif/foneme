@@ -22,6 +22,10 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     var channelNameFilter: String?
     var createChannelBarButton: UIBarButtonItem?
     
+    @IBOutlet weak var toastView: UIView!
+    @IBOutlet weak var toastMessageLabel: UILabel!
+    var toastCompleted: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +44,10 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         self.refreshControl?.addTarget(self, action: #selector(OpenChannelsViewController.refreshChannelList), for: .valueChanged)
         
         self.openChannelsTableView.refreshControl = self.refreshControl
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressChannel(_:)))
+        longPressGesture.minimumPressDuration = 1.0
+        self.openChannelsTableView.addGestureRecognizer(longPressGesture)
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController?.searchBar.delegate = self
@@ -68,8 +76,51 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
        // self.searchController?.searchBar.setPlaceholder(textColor: .black)
 //        self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
 //        self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
+    }
+    
+    func showToast(message: String, completion: (() -> Void)?) {
+        self.toastCompleted = false
+        self.toastView.alpha = 1
+        self.toastMessageLabel.text = message
+        self.toastView.isHidden = false
         
-        
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseIn, animations: {
+            self.toastView.alpha = 0
+        }) { (finished) in
+            self.toastView.isHidden = true
+            self.toastCompleted = true
+            
+            completion?()
+        }
+    }
+    
+    @objc func longPressChannel(_ recognizer: UILongPressGestureRecognizer) {
+        let point = recognizer.location(in: self.openChannelsTableView)
+        guard let indexPath = self.openChannelsTableView.indexPathForRow(at: point) else { return }
+        if recognizer.state == .began {
+            let channel = self.channels[indexPath.row]
+            let alert = UIAlertController(title: channel.name, message: nil, preferredStyle: .actionSheet)
+            
+            let actionReport = UIAlertAction(title: "Report", style: .default) { (action) in
+                self.showConfirmDialog("Report", "Are you sure you want to report this channel?") {
+                    self.showToast(message: "Reported", completion: nil)
+                }
+            }
+            
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.modalPresentationStyle = .popover
+            alert.addAction(actionReport)
+            alert.addAction(actionCancel)
+            
+            if let presenter = alert.popoverPresentationController {
+                presenter.sourceView = self.view
+                presenter.sourceRect = CGRect(x: self.view.bounds.minX, y: self.view.bounds.maxY, width: 0, height: 0)
+                presenter.permittedArrowDirections = []
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func setUp(navCont:UINavigationController){

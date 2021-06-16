@@ -567,8 +567,10 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     self.activityIndicator.isHidden = true
 
                     vc.userDetails = user!
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.navigationBar.isHidden = true
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
                 }else{
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -604,8 +606,10 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     self.activityIndicator.isHidden = true
 
                     vc.userDetails = user!
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.navigationBar.isHidden = true
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
                 }else{
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true

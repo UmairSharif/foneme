@@ -105,6 +105,38 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VFC-ri-NII" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </activityIndicatorView>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOw-KT-kWE" userLabel="Toast View">
+                                <rect key="frame" x="147" y="397.5" width="120" height="111"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_toast_check" translatesAutoresizingMaskIntoConstraints="NO" id="JCk-tL-NuO" userLabel="Toast Check Image View">
+                                        <rect key="frame" x="40" y="33" width="40" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="P1R-Wi-F2m"/>
+                                            <constraint firstAttribute="height" constant="32" id="zcp-wT-3nb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-85-XyA" userLabel="Toast Message Label">
+                                        <rect key="frame" x="37" y="73" width="46" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <color key="textColor" name="color_toast_label"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="color_toast_bg"/>
+                                <constraints>
+                                    <constraint firstItem="JCk-tL-NuO" firstAttribute="centerX" secondItem="vOw-KT-kWE" secondAttribute="centerX" id="1sL-Io-EwE"/>
+                                    <constraint firstAttribute="height" constant="111" id="8NI-La-khb"/>
+                                    <constraint firstItem="7cO-85-XyA" firstAttribute="top" secondItem="JCk-tL-NuO" secondAttribute="bottom" constant="8" id="DkE-fK-Sha"/>
+                                    <constraint firstAttribute="width" constant="120" id="SN8-gv-L6W"/>
+                                    <constraint firstItem="7cO-85-XyA" firstAttribute="centerX" secondItem="vOw-KT-kWE" secondAttribute="centerX" id="axG-Ae-btO"/>
+                                    <constraint firstItem="JCk-tL-NuO" firstAttribute="top" secondItem="vOw-KT-kWE" secondAttribute="top" constant="33" id="pHe-oS-Ei5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8mE-4e-ITR"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,7 +145,9 @@
                             <constraint firstItem="A52-uj-hxU" firstAttribute="centerY" secondItem="8mE-4e-ITR" secondAttribute="centerY" id="5tv-Vy-dyC"/>
                             <constraint firstItem="VFC-ri-NII" firstAttribute="top" secondItem="efT-c8-IJ1" secondAttribute="top" id="IYk-0E-lVf"/>
                             <constraint firstAttribute="bottom" secondItem="VFC-ri-NII" secondAttribute="bottom" id="K4k-fx-2kH"/>
+                            <constraint firstItem="vOw-KT-kWE" firstAttribute="centerX" secondItem="8mE-4e-ITR" secondAttribute="centerX" id="UP2-mg-cmk"/>
                             <constraint firstAttribute="bottom" secondItem="bzG-Qy-SeE" secondAttribute="bottom" constant="20" symbolic="YES" id="Y0d-aq-AaY"/>
+                            <constraint firstItem="vOw-KT-kWE" firstAttribute="centerY" secondItem="8mE-4e-ITR" secondAttribute="centerY" id="fvT-yC-mJg"/>
                             <constraint firstItem="VFC-ri-NII" firstAttribute="leading" secondItem="efT-c8-IJ1" secondAttribute="leading" id="gNN-rz-LDx"/>
                             <constraint firstAttribute="trailing" secondItem="VFC-ri-NII" secondAttribute="trailing" id="rMr-Uj-Ws1"/>
                             <constraint firstItem="bzG-Qy-SeE" firstAttribute="leading" secondItem="8mE-4e-ITR" secondAttribute="leading" id="uHL-rz-9hI"/>
@@ -126,6 +160,8 @@
                         <outlet property="emptyLabel" destination="A52-uj-hxU" id="1yf-Sn-nuR"/>
                         <outlet property="loadingIndicatorView" destination="VFC-ri-NII" id="pPI-5v-Ftv"/>
                         <outlet property="openChannelsTableView" destination="bzG-Qy-SeE" id="5DE-Sq-os0"/>
+                        <outlet property="toastMessageLabel" destination="7cO-85-XyA" id="b48-sE-SVi"/>
+                        <outlet property="toastView" destination="vOw-KT-kWE" id="7bk-XJ-NuJ"/>
                         <segue destination="JXT-n3-1vX" kind="showDetail" identifier="ShowOpenChat" id="sEO-ed-aUU"/>
                         <segue destination="dle-0C-8Zz" kind="presentation" identifier="CreateOpenChannel" modalPresentationStyle="formSheet" id="gfl-tS-q2R"/>
                     </connections>
@@ -1526,6 +1562,9 @@ using Foneme Search</string>
         </namedColor>
         <namedColor name="color_toast_bg">
             <color red="0.31000000238418579" green="0.31000000238418579" blue="0.31000000238418579" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color_toast_label">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color_user_message_name">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

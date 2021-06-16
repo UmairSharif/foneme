@@ -10,6 +10,7 @@ import UIKit
 import SendBirdSDK
 import AlamofireImage
 import SwiftyJSON
+import SVProgressHUD
 
 class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate, CreateOpenChannelDelegate {
     
@@ -177,6 +178,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             destination.channelCreationDelegate = self
         } else if segue.identifier == "ShowGroupChat", let destination = segue.destination.children.first as? GroupChannelChatViewController {
             destination.hidesBottomBarWhenPushed = true
+            
             if let index = sender as? Int {
                 print(self.channels[index].channelUrl)
                 destination.channel = self.channels[index]
@@ -210,8 +212,6 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 controller.didMove(toParent: self)
                 
             }
-             
-            
         }
         
     }
@@ -281,10 +281,17 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 })
             }
             
+            let actionReport = UIAlertAction(title: "Report", style: .default) { (action) in
+                self.showConfirmDialog("Report", "Are you sure you want to report this channel?") {
+                    self.showToast(message: "Reported", completion: nil)
+                }
+            }
+            
             let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
             alert.modalPresentationStyle = .popover
             alert.addAction(actionLeave)
+            alert.addAction(actionReport)
             alert.addAction(actionCancel)
             
             if let presenter = alert.popoverPresentationController {
@@ -573,7 +580,29 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowGroupChat", sender: indexPath.row)
+        let channel = self.channels[indexPath.row]
+        if channel.members?.count == 2,
+            let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data,
+            let user = try? PropertyListDecoder().decode(User.self, from: userProfileData),
+            let members = channel.members as? [SBDUser],
+            let friend = members.first(where: {user.mobile != $0.userId}) {
+            SVProgressHUD.show()
+            getUserDetail(cnic: friend.nickname!, friend: "") { userModel, success in
+                SVProgressHUD.dismiss()
+                if (success) {
+                    let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                    vc.delegate = self
+                    vc.userDetails = userModel
+                    vc.contact = nil
+                    vc.channel = channel
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
+                }
+            }
+        } else {
+            performSegue(withIdentifier: "ShowGroupChat", sender: indexPath.row)
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

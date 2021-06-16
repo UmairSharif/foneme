@@ -116,6 +116,7 @@ var isfromNotif = false
             btnCall.isEnabled = false
             btnCall.image = nil
 //            viewLeft.isHidden = true
+            self.imguser.isHidden = true
             viewLeft.isUserInteractionEnabled = false
             DispatchQueue.main.async {
                 if (self.channel?.coverUrl!.count)! > 0 && !(self.channel?.coverUrl!.hasPrefix("https://static.sendbird.com"))!{
@@ -144,7 +145,7 @@ var isfromNotif = false
                     self.imguser.image =  UIImage(named: "ic_profile")
                     self.imguser.layer.cornerRadius = self.imguser.frame.height/2
                     self.imguser.layer.masksToBounds = true
-                }else{
+                } else {
                     self.imguser.sd_setImage(with: URL(string: self.userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
 //                    self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
                     self.imguser.layer.cornerRadius = self.imguser.frame.height/2
@@ -254,6 +255,7 @@ var isfromNotif = false
     func tapFunction(sender:UITapGestureRecognizer) {
         btnProfile(self)
     }
+    
     func setChanelTitle(channle: SBDGroupChannel?) {
         
         if let channelMembers = channel?.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser(), channelMembers.count == 2 {
@@ -276,7 +278,7 @@ var isfromNotif = false
                     self.loadUserDetailInfo(userId: member.userId)
                 }
             }
-        }else {
+        } else {
            
             self.title = Utils.createGroupChannelName(channel: channle!)
             self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
@@ -287,12 +289,15 @@ var isfromNotif = false
     override func viewWillAppear(_ animated: Bool) {
         IQKeyboardManager.shared.enable = false
     }
+    
     @IBAction func btnProfile(_ sender: Any) {
         let vc = UIStoryboard().loadUserDetailsVC()
         // @rackuka: vs.isSearch = true removed. Reason - user details are opened from group channel chat. not from search
         vc.userDetails = userDetails
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.isHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
        
     }
     
@@ -1748,9 +1753,16 @@ var isfromNotif = false
             self.showToast("Copied")
         }
         
+        let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+            self.showConfirmDialog("Report", "Do you want to report this message?") {
+                self.showToast("Reported")
+            }
+        }
+        
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.addAction(actionCopy)
+        alert.addAction(actionReport)
         alert.addAction(actionCancel)
         
         if actionDelete != nil {
@@ -1821,6 +1833,11 @@ var isfromNotif = false
             let actionSave = UIAlertAction(title: "Save File", style: .default) { (action) in
                 DownloadManager.download(url: url, filename: message.name, mimeType: message.type, addToMediaLibrary: false)
             }
+            let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+                self.showConfirmDialog("Report", "Do you want to report this message?") {
+                    self.showToast("Reported")
+                }
+            }
             var actionDelete: UIAlertAction?
             
             alert.modalPresentationStyle = .popover
@@ -1876,6 +1893,7 @@ var isfromNotif = false
             if actionDelete != nil {
                 alert.addAction(actionDelete!)
             }
+            alert.addAction(actionReport)
             alert.addAction(actionCancel)
             
             DispatchQueue.main.async {
@@ -1940,10 +1958,17 @@ var isfromNotif = false
                 
             })
         }
+        let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+            self.showConfirmDialog("Report", "Do you want to report this user?") {
+                self.showToast("Reported")
+            }
+        }
+        
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alert.modalPresentationStyle = .popover
         alert.addAction(actionBlockUser)
+        alert.addAction(actionReport)
         alert.addAction(actionCancel)
         
         if let presenter = alert.popoverPresentationController {
@@ -2027,6 +2052,12 @@ var isfromNotif = false
                 if actionDelete != nil {
                     alert?.addAction(actionDelete!)
                 }
+                let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+                    self.showConfirmDialog("Report", "Do you want to report this message?") {
+                        self.showToast("Reported")
+                    }
+                }
+                alert?.addAction(actionReport)
                 alert?.addAction(actionCancel)
                 
                 if let presenter = alert?.popoverPresentationController {

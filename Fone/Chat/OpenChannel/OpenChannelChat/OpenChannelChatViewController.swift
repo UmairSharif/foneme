@@ -15,7 +15,7 @@ import MobileCoreServices
 import AlamofireImage
 import FLAnimatedImage
 
-class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, OpenChannelMessageTableViewCellDelegate, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate , GroupChannelMessageTableViewCellDelegate{
+class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate {
     @IBOutlet weak var joinGroupView: UIView!
 
     @IBOutlet weak var inputMessageTextField: UITextField!
@@ -666,6 +666,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     imageFileMessageCell.hideFailureElement()
                     imageFileMessageCell.showBottomMargin()
                     imageFileMessageCell.hideAllPlaceholders()
+                    imageFileMessageCell.delegate = self
                     if let progress = self.fileTransferProgress[fileMessageRequestId] {
                         imageFileMessageCell.showProgress(progress)
                     }
@@ -710,6 +711,8 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         videoFileMessageCell.showProgress(progress)
                     }
                     
+                    videoFileMessageCell.delegate = self
+                    
                     cell = videoFileMessageCell
                 }
                 else if (fileDataDict["type"] as! String).hasPrefix("audio") {
@@ -720,7 +723,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     audioFileMessageCell.hideReadStatus()
                     audioFileMessageCell.hideFailureElement()
                     audioFileMessageCell.showBottomMargin()
-                    audioFileMessageCell.delegate = nil
+                    audioFileMessageCell.delegate = self
                     
                     DispatchQueue.main.async {
                         guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
@@ -740,7 +743,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     generalFileMessageCell.hideReadStatus()
                     generalFileMessageCell.hideFailureElement()
                     generalFileMessageCell.showBottomMargin()
-                    generalFileMessageCell.delegate = nil
+                    generalFileMessageCell.delegate = self
                     
                     DispatchQueue.main.async {
                         guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
@@ -831,6 +834,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                             imageFileMessageCell.setImage(nil)
                             imageFileMessageCell.setAnimatedImage(nil, hash: 0)
                         }
+                        imageFileMessageCell.delegate = self
                         
                         cell = imageFileMessageCell
                         
@@ -1077,6 +1081,8 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                             videoFileMessageCell.setAnimatedImage(nil, hash: 0)
                         }
                         
+                        videoFileMessageCell.delegate = self
+                        
                         cell = videoFileMessageCell
                         DispatchQueue.main.async {
                             guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
@@ -1124,7 +1130,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         guard let audioFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell") as? GroupChannelIncomingAudioFileMessageTableViewCell else { return cell }
                         
                         audioFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
-                        
+                        audioFileMessageCell.delegate = self
                         cell = audioFileMessageCell
                     }
                     else {
@@ -1132,7 +1138,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         guard let generalFileMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell") as? GroupChannelIncomingGeneralFileMessageTableViewCell else { return cell }
                         
                         generalFileMessageCell.configureCell(message: fileMessage, prevMessage: prevMessage, nextMessage: nextMessage, sender: self)
-                        
+                        generalFileMessageCell.delegate = self
                         cell = generalFileMessageCell
                     }
                     DispatchQueue.main.async {
@@ -1536,6 +1542,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     // MARK: - OpenChannelMessageTableViewCellDelegate
+    /*
     func didClickResendUserMessageButton(_ message: SBDUserMessage) {
         if let messageText = message.message as? String {
             var preSendMessage: SBDUserMessage?
@@ -1986,6 +1993,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             return
         }
     }
+ */
     
     //MARK: - Add image to Library
       @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -2513,8 +2521,13 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                     self.scrollToBottom(force: false)
                                 }
                                 else {
-                                    let cell = self.messageTableView.cellForRow(at: indexPath) as! OpenChannelImageVideoFileMessageTableViewCell
+                                    if let cell = self.messageTableView.cellForRow(at: indexPath) as? OpenChannelImageVideoFileMessageTableViewCell {
                                     cell.showProgress(CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend))
+                                    }
+                                    
+                                    if let cell = self.messageTableView.cellForRow(at: indexPath) as? GroupChannelOutgoingImageVideoFileMessageTableViewCell {
+                                        cell.showProgress(CGFloat(totalBytesSent) / CGFloat(totalBytesExpectedToSend))
+                                    }
                                 }
                                 
                                 break
@@ -2575,6 +2588,214 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         catch {
+        }
+    }
+}
+
+extension OpenChannelChatViewController: GroupChannelMessageTableViewCellDelegate {
+    /*
+    @objc optional func didClickResendUserMessage(_ message: SBDUserMessage);
+    @objc optional func didClickResendImageVideoFileMessage(_ message: SBDFileMessage);
+    @objc optional func didClickResendAudioGeneralFileMessage(_ message: SBDFileMessage);
+    @objc optional func didLongClickAdminMessage(_ message: SBDAdminMessage);
+    @objc optional func didLongClickUserMessage(_ message: SBDUserMessage);
+    @objc optional func didLongClickUserProfile(_ user: SBDUser);
+    @objc optional func didClickImageVideoFileMessage(_ message: SBDFileMessage);
+    @objc optional func didLongClickImageVideoFileMessage(_ message: SBDFileMessage);
+    @objc optional func didLongClickGeneralFileMessage(_ message: SBDFileMessage);
+    @objc optional func didClickAudioFileMessage(_ message: SBDFileMessage);
+    @objc optional func didClickVideoFileMessage(_ message: SBDFileMessage);
+    @objc optional func didClickUserProfile(_ user: SBDUser);
+    @objc optional func didClickGeneralFileMessage(_ message: SBDFileMessage);
+     */
+    
+    func didLongClickUserProfile(_ user: SBDUser) {
+        guard let currentUser = SBDMain.getCurrentUser() else { return }
+        if user.userId == currentUser.userId {
+            return
+        }
+        
+        let alert = UIAlertController(title: user.nickname, message: nil, preferredStyle: .actionSheet)
+        let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
+            SBDMain.blockUser(user, completionHandler: { (blockedUser, error) in
+                
+            })
+        }
+        let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+            self.showConfirmDialog("Report", "Do you want to report this user?") {
+                self.showToast("Reported")
+            }
+        }
+        
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.modalPresentationStyle = .popover
+        alert.addAction(actionBlockUser)
+        alert.addAction(actionReport)
+        alert.addAction(actionCancel)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+            presenter.permittedArrowDirections = []
+        }
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func didLongClickUserMessage(_ message: SBDUserMessage) {
+        let alert = UIAlertController(title: message.message, message: nil, preferredStyle: .actionSheet)
+        alert.modalPresentationStyle = .popover
+        
+        let actionCopy = UIAlertAction(title: "Copy message", style: .default) { (action) in
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = message.message
+            
+            self.showToast("Copied")
+        }
+        
+        let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+            self.showConfirmDialog("Report", "Do you want to report this message?") {
+                self.showToast("Reported")
+            }
+        }
+        
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(actionCopy)
+        alert.addAction(actionReport)
+        alert.addAction(actionCancel)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+            presenter.permittedArrowDirections = []
+        }
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func didLongClickGeneralFileMessage(_ message: SBDFileMessage) {
+        guard let requestId = message.requestId as? String else { return }
+        guard let url = URL(string: message.url) else { return }
+        guard let sender = message.sender else { return }
+        guard let currentUser = SBDMain.getCurrentUser() else { return }
+        guard let channel = self.channel else { return }
+        if self.resendableFileData[requestId] == nil {
+            let alert = UIAlertController(title: "General file", message: nil, preferredStyle: .actionSheet)
+            let actionSave = UIAlertAction(title: "Save File", style: .default) { (action) in
+                DownloadManager.download(url: url, filename: message.name, mimeType: message.type, addToMediaLibrary: false)
+            }
+            let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+                self.showConfirmDialog("Report", "Do you want to report this message?") {
+                    self.showToast("Reported")
+                }
+            }
+            alert.modalPresentationStyle = .popover
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(actionSave)
+            alert.addAction(actionReport)
+            alert.addAction(actionCancel)
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func didLongClickImageVideoFileMessage(_ message: SBDFileMessage) {
+        guard let messageRequestId = message.requestId  as? String else { return }
+        if self.resendableFileData[messageRequestId] == nil {
+            var alert: UIAlertController?
+            var deleteMessageActionTitle: String?
+            var saveImageVideoActionTitle: String?
+            var deleteMessageSubAlertTitle: String?
+            var deleteMessageSubActionTitle: String?
+            if message.type.hasPrefix("image") {
+                alert = UIAlertController(title: "Image", message: nil, preferredStyle: .actionSheet)
+                alert?.modalPresentationStyle = .popover
+                deleteMessageActionTitle = "Delete image"
+                saveImageVideoActionTitle = "Save image to media library"
+                deleteMessageSubAlertTitle = "Are you sure you want to delete this image?"
+                deleteMessageSubActionTitle = "Yes. Delete the image"
+            }
+            else {
+                alert = UIAlertController(title: "Video", message: nil, preferredStyle: .actionSheet)
+                alert?.modalPresentationStyle = .popover
+                deleteMessageActionTitle = "Delete video"
+                saveImageVideoActionTitle = "Save video to media library"
+                deleteMessageSubAlertTitle = "Are you sure you want to delete this video?"
+                deleteMessageSubActionTitle = "Yes. Delete the video"
+            }
+            
+            var actionDelete: UIAlertAction?
+            guard let sender = message.sender else { return }
+            guard let currentUser = SBDMain.getCurrentUser() else { return }
+            if sender.userId == currentUser.userId {
+                actionDelete = UIAlertAction(title: deleteMessageActionTitle, style: .destructive, handler: { (action) in
+                    let subAlert = UIAlertController(title: deleteMessageSubAlertTitle, message: nil, preferredStyle: .actionSheet)
+                    let subActionDelete = UIAlertAction(title: deleteMessageSubActionTitle, style: .default, handler: { (action) in
+                        guard let channel = self.channel else { return }
+                        channel.delete(message, completionHandler: { (error) in
+                            if error != nil {
+                                return
+                            }
+                            
+                            // TODO:
+                        })
+                    })
+                    let subActionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    
+                    subAlert.addAction(subActionDelete)
+                    subAlert.addAction(subActionCancel)
+                    
+                    if let presenter = subAlert.popoverPresentationController {
+                        presenter.sourceView = self.view
+                        presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+                        presenter.permittedArrowDirections = []
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.present(subAlert, animated: true, completion: nil)
+                    }
+                })
+            }
+            
+            let actionSaveImageVideo = UIAlertAction(title: saveImageVideoActionTitle, style: .default) { (action) in
+                if let url = URL(string: message.url) {
+                    DownloadManager.download(url: url, filename: message.name, mimeType: message.type, addToMediaLibrary: true)
+                }
+            }
+            let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            if alert != nil {
+                alert?.addAction(actionSaveImageVideo)
+                if actionDelete != nil {
+                    alert?.addAction(actionDelete!)
+                }
+                let actionReport = UIAlertAction(title: "Report", style: .default) { _ in
+                    self.showConfirmDialog("Report", "Do you want to report this message?") {
+                        self.showToast("Reported")
+                    }
+                }
+                alert?.addAction(actionReport)
+                alert?.addAction(actionCancel)
+                
+                if let presenter = alert?.popoverPresentationController {
+                    presenter.sourceView = self.view
+                    presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxY, width: 0, height: 0)
+                    presenter.permittedArrowDirections = []
+                }
+                
+                DispatchQueue.main.async {
+                    self.present(alert!, animated: true, completion: nil)
+                }
+            }
         }
     }
 }

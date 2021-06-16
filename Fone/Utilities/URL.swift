@@ -51,3 +51,6 @@ let setSubscriptions_Customer = "\(BrainTreeServer)/createCustomer.php?sandbox=\
 let cancelSubscription_Customer = "\(BrainTreeServer)/cancelSubscription.php?sandbox=\(IS_SANDBOX)&subscriptionId="
 
 //d/file/brain/cancelSubscription.php?subscriptionId=3zybdg&sandbox=1
+let addSocialLinkUrl = "\(BASEURL)api/account/v1/addSocialLink"
+let deleteSocialLinkUrl = "\(BASEURL)api/account/v1/deleteSocialLink"
+let updateSocialLinkUrl = "\(BASEURL)api/account/v1/updateSocialLink"

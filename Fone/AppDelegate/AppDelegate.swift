@@ -89,13 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
             print(params ?? "");
 
             if let params = params as? [String: AnyObject] {
-
                 if let GroupId = params["GroupnName"] as? String {
-
                     self.RedirectToGroup(GrpName: GroupId)
                 }
-                else if let GroupId = params["GroupName"] as? String {
-                    self.RedirectToGroup(GrpName: GroupId)
+                else if let groupLink = params["GroupName"] as? String {
+                    self.redirectToGroup(groupLink: groupLink)
                 }
                 else if let foneId = params["ID"] as? String {
                     if let topVC = topViewController() {
@@ -105,9 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
 //                        vc.userDetails = userModel!
                         vc.FoneID = foneId
                         vc.isFromLink = true
-                        vc.modalPresentationStyle = .overFullScreen
-                        vc.modalTransitionStyle = .crossDissolve
-                        topVC.present(vc, animated: false, completion: {
+                        let nav = UINavigationController(rootViewController: vc)
+                        nav.navigationBar.isHidden = true
+                        nav.modalPresentationStyle = .overFullScreen
+                        nav.modalTransitionStyle = .crossDissolve
+                        topVC.present(nav, animated: false, completion: {
                             topVC.view.alpha = 1
                         })
                     }

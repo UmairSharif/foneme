@@ -12,6 +12,7 @@ import UIKit
 fileprivate enum Storyboard : String {
     case authentication = "Authentication"
     case home = "Home"
+    case socialLinks = "SocialLinks"
 }
 
 
@@ -137,4 +138,19 @@ extension UIStoryboard {
         return self.loadFromStoryBoard(.home , "UserDetailsVC") as! UserDetailsVC
     }
     
+    
+    func socialLinksVC() -> SocialLinksViewController
+    {
+        return self.loadFromStoryBoard(.socialLinks , "SocialLinksViewController") as! SocialLinksViewController
+    }
+    
+    func linksManagementVC() -> LinksManagementViewController
+    {
+        return self.loadFromStoryBoard(.socialLinks , "LinksManagementViewController") as! LinksManagementViewController
+    }
+    
+    func addlinkVC() -> AddLinkViewController
+    {
+        return self.loadFromStoryBoard(.socialLinks , "AddLinkViewController") as! AddLinkViewController
+    }
 }

@@ -42,6 +42,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var lblAboutme: UILabel!
     @IBOutlet weak var lblprofession: UILabel!
     @IBOutlet weak var viewLoc: UIView!
+    @IBOutlet weak var lbLinks: UILabel!
     var userDetails:UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
@@ -113,6 +114,9 @@ class UserDetailsVC: UIViewController {
             viewLoc.isHidden = false
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
+        if let name = userDetails?.name {
+            lbLinks.text = "\(name)'s Links"
+        }
     }
     
     @IBAction func btnClickBack(_ sender: UIButton) {
@@ -124,6 +128,16 @@ class UserDetailsVC: UIViewController {
         self.showToast(controller: self, message: "Fone id copied", seconds: 1)
     }
     
+    @IBAction func btnLinksTapped(_ sender: Any) {
+        if let user = self.userDetails {
+            let vc = UIStoryboard().socialLinksVC()
+            vc.user = user
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.showAlert("","Oops!! Can't get user detail. Please try again later!")
+        }
+    }
     
     @IBAction func btnClickFriend(_ sender: UIButton) {
         self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: (btnFonemeID.titleLabel?.text)!) { (user, success) in

@@ -34,6 +34,7 @@ target 'Fone' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'OneSignal'
   pod 'GoogleAnalytics'
+  pod 'Toast-Swift', '~> 5.0.1'
 
   target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal'

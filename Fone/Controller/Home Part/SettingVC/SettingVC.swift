@@ -24,6 +24,7 @@ class SettingVC: UIViewController {
     @IBOutlet weak var subscriptionLbl : UILabel!
     @IBOutlet weak var subscriptionView : UIView!
 
+    private var userModel: UserDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,7 @@ class SettingVC: UIViewController {
                     
                     self.getUserDetail(cnic: user.address ?? "", friend: "") { (userModel, success) in
                         if success {
+                            self.userModel = userModel
                             debugPrint("USER",userModel?.aboutme)
                             self.lblAboutme.text = userModel?.aboutme
                         
@@ -99,8 +101,6 @@ class SettingVC: UIViewController {
         }
     }
     @IBAction func btnAboutme(_ sender: Any) {
-        
-        
         let vc = UIStoryboard().loadaboutProfileVC()
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -145,7 +145,6 @@ class SettingVC: UIViewController {
     
     @IBAction func notificationBtnTapped(_ sender:UIButton)
     {
-        
     }
     
     @IBAction func helpBtnTapped(_ sender:UIButton)
@@ -201,6 +200,17 @@ class SettingVC: UIViewController {
              alertController.addAction(action1)
              alertController.addAction(action2)
              self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnSocialLinksTapped(_ sender: Any) {
+        if let user = self.userModel {
+            let vc = UIStoryboard().socialLinksVC()
+            vc.user = user
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.showAlert("", "Oops!! Can't get user detail. Please try again later!")
+        }
     }
     
     func cancelSubscription(){
