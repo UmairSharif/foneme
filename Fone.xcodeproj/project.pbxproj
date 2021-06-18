@@ -240,6 +240,7 @@
 		6669E6162674CBD2001BDC75 /* LinksManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6152674CBD2001BDC75 /* LinksManagementViewController.swift */; };
 		6669E6182675099F001BDC75 /* SocialLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6172675099F001BDC75 /* SocialLinkView.swift */; };
 		6669E61A267509A9001BDC75 /* SocialLinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6669E619267509A9001BDC75 /* SocialLinkView.xib */; };
+		66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B71BF9267C81E6002123BA /* String+Fone.swift */; };
 		66E6F98726751D6A00F5BA25 /* AddLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */; };
 		6DB2853FEA46E788380A2AF1 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */; };
 		C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5517CB524C9F592004C42BA /* UserDetailModel.swift */; };
@@ -522,6 +523,7 @@
 		6669E6152674CBD2001BDC75 /* LinksManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksManagementViewController.swift; sourceTree = "<group>"; };
 		6669E6172675099F001BDC75 /* SocialLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkView.swift; sourceTree = "<group>"; };
 		6669E619267509A9001BDC75 /* SocialLinkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialLinkView.xib; sourceTree = "<group>"; };
+		66B71BF9267C81E6002123BA /* String+Fone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Fone.swift"; sourceTree = "<group>"; };
 		66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkViewController.swift; sourceTree = "<group>"; };
 		7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1121,6 +1123,7 @@
 				22880EC523C074830044263D /* Extensions.swift */,
 				22880EC623C074830044263D /* HKImagePickerHandler.swift */,
 				4F2E83542492103D00FFC0B0 /* AppDelegate+IncomingCall.swift */,
+				66B71BF9267C81E6002123BA /* String+Fone.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1867,6 +1870,7 @@
 			files = (
 				22880ECD23C074830044263D /* CosmosSize.swift in Sources */,
 				1BA0976C24817B5000E0A042 /* GroupChannelChatViewController.swift in Sources */,
+				66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */,
 				1BA0978424817B5000E0A042 /* OpenChanannelChatDelegate.swift in Sources */,
 				1BA097A524817B5000E0A042 /* OpenChannelSettingsChannelNameTableViewCell.swift in Sources */,
 				1BA097B624817B5100E0A042 /* CustomButton.swift in Sources */,

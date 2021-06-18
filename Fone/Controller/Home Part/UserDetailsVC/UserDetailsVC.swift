@@ -92,19 +92,11 @@ class UserDetailsVC: UIViewController {
                 return currUserNumber == (dict?["ContactsNumber"]?.string ?? "")
             })
         }
-        // @rackuka: show add friend button only when opening from search friends results
-//        self.btnFriend.isHidden = !self.isSearch
-        
         self.btnFriend.isFriendAdded = isContactAdded
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
-        if FoneID.isEmpty{
-            self.btnFonemeID.setTitle("fone.me/\(userDetails?.cnic ?? "")", for: .normal)
-        }
-        else{
-            self.btnFonemeID.setTitle("fone.me/\(userDetails?.name ?? "")", for: .normal)
-        }
+        self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
         self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
         self.lblprofession.text = self.userDetails?.profession ?? ""
         viewLoc.isHidden = true

@@ -18,16 +18,16 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
     @IBOutlet weak var onlineStateLabel: UILabel!
     @IBOutlet weak var onlineStateImageView: UIImageView!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
-    var userNew:SBDUser?
+    var userNew: SBDUser?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "Profile"
         self.navigationItem.largeTitleDisplayMode = .automatic
-        
+
         guard let user = self.user else { return }
         self.refreshUserInfo(user)
-        
+
         let query = SBDMain.createApplicationUserListQuery()
         query?.userIdsFilter = [user.userId]
         query?.loadNextPage(completionHandler: { (users, error) in
@@ -35,7 +35,7 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
                 Utils.showAlertController(error: error!, viewController: self)
                 return
             }
-            
+
             if (users?.count)! > 0 {
                 self.refreshUserInfo(users![0])
             }
@@ -45,10 +45,10 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
     static func nib() -> UINib {
         return UINib(nibName: String(describing: self), bundle: Bundle(for: self))
     }
-    
+
     func refreshUserInfo(_ user: SBDUser) {
         self.profileImageView.setProfileImageView(for: user)
-        
+
         self.nicknameLabel.text = user.nickname
         userNew = user
         if user.connectionStatus == .online {
@@ -71,30 +71,26 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
     @IBAction func OpenProfile(_ sender: Any) {
         guard let userM = self.userNew else { return }
 
-        
+
 //        self.view.isUserInteractionEnabled = false
 //        return;
-            
-        debugPrint("USER",userM.userId,userM.friendDiscoveryKey,userM.metaData,userM.friendName, userM.nickname)
+
+        debugPrint("USER", userM.userId, userM.friendDiscoveryKey, userM.metaData, userM.friendName, userM.nickname)
         let vc = UIStoryboard().loadUserDetailsVC()
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.isHidden = true
-        self.getUserDetailPhone(cnic:userM.userId , friend: "" ) { (user, success) in
+        self.getUserDetailPhone(cnic: userM.userId, friend: "") { (user, success) in
             if success {
                 self.view.isUserInteractionEnabled = true
 
                 vc.userDetails = user!
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
-            }else{
-//                self.activityIndicator.stopAnimating()
-//                self.activityIndicator.isHidden = true
-//                self.view.isUserInteractionEnabled = true
             }
         }
-        
+
     }
-    
+
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
         if let navigationController = self.navigationController {

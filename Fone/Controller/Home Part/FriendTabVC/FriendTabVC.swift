@@ -13,107 +13,104 @@ import Alamofire
 import SendBirdSDK
 import Branch
 class FriendTabVC: UIViewController {
-    var user = [SBDUser]()
+    var users = [SBDUser]()
 
     //IBoutlet and Variables
-    @IBOutlet weak var contactTVC : UITableView!
-    @IBOutlet weak var searchBar : UISearchBar!
-    @IBOutlet weak var inviteView : UIView!
-    @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
+    @IBOutlet weak var contactTVC: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var inviteView: UIView!
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     var contactArray = [Contacts]()
     var friendList = [FriendList]()
     var filteredContacts = [FriendList]()
     var isFiltering = false
     let network = NetworkManager.sharedInstance
-    var netStatus : Bool?
+    var netStatus: Bool?
     var refreshControl = UIRefreshControl()
-    
+
     var userListQuery: SBDApplicationUserListQuery?
-    var userDetails:UserDetailModel?
+    var userDetails: UserDetailModel?
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+
         //Forcing View to light Mode
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         } else {
             // Fallback on earlier versions
         }
-       
+
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         contactTVC.addSubview(refreshControl) // not required when using UITableViewController
-        
         
         searchBar.delegate = self
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.inviteView.isHidden = true
         self.contactTVC.tableFooterView = UIView.init()
-        
+
         var showLoader = true
         if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
             if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                if contacts.count > 0{
+                if contacts.count > 0 {
                     showLoader = false
                 }
             }
         }
-        
-        
+
         // Get Contacts Friend List
-        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: showLoader)
+        self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: showLoader)
         network.reachability.whenReachable = { reachability in
-            
+
             self.netStatus = true
             UserDefaults.standard.set("Yes", forKey: "netStatus")
             UserDefaults.standard.synchronize()
-            
+
             // Get Contacts Friend List
-            self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: showLoader)
+            self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: showLoader)
         }
-        
+
         network.reachability.whenUnreachable = { reachability in
-            
+
             self.netStatus = false
             UserDefaults.standard.set("No", forKey: "netStatus")
             UserDefaults.standard.synchronize()
             let alertController = UIAlertController(title: "No Internet!", message: "Please connect your device to the internet.", preferredStyle: .alert)
-            
-            let action1 = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-                
+
+            let action1 = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
+
             }
-            
+
             alertController.addAction(action1)
             self.present(alertController, animated: true, completion: nil)
         }
     }
-    
+
     @objc func refresh(_ sender: AnyObject) {
         // Code to refresh table view
-        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
-        
+        self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: true)
+
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        
+
+
         if PlatformUtils.isSimulator {
-        }else {
+        } else {
             self.getSubscriptionsForCustomer()
-            
+
         }
-        
+
         loadDataFromCache()
+        getUSERSTATUS()
 //        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
-        
+
     }
-    
+
     func updateView() {
-        
         // if there is data for table view then show table view
         if isFiltering && filteredContacts.count > 0 || !isFiltering && friendList.count > 0 {
             contactTVC.isHidden = false
@@ -121,12 +118,12 @@ class FriendTabVC: UIViewController {
             contactTVC.reloadData()
         }
         // otherwise show invite view
-        else {
+            else {
             contactTVC.isHidden = true
             inviteView.isHidden = false
         }
     }
-    
+
     func loadDataFromCache() {
         guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data else {
             return
@@ -138,86 +135,84 @@ class FriendTabVC: UIViewController {
 
         for items in contacts {
             let dict = items.dictionary
-            
+
             let number = dict?["ContactsNumber"]?.string ?? ""
             let name = dict?["ContactsName"]?.string ?? ""
             let userImage = dict?["Image"]?.string ?? ""
             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
             let userid = dict?["ContactsVT"]?.string ?? ""
-            debugPrint("USERID",userid)
-            
-            let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic,userId: userid)
+            debugPrint("USERID", userid)
+
+            let getData = FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic, userId: userid)
             self.friendList.append(getData)
-            
-            
+
+
         }
-        print("self.friendList = \(self.friendList.count)");
-        updateView()
+        self.updateView()
     }
-    
-    func sendContactAPI(contactsArray : [Contacts], showLoader: Bool)
+
+    func sendContactAPI(contactsArray: [Contacts], showLoader: Bool)
     {
         if showLoader {
             self.activityIndicator.startAnimating()
             self.activityIndicator.isHidden = false
-        }else{
+        } else {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
         }
-        
+
         //var result = [String: Any]()
-        var userId : String?
-        
+        var userId: String?
+
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
             if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
                 userId = user.userId
             }
         }
-        
+
         let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
-        var contactList = [[String:Any]]()
-        
+        var contactList = [[String: Any]]()
+
         for contact in contactsArray
         {
-            
+
             let number = contact.number?.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
-            
+
             let parameter = ["ContactsName": contact.name ?? "",
-                             "ContactsNumber": number ?? ""
+                "ContactsNumber": number ?? ""
             ]
-            
+
             contactList.append(parameter)
         }
-        
+
         var parameters = [
-            "UserId" : userId ?? "",
+            "UserId": userId ?? "",
             "Contacts": contactList
-            
-            ] as [String:Any]
+        ] as [String: Any]
         if showLoader {
-            parameters = [ "UserId" : userId ?? ""] as [String:Any]
+            parameters = ["UserId": userId ?? ""] as [String: Any]
         }
-        
-        
+
+
         // print(parameters)
-        var headers = [String:String]()
+        var headers = [String: String]()
         headers = ["Content-Type": "application/json",
-                   "Authorization" : "bearer " + loginToken!]
-        
+            "Authorization": "bearer " + loginToken!]
+
         ServerCall.makeCallWitoutFile(saveContactUrl, params: parameters, type: Method.POST, currentView: nil, header: headers) { (response) in
-            
+
             self.refreshControl.endRefreshing()
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
-            
-            
+
+
             if let json = response {
                 // print(json)
                 let statusCode = json["StatusCode"].string ?? ""
                 if statusCode == "401" {
-                    var mobilenumber : String?
-                    
+                    var mobilenumber: String?
+
                     if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                         print(userProfileData)
                         if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
@@ -227,25 +222,25 @@ class FriendTabVC: UIViewController {
                     self.getAccessTokenAPI(mobileNumber: mobilenumber ?? "")
                     return
                 }
-                
+
                 ///  print(json)
                 if let contacts = json["Contacts"].array {
                     if contacts.count > 0 {
                         var midConatct = [SwiftyJSON.JSON]()
-                        
+
                         for var items in contacts {
                             let dict = items.dictionary
                             var number = dict?["ContactsNumber"]?.string ?? ""
                             number = number.replacingOccurrences(of: " ", with: "")
                             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
-                            
+
                             //let json = JSON(number)
                             items["ContactsNumber"] = JSON(number) ;
                             if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
                                 midConatct.append(items)
                             }
                         }
-                        
+
                         UserDefaults.standard.set(try? PropertyListEncoder().encode(midConatct), forKey: "Contacts")
                         UserDefaults.standard.synchronize()
                         if self.friendList.count == 0 {
@@ -267,12 +262,11 @@ class FriendTabVC: UIViewController {
                 {
                     self.loadDataFromCache()
                     self.getUSERSTATUS()
-                    
                 }
-            }else {
-                
-                var mobilenumber : String?
-                
+            } else {
+
+                var mobilenumber: String?
+
                 if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                     print(userProfileData)
                     if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
@@ -283,70 +277,70 @@ class FriendTabVC: UIViewController {
             }
         }
     }
-    
-    
+
+
     func getUSERSTATUS()
     {
-        
-        if friendList.count > 0{
-        let ids : [String] = friendList.map { $0.number ?? ""}
-            
-        let query = SBDMain.createApplicationUserListQuery()
-        query?.userIdsFilter = ids
-        query?.loadNextPage(completionHandler: { (users, error) in
-            if error != nil {
-                Utils.showAlertController(error: error!, viewController: self)
-                return
-            }
-            
-            if (users?.count)! > 0 {
-                self.user.removeAll()
-                self.user = users!
-            }
-            DispatchQueue.main.async {
-                self.updateView()
-            }
-        })
+
+        if friendList.count > 0 {
+            let ids: [String] = friendList.map { $0.number ?? "" }
+
+            let query = SBDMain.createApplicationUserListQuery()
+            query?.userIdsFilter = ids
+            query?.loadNextPage(completionHandler: { (users, error) in
+                if error != nil {
+                    Utils.showAlertController(error: error!, viewController: self)
+                    return
+                }
+
+                if (users?.count)! > 0 {
+                    self.users.removeAll()
+                    self.users = users!
+                }
+                DispatchQueue.main.async {
+                    self.updateView()
+                }
+            })
         }
     }
-    
-    func getAccessTokenAPI(mobileNumber : String)
+
+    func getAccessTokenAPI(mobileNumber: String)
     {
-        
+
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
-        
+
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        let parameters : [String : Any] = [
+        let parameters: [String: Any] = [
             "username": mobileNumber,
-            "password" : "123456",
-            "client_id" : ClientId,
-            "grant_type" : "password"
+            "password": "123456",
+            "client_id": ClientId,
+            "grant_type": "password"
         ]
-        
-        Alamofire.request(getAccessTokenUrl, method: .post, parameters: parameters, encoding:  URLEncoding.httpBody, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            
+
+        Alamofire.request(getAccessTokenUrl, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).responseJSON { (response: DataResponse<Any>) in
+
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
-            
+
             switch(response.result) {
             case.success(let data):
                 let json = JSON(data)
                 print(json)
                 let accessToken = json["access_token"].string ?? ""
-                
+
                 UserDefaults.standard.set(accessToken, forKey: "AccessToken")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
-                self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
-                
+                self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: true)
+
             case.failure(let error):
-                print("Not Success",error)
+                print("Not Success", error)
                 //self.errorAlert("\(error)")
-                var mobilenumber : String?
-                
+                var mobilenumber: String?
+
                 if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                     print(userProfileData)
                     if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
@@ -357,24 +351,24 @@ class FriendTabVC: UIViewController {
             }
         }
     }
-    
-    @IBAction func inviteBtnTapped(_ sender : UIButton)
+
+    @IBAction func inviteBtnTapped(_ sender: UIButton)
     {
         //Set the default sharing message.
         let message = "Fone App"
         //Set the link to share.
         if let link = NSURL(string: "")
         {
-            let objectsToShare = [message,link] as [Any]
+            let objectsToShare = [message, link] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
             self.present(activityVC, animated: true, completion: nil)
         }
     }
-    
-    
-    func getSubscriptionsForCustomer(){
-        
+
+
+    func getSubscriptionsForCustomer() {
+
         var mobilenumber = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -386,63 +380,63 @@ class FriendTabVC: UIViewController {
             return;
         }
         // mobilenumber = "9199876543"
-        let header  = ["Content-Type": "application/json"]
+        let header = ["Content-Type": "application/json"]
         // APIManager.sharedManager.request(getBrainTreePlans, method: Alamofire.HTTPMethod.post, parameters: nil, encoding:  JSONEncoding.default,
         let apiURL = "\(getSubscriptions_Customer)\(mobilenumber)"
-        
+
         ServerCall.makeCallWitoutFile(apiURL, params: nil, type: Method.POST, currentView: nil, header: header) { (response) in
             let isAvilabel = response?["response"] ?? false
             print(isAvilabel)
             print(response)
             if isAvilabel == true {
                 let subscriptionArr = response?["subscriptions"].arrayObject
-                let subscritpionobject = subscriptionArr?.last as? [String:Any]
-                let subDateobject = subscritpionobject?["lastdate"] as? [String:Any]
+                let subscritpionobject = subscriptionArr?.last as? [String: Any]
+                let subDateobject = subscritpionobject?["lastdate"] as? [String: Any]
                 let dateExpiry = subDateobject?["date"] as? String ?? ""
                 print("dateExpiry = \(dateExpiry)")
                 let dateObj = Utility.sharedInstance.getDateFromString(dateExpiry, "yyyy-MM-dd HH:mm:ss") ?? Date()
                 let diffreance = Utility.sharedInstance.diffranceBetweenDays(formatedStartDate: dateObj)
                 print("diffreance = \(diffreance)")
-                
-                let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String  ?? ""
-                let subscriptionId = subscritpionobject?[SubscriptionId] as? String  ?? ""
+
+                let subscriptionStatus = subscritpionobject?[SubscriptionStatus] as? String ?? ""
+                let subscriptionId = subscritpionobject?[SubscriptionId] as? String ?? ""
                 let subscriptionPlan = subscritpionobject?[SubscriptionPlan] as? String
                 UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
                 UserDefaults.standard.set(subscriptionPlan, forKey: SubscriptionPlan)
                 UserDefaults.standard.set(subscriptionId, forKey: SubscriptionId)
                 UserDefaults.standard.set("\(diffreance)", forKey: SubscriptionDays)
-                
+
                 if (subscriptionStatus.lowercased() != "active") && (diffreance < 0) {
                     self.openPlanListView()
                 }
-                
-            }else {
+
+            } else {
                 UserDefaults.standard.set("", forKey: SubscriptionStatus)
                 UserDefaults.standard.set("", forKey: SubscriptionPlan)
                 UserDefaults.standard.set("0", forKey: SubscriptionDays)
-                
+
                 self.openPlanListView()
             }
             // self.openPlanListView()
-            
+
         }
-        
+
     }
-    
+
     func openPlanListView() {
         return;
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
-        
+
         //topViewController
-        
+
     }
-    
+
 }
 
 
-extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
+extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
@@ -453,22 +447,20 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             return friendList.count
         }
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LocalContactTVC
         cell.btnCall.isHidden = true
         cell.btnVideo.isHidden = true
         if isFiltering {
-            
             if filteredContacts.count > 0 {
                 let contact = filteredContacts[indexPath.row]
                 cell.nameLbl.text = contact.name
-                cell.phoneLbl.text =  "fone.me/\(contact.ContactsCnic!)"//contact.number
+                cell.phoneLbl.text = contact.ContactsCnic?.cnicToLink
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                
-            }else {
+            } else {
                 return UITableViewCell()
             }
         }
@@ -477,66 +469,46 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             if friendList.count > 0
             {
                 let contact = friendList[indexPath.row]
-                
                 cell.nameLbl.text = contact.name
-                cell.phoneLbl.text = "fone.me/\(contact.ContactsCnic!)"//contact.number
+                cell.phoneLbl.text = contact.ContactsCnic?.cnicToLink
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                
-                for val in user
-                {
-                    
-                    debugPrint("NUMBER",val.userId)
-                    
-                    if val.userId == contact.number
+                if let user = users.first(where: {$0.userId == contact.number}) {
+                    if user.connectionStatus == .online {
+                        debugPrint("LAST SEEN online")
+                        cell.online.isHidden = false
+                        cell.online.layer.cornerRadius = 5
+                        cell.online.layer.masksToBounds = true
+                        cell.lastseen.text = "Online"
+                        cell.lastseen.textColor = .systemGreen
+                    }
+                    else
                     {
-//                        cell.userImage.sd_setImage(with: URL(string: val.profileUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                        
-                        if val.connectionStatus == .online {
-                            debugPrint("LAST SEEN online")
-                            cell.online.isHidden = false
-                            cell.online.layer.cornerRadius = 5
-                            cell.online.layer.masksToBounds = true
-                            cell.lastseen.text = "Online"
-                            cell.lastseen.textColor = .systemGreen
-                        }
-                        else
-                        {
-                            cell.online.isHidden = true
-
-                            if val.lastSeenAt > 0 {
-//                                debugPrint("LAST SEEN",String(format: "Last Updated %@", Utils.getDateStringForDateSeperatorFromTimestamp(val.lastSeenAt)))
-//
-                                let date = Date(timeIntervalSince1970: TimeInterval(val.lastSeenAt))
-                                
-//
-//                                let datestr = Utils.getDateStringForDateSeperatorFromTimestamp(val.lastSeenAt).toDate(withFormat: "MMM dd, yyyy at hh:mm a")
-//                                debugPrint("date.......",date.timeAgoSinceDate())
-                                cell.lastseen.textColor = .lightGray
-                                cell.lastseen.text = date.timeAgoSinceDate()
-                                
-                            }
+                        cell.online.isHidden = true
+                        if user.lastSeenAt > 0 {
+                            let date = Date(timeIntervalSince1970: TimeInterval(user.lastSeenAt / 1000))
+                            cell.lastseen.textColor = .lightGray
+                            cell.lastseen.text = date.timeAgoSinceDate()
                         }
                     }
                 }
-                
-            }else {
+            } else {
                 return UITableViewCell()
             }
         }
         cell.btnCall.tag = indexPath.row
-        cell.btnCall.addTarget(self, action:#selector(self.btnCallClicked(_:)) , for: .touchUpInside)
+        cell.btnCall.addTarget(self, action: #selector(self.btnCallClicked(_:)), for: .touchUpInside)
         cell.btnVideo.tag = indexPath.row
-        cell.btnVideo.addTarget(self, action:#selector(self.btnVideoClicked(_:)) , for: .touchUpInside)
+        cell.btnVideo.addTarget(self, action: #selector(self.btnVideoClicked(_:)), for: .touchUpInside)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         self.view.isUserInteractionEnabled = false
-        
+
         if isFiltering, filteredContacts.count > 0 {
-            
+
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
             vc.isSearch = true
@@ -544,25 +516,25 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
-                    
-                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC{
+
+                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
 
                         if cell.userImage.image != nil
                         {
                             let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
-                            
-                            if self.checkUSERFRIEND(num: user?.phoneNumber ?? ""){
-                            self.btnClickChat(user ,img: imgdata,cont: contact)
-                                
+
+                            if self.checkUSERFRIEND(num: user?.phoneNumber ?? "") {
+                                self.btnClickChat(user, img: imgdata, cont: contact)
+
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true
                                 return
 
                             }
-                         }
+                        }
 //                        return
-                }
-                        
+                    }
+
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
 
@@ -571,7 +543,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     nav.navigationBar.isHidden = true
                     nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
@@ -586,22 +558,22 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
-                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC{
+                    if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
 
                         if cell.userImage.image != nil
                         {
                             let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
-                            
-                            
-                            if self.checkUSERFRIEND(num: user?.phoneNumber ?? ""){
-                            self.btnClickChat(user ,img: imgdata, cont: contact)
-                          
 
-                            return
+
+                            if self.checkUSERFRIEND(num: user?.phoneNumber ?? "") {
+                                self.btnClickChat(user, img: imgdata, cont: contact)
+
+
+                                return
                             }
-                    }
+                        }
 //                        return
-                }
+                    }
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
 
@@ -610,7 +582,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     nav.navigationBar.isHidden = true
                     nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
@@ -618,12 +590,12 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
             }
         }
     }
-    
-    @objc func btnCallClicked(_ sender:UIButton){
+
+    @objc func btnCallClicked(_ sender: UIButton) {
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         self.view.isUserInteractionEnabled = false
-        
+
         if isFiltering, filteredContacts.count > 0 {
             let contact = filteredContacts[sender.tag]
             let vc = UIStoryboard().loadVideoCallVC()
@@ -641,14 +613,14 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
                 }
             }
         }
-        else if friendList.count > 0{
+        else if friendList.count > 0 {
             let contact = friendList[sender.tag]
             let vc = UIStoryboard().loadVideoCallVC()
             vc.isVideo = false
@@ -665,46 +637,46 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
                 }
             }
-            
+
         }
     }
-    
+
     //MARK:- CHECK USER FRIEND STATUS : -
     func checkUSERFRIEND(num: String) -> Bool
     {
         let currUserNumber = num ?? ""
-              var isContactAdded = false
-              if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
-                                if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                                    if contacts.count > 0 {
-                                        for items in contacts {
-                                            let dict = items.dictionary
-                                            let number = dict?["ContactsNumber"]?.string ?? ""
-                                          if number == currUserNumber {
-                                              isContactAdded = true
-                                              break;
-                                          }
-                                            
-                                        }
-                                    }
-                                }
-                                
-                            }
+        var isContactAdded = false
+        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
+            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
+                if contacts.count > 0 {
+                    for items in contacts {
+                        let dict = items.dictionary
+                        let number = dict?["ContactsNumber"]?.string ?? ""
+                        if number == currUserNumber {
+                            isContactAdded = true
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+        }
         return isContactAdded
     }
-    
-    
-    @objc func btnVideoClicked(_ sender:UIButton){
+
+
+    @objc func btnVideoClicked(_ sender: UIButton) {
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         self.view.isUserInteractionEnabled = false
-        
+
         if isFiltering {
             let contact = filteredContacts[sender.tag]
             let vc = UIStoryboard().loadVideoCallVC()
@@ -721,15 +693,15 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
                 }
             }
-            
+
         }
-        else{
+        else {
             let contact = friendList[sender.tag]
             let vc = UIStoryboard().loadVideoCallVC()
             vc.isVideo = true
@@ -745,18 +717,18 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
-                }else{
+                } else {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
                 }
             }
-            
+
         }
     }
-    
+
     //MARK:- NEW CHANGE FOR CALL DIRECT :-
-    func btnClickChat(_ userMd: UserDetailModel?, img: Data?,cont: FriendList?) {
+    func btnClickChat(_ userMd: UserDetailModel?, img: Data?, cont: FriendList?) {
         var userId = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -771,13 +743,13 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
         self.userListQuery = SBDMain.createApplicationUserListQuery()
         self.userListQuery?.limit = 100
         var arrayNumber = [String]()
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
             if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
                 if contacts.count > 0 {
                     for items in contacts
                     {
                         let dict = items.dictionary
-                            
+
                         let number = dict?["ContactsNumber"]?.string ?? ""
                         arrayNumber.append(number)
                     }
@@ -787,7 +759,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
         }
         if arrayNumber.count > 0 {
             self.userListQuery?.userIdsFilter = [userMd!.phoneNumber]
-        }else {
+        } else {
             self.userListQuery?.userIdsFilter = ["0"]
         }
         var selecteduser = SBDUser()
@@ -796,9 +768,9 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                 print(error?.localizedDescription ?? "Error")
                 return
             }
-            
+
             DispatchQueue.main.async {
-              
+
                 for user in users! {
                     if user.userId == SBDMain.getCurrentUser()!.userId {
                         continue
@@ -806,14 +778,14 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     //User user here
                     selecteduser = user
                 }
-                
+
                 let params = SBDGroupChannelParams()
-                params.coverImage =  img
+                params.coverImage = img
                 params.add(selecteduser)
                 params.name = userMd?.name
-                
+
                 SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
-                    
+
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     if let error = error {
@@ -823,7 +795,7 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                         DispatchQueue.main.async {
                             self.present(alertController, animated: true, completion: nil)
                         }
-                        
+
                         return
                     }
                     vc.channel = channel
@@ -831,18 +803,18 @@ extension FriendTabVC :  UITableViewDelegate,UITableViewDataSource
                     nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
                 }
-                
+
             }
         })
-        
+
     }
-    
-    
-    
+
+
+
 }
 
-extension FriendTabVC : UISearchBarDelegate {
-    
+extension FriendTabVC: UISearchBarDelegate {
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         isFiltering = true
         guard let searchText = searchBar.text else {
@@ -856,7 +828,7 @@ extension FriendTabVC : UISearchBarDelegate {
             updateView()
             return
         }
-        
+
         self.activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
         self.view.isUserInteractionEnabled = false
@@ -867,7 +839,7 @@ extension FriendTabVC : UISearchBarDelegate {
             if success {
                 self.filteredContacts.removeAll()
                 self.filteredContacts = users!
-                
+
                 self.isFiltering = self.filteredContacts.count > 0
                 if self.isFiltering == false {
                     self.showAlert("Not user found for this fone id.")
@@ -875,29 +847,29 @@ extension FriendTabVC : UISearchBarDelegate {
                 self.updateView()
             }
         }
-        
+
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isFiltering = false
         searchBar.text = ""
         self.view.endEditing(true)
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isFiltering = false
         guard let firstSubview = searchBar.subviews.first else { return }
-        
+
         firstSubview.subviews.forEach {
             ($0 as? UITextField)?.clearButtonMode = .never
         }
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         isFiltering = false
         self.view.endEditing(true)
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isFiltering = false
@@ -905,17 +877,17 @@ extension FriendTabVC : UISearchBarDelegate {
             updateView()
         }
     }
-    
+
 }
 
 
-extension FriendTabVC : AddFriendDelegate {
+extension FriendTabVC: AddFriendDelegate {
     func addFriendRefresh() {
-        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: false)
+        self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: false)
     }
-    
-    
+
+
 }
-extension FriendTabVC : GroupChannelsUpdateListDelegate {
-    
+extension FriendTabVC: GroupChannelsUpdateListDelegate {
+
 }
