@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I26-u2-qVg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I26-u2-qVg">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--Profile Image & Name-->
         <scene sceneID="WD0-Eg-oi1">
             <objects>
-                <viewController title="Profile Image &amp; Name" id="DQW-Dx-Yxd" customClass="UpdateUserProfileViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile Image &amp; Name" id="DQW-Dx-Yxd" customClass="UpdateUserProfileViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GAN-bO-hSj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,6 +78,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <viewLayoutGuide key="safeArea" id="Uh2-i1-cDH"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="9CV-5I-WaJ"/>
@@ -91,12 +93,12 @@
                                     <constraint firstItem="Uh2-i1-cDH" firstAttribute="trailing" secondItem="I50-P2-vAI" secondAttribute="trailing" constant="15" id="q6Z-yj-CP6"/>
                                     <constraint firstAttribute="trailing" secondItem="crB-vI-3m5" secondAttribute="trailing" id="yWj-Cz-PXL"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="Uh2-i1-cDH"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nhb-kQ-gGi" customClass="CustomActivityIndicatorView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ai6-jJ-dVQ"/>
                         <color key="backgroundColor" name="color_channel_settings_bg"/>
                         <constraints>
                             <constraint firstItem="Vjz-VE-h7W" firstAttribute="top" secondItem="ai6-jJ-dVQ" secondAttribute="top" id="5lJ-Em-UzW"/>
@@ -107,7 +109,6 @@
                             <constraint firstItem="Nhb-kQ-gGi" firstAttribute="top" secondItem="GAN-bO-hSj" secondAttribute="top" id="ad1-8G-Mdx"/>
                             <constraint firstAttribute="bottom" secondItem="Nhb-kQ-gGi" secondAttribute="bottom" id="d3D-sm-Lpo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ai6-jJ-dVQ"/>
                     </view>
                     <connections>
                         <outlet property="loadingIndicatorView" destination="Nhb-kQ-gGi" id="Xwi-iY-Pld"/>
@@ -122,11 +123,11 @@
         <!--Settings View Controller-->
         <scene sceneID="SEk-lL-hZ8">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsViewController" id="I26-u2-qVg" customClass="SettingsViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsViewController" id="I26-u2-qVg" customClass="SettingsViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="HvX-5I-bdx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="aN7-Gb-59W">
                                 <cells>
@@ -134,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="18" width="414" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="whi-k9-s6Y" id="5If-Uo-PO6">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-2k-6JZ" userLabel="Profile Image View">
@@ -150,7 +151,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NIckname Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzd-Hq-IWO" userLabel="Nickname Label">
-                                                    <rect key="frame" x="83" y="19" width="284" height="21"/>
+                                                    <rect key="frame" x="83" y="19" width="285.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <color key="textColor" name="color_settings_nickname_label"/>
                                                     <nil key="highlightedColor"/>
@@ -179,7 +180,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hM-4I-SbF" userLabel="User ID Label">
-                                                    <rect key="frame" x="131" y="49" width="236" height="16"/>
+                                                    <rect key="frame" x="131" y="49" width="237.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.28627450980000002" green="0.30588235289999999" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -204,11 +205,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Group Channel Notifications" id="vQj-1Q-7CD">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="k9Z-rF-Rge" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="155" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="k9Z-rF-Rge" customClass="SettingsSwitchTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="149" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k9Z-rF-Rge" id="Fpe-CD-HfS">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-Of-z3R" userLabel="Bottom Border View">
@@ -241,10 +242,10 @@
                                                 <constraint firstItem="qWM-Of-z3R" firstAttribute="leading" secondItem="Fpe-CD-HfS" secondAttribute="leading" constant="16" id="zfh-BS-fSC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="UEQ-Es-zb4"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="qWM-Of-z3R" secondAttribute="trailing" id="OU1-Nt-xeD"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="UEQ-Es-zb4"/>
                                         <connections>
                                             <outlet property="bottomBorderView" destination="qWM-Of-z3R" id="PVT-5Q-kUu"/>
                                             <outlet property="settingsLabel" destination="xZC-HO-geI" id="l1s-ni-VfD"/>
@@ -254,8 +255,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Distinct Group Channel" footerTitle="When Create Distinct Channel is disabled, a new channel will be created even if a channel with the same members already exists." id="3uf-wF-uk3">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rzC-70-rn0" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="262.5" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rzC-70-rn0" customClass="SettingsSwitchTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="250.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rzC-70-rn0" id="8MQ-id-uuO">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -292,10 +293,10 @@
                                                 <constraint firstItem="uNd-D2-tf9" firstAttribute="centerY" secondItem="8MQ-id-uuO" secondAttribute="centerY" id="pg8-0I-E4J"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="WqF-mB-I3u"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="3LA-rI-pxp" secondAttribute="trailing" id="oDM-2E-9QF"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="WqF-mB-I3u"/>
                                         <connections>
                                             <outlet property="bottomBorderView" destination="3LA-rI-pxp" id="DZm-3f-oQS"/>
                                             <outlet property="settingsLabel" destination="uNd-D2-tf9" id="vse-8d-PLF"/>
@@ -307,14 +308,14 @@
                             <tableViewSection headerTitle="Blocked User List" id="d6b-lW-fIu">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="q5s-lt-gZ3">
-                                        <rect key="frame" x="0.0" y="406.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="367" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5s-lt-gZ3" id="oaT-SA-BkY">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blocked Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xnh-He-PWs" userLabel="Setting Label">
-                                                    <rect key="frame" x="61" y="11.5" width="110.5" height="21"/>
+                                                    <rect key="frame" x="61" y="11.5" width="110" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.21176470589999999" green="0.1764705882" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -341,7 +342,7 @@
                             <tableViewSection id="uLB-Vq-uC8">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Wht-ts-txt">
-                                        <rect key="frame" x="0.0" y="486.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="447" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wht-ts-txt" id="8Tw-dG-Vak">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -386,7 +387,7 @@
         <!--Settings Time View Controller-->
         <scene sceneID="jCq-3Y-z9r">
             <objects>
-                <viewController id="kam-QO-vLM" customClass="SettingsTimeViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kam-QO-vLM" customClass="SettingsTimeViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xfK-a2-AlO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -395,8 +396,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsSwitchTableViewCell" id="iiO-b3-LxA" customClass="SettingsSwitchTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsSwitchTableViewCell" id="iiO-b3-LxA" customClass="SettingsSwitchTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iiO-b3-LxA" id="E6x-YN-DWM">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -433,18 +434,18 @@
                                                 <constraint firstItem="Nnm-ja-dA0" firstAttribute="leading" secondItem="E6x-YN-DWM" secondAttribute="leading" constant="16" id="u1X-qn-guq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="TPm-dH-ssy"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="sgW-vp-kQY" secondAttribute="trailing" id="rYj-yk-jMk"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="TPm-dH-ssy"/>
                                         <connections>
                                             <outlet property="bottomBorderView" destination="sgW-vp-kQY" id="iZb-48-aj8"/>
                                             <outlet property="settingsLabel" destination="Nnm-ja-dA0" id="vff-rY-nSC"/>
                                             <outlet property="switchButton" destination="GE6-i7-ind" id="gF0-Hq-hgx"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimeTableViewCell" id="GET-tU-FvO" customClass="SettingsTimeTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimeTableViewCell" id="GET-tU-FvO" customClass="SettingsTimeTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GET-tU-FvO" id="r4Z-aB-TF1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -495,6 +496,7 @@
                                                 <constraint firstItem="dc3-eA-0mj" firstAttribute="leading" secondItem="r4Z-aB-TF1" secondAttribute="leading" constant="16" id="mvs-ND-EME"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="rId-zm-7cl"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="EFj-Ll-sZp" secondAttribute="trailing" id="Htv-Qm-cH8"/>
                                             <constraint firstAttribute="trailing" secondItem="dc3-eA-0mj" secondAttribute="trailing" id="IR0-fN-0mQ"/>
@@ -502,7 +504,6 @@
                                             <constraint firstAttribute="trailing" secondItem="O8H-nw-KcB" secondAttribute="trailing" id="gCI-lZ-qaF"/>
                                             <constraint firstItem="O8H-nw-KcB" firstAttribute="leading" secondItem="GET-tU-FvO" secondAttribute="leading" id="xtm-ZE-BRJ"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="rId-zm-7cl"/>
                                         <connections>
                                             <outlet property="bottomBorderView" destination="dc3-eA-0mj" id="IKJ-Kn-ywt"/>
                                             <outlet property="expandedBottomBorderView" destination="O8H-nw-KcB" id="Xee-JX-tPx"/>
@@ -511,8 +512,8 @@
                                             <outlet property="timeLabel" destination="yiI-Mb-Eg2" id="UbE-sf-7u0"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimePickerTableViewCell" rowHeight="242" id="gQk-7o-e2B" customClass="SettingsTimePickerTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="414" height="242"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SettingsTimePickerTableViewCell" rowHeight="242" id="gQk-7o-e2B" customClass="SettingsTimePickerTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="112.5" width="414" height="242"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gQk-7o-e2B" id="xbR-pK-6Fw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="242"/>
@@ -536,10 +537,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jm7-5z-HYP" customClass="CustomActivityIndicatorView" customModule="Fone" customModuleProvider="target">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jm7-5z-HYP" customClass="CustomActivityIndicatorView" customModule="Fone_Messenger" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="NAQ-9W-Sr9"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jm7-5z-HYP" firstAttribute="top" secondItem="NAQ-9W-Sr9" secondAttribute="top" id="3YJ-8V-oiw"/>
@@ -551,7 +553,6 @@
                             <constraint firstItem="NAQ-9W-Sr9" firstAttribute="bottom" secondItem="4OL-3l-46o" secondAttribute="bottom" id="rTz-HI-Tfi"/>
                             <constraint firstItem="NAQ-9W-Sr9" firstAttribute="trailing" secondItem="Jm7-5z-HYP" secondAttribute="trailing" id="ye1-0g-FHb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="NAQ-9W-Sr9"/>
                     </view>
                     <connections>
                         <outlet property="loadingIndicatorView" destination="Jm7-5z-HYP" id="2sg-qg-y32"/>
@@ -565,7 +566,7 @@
         <!--Settings Blocked User List View Controller-->
         <scene sceneID="QXF-re-Ydo">
             <objects>
-                <viewController id="t5N-We-wvf" customClass="SettingsBlockedUserListViewController" customModule="Fone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="t5N-We-wvf" customClass="SettingsBlockedUserListViewController" customModule="Fone_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8Jm-fv-d0n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -574,8 +575,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BlockedUserTableViewCell" rowHeight="66" id="PPK-KZ-ZGO" customClass="BlockedUserTableViewCell" customModule="Fone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="66"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BlockedUserTableViewCell" rowHeight="66" id="PPK-KZ-ZGO" customClass="BlockedUserTableViewCell" customModule="Fone_Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PPK-KZ-ZGO" id="GBU-GH-fXe">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
@@ -617,10 +618,10 @@
                                                 <constraint firstItem="whJ-lc-VZ9" firstAttribute="centerY" secondItem="GBU-GH-fXe" secondAttribute="centerY" id="mFd-bV-IVZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="m8T-eC-TMm"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="kDn-0K-TK0" secondAttribute="trailing" id="LJa-T3-OUC"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="m8T-eC-TMm"/>
                                         <connections>
                                             <outlet property="nicknameLabel" destination="whJ-lc-VZ9" id="WiX-d6-gep"/>
                                             <outlet property="profileImageView" destination="j1s-fg-6Ms" id="E8J-vZ-d0r"/>
@@ -635,6 +636,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="fmY-E3-hHR"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LGP-7h-qrz" firstAttribute="top" secondItem="8Jm-fv-d0n" secondAttribute="top" id="FRL-zF-tcC"/>
@@ -644,7 +646,6 @@
                             <constraint firstItem="i2K-o5-wTq" firstAttribute="centerX" secondItem="fmY-E3-hHR" secondAttribute="centerX" id="qV0-cM-EaR"/>
                             <constraint firstItem="i2K-o5-wTq" firstAttribute="centerY" secondItem="fmY-E3-hHR" secondAttribute="centerY" id="tgc-qz-hb9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fmY-E3-hHR"/>
                     </view>
                     <connections>
                         <outlet property="emptyLabel" destination="i2K-o5-wTq" id="xSF-Ea-Rmi"/>
@@ -676,5 +677,8 @@
         <namedColor name="color_user_list_divider">
             <color red="0.79600000381469727" green="0.80800002813339233" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

@@ -168,10 +168,18 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         cell.channelNameLabel.text = channel.name
         
         if channel.participantCount > 1 {
+            cell.participantCountLabel.text = String(format: "%ld participants", channel.participantCount)
+        } else {
+            cell.participantCountLabel.text = String(format: "1 participant")
+        }
+        
+        /*
+        if channel.participantCount > 1 {
             cell.participantCountLabel.text = String(format: "%ld participants", (channel.participantCount + channel.operators!.count ?? 0))
         } else {
             cell.participantCountLabel.text = String(format: "%ld participant", ((channel.participantCount == 0) ? 1 : (channel.participantCount  + channel.operators!.count ?? 0) ) )
         }
+        */
         
         var asOperator: Bool = false
         if let operators: [SBDUser] = channel.operators as? [SBDUser] {

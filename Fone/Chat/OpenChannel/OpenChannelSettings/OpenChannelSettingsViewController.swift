@@ -248,7 +248,12 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                     participantCell.settingMenuIconImageView.image = UIImage(named: "img_icon_participant")
 //                    participantCell.countLabel.text = String(format: "%ld", channel.participantCount)
 
-                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + channel.operators!.count ?? 0) - 1))
+//                    participantCell.countLabel.text = String(format: "%ld", ((channel.participantCount == 0) ? 1 : (channel.participantCount + channel.operators!.count ?? 0) - 1))
+                    if channel.participantCount > 1 {
+                        participantCell.countLabel.text = String(format: "%ld participants", channel.participantCount)
+                    } else {
+                        participantCell.countLabel.text = String(format: "1 participant")
+                    }
 
                     cell = participantCell
                 }

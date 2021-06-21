@@ -15,7 +15,6 @@ import MobileCoreServices
 import Alamofire
 import AlamofireImage
 import FLAnimatedImage
-import IQKeyboardManagerSwift
 
 class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SBDChannelDelegate, GroupChannelMessageTableViewCellDelegate, GroupChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate, SBDNetworkDelegate, SBDConnectionDelegate {
     
@@ -93,8 +92,6 @@ var isfromNotif = false
         } else {
             joinGroupView.isHidden = false
         }
-        
-        IQKeyboardManager.shared.enable = false
         
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
@@ -286,10 +283,6 @@ var isfromNotif = false
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        IQKeyboardManager.shared.enable = false
-    }
-    
     @IBAction func btnProfile(_ sender: Any) {
         let vc = UIStoryboard().loadUserDetailsVC()
         // @rackuka: vs.isSearch = true removed. Reason - user details are opened from group channel chat. not from search
@@ -302,8 +295,6 @@ var isfromNotif = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        IQKeyboardManager.shared.enable = true
-        
         if let navigationController = self.navigationController, let topViewController = navigationController.topViewController {
             if navigationController.viewControllers.firstIndex(of: self) == nil {
                 if navigationController is CreateGroupChannelNavigationController && !(topViewController is GroupChannelSettingsViewController) {

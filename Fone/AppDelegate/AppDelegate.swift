@@ -737,23 +737,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
 
         //  MARK:- Configuration
         func configureApplicationSetup() {
-
             //IQKeyboard Setup
             IQKeyboardSetup()
         }
 
         func IQKeyboardSetup() {
-
             //IQKeyboard Manager
             IQKeyboardManager.shared.enable = true
             IQKeyboardManager.shared.enableDebugging = true
             IQKeyboardManager.shared.enableAutoToolbar = false
             IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-
+            IQKeyboardManager.shared.disabledDistanceHandlingClasses = [
+                OpenChannelChatViewController.self,
+                GroupChannelChatViewController.self
+            ]
+            
+            IQKeyboardManager.shared.disabledToolbarClasses = [
+                OpenChannelChatViewController.self,
+                GroupChannelChatViewController.self
+            ]
+            
+            IQKeyboardManager.shared.disabledTouchResignedClasses = [
+                OpenChannelChatViewController.self,
+                GroupChannelChatViewController.self
+            ]
         }
-
-
-
     }
 
 // [START ios_10_message_handling]

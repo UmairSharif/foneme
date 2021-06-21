@@ -385,10 +385,10 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         self.keyboardHeight = height ?? 0
         
         DispatchQueue.main.async {
-           /* UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
+           UIView.animate(withDuration: duration ?? 0, delay: 0, options: .curveEaseOut, animations: {
                self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
-            }, completion: nil)*/
+            }, completion: nil)
             
             self.stopMeasuringVelocity = true
             self.scrollToBottom(force: false)
