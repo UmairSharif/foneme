@@ -637,6 +637,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
             // Messaging.messaging().appDidReceiveMessage(userInfo)
             // Print message ID.
 
+            /*
             if let push_type = userInfo[AnyHashable("push_type")] as? String {
                 print(push_type)
 
@@ -654,6 +655,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
 
                 }
             }
+             */
             //        if UIApplication.shared.applicationState == UIApplication.State.background {
             //
             //            // Print full message.
@@ -682,7 +684,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                 print("Message ID: \(messageID)")
             }
 
-            print(userInfo)
+            print("didReceiveRemoteNotification \(userInfo)")
 
             //        if UIApplication.shared.applicationState == UIApplication.State.background {
             //            self.userInfo = userInfo
@@ -830,6 +832,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                 body = adminMessage.message ?? ""
             }
 
+            /*
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = body
@@ -853,6 +856,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
 
                 }
             }
+             */
         }
     }
 
