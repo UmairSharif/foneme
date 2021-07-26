@@ -10,7 +10,7 @@ import UIKit
 import SendBirdSDK
 import AlamofireImage
 import Branch
-
+import SVProgressHUD
 
 class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegate, UITableViewDelegate, UITableViewDataSource, NotificationDelegate {
     var channelName: String?
@@ -66,20 +66,25 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
+        
         self.createChannel()
     }
-
 
     func saveGroupInfo() {
         if self.isPublicGroup {
             let link = self.inviteURLField?.text ?? ""
-            if link.isEmpty{
-                Utils.showAlertController(title: "", message: "Please enter public link name.", viewController: self)
+            if link.isEmpty {
+                Utils.showAlertController(title: "", message: "Please enter public link.", viewController: self)
                 return
             }
+            if !link.isValidPublicGroupLink {
+                Utils.showAlertController(title: "", message: "Please enter valid public link.", viewController: self)
+                return
+            }
+            SVProgressHUD.show()
             checkDeepLinkExist(link: "https://fone.me/g/\(link)") { isExist in
                 if isExist {
+                    SVProgressHUD.dismiss()
                     self.errorAlert("This link is exist. Please choose another one.")
                 } else {
                     self.callApiCreateGroup()
@@ -99,6 +104,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
             }
         }
         
+        /*
         var groupLink = "";
         var publicGroupLink = "";
         if self.isPublicGroup {
@@ -106,9 +112,9 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         } else {
             groupLink = self.privateGroupLbl?.text ?? ""
         }
-        
         let groupID = self.createdChannel?.channelUrl
-        let params = ["GroupID": groupID!,
+        let params = [
+            "GroupID": groupID!,
             "UserID": userId,
             "GroupName": channelName!,
             "GroupDescription": channelDescription,
@@ -117,13 +123,25 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
             "IsGroup": "0",
             "PublicGroupLink": publicGroupLink,
             "DeepLink": "https://fone.me/g/\(publicGroupLink)"] as [String: Any]
-
+         */
+        let publicGroupLink = self.inviteURLField?.text ?? ""
+        let params = [
+            "GroupID": self.createdChannel?.channelUrl ?? "",
+            "UserID": userId,
+            "GroupName": channelName!,
+            "GroupDescription": channelDescription,
+            "GroupLink": self.createdChannel?.channelUrl ?? "",
+            "IsPublic": isPublicGroup ? "1" : "0",
+            "IsGroup": "0",
+            "PublicGroupLink": self.createdChannel?.channelUrl ?? "",
+            "DeepLink": isPublicGroup ? "https://fone.me/g/\(publicGroupLink)" : publicGroupLink
+        ] as [String: Any]
         print("params: \(params)")
         var headers = [String: String]()
         headers = ["Content-Type": "application/json"]
 
         ServerCall.makeCallWitoutFile(createGroupChannel, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-
+            SVProgressHUD.dismiss()
             if let json = response {
                 print(json)
                 let statusCode = json["StatusCode"].string ?? ""

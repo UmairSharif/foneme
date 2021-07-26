@@ -44,7 +44,7 @@ class FriendTabVC: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         contactTVC.addSubview(refreshControl) // not required when using UITableViewController
-        
+
         searchBar.delegate = self
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -110,7 +110,7 @@ class FriendTabVC: UIViewController {
 
         checkOpenSocialLinksIfNeeded()
     }
-    
+
     private func checkOpenSocialLinksIfNeeded() {
         if !UserDefaults.standard.bool(forKey: KEY_OPEN_PROFILE_SOCIAL_LINKS) {
             let alertViewController = UIAlertController(title: "Social Links", message: "It looks like your profile is not up to date. Do you want to update it now?", preferredStyle: .alert)
@@ -252,7 +252,7 @@ class FriendTabVC: UIViewController {
                             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
 
                             //let json = JSON(number)
-                            items["ContactsNumber"] = JSON(number) ;
+                            items["ContactsNumber"] = JSON(number)
                             if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
                                 midConatct.append(items)
                             }
@@ -394,7 +394,7 @@ class FriendTabVC: UIViewController {
             }
         }
         if mobilenumber == "+18888888888" {
-            return;
+            return
         }
         // mobilenumber = "9199876543"
         let header = ["Content-Type": "application/json"]
@@ -441,7 +441,7 @@ class FriendTabVC: UIViewController {
     }
 
     func openPlanListView() {
-        return;
+        return
         let desiredVC = UIStoryboard().loadPlanVC()
         desiredVC.modalPresentationStyle = .fullScreen
         topViewController()?.navigationController?.present(desiredVC, animated: true, completion: nil)
@@ -489,7 +489,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                 cell.nameLbl.text = contact.name
                 cell.phoneLbl.text = contact.ContactsCnic?.cnicToLink
                 cell.userImage.sd_setImage(with: URL(string: contact.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                if let user = users.first(where: {$0.userId == contact.number}) {
+                if let user = users.first(where: { $0.userId == contact.number }) {
                     if user.connectionStatus == .online {
                         debugPrint("LAST SEEN online")
                         cell.online.isHidden = false
@@ -525,7 +525,6 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
         self.view.isUserInteractionEnabled = false
 
         if isFiltering, filteredContacts.count > 0 {
-
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
             vc.isSearch = true
@@ -533,13 +532,9 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
-
                     if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
-
-                        if cell.userImage.image != nil
-                        {
+                        if cell.userImage.image != nil {
                             let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
-
                             if self.checkUSERFRIEND(num: user?.phoneNumber ?? "") {
                                 self.btnClickChat(user, img: imgdata, cont: contact)
 
@@ -549,12 +544,9 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
 
                             }
                         }
-//                        return
                     }
-
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
-
                     vc.userDetails = user!
                     let nav = UINavigationController(rootViewController: vc)
                     nav.navigationBar.isHidden = true
@@ -564,6 +556,8 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
         }
@@ -589,7 +583,6 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                                 return
                             }
                         }
-//                        return
                     }
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -603,6 +596,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
         }
@@ -634,6 +628,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
         }
@@ -658,6 +653,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
 
@@ -677,13 +673,12 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                         let number = dict?["ContactsNumber"]?.string ?? ""
                         if number == currUserNumber {
                             isContactAdded = true
-                            break;
+                            break
                         }
 
                     }
                 }
             }
-
         }
         return isContactAdded
     }
@@ -714,9 +709,9 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
-
         }
         else {
             let contact = friendList[sender.tag]
@@ -738,6 +733,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
 

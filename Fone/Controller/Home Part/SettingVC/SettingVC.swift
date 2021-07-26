@@ -55,23 +55,19 @@ class SettingVC: UIViewController {
                     self.getUserDetail(cnic: user.address ?? "", friend: "") { (userModel, success) in
                         if success {
                             self.userModel = userModel
-                            debugPrint("USER", userModel?.aboutme)
                             self.lblAboutme.text = userModel?.aboutme
 
                             UserDefaults.standard.setValue(userModel?.aboutme, forKey: "about")
                             UserDefaults.standard.setValue(userModel?.profession, forKey: "profession")
-
-
-
                             UserDefaults.standard.synchronize()
                             let profession = UserDefaults.standard.value(forKey: "profession") as? String
                             self.professionLabel.text = profession ?? ""
 
                             self.checkOpenSocialLinksIfNeeded()
+                        } else {
+                            self.showAlert("Can't get user information. Please try again.")
                         }
                     }
-
-                    debugPrint("Aboutme", user.aboutme)
 
                     if let url = URL(string: user.userImage ?? "") {
                         self.downloadImage(from: url)

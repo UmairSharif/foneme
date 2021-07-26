@@ -217,13 +217,16 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 
                 let isPublic = self.groupInfoDic["IsPublic"] as? String
                 if isPublic == "True" {
-
-                    if let val = self.groupInfoDic["PublicGroupLink"] as? String {
-                        banCell.settingMenuLabel.text = "https://fone.me/g/" + val
-                    }
-                    else
-                    {
-                        banCell.settingMenuLabel.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                    if let deepLink = self.groupInfoDic["DeepLink"] as? String {
+                        banCell.settingMenuLabel.text = deepLink
+                    } else {
+                        if let val = self.groupInfoDic["PublicGroupLink"] as? String {
+                            banCell.settingMenuLabel.text = "https://fone.me/g/" + val
+                        }
+                        else
+                        {
+                            banCell.settingMenuLabel.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
+                        }
                     }
                 } else {
 //                            if let val = self.groupInfoDic["PublicGroupLink"] as? String{

@@ -27,7 +27,7 @@ class UIFriendButton: UIButton {
 class UserDetailsVC: UIViewController {
 
     //MARK:-Outlets
-    
+
     @IBOutlet weak var lblVideoCall: UILabel!
     @IBOutlet weak var lblChat: UILabel!
     @IBOutlet weak var lblVoiceCall: UILabel!
@@ -46,10 +46,10 @@ class UserDetailsVC: UIViewController {
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
-    var delegate : AddFriendDelegate?
+    var delegate: AddFriendDelegate?
     var isFromLink = false
     var FoneID = ""
-    var activityIndicatorView : NVActivityIndicatorView?
+    var activityIndicatorView: NVActivityIndicatorView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,28 +62,29 @@ class UserDetailsVC: UIViewController {
         {
             activityIndicatorView?.startAnimating()
             isFromLink = false
-            
+
             self.getUserDetail(cnic: FoneID, friend: "") { (userModel, success) in
                 if success {
-//                    debugPrint("USER",)
                     self.activityIndicatorView?.stopAnimating()
                     self.userDetails = userModel
                     self.UpdateDetails()
+                } else {
+                    self.showAlert("Can't get user information. Please try again.")
                 }
             }
         }
-        else{
+        else {
             self.UpdateDetails()
         }
-        
+
     }
-    
+
     //MARK:- Update Details
     func UpdateDetails()
     {
         let currUserNumber = userDetails?.phoneNumber ?? ""
         var isContactAdded = false
-        
+
         if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data,
             let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
             // @rackuka: rewritten with contacts.contains - syntax sugar
@@ -101,7 +102,7 @@ class UserDetailsVC: UIViewController {
         self.lblprofession.text = self.userDetails?.profession ?? ""
         viewLoc.isHidden = true
 
-        if self.userDetails?.location != "" &&  self.userDetails?.location != nil && self.userDetails?.location != "null"
+        if self.userDetails?.location != "" && self.userDetails?.location != nil && self.userDetails?.location != "null"
         {
             viewLoc.isHidden = false
             self.lblAdress.text = self.userDetails?.location ?? ""
@@ -110,16 +111,16 @@ class UserDetailsVC: UIViewController {
             lbLinks.text = "\(name)'s Links"
         }
     }
-    
+
     @IBAction func btnClickBack(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func btnCopyBranchLink(_ sender : UIButton){
+
+    @IBAction func btnCopyBranchLink(_ sender: UIButton) {
         UIPasteboard.general.string = sender.titleLabel?.text ?? ""
         self.showToast(controller: self, message: "Fone id copied", seconds: 1)
     }
-    
+
     @IBAction func btnLinksTapped(_ sender: Any) {
         if let user = self.userDetails {
             let vc = UIStoryboard().socialLinksVC()
@@ -127,10 +128,10 @@ class UserDetailsVC: UIViewController {
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            self.showAlert("","Oops!! Can't get user detail. Please try again later!")
+            self.showAlert("", "Oops!! Can't get user detail. Please try again later!")
         }
     }
-    
+
     @IBAction func btnClickFriend(_ sender: UIButton) {
         self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: (btnFonemeID.titleLabel?.text)!) { (user, success) in
             if success {
@@ -140,19 +141,19 @@ class UserDetailsVC: UIViewController {
                 if self.delegate != nil {
                     self.delegate?.addFriendRefresh()
                 }
-            }else{
+            } else {
                 self.showAlert("\(self.userDetails?.name ?? "User") is already your friend.")
             }
         }
     }
-    
+
     @IBAction func btnClickVoiceCall(_ sender: UIButton) {
-        
-       // UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
+
+        // UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
 
 //        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
 //        if subscription.lowercased() == "active" {
-            
+
         let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = false
@@ -167,9 +168,9 @@ class UserDetailsVC: UIViewController {
 //
 //            self.show(message: "Please subscribe for app to use this feature.")
 //        }
-        
+
     }
-    
+
     @IBAction func btnClickChat(_ sender: UIButton) {
         var userId = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
@@ -184,13 +185,13 @@ class UserDetailsVC: UIViewController {
         self.userListQuery = SBDMain.createApplicationUserListQuery()
         self.userListQuery?.limit = 100
         var arrayNumber = [String]()
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
+        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
             if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
                 if contacts.count > 0 {
                     for items in contacts
                     {
                         let dict = items.dictionary
-                            
+
                         let number = dict?["ContactsNumber"]?.string ?? ""
                         arrayNumber.append(number)
                     }
@@ -200,7 +201,7 @@ class UserDetailsVC: UIViewController {
         }
         if arrayNumber.count > 0 {
             self.userListQuery?.userIdsFilter = [self.userDetails!.phoneNumber!]
-        }else {
+        } else {
             self.userListQuery?.userIdsFilter = ["0"]
         }
         var selecteduser = SBDUser()
@@ -209,9 +210,9 @@ class UserDetailsVC: UIViewController {
                 print(error?.localizedDescription ?? "Error")
                 return
             }
-            
+
             DispatchQueue.main.async {
-              
+
                 for user in users! {
                     if user.userId == SBDMain.getCurrentUser()!.userId {
                         continue
@@ -219,12 +220,12 @@ class UserDetailsVC: UIViewController {
                     //User user here
                     selecteduser = user
                 }
-                
+
                 let params = SBDGroupChannelParams()
                 params.coverImage = self.UserImage.image?.jpegData(compressionQuality: 0.5)
                 params.add(selecteduser)
                 params.name = self.userDetails?.name
-                
+
                 SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
                     if let error = error {
                         let alertController = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
@@ -233,26 +234,26 @@ class UserDetailsVC: UIViewController {
                         DispatchQueue.main.async {
                             self.present(alertController, animated: true, completion: nil)
                         }
-                        
+
                         return
                     }
-                    
-                    
+
+
                     vc.channel = channel
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
                 }
-                
+
             }
         })
-        
+
     }
-    
+
     @IBAction func btnClickVideoCall(_ sender: UIButton) {
 //        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
 //      if subscription.lowercased() == "active" {
-                let contact = userDetails
+        let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = true
         vc.recieverNumber = contact?.phoneNumber
@@ -263,21 +264,21 @@ class UserDetailsVC: UIViewController {
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
 //              } else {
-//            
+//
 //            self.show(message: "Please subscribe for app to use this feature.")
 //        }
     }
-    
+
     func show(message: String) {
-          DispatchQueue.main.async {
-              
-              let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
-              alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-              self.present(alertController, animated: true, completion: nil)
-          }
-      }
+        DispatchQueue.main.async {
+
+            let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
-extension UserDetailsVC : GroupChannelsUpdateListDelegate {
-    
+extension UserDetailsVC: GroupChannelsUpdateListDelegate {
+
 }
