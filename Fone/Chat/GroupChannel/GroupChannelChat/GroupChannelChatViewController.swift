@@ -619,7 +619,7 @@ var isfromNotif = false
                self.inputMessageInnerContainerViewBottomMargin.constant = self.keyboardHeight - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
             }, completion: nil)
-
+            self.scrollToBottom(force: true)
             self.stopMeasuringVelocity = true
             self.scrollToBottom(force: false)
             self.keyboardShown = true
@@ -696,7 +696,6 @@ var isfromNotif = false
                     self.messageTableView.reloadData()
                     self.scrollToBottom(force: true)
                 }
-                
                 return
             }
             
@@ -711,7 +710,7 @@ var isfromNotif = false
                         self.messages[index] = message
                         self.preSendMessages.removeValue(forKey: requestId)
                         self.messageTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
-                        self.scrollToBottom(force: false)
+                        self.scrollToBottom(force: true)
                     }
                 }
             }

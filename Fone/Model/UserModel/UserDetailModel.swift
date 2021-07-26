@@ -70,6 +70,8 @@ struct UserDetailModel: Codable {
             } else {
                 socialLinks = []
             }
+        } else {
+            socialLinks = []
         }
     }
 }

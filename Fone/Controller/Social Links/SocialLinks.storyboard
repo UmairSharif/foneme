@@ -210,9 +210,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-Or-NNx">
-                                <rect key="frame" x="176.5" y="523" width="61.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No links found, check back soon!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-Or-NNx">
+                                <rect key="frame" x="132" y="417" width="150" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="8b0-mN-1vI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -225,7 +228,7 @@
                             <constraint firstItem="fWG-Ma-XPq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DxC-LS-KCM"/>
                             <constraint firstItem="kz9-yK-Wmm" firstAttribute="top" secondItem="cku-QT-AXv" secondAttribute="bottom" id="Fqx-Cl-4o4"/>
                             <constraint firstItem="kz9-yK-Wmm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NQB-Au-Ve3"/>
-                            <constraint firstItem="H0W-Or-NNx" firstAttribute="centerY" secondItem="cku-QT-AXv" secondAttribute="centerY" id="P1N-5n-hU6"/>
+                            <constraint firstItem="H0W-Or-NNx" firstAttribute="centerY" secondItem="cku-QT-AXv" secondAttribute="centerY" constant="-100" id="P1N-5n-hU6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fWG-Ma-XPq" secondAttribute="trailing" id="TaD-im-jxb"/>
                             <constraint firstItem="cku-QT-AXv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="c2C-dz-ZNc"/>
                             <constraint firstItem="P5o-8k-vZt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="eHC-PD-MPO"/>

@@ -30,7 +30,7 @@ extension AppDelegate {
             if let json = response {
                 debugPrint(json)
                 if let vall = json["GroupData"].array,
-                   let group = vall.first?.dictionary {
+                    let group = vall.first?.dictionary {
                     let groupId = group["GroupID"]?.string ?? ""
                     let grouptype = group["IsPublic"]?.string ?? ""
                     if let topVC = topViewController() {
@@ -45,11 +45,10 @@ extension AppDelegate {
                                 activity?.stopAnimating()
                                 let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
                                 vc.channel = channel
-                                
-                                vc.modalPresentationStyle = .overFullScreen
-                                vc.modalTransitionStyle = .crossDissolve
+
                                 let navCont = UINavigationController.init(rootViewController: vc)
-                                
+                                navCont.modalPresentationStyle = .overFullScreen
+                                navCont.modalTransitionStyle = .crossDissolve
                                 topVC.present(navCont, animated: false, completion: {
                                     topVC.view.alpha = 1
                                 })
@@ -57,6 +56,24 @@ extension AppDelegate {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    func redirectToPrivateChat(channelURL: String) {
+        if let topVC = topViewController() {
+            SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
+                guard error == nil else {
+                    return
+                }
+                let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                vc.channel = groupChannel
+
+                let navCont = UINavigationController.init(rootViewController: vc)
+                navCont.modalPresentationStyle = .overFullScreen
+                navCont.modalTransitionStyle = .crossDissolve
+                topVC.present(navCont, animated: false, completion: {
+                })
             }
         }
     }

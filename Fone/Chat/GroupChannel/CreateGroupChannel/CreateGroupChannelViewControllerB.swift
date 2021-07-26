@@ -266,7 +266,6 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
                     }
                 }
             }
-            
         }
     }
     

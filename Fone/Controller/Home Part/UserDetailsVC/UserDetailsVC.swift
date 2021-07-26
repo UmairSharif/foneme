@@ -43,7 +43,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var lblprofession: UILabel!
     @IBOutlet weak var viewLoc: UIView!
     @IBOutlet weak var lbLinks: UILabel!
-    var userDetails:UserDetailModel?
+    var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
     var delegate : AddFriendDelegate?
@@ -180,6 +180,7 @@ class UserDetailsVC: UIViewController {
         }
         let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
         vc.delegate = self
+        vc.userDetails = userDetails
         self.userListQuery = SBDMain.createApplicationUserListQuery()
         self.userListQuery?.limit = 100
         var arrayNumber = [String]()

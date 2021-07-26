@@ -123,7 +123,7 @@ extension UIViewController {
 
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let userInfo = delegate.userInfo
-        print(userInfo)
+        print("seralizeNotificationResult \(userInfo)")
         let aps = userInfo?[AnyHashable("aps")] as? NSDictionary
 
         let receiverId = userInfo?["ReceiverId"] as? String
@@ -141,7 +141,6 @@ extension UIViewController {
         let alert = aps?["alert"] as? NSDictionary
         _ = alert?[AnyHashable("body")] as? String
         _ = alert?["title"] as? String
-
 
         if notificationType == "CLLCN"
         {

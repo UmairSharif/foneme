@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let KEY_OPEN_PROFILE_SOCIAL_LINKS = "KEY_OPEN_PROFILE_SOCIAL_LINKS"
+
 let BrainTree_toKinizationKey = "sandbox_ktbkxkdd_trhv6grk27vpbzkp"
 let BrainTree_toKinizationKey_Pro = "production_csr6kp5g_ysvjqxmg78mdgnbf"
 

@@ -108,6 +108,23 @@ class FriendTabVC: UIViewController {
         getUSERSTATUS()
 //        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
 
+        checkOpenSocialLinksIfNeeded()
+    }
+    
+    private func checkOpenSocialLinksIfNeeded() {
+        if !UserDefaults.standard.bool(forKey: KEY_OPEN_PROFILE_SOCIAL_LINKS) {
+            let alertViewController = UIAlertController(title: "Social Links", message: "It looks like your profile is not up to date. Do you want to update it now?", preferredStyle: .alert)
+            alertViewController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                UserDefaults.standard.setValue(true, forKey: KEY_OPEN_PROFILE_SOCIAL_LINKS)
+                UserDefaults.standard.synchronize()
+            }))
+            alertViewController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                if let topController = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
+                    topController.selectedIndex = 3 // Settings
+                }
+            }))
+            self.present(alertViewController, animated: true, completion: nil)
+        }
     }
 
     func updateView() {

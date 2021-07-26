@@ -114,53 +114,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                 } else if let channelURL = params["~channel"] as? String {
                     if channelURL.contains("sendbird_group_channel") {
                         //Group
-                        if let topVC = topViewController() {
-//                            topVC.view.alpha = 0.1
-                            SBDGroupChannel.getWithUrl(channelURL) { (groupChannel, error) in
-                                guard error == nil else {
-                                    // Error.
-//                                topVC.view.alpha = 1
-                                    return
-                                }
-                                // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
-
-                                let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
-                                vc.channel = groupChannel
-                                vc.modalPresentationStyle = .overFullScreen
-                                vc.modalTransitionStyle = .crossDissolve
-                                let navCont = UINavigationController.init(rootViewController: vc)
-                                topVC.present(navCont, animated: false, completion: {
-//                                topVC.view.alpha = 1
-                                })
-
-
-                            }
-                        }
-
-
+                        self.redirectToPrivateChat(channelURL: channelURL)
                     } else {
-                        //Open Channel
-                        if let topVC = topViewController() {
-//                            topVC.view.alpha = 0.1
-                            SBDOpenChannel.getWithUrl(channelURL) { (groupChannel, error) in
-                                guard error == nil else {
-//                                topVC.view.alpha = 1
-                                    // Error.
-                                    return
-                                }
-                                // TODO: Implement what is needed with the contents of the response in the groupChannel parameter.
-
-                                let vc = UIStoryboard(name: "OpenChannel", bundle: nil).instantiateViewController(withIdentifier: "OpenChannelChatViewController") as! OpenChannelChatViewController
-                                vc.channel = groupChannel
-                                vc.modalPresentationStyle = .overFullScreen
-                                vc.modalTransitionStyle = .crossDissolve
-                                let navCont = UINavigationController.init(rootViewController: vc)
-
-                                topVC.present(navCont, animated: false, completion: {
-                                    topVC.view.alpha = 1
-                                })
-                            }
-                        }
+                        self.redirectToGroup(groupLink: channelURL)
                     }
                     print(params);
                 }
@@ -626,6 +582,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                 }
             }
         }
+    
 
 
         // [START receive_message]
@@ -766,12 +723,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
         }
     }
 
-// [START ios_10_message_handling]
-    @available(iOS 10, *)
-    extension AppDelegate: UNUserNotificationCenterDelegate {
-
-    }
-
     extension AppDelegate: SBDChannelDelegate {
         func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
             let topViewController = UIViewController.currentViewController()
@@ -832,7 +783,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                 body = adminMessage.message ?? ""
             }
 
-            /*
             let content = UNMutableNotificationContent()
             content.title = title
             content.body = body
@@ -851,12 +801,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
             let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 0.1, repeats: false)
             let request = UNNotificationRequest(identifier: String(format: "%@_%@", content.categoryIdentifier, sender.channelUrl), content: content, trigger: trigger)
             let center = UNUserNotificationCenter.current()
+            center.delegate = self
             center.add(request) { (error) in
                 if error != nil {
 
                 }
             }
-             */
         }
     }
 

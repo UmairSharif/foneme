@@ -587,7 +587,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             let members = channel.members as? [SBDUser],
             let friend = members.first(where: {user.mobile != $0.userId}) {
             SVProgressHUD.show()
-            getUserDetail(cnic: friend.nickname!, friend: "") { userModel, success in
+            getUserDetailPhone(cnic: friend.userId, friend: "") {userModel, success in
                 SVProgressHUD.dismiss()
                 if (success) {
                     let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController

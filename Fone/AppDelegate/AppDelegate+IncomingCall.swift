@@ -9,32 +9,31 @@
 import UIKit
 import UserNotifications
 
-extension AppDelegate {
-    
+extension AppDelegate: UNUserNotificationCenterDelegate {
     func displayIncomingCall(
-      uuid: UUID,
-      handle: String,
-      hasVideo: Bool = false,
-      completion: ((Error?) -> Void)?
+        uuid: UUID,
+        handle: String,
+        hasVideo: Bool = false,
+        completion: ((Error?) -> Void)?
     ) {
-     
+
     }
-    
+
     func registerForLocalNotifications() {
         // Define the custom actions.
         let inviteAction = UNNotificationAction(identifier: "INVITE_ACTION",
-              title: "Simulate VoIP Push",
-              options: UNNotificationActionOptions(rawValue: 0))
+            title: "Simulate VoIP Push",
+            options: UNNotificationActionOptions(rawValue: 0))
         let declineAction = UNNotificationAction(identifier: "DECLINE_ACTION",
-              title: "Decline",
-              options: .destructive)
+            title: "Decline",
+            options: .destructive)
         let notificationCenter = UNUserNotificationCenter.current()
 
         // Define the notification type
         let meetingInviteCategory = UNNotificationCategory(identifier: "ROOM_INVITATION",
-                                                           actions: [inviteAction, declineAction],
-                                                           intentIdentifiers: [],
-                                                           options: .customDismissAction)
+            actions: [inviteAction, declineAction],
+            intentIdentifiers: [],
+            options: .customDismissAction)
         notificationCenter.setNotificationCategories([meetingInviteCategory])
 
         // Register for notification callbacks.
@@ -42,34 +41,33 @@ extension AppDelegate {
 
         // Request permission to display alerts and play sounds.
         notificationCenter.requestAuthorization(options: [.alert])
-           { (granted, error) in
-              // Enable or disable features based on authorization.
-           }
+        { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
     }
-    
-    
-    
+
+
+
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         userInfo = notification.request.content.userInfo
-        
-        
         if let messageID = userInfo![gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
         if userInfo != nil {
             self.handleNotificationsForCall(userInfo: userInfo!)
         }
+        
         topViewController()?.seralizeNotificationResult()
-        completionHandler([.alert,.sound,.badge])
+        completionHandler([.alert, .sound, .badge])
     }
-    
-    func handleNotificationsForCall(userInfo : [AnyHashable : Any]){
+
+    func handleNotificationsForCall(userInfo: [AnyHashable: Any]) {
         if let push_type = userInfo[AnyHashable("push_type")] as? String {
             print(push_type)
-            if push_type == "call_decline"{
+            if push_type == "call_decline" {
                 if let topVC = topViewController() {
                     if topVC is VideoCallVC {
                         let userName = userInfo[AnyHashable("user_name")] as? String ?? "User"
@@ -82,20 +80,25 @@ extension AppDelegate {
             }
         }
     }
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
         userInfo = response.notification.request.content.userInfo
         // Print message ID.
-        
-        
-        if let messageID = userInfo![gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+        if let sendbird = userInfo?["sendbird"] as? [String: Any],
+           let channelDict = sendbird["channel"] as? [String: Any],
+           let channelUrl = channelDict["channel_url"] as? String {
+            debugPrint("Click on notification of channel: \(channelUrl)")
+            redirectToPrivateChat(channelURL: channelUrl)
+        } else {
+            if let messageID = userInfo![gcmMessageIDKey] {
+                print("Message ID: \(messageID)")
+            }
+            
+            topViewController()?.seralizeNotificationResult()
         }
-    
-        topViewController()?.seralizeNotificationResult()
-        
+
         completionHandler()
     }
 }
