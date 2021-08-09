@@ -55,11 +55,9 @@ class UserDetailsVC: UIViewController {
 
     }
     override func viewWillAppear(_ animated: Bool) {
-        print(userDetails?.userId)
         activityIndicatorView = NVActivityIndicatorView(frame: CGRect.init(x: self.view.center.x - 30, y: self.view.center.y - 30, width: 60, height: 60), type: .ballPulse, color: .blue)
         self.view.addSubview(activityIndicatorView!)
-        if isFromLink == true
-        {
+        if isFromLink == true {
             activityIndicatorView?.startAnimating()
             isFromLink = false
 
@@ -69,7 +67,7 @@ class UserDetailsVC: UIViewController {
                     self.userDetails = userModel
                     self.UpdateDetails()
                 } else {
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error"," Can't get user information. Please try again.")
                 }
             }
         }
@@ -80,19 +78,14 @@ class UserDetailsVC: UIViewController {
     }
 
     //MARK:- Update Details
-    func UpdateDetails()
-    {
-        let currUserNumber = userDetails?.phoneNumber ?? ""
+    func UpdateDetails() {
         var isContactAdded = false
-
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data,
-            let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-            // @rackuka: rewritten with contacts.contains - syntax sugar
-            isContactAdded = contacts.contains(where: { (items) -> Bool in
-                let dict = items.dictionary
-                return currUserNumber == (dict?["ContactsNumber"]?.string ?? "")
-            })
+        if let number = userDetails?.phoneNumber {
+            if CurrentSession.shared.friends.first(where: {number.comparePhoneNumber(number: $0.number)}) != nil {
+                isContactAdded = true
+            }
         }
+        
         self.btnFriend.isFriendAdded = isContactAdded
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))

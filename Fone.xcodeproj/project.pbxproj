@@ -239,6 +239,7 @@
 		6669E6162674CBD2001BDC75 /* LinksManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6152674CBD2001BDC75 /* LinksManagementViewController.swift */; };
 		6669E6182675099F001BDC75 /* SocialLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6172675099F001BDC75 /* SocialLinkView.swift */; };
 		6669E61A267509A9001BDC75 /* SocialLinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6669E619267509A9001BDC75 /* SocialLinkView.xib */; };
+		6673250C26C1996000797C4B /* CurrentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6673250B26C1996000797C4B /* CurrentSession.swift */; };
 		66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B71BF9267C81E6002123BA /* String+Fone.swift */; };
 		66E6F98726751D6A00F5BA25 /* AddLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */; };
 		6DB2853FEA46E788380A2AF1 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */; };
@@ -521,6 +522,7 @@
 		6669E6152674CBD2001BDC75 /* LinksManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksManagementViewController.swift; sourceTree = "<group>"; };
 		6669E6172675099F001BDC75 /* SocialLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkView.swift; sourceTree = "<group>"; };
 		6669E619267509A9001BDC75 /* SocialLinkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialLinkView.xib; sourceTree = "<group>"; };
+		6673250B26C1996000797C4B /* CurrentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSession.swift; sourceTree = "<group>"; };
 		66B71BF9267C81E6002123BA /* String+Fone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Fone.swift"; sourceTree = "<group>"; };
 		66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkViewController.swift; sourceTree = "<group>"; };
 		7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1106,6 +1108,7 @@
 				22880EBE23C074830044263D /* OMUtility.swift */,
 				22880EBF23C074830044263D /* URL.swift */,
 				22880EC023C074830044263D /* Theme.swift */,
+				6673250B26C1996000797C4B /* CurrentSession.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1649,7 +1652,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1250;
-				ORGANIZATIONNAME = Optechno;
+				ORGANIZATIONNAME = Fone.Me;
 				TargetAttributes = {
 					22880E6A23C074380044263D = {
 						CreatedOnToolsVersion = 10.3;
@@ -1902,6 +1905,7 @@
 				1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */,
 				4F16BC8C249D1744001C4708 /* NewCallViewController.swift in Sources */,
 				1BA097C424817B5100E0A042 /* SplitViewController.swift in Sources */,
+				6673250C26C1996000797C4B /* CurrentSession.swift in Sources */,
 				1BA0978724817B5000E0A042 /* OpenChannelTableViewCell.swift in Sources */,
 				22880ECA23C074830044263D /* CosmosText.swift in Sources */,
 				1BA0978524817B5000E0A042 /* CreateOpenChannelDelegate.swift in Sources */,

@@ -94,7 +94,7 @@ class PlanListVC: UIViewController {
             if let error = error {
                 self.show(message: error.localizedDescription)
                 
-            } else if (result?.isCancelled == true) {
+            } else if (result?.isCanceled == true) {
                 self.show(message: "Transaction Cancelled")
                 
             } else if let nonce = result?.paymentMethod?.nonce {

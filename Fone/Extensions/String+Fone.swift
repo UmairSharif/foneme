@@ -49,4 +49,21 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", argumentArray: [regEx])
         return predicate.evaluate(with: self)
     }
+    
+    func comparePhoneNumber(number: String?) -> Bool {
+        guard !self.isEmpty, let number = number, !number.isEmpty else {
+            return false
+        }
+        
+        let firstNum = self.replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+        
+        let secondNum = number.replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "(", with: "")
+            .replacingOccurrences(of: ")", with: "")
+        return firstNum.compare(secondNum) == .orderedSame
+    }
 }

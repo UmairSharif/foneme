@@ -421,7 +421,7 @@ extension CallLogVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error"," Can't get user information. Please try again.")
                 }
             }
         }
@@ -449,7 +449,7 @@ extension CallLogVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error"," Can't get user information. Please try again.")
                 }
             }
         }

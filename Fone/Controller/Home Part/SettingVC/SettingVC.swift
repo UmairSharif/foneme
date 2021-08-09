@@ -65,7 +65,7 @@ class SettingVC: UIViewController {
 
                             self.checkOpenSocialLinksIfNeeded()
                         } else {
-                            self.showAlert("Can't get user information. Please try again.")
+                            self.showAlert("Error"," Can't get user information. Please try again.")
                         }
                     }
 

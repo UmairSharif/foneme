@@ -52,13 +52,7 @@ class FriendTabVC: UIViewController {
         self.contactTVC.tableFooterView = UIView.init()
 
         var showLoader = true
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
-            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                if contacts.count > 0 {
-                    showLoader = false
-                }
-            }
-        }
+        if !CurrentSession.shared.friends.isEmpty { showLoader = false }
 
         // Get Contacts Friend List
         self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: showLoader)
@@ -104,11 +98,12 @@ class FriendTabVC: UIViewController {
 
         }
 
-        loadDataFromCache()
+        friendList = CurrentSession.shared.friends
         getUSERSTATUS()
+        self.updateView()
 //        self.sendContactAPI(contactsArray : LocalContactHandler.instance.contactArray, showLoader: true)
 
-        checkOpenSocialLinksIfNeeded()
+        //checkOpenSocialLinksIfNeeded()
     }
 
     private func checkOpenSocialLinksIfNeeded() {
@@ -133,39 +128,10 @@ class FriendTabVC: UIViewController {
             contactTVC.isHidden = false
             inviteView.isHidden = true
             contactTVC.reloadData()
-        }
-        // otherwise show invite view
-            else {
+        } else {
             contactTVC.isHidden = true
             inviteView.isHidden = false
         }
-    }
-
-    func loadDataFromCache() {
-        guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data else {
-            return
-        }
-        guard let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) else {
-            return
-        }
-        self.friendList.removeAll()
-
-        for items in contacts {
-            let dict = items.dictionary
-
-            let number = dict?["ContactsNumber"]?.string ?? ""
-            let name = dict?["ContactsName"]?.string ?? ""
-            let userImage = dict?["Image"]?.string ?? ""
-            let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
-            let userid = dict?["ContactsVT"]?.string ?? ""
-            debugPrint("USERID", userid)
-
-            let getData = FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic, userId: userid)
-            self.friendList.append(getData)
-
-
-        }
-        self.updateView()
     }
 
     func sendContactAPI(contactsArray: [Contacts], showLoader: Bool)
@@ -178,22 +144,12 @@ class FriendTabVC: UIViewController {
             self.activityIndicator.isHidden = true
         }
 
-        //var result = [String: Any]()
-        var userId: String?
-
-        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-            print(userProfileData)
-            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                userId = user.userId
-            }
-        }
-
-        let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
+        var userId: String = CurrentSession.shared.user?.userId ?? ""
+        let loginToken = CurrentSession.shared.accessToken
+        
         var contactList = [[String: Any]]()
-
         for contact in contactsArray
         {
-
             let number = contact.number?.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
 
             let parameter = ["ContactsName": contact.name ?? "",
@@ -204,13 +160,12 @@ class FriendTabVC: UIViewController {
         }
 
         var parameters = [
-            "UserId": userId ?? "",
+            "UserId": userId,
             "Contacts": contactList
         ] as [String: Any]
-        if showLoader {
-            parameters = ["UserId": userId ?? ""] as [String: Any]
+        if showLoader || contactList.count == 0 {
+            parameters = ["UserId": userId] as [String: Any]
         }
-
 
         // print(parameters)
         var headers = [String: String]()
@@ -258,8 +213,7 @@ class FriendTabVC: UIViewController {
                             }
                         }
 
-                        UserDefaults.standard.set(try? PropertyListEncoder().encode(midConatct), forKey: "Contacts")
-                        UserDefaults.standard.synchronize()
+                        CurrentSession.shared.storeFriends(friends: midConatct)
                         if self.friendList.count == 0 {
                             if let chatvc = self.tabBarController?.viewControllers?[2] as? GroupChannelsViewController {
                                 if chatvc.isViewLoaded {
@@ -267,19 +221,13 @@ class FriendTabVC: UIViewController {
                                 }
                             }
                         }
-                        self.friendList.removeAll()
+
+                        self.friendList = CurrentSession.shared.friends
+
+                        self.getUSERSTATUS()
                     }
                 }
-                let contacts = json["Contacts"].array
-                if contacts?.count == 0
-                {
-                    self.updateView()
-                }
-                else
-                {
-                    self.loadDataFromCache()
-                    self.getUSERSTATUS()
-                }
+                self.updateView()
             } else {
 
                 var mobilenumber: String?
@@ -295,13 +243,9 @@ class FriendTabVC: UIViewController {
         }
     }
 
-
-    func getUSERSTATUS()
-    {
-
+    func getUSERSTATUS() {
         if friendList.count > 0 {
             let ids: [String] = friendList.map { $0.number ?? "" }
-
             let query = SBDMain.createApplicationUserListQuery()
             query?.userIdsFilter = ids
             query?.loadNextPage(completionHandler: { (users, error) in
@@ -556,8 +500,8 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    
-                    self.showAlert("Can't get user information. Please try again.")
+
+                    self.showAlert("Error", " Can't get user information. Please try again.")
                 }
             }
         }
@@ -596,7 +540,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error", " Can't get user information. Please try again.")
                 }
             }
         }
@@ -628,7 +572,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error", " Can't get user information. Please try again.")
                 }
             }
         }
@@ -653,7 +597,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error", " Can't get user information. Please try again.")
                 }
             }
 
@@ -661,26 +605,9 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
     }
 
     //MARK:- CHECK USER FRIEND STATUS : -
-    func checkUSERFRIEND(num: String) -> Bool
-    {
-        let currUserNumber = num ?? ""
-        var isContactAdded = false
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
-            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                if contacts.count > 0 {
-                    for items in contacts {
-                        let dict = items.dictionary
-                        let number = dict?["ContactsNumber"]?.string ?? ""
-                        if number == currUserNumber {
-                            isContactAdded = true
-                            break
-                        }
-
-                    }
-                }
-            }
-        }
-        return isContactAdded
+    func checkUSERFRIEND(num: String) -> Bool {
+        if num.isEmpty { return false }
+        return CurrentSession.shared.friends.first(where: { num.comparePhoneNumber(number: $0.number) }) != nil
     }
 
 
@@ -709,7 +636,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert("Error", " Can't get user information. Please try again.")
                 }
             }
         }
@@ -733,7 +660,10 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.view.isUserInteractionEnabled = true
-                    self.showAlert("Can't get user information. Please try again.")
+                    self.showAlert(
+                        "Error",
+                        "Can't get user information. Please try again."
+                    )
                 }
             }
 
@@ -755,21 +685,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
         vc.contact = cont
         self.userListQuery = SBDMain.createApplicationUserListQuery()
         self.userListQuery?.limit = 100
-        var arrayNumber = [String]()
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
-            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                if contacts.count > 0 {
-                    for items in contacts
-                    {
-                        let dict = items.dictionary
-
-                        let number = dict?["ContactsNumber"]?.string ?? ""
-                        arrayNumber.append(number)
-                    }
-                }
-            }
-
-        }
+        let arrayNumber = CurrentSession.shared.friends.map({ $0.number })
         if arrayNumber.count > 0 {
             self.userListQuery?.userIdsFilter = [userMd!.phoneNumber]
         } else {
@@ -896,11 +812,10 @@ extension FriendTabVC: UISearchBarDelegate {
 
 extension FriendTabVC: AddFriendDelegate {
     func addFriendRefresh() {
-        self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: false)
+        self.sendContactAPI(contactsArray: [], showLoader: false)
     }
-
-
 }
+
 extension FriendTabVC: GroupChannelsUpdateListDelegate {
 
 }

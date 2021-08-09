@@ -76,10 +76,8 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
             locationstatus()
         }
         
-//        txtaboutme.delegate = self
-          // here you can call the start location function
-//        txtaboutme.placeholder = "Hey there! I am using Fone Messenger."
-        txtaboutme.text = "Hey there! I am using Fone Messenger."
+        txtaboutme.placeholder = "Hey there! I am using Fone Messenger."
+        txtaboutme.delegate = self
         lblcount.text =  "\(txtaboutme.text.count)/180"
         // Do any additional setup after loading the view.
     }
