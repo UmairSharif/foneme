@@ -11,9 +11,7 @@ import SendBirdSDK
 import SwiftyJSON
 import Branch
 import NVActivityIndicatorView
-protocol AddFriendDelegate {
-    func addFriendRefresh()
-}
+import SVProgressHUD
 
 // @rackuka: introduce isFriendAdded - app specific property designating if button should let add friend OR depict that the friend is added
 class UIFriendButton: UIButton {
@@ -46,7 +44,6 @@ class UserDetailsVC: UIViewController {
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
-    var delegate: AddFriendDelegate?
     var isFromLink = false
     var FoneID = ""
     var activityIndicatorView: NVActivityIndicatorView?
@@ -126,15 +123,17 @@ class UserDetailsVC: UIViewController {
     }
 
     @IBAction func btnClickFriend(_ sender: UIButton) {
+        SVProgressHUD.show()
         self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: (btnFonemeID.titleLabel?.text)!) { (user, success) in
             if success {
-                // @rackuka: reflect state change - now friend has been added
-                self.btnFriend.isFriendAdded = true
-                self.showAlert("Friend add successfully")
-                if self.delegate != nil {
-                    self.delegate?.addFriendRefresh()
+                self.getContacts { finished in
+                    SVProgressHUD.dismiss()
+                    // @rackuka: reflect state change - now friend has been added
+                    self.btnFriend.isFriendAdded = true
+                    self.showAlert("Friend add successfully")
                 }
             } else {
+                SVProgressHUD.dismiss()
                 self.showAlert("\(self.userDetails?.name ?? "User") is already your friend.")
             }
         }

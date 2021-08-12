@@ -240,6 +240,7 @@
 		6669E6182675099F001BDC75 /* SocialLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6172675099F001BDC75 /* SocialLinkView.swift */; };
 		6669E61A267509A9001BDC75 /* SocialLinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6669E619267509A9001BDC75 /* SocialLinkView.xib */; };
 		6673250C26C1996000797C4B /* CurrentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6673250B26C1996000797C4B /* CurrentSession.swift */; };
+		66A6016126C5926500B2A5DA /* UIViewController+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6016026C5926500B2A5DA /* UIViewController+API.swift */; };
 		66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B71BF9267C81E6002123BA /* String+Fone.swift */; };
 		66E6F98726751D6A00F5BA25 /* AddLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */; };
 		6DB2853FEA46E788380A2AF1 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */; };
@@ -523,6 +524,7 @@
 		6669E6172675099F001BDC75 /* SocialLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkView.swift; sourceTree = "<group>"; };
 		6669E619267509A9001BDC75 /* SocialLinkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialLinkView.xib; sourceTree = "<group>"; };
 		6673250B26C1996000797C4B /* CurrentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSession.swift; sourceTree = "<group>"; };
+		66A6016026C5926500B2A5DA /* UIViewController+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+API.swift"; sourceTree = "<group>"; };
 		66B71BF9267C81E6002123BA /* String+Fone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Fone.swift"; sourceTree = "<group>"; };
 		66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkViewController.swift; sourceTree = "<group>"; };
 		7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1124,6 +1126,7 @@
 				22880EC523C074830044263D /* Extensions.swift */,
 				22880EC623C074830044263D /* HKImagePickerHandler.swift */,
 				66B71BF9267C81E6002123BA /* String+Fone.swift */,
+				66A6016026C5926500B2A5DA /* UIViewController+API.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2020,6 +2023,7 @@
 				229BCD0523C202EF00AEF903 /* HelpVC.swift in Sources */,
 				22CCC95223C645A600592614 /* LocalContactTVC.swift in Sources */,
 				22880F0423C08CF10044263D /* MobileVC.swift in Sources */,
+				66A6016126C5926500B2A5DA /* UIViewController+API.swift in Sources */,
 				1BA097BE24817B5100E0A042 /* Utils.swift in Sources */,
 				22880EE223C074830044263D /* HKViewControllerExt.swift in Sources */,
 				22880ECF23C074830044263D /* CosmosLayers.swift in Sources */,

@@ -472,7 +472,6 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
             vc.isSearch = true
-            vc.delegate = self
             self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
@@ -509,7 +508,6 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
         {
             let contact = friendList[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
-            vc.delegate = self
             self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
@@ -805,14 +803,6 @@ extension FriendTabVC: UISearchBarDelegate {
             self.filteredContacts.removeAll()
             updateView()
         }
-    }
-
-}
-
-
-extension FriendTabVC: AddFriendDelegate {
-    func addFriendRefresh() {
-        self.sendContactAPI(contactsArray: [], showLoader: false)
     }
 }
 
