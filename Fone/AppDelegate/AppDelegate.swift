@@ -84,10 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
         initializePushKit()
         //Config Firebase
         FirebaseApp.configure()
-        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
-            // do stuff with deep link data (nav to page, display content, etc)
-            print(params ?? "");
+        Branch.getInstance().checkPasteboardOnInstall()
 
+        BranchScene.shared().initSession(launchOptions: launchOptions) { params, error, scene in
+            // do stuff with deep link data (nav to page, display content, etc)
+            print(params ?? "")
             if let params = params as? [String: AnyObject] {
                 if let GroupId = params["GroupnName"] as? String {
                     self.RedirectToGroup(GrpName: GroupId)
@@ -121,7 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
                     print(params);
                 }
             }
-
         }
 
         UIApplication.shared.applicationIconBadgeNumber = 0

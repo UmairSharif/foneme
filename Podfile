@@ -25,7 +25,7 @@ target 'Fone' do
   pod 'TwilioAccessManager', '~> 1.0.0'
   pod 'ReachabilitySwift'
   pod 'TwilioVoice', '~> 5.1.1'
-  pod 'Branch'
+  pod 'Branch',  '~> 1.39.4'
   pod 'SendBirdSDK'
   pod 'AlamofireImage', '~> 3.4'
   pod 'RSKImageCropper'

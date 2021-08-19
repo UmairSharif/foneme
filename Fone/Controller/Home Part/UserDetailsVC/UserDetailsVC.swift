@@ -164,82 +164,44 @@ class UserDetailsVC: UIViewController {
     }
 
     @IBAction func btnClickChat(_ sender: UIButton) {
-        var userId = ""
-        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-            print(userProfileData)
-            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                userId = user.userId!
-            }
-        }
-        let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
-        vc.delegate = self
-        vc.userDetails = userDetails
-        self.userListQuery = SBDMain.createApplicationUserListQuery()
-        self.userListQuery?.limit = 100
-        var arrayNumber = [String]()
-        if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data {
-            if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                if contacts.count > 0 {
-                    for items in contacts
-                    {
-                        let dict = items.dictionary
+        if let userDetail = self.userDetails,
+            let query = SBDMain.createApplicationUserListQuery() {
+            query.limit = 100
+            query.userIdsFilter = [userDetail.phoneNumber]
 
-                        let number = dict?["ContactsNumber"]?.string ?? ""
-                        arrayNumber.append(number)
-                    }
+            SVProgressHUD.show()
+            query.loadNextPage {[weak self] users, error in
+                guard let sSelf = self else { return }
+                if let error = error {
+                    SVProgressHUD.dismiss()
+                    sSelf.showAlert("Error", error.localizedDescription)
+                    return
                 }
-            }
-
-        }
-        if arrayNumber.count > 0 {
-            self.userListQuery?.userIdsFilter = [self.userDetails!.phoneNumber!]
-        } else {
-            self.userListQuery?.userIdsFilter = ["0"]
-        }
-        var selecteduser = SBDUser()
-        self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Error")
-                return
-            }
-
-            DispatchQueue.main.async {
-
-                for user in users! {
-                    if user.userId == SBDMain.getCurrentUser()!.userId {
-                        continue
-                    }
-                    //User user here
-                    selecteduser = user
-                }
-
-                let params = SBDGroupChannelParams()
-                params.coverImage = self.UserImage.image?.jpegData(compressionQuality: 0.5)
-                params.add(selecteduser)
-                params.name = self.userDetails?.name
-
-                SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
-                    if let error = error {
-                        let alertController = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
-                        let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
-                        alertController.addAction(actionCancel)
-                        DispatchQueue.main.async {
-                            self.present(alertController, animated: true, completion: nil)
+                if let users = users, let selectedUser = users.first {
+                    SBDGroupChannel.createChannel(with: [selectedUser], isDistinct: true) {[weak self] channel, error in
+                        guard let sSelf = self else { return }
+                        SVProgressHUD.dismiss()
+                        if let error = error {
+                            sSelf.showAlert("Error", error.localizedDescription)
+                            return
                         }
 
-                        return
+                        DispatchQueue.main.async {
+                            let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                            vc.delegate = sSelf
+                            vc.userDetails = sSelf.userDetails
+                            vc.channel = channel
+                            let nav = UINavigationController(rootViewController: vc)
+                            nav.modalPresentationStyle = .fullScreen
+                            sSelf.present(nav, animated: true, completion: nil)
+                        }
                     }
-
-
-                    vc.channel = channel
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true, completion: nil)
+                } else {
+                    SVProgressHUD.dismiss()
+                    sSelf.showAlert("Error", "Can't find this user in Sendbird. Please contact administrator.")
                 }
-
             }
-        })
-
+        }
     }
 
     @IBAction func btnClickVideoCall(_ sender: UIButton) {

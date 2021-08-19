@@ -774,7 +774,6 @@ extension FriendTabVC: UISearchBarDelegate {
                 self.updateView()
             }
         }
-
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
