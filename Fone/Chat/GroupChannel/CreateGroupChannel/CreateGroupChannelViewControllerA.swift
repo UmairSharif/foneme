@@ -31,16 +31,16 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.title = "Choose Member"
-        
+        self.title = "Add Participants"
         self.navigationItem.largeTitleDisplayMode = .never
         
-        self.okButtonItem = UIBarButtonItem(title: "OK(0)", style: .plain, target: self, action: #selector(CreateGroupChannelViewControllerA.clickOkButton(_:)))
-        self.okButtonItem?.tintColor = UIColor.white
+        self.okButtonItem = UIBarButtonItem(image: UIImage(named: "ic_next"), style: .plain, target: self, action: #selector(CreateGroupChannelViewControllerA.clickOkButton(_:)))
+        self.okButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = self.okButtonItem
         
-        self.cancelButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CreateGroupChannelViewControllerA.clickCancelCreateGroupChannel(_:)))
-        self.cancelButtonItem?.tintColor = UIColor.white
+        self.cancelButtonItem = UIBarButtonItem(image: UIImage(named: "ic_back_blk"), style: .plain, target: self, action: #selector(CreateGroupChannelViewControllerA.clickCancelCreateGroupChannel(_:)))
+        
+        self.cancelButtonItem?.tintColor = hexStringToUIColor(hex: "333333")
         self.navigationItem.leftBarButtonItem = self.cancelButtonItem
         
         self.searchController = UISearchController(searchResultsController: nil)
@@ -54,8 +54,12 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
         self.searchController?.searchBar.placeholder = "Search"
         self.searchController?.searchBar.tintColor = .white
         self.searchController?.obscuresBackgroundDuringPresentation = false
-        self.navigationItem.searchController = self.searchController
+        //self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
+        
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: hexStringToUIColor(hex: "333333")]
+        
 //        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
         
         self.tableView.delegate = self
@@ -79,24 +83,27 @@ class CreateGroupChannelViewControllerA: UIViewController, UITableViewDelegate, 
             self.okButtonItem?.isEnabled = true
         }
         
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         self.refreshUserList()
         
-        self.searchController?.searchBar.set(textColor: .black)
+        self.searchController?.searchBar.set(textColor: hexStringToUIColor(hex: "333333"))
         self.searchController?.searchBar.setTextField(color: .white)
-        self.searchController?.searchBar.setPlaceholder(textColor: .black)
+        self.searchController?.searchBar.setPlaceholder(textColor: hexStringToUIColor(hex: "333333"))
         self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
         self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self] ).tintColor = .white
+        
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func setupScrollView() {
@@ -152,7 +159,7 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
                     return
                 }
                 if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                     alert.addAction(actionCancel)
                     self.present(alert, animated: true, completion: nil)
@@ -191,22 +198,16 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         if self.userListQuery == nil {
             self.userListQuery = SBDMain.createApplicationUserListQuery()
             var arrayNumber = [String]()
-            if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
-                if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                    if contacts.count > 0 {
-                        for items in contacts {
-                            let dict = items.dictionary
-                            let number = dict?["ContactsNumber"]?.string ?? ""
-                            let name = dict?["ContactsCnic"]?.string ?? ""
-                            arrayNumber.append(number)
-                            self.localUserInfo["\(number)"] = name;
-                            self.localUserInfo["friendname" + "\(number)"] =  dict?["ContactsName"]?.string ?? ""
+            let contacts = CurrentSession.shared.friends
+            if contacts.count > 0 {
+                for items in contacts {
+                    let number = items.number ?? ""
+                    let name = items.ContactsCnic
+                    arrayNumber.append(number)
+                    self.localUserInfo["\(number)"] = name;
+                    self.localUserInfo["friendname" + "\(number)"] =  items.name ?? ""
 
-                        }
-                    }
-//                    key    String    "ContactsName"
                 }
-
             }
             self.userListQuery?.limit = UInt(arrayNumber.count)
             print("arrayNumber = \(arrayNumber) === \(arrayNumber.count)");
@@ -221,22 +222,17 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         if self.userListQuery?.hasNext == false {
             return
         }
-        
         self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.refreshControl?.endRefreshing()
-                }
-                
-                return
-            }
-            
             DispatchQueue.main.async {
+                if error != nil {
+                    self.refreshControl?.endRefreshing()
+                    return
+                }
                 if refresh {
                     self.users.removeAll()
                     self.allUsers.removeAll()
                 }
-                
+
                 for user in users! {
                     if user.userId == SBDMain.getCurrentUser()?.userId {
                         continue
@@ -245,9 +241,9 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
                     user.friendName = self.localUserInfo["friendname" + user.userId]
                     self.users.append(user)
                     self.allUsers.append(user)
-                    
+
                 }
-                
+
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
             }
@@ -264,14 +260,13 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         
         cell.profileImageView.setProfileImageView(for: selectedUsers[indexPath.row])
         cell.nicknameLabel.text = selectedUsers[indexPath.row].friendName
-        
         return cell
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedUsers.remove(at: indexPath.row)
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         if self.selectedUsers.count == 0 {
             self.okButtonItem?.isEnabled = false
@@ -297,26 +292,24 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectableUserTableViewCell") as! SelectableUserTableViewCell
         cell.user = self.users[indexPath.row]
         
-        DispatchQueue.main.async {
-            if let updateCell = tableView.cellForRow(at: indexPath) as? SelectableUserTableViewCell {
-                updateCell.nicknameLabel.text = self.users[indexPath.row].friendName
-                    //"fone.me/\(self.users[indexPath.row].nickname!)"
-                updateCell.profileImageView.setProfileImageView(for: self.users[indexPath.row])
-                
-                if let user = self.users[exists: indexPath.row] {
-                    if self.selectedUsers.contains(user) {
-                        updateCell.selectedUser = true
-                    } else {
-                        updateCell.selectedUser = false
-                    }
-                }
-                
+        cell.nicknameLabel.text = self.users[indexPath.row].friendName
+        cell.profileImageView.setProfileImageView(for: self.users[indexPath.row])
+
+        if let user = self.users[exists: indexPath.row] {
+            if self.selectedUsers.contains(user) {
+                cell.selectedUser = true
+            } else {
+                cell.selectedUser = false
             }
         }
         
         if self.users.count > 0 && indexPath.row == self.users.count - 1 {
             self.loadUserListNextPage(false)
         }
+        
+        cell.cellContentView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        cell.cellContentView.layer.borderWidth = 1.0
+        cell.cellContentView.layer.cornerRadius = 12.0
         
         return cell
     }
@@ -341,7 +334,7 @@ SBDGroupChannel.createChannel(withUserIds: arrayIds, isDistinct: true) { (sbdcha
             }
         }
         
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         if self.selectedUsers.count == 0 {
             self.okButtonItem?.isEnabled = false

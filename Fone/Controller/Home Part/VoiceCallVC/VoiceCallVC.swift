@@ -128,10 +128,8 @@ class VoiceCallVC: UIViewController {
        self.timerLbl.isHidden = true
        self.seconds = 86400
         self.callerImage.sd_setImage(with: URL(string: userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-        DispatchQueue.main.async {
-            self.callerImage.layer.cornerRadius = self.callerImage.frame.height/2
-            self.callerImage.layer.masksToBounds = true
-        }
+        self.callerImage.layer.cornerRadius = self.callerImage.frame.height/2
+        self.callerImage.layer.masksToBounds = true
       
     }
     
@@ -359,15 +357,6 @@ extension VoiceCallVC: PKPushRegistryDelegate {
     }
     
     func fetchAccessToken(completion: @escaping (String) -> ()) {
-
-//        var sender = ""
-//        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-//            print(userProfileData)
-//            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-//                sender = user.mobile ?? ""
-//            }
-//        }
-        
         var userId : String?
         var dialerNumber : String?
         

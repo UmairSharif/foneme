@@ -8,7 +8,6 @@
 
 import UIKit
 import ContactsUI
-import NVActivityIndicatorView
 
 protocol LocalContactDelegate {
     
@@ -19,9 +18,14 @@ struct FriendList  {
     
     var name : String?
     var number : String?
+    var email : String?
+    var socialId: String?
     var userImage : String?
     var ContactsCnic:String?
     var userId:String?
+    var type:String?
+    var distance:String?
+    var profession: String?
 }
 
 class LocalContactVC: UIViewController {
@@ -128,7 +132,7 @@ class LocalContactVC: UIViewController {
                         let number = dict?["ContactsNumber"]?.string ?? ""
                         let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
 
-                        if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
+                        if !ContactsCnic.isEmpty {
                             let name = dict?["ContactsName"]?.string ?? ""
                             let userImage = dict?["Image"]?.string ?? ""
                             let getData = FriendList(name: name, number: number,userImage : userImage,ContactsCnic: ContactsCnic)
@@ -187,6 +191,12 @@ extension LocalContactVC :  UITableViewDelegate,UITableViewDataSource
             cell.phoneLbl.text = contact.number
             cell.userImage.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "ic_profile"))
         }
+        
+        cell.cellContentView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        cell.cellContentView.layer.borderWidth = 1.0
+        cell.cellContentView.layer.cornerRadius = 12.0
+        
+       // cell.dotView.layer.cornerRadius = cell.dotView.frame.size.height / 2.0
         
         return cell
     }

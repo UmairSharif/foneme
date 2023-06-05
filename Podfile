@@ -8,6 +8,7 @@ target 'Fone' do
   # Pods for Fone
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
   pod 'MASegmentedControl'
   pod 'SVProgressHUD'
@@ -35,9 +36,21 @@ target 'Fone' do
   pod 'OneSignal'
   pod 'GoogleAnalytics'
   pod 'Toast-Swift', '~> 5.0.1'
-
+  pod "TTGTagCollectionView"
+  pod 'GoogleSignIn', '~> 6.2.4'
+  #pod 'FBSDKLoginKit'
+pod 'FacebookCore'
+pod 'FacebookLogin'
+  pod 'Braintree', :inhibit_warnings => true
+  pod 'SnapKit'
+  pod 'SwiftJWT'
+  pod 'Google-Mobile-Ads-SDK'
+  
   target 'OneSignalNotificationServiceExtension' do
     pod 'OneSignal'
+    pod 'Alamofire', '~> 4.7'
+    pod 'SnapKit'
+    pod 'SwiftJWT'
   end
 
   target 'FoneTests' do
@@ -54,9 +67,11 @@ target 'Fone' do
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
         config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+        config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+        config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
        end
     end
   end
  
 end
-

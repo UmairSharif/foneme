@@ -36,9 +36,14 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
     @IBOutlet weak var privateGroupLbl: UILabel?
     @IBOutlet weak var bottomView: UIView?
     @IBOutlet weak var privateGroupView: UIView?
+    @IBOutlet weak var publicGroupView: UIView?
     var isPublicGroup = false
     @IBOutlet weak var publickLinkStatusLbl: UILabel?
-
+    @IBOutlet weak var inviteLbl: UILabel!
+    @IBOutlet weak var privateLbl: UILabel!
+    @IBOutlet weak var publicLbl: UILabel!
+    @IBOutlet weak var chooseTypeImg: UIImageView!
+    
     var createdChannel: SBDOpenChannel?
 
     override func viewDidLoad() {
@@ -49,13 +54,12 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         self.title = "Create Public Chats"
         self.navigationItem.largeTitleDisplayMode = .never
 
-        self.doneButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CreateOpenChannelViewControllerB.clickDoneButton(_:)))
-        self.navigationItem.rightBarButtonItem = self.doneButtonItem
+        /*self.doneButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CreateOpenChannelViewControllerB.clickDoneButton(_:)))
+        self.navigationItem.rightBarButtonItem = self.doneButtonItem*/
 
         self.channelUrl = String.randomUUIDString()
 
         self.activityIndicatorView.isHidden = true
-        self.view.bringSubviewToFront(self.activityIndicatorView)
 
         NotificationCenter.default.addObserver(self, selector: #selector(CreateOpenChannelViewControllerB.keyboardWillShow(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateOpenChannelViewControllerB.keyboardWillHide(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
@@ -68,6 +72,15 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         self.tableView.dataSource = self
         
         self.createChannel()
+        
+        privateGroupView?.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        privateGroupView?.layer.borderWidth = 1.0
+        privateGroupView?.layer.cornerRadius = 12.0
+        
+        publicGroupView?.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        publicGroupView?.layer.borderWidth = 1.0
+        publicGroupView?.layer.cornerRadius = 12.0
+        
     }
 
     func saveGroupInfo() {
@@ -93,15 +106,13 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         } else {
             callApiCreateGroup()
         }
+        
     }
     
     func callApiCreateGroup() {
         var userId = ""
-        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-            print(userProfileData)
-            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                userId = user.userId!
-            }
+        if let currentUserLoggedIn = CurrentSession.shared.user {
+                userId = currentUserLoggedIn.userId!
         }
         
         /*
@@ -154,8 +165,8 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
                 {
                     if let message = json["Message"].string
                     {
-                        print(message)
                         self.errorAlert("\(message)")
+                        
                     }
                 }
             }
@@ -186,23 +197,17 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
         }
     }
 
-    @objc func clickDoneButton(_ sender: AnyObject) {
-
-//        if self.isPublicGroup && self.publicGroupLink.isEmpty {
-//            self.publicChannelBtnClicked()
-//            return
-//        }
-
+    @IBAction func clickCancelButton(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func clickDoneButton(_ sender: AnyObject) {
+        
         saveGroupInfo()
     }
-
-    // @objc func clickDoneButton(_ sender: AnyObject) {
+    
     @objc func createChannel() {
-        self.activityIndicatorView.superViewSize = self.view.frame.size
-        self.activityIndicatorView.updateFrame()
-
-        self.activityIndicatorView.isHidden = false
-        self.activityIndicatorView.startAnimating()
+        SVProgressHUD.show()
         var operatorIds: [String] = []
         operatorIds += self.selectedUsers.keys
         operatorIds.append((SBDMain.getCurrentUser()?.userId)!)
@@ -210,8 +215,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
 
         SBDOpenChannel.createChannel(withName: self.channelName, channelUrl: channelUrl, coverImage: self.coverImageData!, coverImageName: "cover_image.jpg", data: nil, operatorUserIds: operatorIds, customType: nil, progressHandler: nil) { (channel, error) in
             if let error = error {
-                self.activityIndicatorView.isHidden = true
-                self.activityIndicatorView.stopAnimating()
+                SVProgressHUD.dismiss()
 
                 Utils.showAlertController(error: error, viewController: self)
 
@@ -226,8 +230,7 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
             }
 
             channel?.enter(completionHandler: { (error) in
-                self.activityIndicatorView.isHidden = true
-                self.activityIndicatorView.stopAnimating()
+                SVProgressHUD.dismiss()
 
                 if let error = error {
                     Utils.showAlertController(error: error, viewController: self)
@@ -235,7 +238,6 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
                     return
                 }
                 self.openCreateLinkView(channel!)
-                // self.navigationController?.dismiss(animated: true, completion: nil)
 
             })
             self.createdChannel = channel;
@@ -292,13 +294,23 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
             self.publicImage?.image = UIImage(named: "img_list_checked")
             isPublicGroup = true;
             self.privateGroupView?.isHidden = true
+            self.inviteLbl.text = "Link"
+            self.chooseTypeImg.image = UIImage(named: "choose_public_type")
+            
+            self.privateLbl.textColor = .black
+            self.publicLbl.textColor = .white
         }
         else {
             self.privateGroupView?.isHidden = false
 
             self.privateImage?.image = UIImage(named: "img_list_checked")
             isPublicGroup = false;
+            self.inviteLbl.text = "Invite Link"
+            self.chooseTypeImg.image = UIImage(named: "choose_private_type")
 
+            self.privateLbl.textColor = .white
+            self.publicLbl.textColor = .black
+            
         }
         if let channel = self.createdChannel {
             self.openCreateLinkView(channel);
@@ -306,7 +318,12 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
 
 
     }
-
+    
+    @IBAction func copyPrivate()
+    {
+        UIPasteboard.general.string = self.privateGroupLbl?.text
+        showToast(controller: self, message: "Copied to clipboard!!", seconds: 0.5)
+    }
 
     func openCreateLinkView(_ channel: SBDOpenChannel) {
         self.view.endEditing(true)
@@ -352,9 +369,9 @@ class CreateOpenChannelViewControllerB: UIViewController, SelectOperatorsDelegat
                     }
                 }
             } else {
-                Utils.showAlertController(title: "Error", message: "\(String(describing: error?.localizedDescription))", viewController: self)
-
-                print(String(format: "Branch error : %@", error! as CVarArg))
+                if let localizedDescription = error?.localizedDescription {
+                    Utils.showAlertController(title: "Error", message: localizedDescription, viewController: self)
+                }
             }
 
         }

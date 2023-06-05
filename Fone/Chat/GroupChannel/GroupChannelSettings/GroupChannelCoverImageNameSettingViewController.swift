@@ -12,6 +12,7 @@ import RSKImageCropper
 import Photos
 import MobileCoreServices
 import AlamofireImage
+import SVProgressHUD
 
 class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     weak var delegate: GroupChannelCoverImageNameSettingDelegate?
@@ -34,8 +35,6 @@ class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImage
         
         let barButtonItemDone = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(GroupChannelCoverImageNameSettingViewController.clickDoneButton(_:)))
         self.navigationItem.rightBarButtonItem = barButtonItemDone
-        
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         self.loadingIndicatorView.isHidden = true
         
         self.coverImage = nil
@@ -229,10 +228,7 @@ class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImage
     }
 
     func updateChannelInfo() {
-        self.loadingIndicatorView.superViewSize = self.view.frame.size
-        self.loadingIndicatorView.updateFrame()
-        self.loadingIndicatorView.isHidden = false
-        self.loadingIndicatorView.startAnimating()
+        SVProgressHUD.show()
         
         let params = SBDGroupChannelParams()
         if self.coverImage != nil {
@@ -246,11 +242,10 @@ class GroupChannelCoverImageNameSettingViewController: UIViewController, UIImage
         
         if let channel = self.channel {
             channel.update(with: params) { (channel, error) in
-                self.loadingIndicatorView.isHidden = true
-                self.loadingIndicatorView.stopAnimating()
+                SVProgressHUD.dismiss()
                 
-                if let error = error {
-                    Utils.showAlertController(error: error, viewController: self)
+                if let _ = error {
+                    //Utils.showAlertController(error: error, viewController: self)
                     return
                 }
                 

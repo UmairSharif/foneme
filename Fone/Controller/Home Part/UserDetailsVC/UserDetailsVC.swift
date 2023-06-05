@@ -10,7 +10,6 @@ import UIKit
 import SendBirdSDK
 import SwiftyJSON
 import Branch
-import NVActivityIndicatorView
 import SVProgressHUD
 
 // @rackuka: introduce isFriendAdded - app specific property designating if button should let add friend OR depict that the friend is added
@@ -40,27 +39,35 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var lblAboutme: UILabel!
     @IBOutlet weak var lblprofession: UILabel!
     @IBOutlet weak var viewLoc: UIView!
+    @IBOutlet weak var viewDes: UIView!
+    @IBOutlet weak var viewLinks: UIView!
     @IBOutlet weak var lbLinks: UILabel!
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
     var isFromLink = false
     var FoneID = ""
-    var activityIndicatorView: NVActivityIndicatorView?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        viewDes.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        viewDes.layer.borderWidth = 1.0
+        viewDes.layer.cornerRadius = 12.0
+        
+        viewLinks.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        viewLinks.layer.borderWidth = 1.0
+        viewLinks.layer.cornerRadius = 12.0
+        
     }
     override func viewWillAppear(_ animated: Bool) {
-        activityIndicatorView = NVActivityIndicatorView(frame: CGRect.init(x: self.view.center.x - 30, y: self.view.center.y - 30, width: 60, height: 60), type: .ballPulse, color: .blue)
-        self.view.addSubview(activityIndicatorView!)
+    
         if isFromLink == true {
-            activityIndicatorView?.startAnimating()
+            SVProgressHUD.show()
             isFromLink = false
 
             self.getUserDetail(cnic: FoneID, friend: "") { (userModel, success) in
                 if success {
-                    self.activityIndicatorView?.stopAnimating()
+                    SVProgressHUD.dismiss()
                     self.userDetails = userModel
                     self.UpdateDetails()
                 } else {
@@ -77,24 +84,26 @@ class UserDetailsVC: UIViewController {
     //MARK:- Update Details
     func UpdateDetails() {
         var isContactAdded = false
-        if let number = userDetails?.phoneNumber {
-            if CurrentSession.shared.friends.first(where: {number.comparePhoneNumber(number: $0.number)}) != nil {
+        if let contact = userDetails?.uniqueContact {
+            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
                 isContactAdded = true
             }
         }
         
         self.btnFriend.isFriendAdded = isContactAdded
         UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
+        UserImage.contentMode = .scaleAspectFill
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
         self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
         self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
         self.lblprofession.text = self.userDetails?.profession ?? ""
-        viewLoc.isHidden = true
+        //viewLoc.isHidden = true
 
+        self.lblAdress.text = ""
         if self.userDetails?.location != "" && self.userDetails?.location != nil && self.userDetails?.location != "null"
         {
-            viewLoc.isHidden = false
+            //viewLoc.isHidden = false
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
         if let name = userDetails?.name {
@@ -167,7 +176,7 @@ class UserDetailsVC: UIViewController {
         if let userDetail = self.userDetails,
             let query = SBDMain.createApplicationUserListQuery() {
             query.limit = 100
-            query.userIdsFilter = [userDetail.phoneNumber]
+            query.userIdsFilter = [userDetail.uniqueContact]
 
             SVProgressHUD.show()
             query.loadNextPage {[weak self] users, error in
@@ -198,7 +207,7 @@ class UserDetailsVC: UIViewController {
                     }
                 } else {
                     SVProgressHUD.dismiss()
-                    sSelf.showAlert("Error", "Can't find this user in Sendbird. Please contact administrator.")
+                    sSelf.showAlert("Error", "Sorry, We couldn't start this conversation due to user not found. Please contact administrator for more information.")
                 }
             }
         }

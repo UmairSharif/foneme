@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class LocalContactTVC: UITableViewCell {
 
@@ -18,16 +19,31 @@ class LocalContactTVC: UITableViewCell {
     @IBOutlet weak var btnVideo : UIButton!
     @IBOutlet weak var lastseen : UILabel!
     @IBOutlet weak var online : UILabel!
+    @IBOutlet weak var distance : UILabel!
+    @IBOutlet weak var cellContentView : UIView!
+
+    var contact: FriendList? {
+        didSet {
+            self.nameLbl.text = contact?.name
+            self.phoneLbl.text = contact?.ContactsCnic?.cnicToLink
+            self.distance.text = contact?.distance
+            if let userImage = contact?.userImage, let urlImage = URL(string: userImage) {
+                self.userImage.sd_setImage(with: urlImage, placeholderImage: UIImage(named: "ic_profile"))
+            } else {
+                /// There is no profile picture.
+                self.userImage.image = UIImage(named: "ic_profile")
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+
+
 
 }

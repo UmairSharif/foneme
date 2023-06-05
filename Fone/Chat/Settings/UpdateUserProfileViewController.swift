@@ -12,6 +12,7 @@ import Photos
 import MobileCoreServices
 import AlamofireImage
 import SendBirdSDK
+import SVProgressHUD
 
 class UpdateUserProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     @IBOutlet weak var profileImageView: UIImageView!
@@ -39,7 +40,6 @@ class UpdateUserProfileViewController: UIViewController, UIImagePickerController
         self.navigationItem.rightBarButtonItem = barButtonItemDone
         
         self.loadingIndicatorView.isHidden = true
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         
         self.profileImageView.isUserInteractionEnabled = true
         let tapProfileImageGesture = UITapGestureRecognizer(target: self, action: #selector(UpdateUserProfileViewController.clickProfileImage))
@@ -146,13 +146,9 @@ class UpdateUserProfileViewController: UIViewController, UIImagePickerController
 
     func updateUserProfile() {
         let imageData = self.profileImage?.jpegData(compressionQuality: 0.5)
-        self.loadingIndicatorView.isHidden = false
-        self.loadingIndicatorView.startAnimating()
+        SVProgressHUD.show()
         SBDMain.updateCurrentUserInfo(withNickname: self.nicknameTextField.text, profileImage: imageData) { (error) in
-            DispatchQueue.main.async {
-                self.loadingIndicatorView.isHidden = true
-                self.loadingIndicatorView.stopAnimating()
-            }
+            SVProgressHUD.dismiss()
             
             UserDefaults.standard.set(SBDMain.getCurrentUser()!.nickname, forKey: "sendbird_user_nickname")
             UserDefaults.standard.synchronize()

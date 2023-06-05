@@ -481,25 +481,25 @@ extension VideoCallVC {
                         builder.videoTracks = self.localVideoTrack != nil ? [self.localVideoTrack!] : [LocalVideoTrack]()
                         
                         // Use the preferred video codec
-                        if let preferredVideoCodec = Settings.shared.videoCodec {
+                        if let preferredVideoCodec = AVSettings.shared.videoCodec {
                             builder.preferredVideoCodecs = [preferredVideoCodec]
                         }
                     }
                     
                     // Use the preferred audio codec
-                    if let preferredAudioCodec = Settings.shared.audioCodec {
+                    if let preferredAudioCodec = AVSettings.shared.audioCodec {
                         builder.preferredAudioCodecs = [preferredAudioCodec]
                     }
                     
                     
                     
                     // Use the preferred encoding parameters
-                    if let encodingParameters = Settings.shared.getEncodingParameters() {
+                    if let encodingParameters = AVSettings.shared.getEncodingParameters() {
                         builder.encodingParameters = encodingParameters
                     }
                     
                     // Use the preferred signaling region
-                    if let signalingRegion = Settings.shared.signalingRegion {
+                    if let signalingRegion = AVSettings.shared.signalingRegion {
                         builder.region = signalingRegion
                     }
                     if self.isVideo {
@@ -545,7 +545,7 @@ extension VideoCallVC {
                     userId = user.userId
                     dialerNumber = user.mobile
                     dialerName = user.name
-                    dialerId = user.address
+                    dialerId = user.address ?? user.email
                     dialerImageUrl = user.userImage
                 }
             }
@@ -921,13 +921,13 @@ extension VideoCallVC : RemoteParticipantDelegate {
         }
         else
         {
-            
+            if self.isIncommingCall {
+                self.addCallLogAPI(status: "IC", notifType: "CR")
+            }else{
+                self.addCallLogAPI(status: "OC", notifType: "CR")
+            }
         }
-        if self.isIncommingCall {
-            self.addCallLogAPI(status: "IC", notifType: "CR")
-        }else{
-            self.addCallLogAPI(status: "OC", notifType: "CR")
-        }
+
         self.isCallStarted = true
         //callerView.isHidden = true
         //Timer for call
@@ -1076,7 +1076,7 @@ extension VideoCallVC : RoomDelegate {
         self.callKitCompletionHandler!(true)
         if self.isIncommingCall == false {
             self.loadViewIfNeeded()
-            //sendVOIPNotification
+            //sendVOIPNotification()
             
         }
         

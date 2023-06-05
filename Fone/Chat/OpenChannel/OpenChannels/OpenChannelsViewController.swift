@@ -9,33 +9,31 @@
 import UIKit
 import SendBirdSDK
 import AlamofireImage
+import SVProgressHUD
 
 class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CreateOpenChannelDelegate, OpenChanannelChatDelegate, NotificationDelegate {
     @IBOutlet weak var openChannelsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var emptyLabel: UILabel!
-    
-    var channels: [SBDOpenChannel] = []
-    var refreshControl: UIRefreshControl?
-    var searchController: UISearchController?
-    var channelListQuery: SBDOpenChannelListQuery?
-    var channelNameFilter: String?
-    var createChannelBarButton: UIBarButtonItem?
-    
     @IBOutlet weak var toastView: UIView!
     @IBOutlet weak var toastMessageLabel: UILabel!
-    var toastCompleted: Bool = true
+    
+    private var channels: [SBDOpenChannel] = []
+    private var refreshControl: UIRefreshControl?
+    private var searchController: UISearchController?
+    private var channelListQuery: SBDOpenChannelListQuery?
+    private var channelNameFilter: String?
+    private var createChannelBarButton: UIBarButtonItem?
+    private var toastCompleted: Bool = true
+    private var pendingRequestWorkItem: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         self.title = ""
         self.navigationController?.title = ""
         self.navigationItem.largeTitleDisplayMode = .automatic
         
         self.createChannelBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_create_public_group_channel_blue"), style: .plain, target: self, action: #selector(OpenChannelsViewController.clickCreateOpenChannel(_:)))
-     //   self.navigationItem.rightBarButtonItem = self.createChannelBarButton
         
         self.openChannelsTableView.delegate = self
         self.openChannelsTableView.dataSource = self
@@ -56,26 +54,20 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             // Fallback on earlier versions
         }
-       // self.searchController?.searchBar.tintColor = .white
         self.searchController?.searchBar.placeholder = "Public Chat Name"
         self.searchController?.obscuresBackgroundDuringPresentation = false
         self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
-        self.searchController?.searchBar.showsCancelButton = true
+        self.searchController?.searchBar.showsCancelButton = false
         self.navigationItem.searchController = self.searchController
         self.navigationItem.hidesSearchBarWhenScrolling = true
         
         self.searchController?.hidesNavigationBarDuringPresentation = false
         self.searchController?.isActive = true
         self.loadingIndicatorView.isHidden = true
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
-        
-        self.loadChannelListNextPage(refresh: true, channelNameFilter: self.channelNameFilter)
-        
         self.searchController?.searchBar.set(textColor: .black)
         self.searchController?.searchBar.setTextField(color: .white)
-       // self.searchController?.searchBar.setPlaceholder(textColor: .black)
-//        self.searchController?.searchBar.setSearchImage(color: hexStringToUIColor(hex: "0072F8"))
-//        self.searchController?.searchBar.setClearButton(color:  hexStringToUIColor(hex: "0072F8"))
+        self.openChannelsTableView.keyboardDismissMode = .onDrag
+        refreshChannelList()
     }
     
     func showToast(message: String, completion: (() -> Void)?) {
@@ -126,12 +118,12 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     func setUp(navCont:UINavigationController){
         
         navCont.navigationBar.tintColor = UIColor.white;
-              navCont.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
-               navCont.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
-                                                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
-               navCont.navigationBar.isTranslucent = false
-               navCont.navigationBar.prefersLargeTitles = false
-         
+        navCont.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")
+        navCont.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
+                                                     NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
+        navCont.navigationBar.isTranslucent = false
+        navCont.navigationBar.prefersLargeTitles = false
+        
     }
     
     
@@ -161,65 +153,11 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelTableViewCell") as! OpenChannelTableViewCell
-        cell.coverImage.image = nil
-        let channel = self.channels[indexPath.row]
-        cell.channelNameLabel.text = channel.name
-        
-        if channel.participantCount > 1 {
-            cell.participantCountLabel.text = String(format: "%ld participants", channel.participantCount)
-        } else {
-            cell.participantCountLabel.text = String(format: "1 participant")
-        }
-        
-        /*
-        if channel.participantCount > 1 {
-            cell.participantCountLabel.text = String(format: "%ld participants", (channel.participantCount + channel.operators!.count ?? 0))
-        } else {
-            cell.participantCountLabel.text = String(format: "%ld participant", ((channel.participantCount == 0) ? 1 : (channel.participantCount  + channel.operators!.count ?? 0) ) )
-        }
-        */
-        
-        var asOperator: Bool = false
-        if let operators: [SBDUser] = channel.operators as? [SBDUser] {
-            for op: SBDUser in operators {
-                if op.userId == SBDMain.getCurrentUser()?.userId {
-                    asOperator = true
-                    break
-                }
-            }
-        }
-        
-        cell.asOperator = asOperator
-        
-        DispatchQueue.main.async {
-            if let updateCell: OpenChannelTableViewCell = tableView.cellForRow(at: indexPath) as? OpenChannelTableViewCell {
-                var placeholderCoverImage: String?
-                switch channel.name.count % 3 {
-                case 0:
-                    placeholderCoverImage = "img_cover_image_placeholder_1"
-                    break
-                case 1:
-                    placeholderCoverImage = "img_cover_image_placeholder_2"
-                    break
-                case 2:
-                    placeholderCoverImage = "img_cover_image_placeholder_3"
-                    break
-                default:
-                    placeholderCoverImage = "img_cover_image_placeholder_1"
-                    break
-                }
-                if let url = URL(string: channel.coverUrl!) {
-                    updateCell.coverImage.af_setImage(withURL: url, placeholderImage: UIImage(named: placeholderCoverImage!))
-                }
-                else {
-                    updateCell.coverImage.image = UIImage(named: placeholderCoverImage!)
-                }
-                
-            }
-        }
-        
+        cell.channel = self.channels[indexPath.row]
+        /// Load more
         if self.channels.count > 0 && indexPath.row == self.channels.count - 1 {
             self.loadChannelListNextPage(refresh: false, channelNameFilter: self.channelNameFilter)
         }
@@ -228,19 +166,13 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.channels.count == 0 {
-            if self.channelNameFilter == nil {
-                self.emptyLabel.text = "There are no public chat"
-            }
-            else {
-                self.emptyLabel.text = "Search results not found"
-            }
-            self.emptyLabel.isHidden = false
-        }
-        else {
-            self.emptyLabel.isHidden = true
-        }
         
+        if self.channelNameFilter == nil {
+            self.emptyLabel.text = "There are no public chat"
+        } else {
+            self.emptyLabel.text = "Search results not found"
+        }
+        self.emptyLabel.isHidden = !(self.channels.count == 0)
         return self.channels.count
     }
     
@@ -254,14 +186,14 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         if self.splitViewController?.displayMode == UISplitViewController.DisplayMode.allVisible {
             
         }
-        self.loadingIndicatorView.isHidden = false
-        self.loadingIndicatorView.startAnimating()
+        SVProgressHUD.show()
+        
         selectedChannel.enter { (error) in
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
+            SVProgressHUD.dismiss()
             
             if let error = error {
-                Utils.showAlertController(error: error, viewController: self)
+                debugPrint(error.localizedDescription)
+                //Utils.showAlertController(error: error, viewController: self)
                 return
             }
             
@@ -276,7 +208,9 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func clearSearchFilter() {
+        self.searchController?.searchBar.resignFirstResponder()
         self.channelNameFilter = nil
+        refreshChannelList()
     }
     
     func loadChannelListNextPage(refresh: Bool, channelNameFilter: String?) {
@@ -295,39 +229,55 @@ class OpenChannelsViewController: UIViewController, UITableViewDelegate, UITable
         if self.channelListQuery?.hasNext == false {
             return
         }
-        
+        SVProgressHUD.show()
         self.channelListQuery?.loadNextPage(completionHandler: { (channels, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.refreshControl?.endRefreshing()
-                }
-                
-                return
-            }
             
             DispatchQueue.main.async {
+                if error != nil {
+                    self.refreshControl?.endRefreshing()
+                    return
+                }
+                
                 if refresh {
                     self.channels.removeAll()
                 }
                 
-                self.channels += channels!
+                channels?.forEach({ channel in
+                    if !channel.name.isEmpty {
+                        self.channels.append(channel)
+                    }
+                })
                 self.openChannelsTableView.reloadData()
-                
                 self.refreshControl?.endRefreshing()
+                SVProgressHUD.dismiss()
             }
         })
     }
     
     // MARK: - UISearchBarDelegate
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.channelNameFilter = nil
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        pendingRequestWorkItem?.cancel()
+        
+        let requestWorkItem = DispatchWorkItem { [unowned self] in
+            self.channelNameFilter = searchText
+            self.refreshChannelList()
+        }
+        
+        pendingRequestWorkItem = requestWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250),
+                                      execute: requestWorkItem)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        self.channelNameFilter = nil
         self.refreshChannelList()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.channelNameFilter = searchBar.text
-        
         self.refreshChannelList()
     }
     

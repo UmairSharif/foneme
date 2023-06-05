@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DatePickerCell" customModule="TCBSCd" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="158" height="139"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="158" height="139"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryh-8Q-FV6">
+                        <rect key="frame" x="0.0" y="0.0" width="158" height="139"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-Zu-UwQ">
+                        <rect key="frame" x="68.5" y="59.5" width="21" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ndi-Zu-UwQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="top" priority="750" constant="8" id="7Wg-lc-n0U"/>
+                <constraint firstItem="ryh-8Q-FV6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Bu8-rE-K30"/>
+                <constraint firstItem="ndi-Zu-UwQ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="EfL-BW-MSG"/>
+                <constraint firstItem="ndi-Zu-UwQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" priority="750" constant="8" id="NMH-FK-4Pf"/>
+                <constraint firstItem="ndi-Zu-UwQ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Qm8-3a-wfq"/>
+                <constraint firstItem="ryh-8Q-FV6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Qv3-0R-NKZ"/>
+                <constraint firstAttribute="trailing" secondItem="ryh-8Q-FV6" secondAttribute="trailing" id="Vwt-iz-aZL"/>
+                <constraint firstAttribute="bottom" secondItem="ryh-8Q-FV6" secondAttribute="bottom" id="zoy-pg-TpF"/>
+            </constraints>
+            <size key="customSize" width="158" height="139"/>
+            <connections>
+                <outlet property="selectBackgroundView" destination="ryh-8Q-FV6" id="ZYa-cH-zyo"/>
+                <outlet property="titleLabel" destination="ndi-Zu-UwQ" id="Fn0-cB-8wG"/>
+            </connections>
+            <point key="canvasLocation" x="76.811594202898561" y="177.79017857142856"/>
+        </collectionViewCell>
+    </objects>
+</document>

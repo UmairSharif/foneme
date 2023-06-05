@@ -9,6 +9,8 @@
 import UIKit
 import SendBirdSDK
 import AlamofireImage
+import SVProgressHUD
+
 class GroupChannelHiddenChannelsViewController: UIViewController {
     
     @IBOutlet weak var emptyLabel: UILabel!
@@ -39,7 +41,6 @@ class GroupChannelHiddenChannelsViewController: UIViewController {
         self.tableView.refreshControl = self.refreshControl
         
         self.hideLoadingIndicatorView()
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         
         self.loadChannelListNextPage(true)
     }
@@ -106,17 +107,12 @@ class GroupChannelHiddenChannelsViewController: UIViewController {
     
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
     
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        self.loadingIndicatorView.isHidden = true
+        SVProgressHUD.dismiss()
     }
     
 }

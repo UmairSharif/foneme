@@ -14,10 +14,11 @@ class OpenChannelSettingsChannelNameTableViewCell: UITableViewCell {
     @IBOutlet weak var channelCoverImageView: UIImageView!
     @IBOutlet weak var channelNameTextField: UITextField!
     @IBOutlet weak var enableEditButton: UIButton!
+    @IBOutlet weak var addOperatorButton: UIButton!
+    @IBOutlet weak var roomDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         
         self.channelCoverImageView.isUserInteractionEnabled = false
         self.channelNameTextField.isEnabled = false
@@ -26,8 +27,6 @@ class OpenChannelSettingsChannelNameTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @objc func clickEnableEditButton() {
@@ -39,13 +38,13 @@ class OpenChannelSettingsChannelNameTableViewCell: UITableViewCell {
     }
     
     func setEnableEditing(_ enable: Bool) {
-        if enable {
-            self.enableEditButton.isHidden = false
-            self.enableEditButton.isEnabled = true
-        }
-        else {
-            self.enableEditButton.isHidden = true
-            self.enableEditButton.isEnabled = false
-        }
+//        if enable {
+//            self.enableEditButton.isHidden = false
+//            self.enableEditButton.isEnabled = true
+//        }
+//        else {
+//            self.enableEditButton.isHidden = true
+//            self.enableEditButton.isEnabled = false
+//        }
     }
 }

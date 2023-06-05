@@ -316,22 +316,22 @@ class VideoCallVC1: UIViewController {
                builder.videoTracks = self.localVideoTrack != nil ? [self.localVideoTrack!] : [LocalVideoTrack]()
                
                // Use the preferred audio codec
-               if let preferredAudioCodec = Settings.shared.audioCodec {
+               if let preferredAudioCodec = AVSettings.shared.audioCodec {
                    builder.preferredAudioCodecs = [preferredAudioCodec]
                }
                
                // Use the preferred video codec
-               if let preferredVideoCodec = Settings.shared.videoCodec {
+               if let preferredVideoCodec = AVSettings.shared.videoCodec {
                    builder.preferredVideoCodecs = [preferredVideoCodec]
                }
                
                // Use the preferred encoding parameters
-               if let encodingParameters = Settings.shared.getEncodingParameters() {
+               if let encodingParameters = AVSettings.shared.getEncodingParameters() {
                    builder.encodingParameters = encodingParameters
                }
 
                // Use the preferred signaling region
-               if let signalingRegion = Settings.shared.signalingRegion {
+               if let signalingRegion = AVSettings.shared.signalingRegion {
                    builder.region = signalingRegion
                }
             

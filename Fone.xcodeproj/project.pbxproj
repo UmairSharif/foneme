@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048AC46229F9037B00B635B0 /* AddPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048AC46129F9037B00B635B0 /* AddPhotosViewController.swift */; };
+		0824E4B229E579DB009E1E22 /* CalendarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824E4B029E579DA009E1E22 /* CalendarPickerView.swift */; };
+		0824E4B329E579DB009E1E22 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824E4B129E579DB009E1E22 /* DatePickerCell.swift */; };
+		0824E4B529E58638009E1E22 /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0824E4B429E58637009E1E22 /* DatePickerCell.xib */; };
+		0824E4B729E58724009E1E22 /* EnterBirthDayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824E4B629E58724009E1E22 /* EnterBirthDayVC.swift */; };
+		08B383A429E29D1F0045D37F /* IdealMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B383A329E29D1F0045D37F /* IdealMatchViewController.swift */; };
+		08B383A829E2A0CB0045D37F /* IdealMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B383A629E2A0CB0045D37F /* IdealMatchCell.swift */; };
+		08B383A929E2A0CB0045D37F /* IdealMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B383A729E2A0CB0045D37F /* IdealMatchCell.xib */; };
+		08B383AD29E445670045D37F /* GenderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B383AC29E445670045D37F /* GenderListVC.swift */; };
+		08B383B029E447100045D37F /* GenderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B383AE29E447100045D37F /* GenderListCell.swift */; };
+		08B383B129E447100045D37F /* GenderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B383AF29E447100045D37F /* GenderListCell.xib */; };
 		134198D925D19D6000FECCB5 /* AboutMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134198D825D19D6000FECCB5 /* AboutMeVC.swift */; };
 		1395322E25DD9662006D506F /* NewChatCNCTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395322D25DD9662006D506F /* NewChatCNCTVC.swift */; };
 		13EC3CC425D32E7E001C9D95 /* AboutmeProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EC3CC325D32E7E001C9D95 /* AboutmeProfileVC.swift */; };
@@ -22,6 +33,12 @@
 		185F529F2500ECA2003D8DE7 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529C2500ECA2003D8DE7 /* ringtone.mp3 */; };
 		185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
 		185F52A12500ECA2003D8DE7 /* iphone-original.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */; };
+		18693E23298C194600F36B24 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18693E20298C194600F36B24 /* CategoryTableViewCell.swift */; };
+		18693E24298C194600F36B24 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18693E21298C194600F36B24 /* CategoryTableViewCell.xib */; };
+		18693E25298C194600F36B24 /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18693E22298C194600F36B24 /* CategoryVC.swift */; };
+		18693E2A298C195500F36B24 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 18693E27298C195500F36B24 /* categories.json */; };
+		18693E2B298C195500F36B24 /* Subcategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18693E28298C195500F36B24 /* Subcategory.swift */; };
+		18693E2C298C195500F36B24 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18693E29298C195500F36B24 /* Category.swift */; };
 		18A7CDDA25162E38006308CB /* PlanListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7CDD925162E38006308CB /* PlanListVC.swift */; };
 		1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */; };
 		1BA0974C24817B5000E0A042 /* SettingsTimePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */; };
@@ -218,6 +235,8 @@
 		22E1602B23C8FA9600D2E54C /* LocalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */; };
 		22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E1602D23C8FC8D00D2E54C /* CallLog.swift */; };
 		22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */; };
+		28A1D8FA297148DB00E0A655 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1D8F9297148DB00E0A655 /* KeychainItem.swift */; };
+		39E66B9710067A63295224C6 /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */; };
 		4F16BC84249D1744001C4708 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC76249D1744001C4708 /* CallManager.swift */; };
 		4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC77249D1744001C4708 /* CallsViewController.swift */; };
 		4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC79249D1744001C4708 /* CallTableViewCell.swift */; };
@@ -231,8 +250,7 @@
 		4F83FD3724ACA39D00121486 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */; };
 		4F8AA6AC2477AE4600D06BC0 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */; };
 		51F27B7F264AC0A700E1E017 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F27B7E264AC0A700E1E017 /* UITextView.swift */; };
-		5AEEEECA311679E4351B8401 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E34245D85510D2E9A00B7D /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
-		61A4316B838B1A617FD23A7B /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */; };
+		5AD5736E29DC78230035D13A /* PhoneAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD5736D29DC78220035D13A /* PhoneAuthManager.swift */; };
 		6624C306267139C6002EB175 /* AppDelegate+DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6624C305267139C6002EB175 /* AppDelegate+DeepLink.swift */; };
 		6669E6122674CB18001BDC75 /* SocialLinks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6669E6112674CB18001BDC75 /* SocialLinks.storyboard */; };
 		6669E6142674CBAE001BDC75 /* SocialLinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669E6132674CBAE001BDC75 /* SocialLinksViewController.swift */; };
@@ -243,13 +261,30 @@
 		66A6016126C5926500B2A5DA /* UIViewController+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A6016026C5926500B2A5DA /* UIViewController+API.swift */; };
 		66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B71BF9267C81E6002123BA /* String+Fone.swift */; };
 		66E6F98726751D6A00F5BA25 /* AddLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */; };
-		6DB2853FEA46E788380A2AF1 /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */; };
+		6FA8C51F27B96CA6000D768B /* Temp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA8C51E27B96CA6000D768B /* Temp.storyboard */; };
+		6FDC0FF927C9213400E6CF65 /* NearByPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDC0FF827C9213400E6CF65 /* NearByPeople.swift */; };
+		71D4AF664AC8310155E01C8D /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E794AB9C316CDA819E6CC /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
+		8B674B2C29C32EF00060FC88 /* PhoneEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B674B2A29C32EF00060FC88 /* PhoneEmailVC.swift */; };
+		8B674B2D29C32EF00060FC88 /* PhoneEmailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B674B2B29C32EF00060FC88 /* PhoneEmailVC.xib */; };
+		959E2C08296EC458006E0D61 /* FBLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C02296EC458006E0D61 /* FBLogin.swift */; };
+		959E2C0A296EC458006E0D61 /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C04296EC458006E0D61 /* AppleSignIn.swift */; };
+		959E2C0B296EC458006E0D61 /* GoogleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C05296EC458006E0D61 /* GoogleLogin.swift */; };
+		959E2C0C296EC458006E0D61 /* SocialLoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C06296EC458006E0D61 /* SocialLoginUser.swift */; };
+		959E2C0D296EC458006E0D61 /* SocialLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C07296EC458006E0D61 /* SocialLoginManager.swift */; };
+		A82C2F5327E9C61F00749B5D /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A82C2F4F27E9C61A00749B5D /* Rubik-Medium.ttf */; };
+		A82C2F5427E9C62000749B5D /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A82C2F5027E9C61C00749B5D /* Rubik-Regular.ttf */; };
+		A82C2F5527E9C62000749B5D /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A82C2F5127E9C61E00749B5D /* Rubik-Light.ttf */; };
+		A82C2F5627E9C62000749B5D /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A82C2F5227E9C61F00749B5D /* Rubik-SemiBold.ttf */; };
+		B4A07B6E2866144F00531BE5 /* TextStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A07B6D2866144F00531BE5 /* TextStyling.swift */; };
 		C5517CB624C9F592004C42BA /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5517CB524C9F592004C42BA /* UserDetailModel.swift */; };
 		C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B524C2FEF000400874 /* VideoCallVC.swift */; };
 		C56F34B824C2FEF000400874 /* VideoCallVC+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */; };
 		C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B924C3170D00400874 /* VideoCallSetings.swift */; };
 		C56F34D724C397AB00400874 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34D624C397AB00400874 /* NotificationService.swift */; };
 		C56F34DB24C397AB00400874 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F9830F51C53B85263393ACAE /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64DBE24908D9A67844B754C /* Pods_Fone.framework */; };
+		FB80496827B919FE00140A04 /* SignUpNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80496727B919FE00140A04 /* SignUpNameVC.swift */; };
+		FB80496A27B91A1300140A04 /* ChooseYourLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80496927B91A1300140A04 /* ChooseYourLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,9 +319,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01E34245D85510D2E9A00B7D /* Pods_Fone_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		036B0539FC0B997C4BD30CC6 /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
-		0EAA6E1F4AD1F48D2149D40B /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
+		0441F1D0A2DB8E30714AD40D /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
+		048AC46129F9037B00B635B0 /* AddPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotosViewController.swift; sourceTree = "<group>"; };
+		0824E4B029E579DA009E1E22 /* CalendarPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerView.swift; sourceTree = "<group>"; };
+		0824E4B129E579DB009E1E22 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		0824E4B429E58637009E1E22 /* DatePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
+		0824E4B629E58724009E1E22 /* EnterBirthDayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBirthDayVC.swift; sourceTree = "<group>"; };
+		08B383A329E29D1F0045D37F /* IdealMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealMatchViewController.swift; sourceTree = "<group>"; };
+		08B383A629E2A0CB0045D37F /* IdealMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealMatchCell.swift; sourceTree = "<group>"; };
+		08B383A729E2A0CB0045D37F /* IdealMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdealMatchCell.xib; sourceTree = "<group>"; };
+		08B383AC29E445670045D37F /* GenderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderListVC.swift; sourceTree = "<group>"; };
+		08B383AE29E447100045D37F /* GenderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderListCell.swift; sourceTree = "<group>"; };
+		08B383AF29E447100045D37F /* GenderListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenderListCell.xib; sourceTree = "<group>"; };
 		133DF3DC25C4C24F003CB2EE /* OneSignalNotificationServiceExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtensionRelease.entitlements; sourceTree = "<group>"; };
 		133DF3DD25C4C26E003CB2EE /* Fone MessengerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone MessengerRelease.entitlements"; sourceTree = "<group>"; };
 		134198D825D19D6000FECCB5 /* AboutMeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeVC.swift; sourceTree = "<group>"; };
@@ -298,6 +342,12 @@
 		185F52972500E49E003D8DE7 /* ringtone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ringtone.caf; sourceTree = "<group>"; };
 		185F529C2500ECA2003D8DE7 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 		185F529D2500ECA2003D8DE7 /* iphone-original.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "iphone-original.mp3"; sourceTree = "<group>"; };
+		18693E20298C194600F36B24 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		18693E21298C194600F36B24 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		18693E22298C194600F36B24 /* CategoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
+		18693E27298C195500F36B24 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		18693E28298C195500F36B24 /* Subcategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subcategory.swift; sourceTree = "<group>"; };
+		18693E29298C195500F36B24 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		18A7CDD925162E38006308CB /* PlanListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanListVC.swift; sourceTree = "<group>"; };
 		1BA096B024817B4E00E0A042 /* SettingsTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimeViewController.swift; sourceTree = "<group>"; };
 		1BA096B124817B4E00E0A042 /* SettingsTimePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTimePickerDelegate.swift; sourceTree = "<group>"; };
@@ -502,7 +552,9 @@
 		22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactHandler.swift; sourceTree = "<group>"; };
 		22E1602D23C8FC8D00D2E54C /* CallLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLog.swift; sourceTree = "<group>"; };
 		22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallHandler.swift; sourceTree = "<group>"; };
-		300A618C5395D961CFDFA679 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		28A1D8F9297148DB00E0A655 /* KeychainItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		368AFAA4C0229CFD552C2188 /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
 		4F16BC76249D1744001C4708 /* CallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		4F16BC77249D1744001C4708 /* CallsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsViewController.swift; sourceTree = "<group>"; };
 		4F16BC79249D1744001C4708 /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
@@ -516,7 +568,7 @@
 		4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsVC.swift; sourceTree = "<group>"; };
 		4F8AA6AB2477AE4600D06BC0 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		51F27B7E264AC0A700E1E017 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
-		644F3D57DEB0CED997B9E55E /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		5AD5736D29DC78220035D13A /* PhoneAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneAuthManager.swift; sourceTree = "<group>"; };
 		6624C305267139C6002EB175 /* AppDelegate+DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+DeepLink.swift"; sourceTree = "<group>"; };
 		6669E6112674CB18001BDC75 /* SocialLinks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SocialLinks.storyboard; sourceTree = "<group>"; };
 		6669E6132674CBAE001BDC75 /* SocialLinksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinksViewController.swift; sourceTree = "<group>"; };
@@ -527,10 +579,26 @@
 		66A6016026C5926500B2A5DA /* UIViewController+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+API.swift"; sourceTree = "<group>"; };
 		66B71BF9267C81E6002123BA /* String+Fone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Fone.swift"; sourceTree = "<group>"; };
 		66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinkViewController.swift; sourceTree = "<group>"; };
-		7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ABBF04275D4F609D955CECE /* Pods-FoneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.debug.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6FA8C51E27B96CA6000D768B /* Temp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Temp.storyboard; sourceTree = "<group>"; };
+		6FDC0FF827C9213400E6CF65 /* NearByPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByPeople.swift; sourceTree = "<group>"; };
+		8B674B2A29C32EF00060FC88 /* PhoneEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEmailVC.swift; sourceTree = "<group>"; };
+		8B674B2B29C32EF00060FC88 /* PhoneEmailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneEmailVC.xib; sourceTree = "<group>"; };
+		959E2C02296EC458006E0D61 /* FBLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBLogin.swift; sourceTree = "<group>"; };
+		959E2C04296EC458006E0D61 /* AppleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
+		959E2C05296EC458006E0D61 /* GoogleLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleLogin.swift; sourceTree = "<group>"; };
+		959E2C06296EC458006E0D61 /* SocialLoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginUser.swift; sourceTree = "<group>"; };
+		959E2C07296EC458006E0D61 /* SocialLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLoginManager.swift; sourceTree = "<group>"; };
+		A37E794AB9C316CDA819E6CC /* Pods_Fone_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3A4E3B7BC2EB6A83EF93289 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		A64DBE24908D9A67844B754C /* Pods_Fone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A82C2F4F27E9C61A00749B5D /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		A82C2F5027E9C61C00749B5D /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		A82C2F5127E9C61E00749B5D /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
+		A82C2F5227E9C61F00749B5D /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		AA06ECB32609BBFB00B2018E /* Fone Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Fone Messenger.entitlements"; sourceTree = "<group>"; };
-		AAD1D06C93FE26BF8336A854 /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
+		B4A07B6D2866144F00531BE5 /* TextStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyling.swift; sourceTree = "<group>"; };
+		C1B91FE3CD03F9DACA4F7CAE /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-Fone-OneSignalNotificationServiceExtension/Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		C5517CB524C9F592004C42BA /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
 		C56F34B524C2FEF000400874 /* VideoCallVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallVC.swift; sourceTree = "<group>"; };
 		C56F34B624C2FEF000400874 /* VideoCallVC+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoCallVC+Extension.swift"; sourceTree = "<group>"; };
@@ -538,7 +606,9 @@
 		C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C56F34D624C397AB00400874 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C56F34D824C397AB00400874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F422F088FB0F0C228695DCF6 /* Pods-FoneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.debug.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD514903E852AD32D8241371 /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB80496727B919FE00140A04 /* SignUpNameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNameVC.swift; sourceTree = "<group>"; };
+		FB80496927B91A1300140A04 /* ChooseYourLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseYourLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,7 +627,7 @@
 				22CCC95E23C798DC00592614 /* AudioToolbox.framework in Frameworks */,
 				22CCC95C23C798CE00592614 /* CoreTelephony.framework in Frameworks */,
 				22CCC95A23C798C600592614 /* PushKit.framework in Frameworks */,
-				6DB2853FEA46E788380A2AF1 /* Pods_Fone.framework in Frameworks */,
+				F9830F51C53B85263393ACAE /* Pods_Fone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +635,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61A4316B838B1A617FD23A7B /* Pods_FoneTests.framework in Frameworks */,
+				39E66B9710067A63295224C6 /* Pods_FoneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,13 +643,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AEEEECA311679E4351B8401 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				71D4AF664AC8310155E01C8D /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048AC46029F9034200B635B0 /* AddPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				048AC46129F9037B00B635B0 /* AddPhotosViewController.swift */,
+			);
+			path = AddPhotos;
+			sourceTree = "<group>";
+		};
+		08B383A529E2A0A50045D37F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				08B383A629E2A0CB0045D37F /* IdealMatchCell.swift */,
+				08B383A729E2A0CB0045D37F /* IdealMatchCell.xib */,
+				08B383AE29E447100045D37F /* GenderListCell.swift */,
+				08B383AF29E447100045D37F /* GenderListCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		134198D725D19D2500FECCB5 /* AboutMe */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +683,34 @@
 				1395322D25DD9662006D506F /* NewChatCNCTVC.swift */,
 			);
 			path = NewChatContact;
+			sourceTree = "<group>";
+		};
+		18693E1E298C194600F36B24 /* CategoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				18693E1F298C194600F36B24 /* View */,
+				18693E22298C194600F36B24 /* CategoryVC.swift */,
+			);
+			path = CategoryVC;
+			sourceTree = "<group>";
+		};
+		18693E1F298C194600F36B24 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18693E20298C194600F36B24 /* CategoryTableViewCell.swift */,
+				18693E21298C194600F36B24 /* CategoryTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18693E26298C195500F36B24 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				18693E27298C195500F36B24 /* categories.json */,
+				18693E28298C195500F36B24 /* Subcategory.swift */,
+				18693E29298C195500F36B24 /* Category.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		1BA096AE24817ADA00E0A042 /* Chat */ = {
@@ -1105,12 +1222,14 @@
 		22880EBB23C074830044263D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				959E2C00296EC458006E0D61 /* Social */,
 				22880EBC23C074830044263D /* Constants.swift */,
 				22880EBD23C074830044263D /* Enums.swift */,
 				22880EBE23C074830044263D /* OMUtility.swift */,
 				22880EBF23C074830044263D /* URL.swift */,
 				22880EC023C074830044263D /* Theme.swift */,
 				6673250B26C1996000797C4B /* CurrentSession.swift */,
+				B4A07B6D2866144F00531BE5 /* TextStyling.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1118,6 +1237,9 @@
 		22880EC123C074830044263D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0824E4B429E58637009E1E22 /* DatePickerCell.xib */,
+				0824E4B029E579DA009E1E22 /* CalendarPickerView.swift */,
+				0824E4B129E579DB009E1E22 /* DatePickerCell.swift */,
 				4F2E8351249209E500FFC0B0 /* VideoCallVC+CallKit.swift */,
 				4F2E8350249209E400FFC0B0 /* VideoCallVC+SimulateIncomingCall.swift */,
 				22880EC223C074830044263D /* HKBaseViewController.swift */,
@@ -1153,6 +1275,7 @@
 		22880EE723C074BC0044263D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A82C2F4E27E9C60500749B5D /* Font */,
 				229AF2FD23D771E500A1D2CD /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -1207,6 +1330,7 @@
 		22880EED23C076530044263D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18693E26298C195500F36B24 /* Category */,
 				22E1602C23C8FC7900D2E54C /* CallLog */,
 				22880EEE23C0765C0044263D /* UserModel */,
 			);
@@ -1233,7 +1357,10 @@
 		22880EF723C08A5C0044263D /* Authentication Part */ = {
 			isa = PBXGroup;
 			children = (
+				5AD5736D29DC78220035D13A /* PhoneAuthManager.swift */,
+				18693E1E298C194600F36B24 /* CategoryVC */,
 				134198D725D19D2500FECCB5 /* AboutMe */,
+				048AC46029F9034200B635B0 /* AddPhotos */,
 				22880F1D23C0C45C0044263D /* PolicyVC */,
 				22880F0B23C0A0DB0044263D /* ForgotPasswordVC */,
 				22880F0823C08D0B0044263D /* SignUpVC */,
@@ -1296,7 +1423,15 @@
 		22880F0823C08D0B0044263D /* SignUpVC */ = {
 			isa = PBXGroup;
 			children = (
+				08B383A529E2A0A50045D37F /* Cell */,
 				22880F0923C08D190044263D /* SignUp VC.swift */,
+				FB80496727B919FE00140A04 /* SignUpNameVC.swift */,
+				FB80496927B91A1300140A04 /* ChooseYourLink.swift */,
+				8B674B2A29C32EF00060FC88 /* PhoneEmailVC.swift */,
+				8B674B2B29C32EF00060FC88 /* PhoneEmailVC.xib */,
+				08B383A329E29D1F0045D37F /* IdealMatchViewController.swift */,
+				08B383AC29E445670045D37F /* GenderListVC.swift */,
+				0824E4B629E58724009E1E22 /* EnterBirthDayVC.swift */,
 			);
 			path = SignUpVC;
 			sourceTree = "<group>";
@@ -1313,6 +1448,7 @@
 			isa = PBXGroup;
 			children = (
 				22880F0F23C0A2DC0044263D /* Home.storyboard */,
+				6FA8C51E27B96CA6000D768B /* Temp.storyboard */,
 			);
 			path = HomeStoryboard;
 			sourceTree = "<group>";
@@ -1392,6 +1528,7 @@
 			isa = PBXGroup;
 			children = (
 				2291D32023D3C2C40032AE5B /* FriendTabVC.swift */,
+				6FDC0FF827C9213400E6CF65 /* NearByPeople.swift */,
 			);
 			path = FriendTabVC;
 			sourceTree = "<group>";
@@ -1490,6 +1627,14 @@
 			path = CallLog;
 			sourceTree = "<group>";
 		};
+		28A1D8F8297148DB00E0A655 /* KeyChainItem */ = {
+			isa = PBXGroup;
+			children = (
+				28A1D8F9297148DB00E0A655 /* KeychainItem.swift */,
+			);
+			path = KeyChainItem;
+			sourceTree = "<group>";
+		};
 		2D9D042061A00D4CFA49F9A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1504,9 +1649,9 @@
 				22CCC95D23C798DC00592614 /* AudioToolbox.framework */,
 				22CCC95B23C798CE00592614 /* CoreTelephony.framework */,
 				22CCC95923C798C600592614 /* PushKit.framework */,
-				8EBCB77BC2DEFC678DE35239 /* Pods_Fone.framework */,
-				01E34245D85510D2E9A00B7D /* Pods_Fone_OneSignalNotificationServiceExtension.framework */,
-				7E44C7356794ECC98E217681 /* Pods_FoneTests.framework */,
+				A64DBE24908D9A67844B754C /* Pods_Fone.framework */,
+				A37E794AB9C316CDA819E6CC /* Pods_Fone_OneSignalNotificationServiceExtension.framework */,
+				28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1562,15 +1707,47 @@
 			path = "Social Links";
 			sourceTree = "<group>";
 		};
+		959E2C00296EC458006E0D61 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				959E2C01296EC458006E0D61 /* Providers */,
+				959E2C06296EC458006E0D61 /* SocialLoginUser.swift */,
+				959E2C07296EC458006E0D61 /* SocialLoginManager.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
+		959E2C01296EC458006E0D61 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				28A1D8F8297148DB00E0A655 /* KeyChainItem */,
+				959E2C02296EC458006E0D61 /* FBLogin.swift */,
+				959E2C04296EC458006E0D61 /* AppleSignIn.swift */,
+				959E2C05296EC458006E0D61 /* GoogleLogin.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		A82C2F4E27E9C60500749B5D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A82C2F5127E9C61E00749B5D /* Rubik-Light.ttf */,
+				A82C2F4F27E9C61A00749B5D /* Rubik-Medium.ttf */,
+				A82C2F5027E9C61C00749B5D /* Rubik-Regular.ttf */,
+				A82C2F5227E9C61F00749B5D /* Rubik-SemiBold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		C14853701DC185DAA4A2975A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				036B0539FC0B997C4BD30CC6 /* Pods-Fone.debug.xcconfig */,
-				AAD1D06C93FE26BF8336A854 /* Pods-Fone.release.xcconfig */,
-				300A618C5395D961CFDFA679 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				644F3D57DEB0CED997B9E55E /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */,
-				F422F088FB0F0C228695DCF6 /* Pods-FoneTests.debug.xcconfig */,
-				0EAA6E1F4AD1F48D2149D40B /* Pods-FoneTests.release.xcconfig */,
+				368AFAA4C0229CFD552C2188 /* Pods-Fone.debug.xcconfig */,
+				0441F1D0A2DB8E30714AD40D /* Pods-Fone.release.xcconfig */,
+				A3A4E3B7BC2EB6A83EF93289 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				C1B91FE3CD03F9DACA4F7CAE /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */,
+				6ABBF04275D4F609D955CECE /* Pods-FoneTests.debug.xcconfig */,
+				DD514903E852AD32D8241371 /* Pods-FoneTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1592,13 +1769,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22880E9623C0743A0044263D /* Build configuration list for PBXNativeTarget "Fone" */;
 			buildPhases = (
-				EFDAF393350A8B1CC6598232 /* [CP] Check Pods Manifest.lock */,
+				2A87FBEE7FCA7AC8BD4C4B8E /* [CP] Check Pods Manifest.lock */,
 				22880E6723C074380044263D /* Sources */,
 				22880E6823C074380044263D /* Frameworks */,
 				22880E6923C074380044263D /* Resources */,
 				1BE5D5C1248032A50080AACF /* ShellScript */,
 				C56F34DF24C397AB00400874 /* Embed App Extensions */,
-				AA47C4AA7B290961FB0A96D5 /* [CP] Embed Pods Frameworks */,
+				DE8831341891D8605129A7AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1606,6 +1783,8 @@
 				C56F34DA24C397AB00400874 /* PBXTargetDependency */,
 			);
 			name = Fone;
+			packageProductDependencies = (
+			);
 			productName = Fone;
 			productReference = 22880E6B23C074380044263D /* Fone Messenger.app */;
 			productType = "com.apple.product-type.application";
@@ -1614,7 +1793,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22880E9923C0743A0044263D /* Build configuration list for PBXNativeTarget "FoneTests" */;
 			buildPhases = (
-				18CCA4D133D46355AD5C032F /* [CP] Check Pods Manifest.lock */,
+				5947E5470CAE476E0A0D7CC7 /* [CP] Check Pods Manifest.lock */,
 				22880E7E23C074390044263D /* Sources */,
 				22880E7F23C074390044263D /* Frameworks */,
 				22880E8023C074390044263D /* Resources */,
@@ -1633,7 +1812,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C56F34DC24C397AB00400874 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
-				40472CF9C9BA3816CA499E12 /* [CP] Check Pods Manifest.lock */,
+				2CC48596A6B996C4F79FE02C /* [CP] Check Pods Manifest.lock */,
 				C56F34D024C397AB00400874 /* Sources */,
 				C56F34D124C397AB00400874 /* Frameworks */,
 				C56F34D224C397AB00400874 /* Resources */,
@@ -1683,6 +1862,8 @@
 				Base,
 			);
 			mainGroup = 22880E6223C074380044263D;
+			packageReferences = (
+			);
 			productRefGroup = 22880E6C23C074380044263D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1700,11 +1881,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA0977624817B5000E0A042 /* GroupChannelOutgoingAudioFileMessageTableViewCell.xib in Resources */,
+				18693E24298C194600F36B24 /* CategoryTableViewCell.xib in Resources */,
 				1BA0979B24817B5000E0A042 /* CreateOpenChannelCurrentUserTableViewCell.xib in Resources */,
 				1BA0977F24817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib in Resources */,
 				22880EF423C0775F0044263D /* Authentication.storyboard in Resources */,
+				6FA8C51F27B96CA6000D768B /* Temp.storyboard in Resources */,
 				1BA0978924817B5000E0A042 /* OpenChannelAdminMessageTableViewCell.xib in Resources */,
+				18693E2A298C195500F36B24 /* categories.json in Resources */,
 				1BA0979224817B5000E0A042 /* OpenChannelUserMessageTableViewCell.xib in Resources */,
+				08B383B129E447100045D37F /* GenderListCell.xib in Resources */,
+				A82C2F5627E9C62000749B5D /* Rubik-SemiBold.ttf in Resources */,
 				1BA097AA24817B5000E0A042 /* OpenChannel.storyboard in Resources */,
 				182AE23124FE63460084A174 /* telephone.caf in Resources */,
 				185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */,
@@ -1713,11 +1899,14 @@
 				6669E61A267509A9001BDC75 /* SocialLinkView.xib in Resources */,
 				1BA0978E24817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.xib in Resources */,
 				2283DC3223C91C57005070B1 /* GoogleService-Info.plist in Resources */,
+				A82C2F5427E9C62000749B5D /* Rubik-Regular.ttf in Resources */,
+				A82C2F5527E9C62000749B5D /* Rubik-Light.ttf in Resources */,
 				185F529E2500ECA2003D8DE7 /* ringtone.mp3 in Resources */,
 				1BA0977C24817B5000E0A042 /* GroupChannelIncomingUserMessageTableViewCell.xib in Resources */,
 				1BA0978124817B5000E0A042 /* GroupChannelIncomingGeneralFileMessageTableViewCell.xib in Resources */,
 				22880F1023C0A2DC0044263D /* Home.storyboard in Resources */,
 				1BA0977A24817B5000E0A042 /* GroupChannelNeutralAdminMessageTableViewCell.xib in Resources */,
+				A82C2F5327E9C61F00749B5D /* Rubik-Medium.ttf in Resources */,
 				1BA0977B24817B5000E0A042 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.xib in Resources */,
 				1BA0978224817B5000E0A042 /* GroupChannelOutgoingUserMessageTableViewCell.xib in Resources */,
 				1BA0977224817B5000E0A042 /* GroupChannelIncomingImageVideoFileMessageTableViewCell.xib in Resources */,
@@ -1726,6 +1915,9 @@
 				185F52982500E49E003D8DE7 /* iphone-original.caf in Resources */,
 				182AE23424FE63A50084A174 /* telephone.mp3 in Resources */,
 				1BA0977824817B5000E0A042 /* GroupChannelOutgoingImageVideoFileMessageTableViewCell.xib in Resources */,
+				8B674B2D29C32EF00060FC88 /* PhoneEmailVC.xib in Resources */,
+				08B383A929E2A0CB0045D37F /* IdealMatchCell.xib in Resources */,
+				0824E4B529E58638009E1E22 /* DatePickerCell.xib in Resources */,
 				1BA0978324817B5000E0A042 /* GroupChannel.storyboard in Resources */,
 				1BA0978824817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.xib in Resources */,
 				1BA097AC24817B5100E0A042 /* UserProfileViewController.xib in Resources */,
@@ -1760,28 +1952,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18CCA4D133D46355AD5C032F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoneTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1BE5D5C1248032A50080AACF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1802,46 +1972,7 @@
 			shellScript = "
 ";
 		};
-		40472CF9C9BA3816CA499E12 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Fone-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA47C4AA7B290961FB0A96D5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EFDAF393350A8B1CC6598232 /* [CP] Check Pods Manifest.lock */ = {
+		2A87FBEE7FCA7AC8BD4C4B8E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1863,6 +1994,67 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2CC48596A6B996C4F79FE02C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Fone-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5947E5470CAE476E0A0D7CC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoneTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE8831341891D8605129A7AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fone/Pods-Fone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1871,7 +2063,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				22880ECD23C074830044263D /* CosmosSize.swift in Sources */,
+				048AC46229F9037B00B635B0 /* AddPhotosViewController.swift in Sources */,
+				18693E25298C194600F36B24 /* CategoryVC.swift in Sources */,
 				1BA0976C24817B5000E0A042 /* GroupChannelChatViewController.swift in Sources */,
+				28A1D8FA297148DB00E0A655 /* KeychainItem.swift in Sources */,
 				66B71BFA267C81E6002123BA /* String+Fone.swift in Sources */,
 				1BA0978424817B5000E0A042 /* OpenChanannelChatDelegate.swift in Sources */,
 				1BA097A524817B5000E0A042 /* OpenChannelSettingsChannelNameTableViewCell.swift in Sources */,
@@ -1885,6 +2080,7 @@
 				6669E6162674CBD2001BDC75 /* LinksManagementViewController.swift in Sources */,
 				4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */,
 				4F83FD3724ACA39D00121486 /* UserDetailsVC.swift in Sources */,
+				6FDC0FF927C9213400E6CF65 /* NearByPeople.swift in Sources */,
 				1BA0977324817B5000E0A042 /* GroupChannelOutgoingMessageTableViewCell.swift in Sources */,
 				22880EDC23C074830044263D /* Enums.swift in Sources */,
 				1BA0979D24817B5000E0A042 /* SelectOperatorsDelegate.swift in Sources */,
@@ -1892,6 +2088,7 @@
 				22880EE023C074830044263D /* HKBaseViewController.swift in Sources */,
 				6624C306267139C6002EB175 /* AppDelegate+DeepLink.swift in Sources */,
 				1BA097C224817B5100E0A042 /* Array+SendBird.swift in Sources */,
+				959E2C0B296EC458006E0D61 /* GoogleLogin.swift in Sources */,
 				18A7CDDA25162E38006308CB /* PlanListVC.swift in Sources */,
 				1BA0977424817B5000E0A042 /* GroupChannelMessageTableViewCell.swift in Sources */,
 				22880EF023C0766B0044263D /* User.swift in Sources */,
@@ -1905,6 +2102,8 @@
 				1BA0979324817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.swift in Sources */,
 				1BA097BD24817B5100E0A042 /* UIViewController+Utils.swift in Sources */,
 				1BA0979124817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.swift in Sources */,
+				FB80496827B919FE00140A04 /* SignUpNameVC.swift in Sources */,
+				18693E23298C194600F36B24 /* CategoryTableViewCell.swift in Sources */,
 				1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */,
 				4F16BC8C249D1744001C4708 /* NewCallViewController.swift in Sources */,
 				1BA097C424817B5100E0A042 /* SplitViewController.swift in Sources */,
@@ -1924,6 +2123,8 @@
 				1BA0976624817B5000E0A042 /* GroupChannelSettingsViewController.swift in Sources */,
 				1BA0979A24817B5000E0A042 /* CreateOpenChannelChannelUrlTableViewCell.swift in Sources */,
 				22880EDA23C074830044263D /* OMServerInteraction.swift in Sources */,
+				959E2C0D296EC458006E0D61 /* SocialLoginManager.swift in Sources */,
+				959E2C0C296EC458006E0D61 /* SocialLoginUser.swift in Sources */,
 				1BA0976824817B5000E0A042 /* GroupChannelSettingsTableViewCellDelegate.swift in Sources */,
 				22880EFA23C08A8A0044263D /* LoginVC.swift in Sources */,
 				22CCC94F23C6442600592614 /* LocalContactVC.swift in Sources */,
@@ -1936,16 +2137,20 @@
 				1BA0979E24817B5000E0A042 /* OpenChannelCoverImageNameSettingViewController.swift in Sources */,
 				22880EFD23C08ABA0044263D /* CountryCodeVC.swift in Sources */,
 				1BA0976F24817B5000E0A042 /* GroupChannelOutgoingAudioFileMessageTableViewCell.swift in Sources */,
+				18693E2B298C195500F36B24 /* Subcategory.swift in Sources */,
 				1BA097BF24817B5100E0A042 /* PhotoViewer.swift in Sources */,
 				229BCD0F23C3C68000AEF903 /* CallVC.swift in Sources */,
 				1BA097B924817B5100E0A042 /* CustomActivityIndicatorView.swift in Sources */,
 				22880EDE23C074830044263D /* URL.swift in Sources */,
+				08B383B029E447100045D37F /* GenderListCell.swift in Sources */,
 				1BA097BA24817B5100E0A042 /* String+SendBird.swift in Sources */,
 				1BA0979424817B5000E0A042 /* OpenChannelChatViewController.swift in Sources */,
 				1BA097AE24817B5100E0A042 /* SelectableUserTableViewCell.swift in Sources */,
 				1BA0975524817B5000E0A042 /* SettingsViewController.swift in Sources */,
+				5AD5736E29DC78230035D13A /* PhoneAuthManager.swift in Sources */,
 				1BA0979624817B5000E0A042 /* SelectOperatorsViewController.swift in Sources */,
 				1BA097A224817B5000E0A042 /* OpenChannelSettingsDelegate.swift in Sources */,
+				B4A07B6E2866144F00531BE5 /* TextStyling.swift in Sources */,
 				1BA0979F24817B5000E0A042 /* OpenChannelCoverImageNameSettingDelegate.swift in Sources */,
 				1BA097B724817B5100E0A042 /* FLAnimatedImageView+ImageLoader.swift in Sources */,
 				1BA0974E24817B5000E0A042 /* SettingsTableViewCellDelegate.swift in Sources */,
@@ -1962,6 +2167,7 @@
 				1BA0975824817B5000E0A042 /* GroupChannelHiddenChannelsViewController.swift in Sources */,
 				22880ED323C074830044263D /* CosmosRating.swift in Sources */,
 				1BA0975624817B5000E0A042 /* DownloadManager.swift in Sources */,
+				0824E4B329E579DB009E1E22 /* DatePickerCell.swift in Sources */,
 				1BA0975324817B5000E0A042 /* SettingsTimePickerTableViewCell.swift in Sources */,
 				22880F1423C0AADB0044263D /* SettingVC.swift in Sources */,
 				1BA0978F24817B5000E0A042 /* OpenChannelGeneralFileMessageTableViewCell.swift in Sources */,
@@ -1969,6 +2175,7 @@
 				1BA0978B24817B5000E0A042 /* OpenChannelMessageTableViewCellDelegate.swift in Sources */,
 				22880EDF23C074830044263D /* Theme.swift in Sources */,
 				1BA0976124817B5000E0A042 /* GroupChannelPublicChannelsViewController.swift in Sources */,
+				959E2C0A296EC458006E0D61 /* AppleSignIn.swift in Sources */,
 				1BA097AB24817B5000E0A042 /* UserProfileViewController.swift in Sources */,
 				4F2E8353249209E500FFC0B0 /* VideoCallVC+CallKit.swift in Sources */,
 				22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */,
@@ -1983,10 +2190,12 @@
 				22CCC95523C671CC00592614 /* VideoCallVC1.swift in Sources */,
 				22AB54F823CF8E9400823EF8 /* FriendTVC.swift in Sources */,
 				1BA0976224817B5000E0A042 /* GroupChannelInviteMemberDelegate.swift in Sources */,
+				0824E4B229E579DB009E1E22 /* CalendarPickerView.swift in Sources */,
 				1BA097B524817B5100E0A042 /* CustomProgressCircle.swift in Sources */,
 				13EC3CC425D32E7E001C9D95 /* AboutmeProfileVC.swift in Sources */,
 				22880F0A23C08D190044263D /* SignUp VC.swift in Sources */,
 				51F27B7F264AC0A700E1E017 /* UITextView.swift in Sources */,
+				8B674B2C29C32EF00060FC88 /* PhoneEmailVC.swift in Sources */,
 				22880F0723C08D070044263D /* VerificationVC.swift in Sources */,
 				1BA0974D24817B5000E0A042 /* UserProfileImageNameSettingDelegate.swift in Sources */,
 				1BA0978024817B5000E0A042 /* GroupChannelIncomingImageVideoFileMessageTableViewCell.swift in Sources */,
@@ -2017,6 +2226,8 @@
 				1BA097B424817B5100E0A042 /* SBConstants.swift in Sources */,
 				1BA0975224817B5000E0A042 /* SettingsSwitchTableViewCell.swift in Sources */,
 				1BA0979924817B5000E0A042 /* CreateOpenChannelUserTableViewCell.swift in Sources */,
+				08B383A429E29D1F0045D37F /* IdealMatchViewController.swift in Sources */,
+				FB80496A27B91A1300140A04 /* ChooseYourLink.swift in Sources */,
 				22880EC823C074830044263D /* StarLayer.swift in Sources */,
 				4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */,
 				22CCC95823C793F300592614 /* TwilioVideoCallSettings.swift in Sources */,
@@ -2025,6 +2236,8 @@
 				22880F0423C08CF10044263D /* MobileVC.swift in Sources */,
 				66A6016126C5926500B2A5DA /* UIViewController+API.swift in Sources */,
 				1BA097BE24817B5100E0A042 /* Utils.swift in Sources */,
+				959E2C08296EC458006E0D61 /* FBLogin.swift in Sources */,
+				08B383AD29E445670045D37F /* GenderListVC.swift in Sources */,
 				22880EE223C074830044263D /* HKViewControllerExt.swift in Sources */,
 				22880ECF23C074830044263D /* CosmosLayers.swift in Sources */,
 				1BA0975124817B5000E0A042 /* BlockedUserTableViewCell.swift in Sources */,
@@ -2035,11 +2248,14 @@
 				1BA0979C24817B5000E0A042 /* CreateOpenChannelCurrentUserTableViewCell.swift in Sources */,
 				22880EE423C074830044263D /* HKImagePickerHandler.swift in Sources */,
 				C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */,
+				18693E2C298C195500F36B24 /* Category.swift in Sources */,
 				22880ECE23C074830044263D /* RightToLeft.swift in Sources */,
 				22880EE323C074830044263D /* Extensions.swift in Sources */,
 				4F2E83552492103D00FFC0B0 /* AppDelegate+IncomingCall.swift in Sources */,
 				1BA097C6248181AF00E0A042 /* MainTabBarController.swift in Sources */,
+				0824E4B729E58724009E1E22 /* EnterBirthDayVC.swift in Sources */,
 				C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */,
+				08B383A829E2A0CB0045D37F /* IdealMatchCell.swift in Sources */,
 				1BA0975B24817B5000E0A042 /* GroupChannelTableViewCell.swift in Sources */,
 				22E1602E23C8FC8D00D2E54C /* CallLog.swift in Sources */,
 				1BA097A424817B5000E0A042 /* OpenChannelSettingsChannelNameTableViewCellDelegate.swift in Sources */,
@@ -2140,6 +2356,7 @@
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2154,7 +2371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2204,6 +2421,7 @@
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2212,9 +2430,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -2225,18 +2444,20 @@
 		};
 		22880E9723C0743A0044263D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 036B0539FC0B997C4BD30CC6 /* Pods-Fone.debug.xcconfig */;
+			baseConfigurationReference = 368AFAA4C0229CFD552C2188 /* Pods-Fone.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.7.1;
+				CURRENT_PROJECT_VERSION = 45;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2248,7 +2469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.7;
+				MARKETING_VERSION = 3.8.16;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
@@ -2261,18 +2482,20 @@
 		};
 		22880E9823C0743A0044263D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAD1D06C93FE26BF8336A854 /* Pods-Fone.release.xcconfig */;
+			baseConfigurationReference = 0441F1D0A2DB8E30714AD40D /* Pods-Fone.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.7.1;
+				CURRENT_PROJECT_VERSION = 45;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2284,8 +2507,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.7;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 3.8.16;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2297,14 +2520,13 @@
 		};
 		22880E9A23C0743A0044263D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F422F088FB0F0C228695DCF6 /* Pods-FoneTests.debug.xcconfig */;
+			baseConfigurationReference = 6ABBF04275D4F609D955CECE /* Pods-FoneTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98FHG7XB75;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2313,10 +2535,9 @@
 					"@loader_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.FoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fone Messenger.app/Fone Messenger";
@@ -2325,14 +2546,13 @@
 		};
 		22880E9B23C0743A0044263D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EAA6E1F4AD1F48D2149D40B /* Pods-FoneTests.release.xcconfig */;
+			baseConfigurationReference = DD514903E852AD32D8241371 /* Pods-FoneTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98FHG7XB75;
+				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2341,10 +2561,9 @@
 					"@loader_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Optechno.FoneTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.FoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fone Messenger.app/Fone Messenger";
@@ -2353,14 +2572,15 @@
 		};
 		C56F34DD24C397AB00400874 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 300A618C5395D961CFDFA679 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = A3A4E3B7BC2EB6A83EF93289 /* Pods-Fone-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.7.1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2373,7 +2593,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.8.7;
+				MARKETING_VERSION = 3.8.16;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2387,15 +2607,16 @@
 		};
 		C56F34DE24C397AB00400874 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 644F3D57DEB0CED997B9E55E /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = C1B91FE3CD03F9DACA4F7CAE /* Pods-Fone-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8.7.1;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2408,8 +2629,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.8.7;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 3.8.16;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

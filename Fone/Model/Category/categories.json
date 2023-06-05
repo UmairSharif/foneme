@@ -1,0 +1,114 @@
+[
+{
+  "CategoryId": 1,
+  "CategoryName": "Web, Mobile & Software Dev",
+  "Subcategories": [
+    {
+      "Id": 1,
+      "Name": "Desktop Software Development"
+    },
+    {
+      "Id": 2,
+      "Name": "E-commerce Development"
+    },
+    {
+      "Id": 2,
+      "Name": "Game Development"
+    },
+    {
+      "Id": 2,
+      "Name": "Mobile Development"
+    },
+    {
+      "Id": 2,
+      "Name": "Product Management"
+    },
+    {
+      "Id": 2,
+      "Name": "QA & Testing"
+    },
+    {
+      "Id": 2,
+      "Name": "Scripts & Utilities"
+    },
+    {
+      "Id": 2,
+      "Name": "Web Development"
+    }
+  ]
+},
+{
+  "CategoryId": 2,
+  "CategoryName": "Data Science & Analytics",
+  "Subcategories": [
+    {
+      "Id": 1,
+      "Name": "A/B Testing"
+    },
+    {
+      "Id": 2,
+      "Name": "Data Visualization"
+    }
+    ,
+    {
+      "Id": 2,
+      "Name": "Data Extraction/ETL"
+    },
+    {
+      "Id": 2,
+      "Name": "Data Mining & Management"
+    },
+    {
+      "Id": 2,
+      "Name": "Machine Learning"
+    },
+    {
+      "Id": 2,
+      "Name": "Quantitative Analysis"
+    }
+  ]
+},
+{
+  "CategoryId": 3,
+  "CategoryName": "Engineering & Architecture",
+  "Subcategories": [
+    {
+      "Id": 1,
+      "Name": "3D Modeling & CAD"
+    },
+    {
+      "Id": 2,
+      "Name": "Architecture"
+    }
+    ,
+    {
+      "Id": 2,
+      "Name": "Chemical Engineering"
+    },
+    {
+      "Id": 2,
+      "Name": "Civil & Structural Engineering"
+    },
+    {
+      "Id": 2,
+      "Name": "Contract Manufacturing"
+    },
+    {
+      "Id": 2,
+      "Name": "Electrical Engineering"
+    },
+    {
+      "Id": 2,
+      "Name": "Interior Design"
+    },
+    {
+      "Id": 2,
+      "Name": "Mechanical Engineering"
+    },
+    {
+      "Id": 2,
+      "Name": "Product Design"
+    }
+  ]
+}
+]

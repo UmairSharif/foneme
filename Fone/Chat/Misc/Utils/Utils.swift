@@ -142,7 +142,7 @@ class Utils: NSObject {
     }
     
     static func showAlertController(error: SBDError, viewController: UIViewController) {
-        let alert = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         let actionCancel = UtilsAction.cancel.create(on: viewController)
         alert.addAction(actionCancel)
         DispatchQueue.main.async {

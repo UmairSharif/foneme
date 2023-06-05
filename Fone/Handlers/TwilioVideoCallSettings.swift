@@ -9,7 +9,7 @@
 import Foundation
 import TwilioVideo
 
-class Settings: NSObject {
+class AVSettings: NSObject {
 
     // ISDK-2644: Resolving a conflict with AudioToolbox in iOS 13
     let supportedAudioCodecs: [TwilioVideo.AudioCodec] = [IsacCodec(),
@@ -70,5 +70,5 @@ class Settings: NSObject {
     }
     
     // MARK:- Shared Instance
-    static let shared = Settings()
+    static let shared = AVSettings()
 }

@@ -12,6 +12,7 @@ import RSKImageCropper
 import Photos
 import AlamofireImage
 import MobileCoreServices
+import SVProgressHUD
 
 class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, OpenChannelSettingsChannelNameTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SelectOperatorsDelegate, OpenChannelCoverImageNameSettingDelegate, NotificationDelegate, SBDChannelDelegate {
     var groupInfoDic = [String: Any]();
@@ -40,9 +41,8 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
-
+        loadingIndicatorView.isHidden = true
         self.hideLoadingIndicatorView()
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         getGroupInfo()
         self.refreshOperators()
     }
@@ -62,11 +62,8 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
     func getGroupInfo() {
 
         var userId = ""
-        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-            print(userProfileData)
-            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+        if let user = CurrentSession.shared.user {
                 userId = user.userId!
-            }
         }
 
         let groupID = self.channel?.channelUrl
@@ -83,8 +80,6 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 
             if let json = response {
                 print(json)
-                //                    self.activityIndicator.stopAnimating()
-                //                    self.activityIndicator.isHidden = true
 
                 let statusCode = json["StatusCode"].string ?? ""
 
@@ -98,15 +93,6 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
                     print(self.groupInfoDic)
 
                     self.settingsTableView.reloadData()
-                } else {
-                    if let message = json["Message"].string
-                    {
-                        print(message)
-                        //self.errorAlert("\(message)")
-                    }
-
-                    //                        self.activityIndicator.stopAnimating()
-                    //                        self.activityIndicator.isHidden = true
                 }
 
             }
@@ -200,6 +186,7 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
             if let channelNameCell = tableView.dequeueReusableCell(withIdentifier: "OpenChannelSettingsChannelNameTableViewCell", for: indexPath) as? OpenChannelSettingsChannelNameTableViewCell {
                 channelNameCell.delegate = self
                 channelNameCell.channelNameTextField.text = channel.name
+                channelNameCell.roomDescriptionLabel.text =  self.groupInfoDic["GroupDescription"] as? String
                 channelNameCell.setEnableEditing(channel.isOperator(with: currentUser))
                 if let url = URL(string: channel.coverUrl!) {
                     channelNameCell.channelCoverImageView.af_setImage(withURL: url, placeholderImage: UIImage(named: "img_cover_image_placeholder_1"))
@@ -669,19 +656,10 @@ class OpenChannelSettingsViewController: UIViewController, UITableViewDelegate, 
 
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        self.loadingIndicatorView.superViewSize = self.view.frame.size
-        self.loadingIndicatorView.updateFrame()
-
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
 
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
 }

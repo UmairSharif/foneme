@@ -79,32 +79,32 @@ class PlanListVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
         //self.navigationController?.popViewController(animated: true)
     }
-    
-    func pay(withPlanId:String) {
-        // Test Values
-        // Card Number: 4111111111111111
-        // Expiration: 08/2018
-        
-        let token = (IS_SANDBOX == 1) ? BrainTree_toKinizationKey : BrainTree_toKinizationKey_Pro
-        print("token == \(token)")
-        let request =  BTDropInRequest()
-        let dropIn = BTDropInController(authorization: token, request: request)
-        { [unowned self] (controller, result, error) in
-            
-            if let error = error {
-                self.show(message: error.localizedDescription)
-                
-            } else if (result?.isCanceled == true) {
-                self.show(message: "Transaction Cancelled")
-                
-            } else if let nonce = result?.paymentMethod?.nonce {
-                self.sendRequestPaymentToServer(nonce: nonce, withPlanId: withPlanId)
-            }
-            controller.dismiss(animated: true, completion: nil)
-        }
-        
-        self.present(dropIn!, animated: true, completion: nil)
-    }
+//    
+//    func pay(withPlanId:String) {
+//        // Test Values
+//        // Card Number: 4111111111111111
+//        // Expiration: 08/2018
+//        
+//        let token = (IS_SANDBOX == 1) ? BrainTree_toKinizationKey : BrainTree_toKinizationKey_Pro
+//        print("token == \(token)")
+//        let request =  BTDropInRequest()
+//        let dropIn = BTDropInController(authorization: token, request: request)
+//        { [unowned self] (controller, result, error) in
+//            
+//            if let error = error {
+//                self.show(message: error.localizedDescription)
+//                
+//            } else if (result?.isCanceled == true) {
+//                self.show(message: "Transaction Cancelled")
+//                
+//            } else if let nonce = result?.paymentMethod?.nonce {
+//                self.sendRequestPaymentToServer(nonce: nonce, withPlanId: withPlanId)
+//            }
+//            controller.dismiss(animated: true, completion: nil)
+//        }
+//        
+//        self.present(dropIn!, animated: true, completion: nil)
+//    }
     
     func sendRequestPaymentToServer(nonce: String, withPlanId: String) {
         print(nonce);
@@ -225,7 +225,7 @@ extension PlanListVC :  UITableViewDelegate,UITableViewDataSource
                           
                           let action1 = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
                              let planId = object?["id"] as? String ?? ""
-                                     self.pay(withPlanId: planId);
+                                   //  self.pay(withPlanId: planId);
                           }
                           let action2 = UIAlertAction(title: "NO", style: .cancel) { (action:UIAlertAction) in
                               

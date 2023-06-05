@@ -14,6 +14,7 @@ import AVKit
 import MobileCoreServices
 import AlamofireImage
 import FLAnimatedImage
+import SVProgressHUD
 
 class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDNetworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, OpenChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate {
     @IBOutlet weak var joinGroupView: UIView!
@@ -66,35 +67,16 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     //   if channel?.isOperator(withUserId: SBDMain.getCurrentUser()!.userId) == true {
-        self.joinGroupBtnClicked()
-        joinGroupView.isHidden = true
 
-   /*     let userId = SBDMain.getCurrentUser()!.userId
-        let operaters = channel?.operators ?? []
-        var isAvilable = false
-        for users in  operaters {
-            let user = users as? SBDUser
-            if user?.userId == userId {
-                isAvilable = true;
-                break;
-            }
-            
-        }
-            
-        //if  channel?.operators!.contains(SBDMain.getCurrentUser()!) ?? false   {
-            if isAvilable {
-                    joinGroupView.isHidden = true
-                } else {
-                    joinGroupView.isHidden = false
-                }
-        
-        */
-        // Do any additional setup after loading the view.
+        self.joinGroupBtnClicked()
+
+        joinGroupView.isHidden = true
         SBDMain.add(self, identifier: self.description)
         
         if let channel = self.channel {
             self.title = channel.name
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: hexStringToUIColor(hex: "333333")]
+            
         }
     
         self.navigationItem.largeTitleDisplayMode = .never
@@ -104,10 +86,13 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         
         let settingBarButtonItem = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(self.clickOpenChannelSettingsButton(_:)))
         self.navigationItem.rightBarButtonItem = settingBarButtonItem
+        settingBarButtonItem.tintColor = hexStringToUIColor(hex: "333333")
         
+        self.navigationController?.navigationBar.backgroundColor = .white
         if self.splitViewController?.displayMode != UISplitViewController.DisplayMode.allVisible {
             let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.clickBackButton(_:)))
             self.navigationItem.leftBarButtonItem = backButton
+            backButton.tintColor = hexStringToUIColor(hex: "333333")
         }
         
         self.messageTableView.rowHeight = UITableView.automaticDimension
@@ -116,36 +101,22 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         self.messageTableView.dataSource = self
         self.messageTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 14, right: 0)
         
-       /* self.messageTableView.register(OpenChannelAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAdminMessageTableViewCell")
-        self.messageTableView.register(OpenChannelUserMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelUserMessageTableViewCell")
-        self.messageTableView.register(OpenChannelImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelImageVideoFileMessageTableViewCell")
-        self.messageTableView.register(OpenChannelGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelGeneralFileMessageTableViewCell")
-        self.messageTableView.register(OpenChannelAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "OpenChannelAudioFileMessageTableViewCell")*/
-        
         //Rajesh
         self.messageTableView.register(GroupChannelNeutralAdminMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelNeutralAdminMessageTableViewCell")
 
-              self.messageTableView.register(GroupChannelIncomingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingUserMessageTableViewCell")
-              self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingImageFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingVideoFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingUserMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingImageFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingVideoFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
 
-              
-              self.messageTableView.register(GroupChannelOutgoingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingUserMessageTableViewCell")
-              self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelOutgoingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell")
-              self.messageTableView.register(GroupChannelOutgoingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell")
-              
-        
-       //Rajesh
-        
-        
-        
-        
-        
-        // Input Text Field
+
+        self.messageTableView.register(GroupChannelOutgoingUserMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingUserMessageTableViewCell")
+        self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingImageFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelOutgoingImageVideoFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingVideoFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelOutgoingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingGeneralFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelOutgoingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell")
+
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
         let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
         self.inputMessageTextField.leftView = leftPaddingView
@@ -160,8 +131,6 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
-        
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         self.loadingIndicatorView.isHidden = true
         
         channel?.getMyMutedInfo(completionHandler: { (isMuted, description, startAt, endAt, duration, error) in
@@ -216,20 +185,22 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
             super.viewWillDisappear(animated)
         }
     }
-        @IBAction func joinGroupBtnClicked(){
-            
-            //SBDGroupChannel
-            
-            channel?.enter(completionHandler: { (error) in
-                if let error = error {
-                    Utils.showAlertController(error: error, viewController: self)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.joinGroupView.isHidden = true;
-                }
-            });
-        }
+    
+    @IBAction func joinGroupBtnClicked(){
+        
+        //SBDGroupChannel
+        
+        channel?.enter(completionHandler: { (error) in
+            if let _ = error {
+                ///Utils.showAlertController(error: error, viewController: self)
+                return
+            }
+            DispatchQueue.main.async {
+                self.joinGroupView.isHidden = true;
+            }
+        });
+    }
+    
     func showToast(_ message: String) {
         self.toastView.alpha = 1
         self.toastMessageLabel.text = message
@@ -415,14 +386,6 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
         if self.keyboardShown == false {
             return
         }
-
-//        DispatchQueue.main.async {
-//            UIView.animate(withDuration: 0.1, animations: {
-//                self.inputMessageInnerContainerViewBottomMargin.constant = 0
-//                self.view.layoutIfNeeded()
-//            })
-//            self.scrollToBottom(force: false)
-//        }
         self.view.endEditing(true)
         self.firstKeyboardShown = false
     }
@@ -880,7 +843,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                             }
                                             
                                             guard let data = response.data, let image = UIImage(data: data) else { return }
-                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
                                         })
                                     }
                                 }
@@ -899,7 +862,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                         }
                                         
                                         guard let data = response.data, let image = UIImage(data: data) else { return }
-                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
                                     })
                                 }
                             }
@@ -949,7 +912,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                         guard let data = response.data else { return }
                                         guard let image = UIImage(data: data) else { return }
                                         updateVideoFileMessageCell.setImage(image)
-                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
                                     })
                                 }
                             }
@@ -1052,17 +1015,34 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                             guard let data = response.data else { return }
                                             guard let image = UIImage(data: data) else { return }
                                             updateImageFileMessageCell.setImage(image)
-                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                            self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
                                         })
                                     }
                                 }
                                 else {
                                     // Without thunbnail.
-                                    updateImageFileMessageCell.hideAllPlaceholders()
-                                    updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
-                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
-                                    updateImageFileMessageCell.setImage(nil)
-                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                    guard let url = URL(string: fileMessage.url) else { return }
+                                    updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                        updateImageFileMessageCell.hideAllPlaceholders()
+                                        
+                                        if response.error != nil {
+                                            updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                            updateImageFileMessageCell.setImage(nil)
+                                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                            self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                            
+                                            return
+                                        }
+                                        
+                                        guard let data = response.data, let image = UIImage(data: data) else { return }
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
+                                    })
+
+//                                    updateImageFileMessageCell.hideAllPlaceholders()
+//                                    updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+//                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+//                                    updateImageFileMessageCell.setImage(nil)
+//                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
                                 }
                             }
                         }
@@ -1111,7 +1091,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                                         updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = true
                                         updateImageFileMessageCell.videoPlayIconImageView.isHidden = false
                                         updateImageFileMessageCell.setImage(image)
-                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.5).hashValue
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
                                     })
                                 }
                             }
@@ -1997,8 +1977,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
     
     //MARK: - Add image to Library
       @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        self.loadingIndicatorView.isHidden = true
-        self.loadingIndicatorView.stopAnimating()
+          SVProgressHUD.dismiss()
           if let error = error {
               // we got back an error!
               showAlertWith(title: "Save error", message: error.localizedDescription)
@@ -2168,7 +2147,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         
                         PHImageManager.default().requestImage(for: imageAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: nil, resultHandler: { (result, info) in
                                                    if result != nil {
-                                                       guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                                                       guard let imageData = result?.jpegData(compressionQuality: 0.4) else { return }
                                                        self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
                                                    }
                                                })
@@ -2176,7 +2155,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                         
                     }  else {
                         guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-                                           guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                        guard let imageData = originalImage.jpegData(compressionQuality: 0.4) else { return }
                                            self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
                         
                       /*  guard let imageAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
@@ -2191,7 +2170,7 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 else {
                     guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-                    guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                    guard let imageData = originalImage.jpegData(compressionQuality: 0.4) else { return }
                     self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
                 }
             } else if CFStringCompare(mediaType, kUTTypeMovie, []) == .compareEqualTo {
@@ -2424,40 +2403,38 @@ class OpenChannelChatViewController: UIViewController, UITableViewDelegate, UITa
                     }
                 }
             }
-        }, completionHandler: { [unowned self] (fileMessage, error) in
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 150 * NSEC_PER_MSEC), execute: {
-                let preSendMessage = self.preSendMessages[fileMessage!.requestId] as! SBDFileMessage
-                
-                self.preSendMessages.removeValue(forKey: fileMessage!.requestId)
-                self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId)
-                
-                if error != nil {
-                    DispatchQueue.main.async {
-                        self.resendableMessages[fileMessage!.requestId] = preSendMessage
-                        self.resendableFileData[preSendMessage.requestId] = [
-                            "data": imageData,
-                            "type": mimeType,
-                            "filename": imageName
-                            ] as [String : AnyObject]
-                        self.messageTableView.reloadData()
-                        self.scrollToBottom(force: true)
-                    }
-                    
-                    return
+        }, completionHandler: { (fileMessage, error) in
+            let preSendMessage = self.preSendMessages[fileMessage!.requestId] as! SBDFileMessage
+
+            self.preSendMessages.removeValue(forKey: fileMessage!.requestId)
+            self.sendingImageVideoMessage.removeValue(forKey: fileMessage!.requestId)
+
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.resendableMessages[fileMessage!.requestId] = preSendMessage
+                    self.resendableFileData[preSendMessage.requestId] = [
+                        "data": imageData,
+                        "type": mimeType,
+                        "filename": imageName
+                        ] as [String : AnyObject]
+                    self.messageTableView.reloadData()
+                    self.scrollToBottom(force: true)
                 }
-                
-                if fileMessage != nil {
-                    DispatchQueue.main.async {
-                        self.determineScrollLock()
-                        self.resendableMessages.removeValue(forKey: fileMessage!.requestId)
-                        self.resendableFileData.removeValue(forKey: fileMessage!.requestId)
-                        self.messages[self.messages.firstIndex(of: preSendMessage)!] = fileMessage!
-                        let indexPath = IndexPath(row: self.messages.firstIndex(of: fileMessage!)!, section: 0)
-                        self.messageTableView.reloadRows(at: [indexPath], with: .none)
-                        self.scrollToBottom(force: false)
-                    }
+
+                return
+            }
+
+            if fileMessage != nil {
+                DispatchQueue.main.async {
+                    self.determineScrollLock()
+                    self.resendableMessages.removeValue(forKey: fileMessage!.requestId)
+                    self.resendableFileData.removeValue(forKey: fileMessage!.requestId)
+                    self.messages[self.messages.firstIndex(of: preSendMessage)!] = fileMessage!
+                    let indexPath = IndexPath(row: self.messages.firstIndex(of: fileMessage!)!, section: 0)
+                    self.messageTableView.reloadRows(at: [indexPath], with: .none)
+                    self.scrollToBottom(force: false)
                 }
-            })
+            }
         })
         
         DispatchQueue.main.async {
@@ -2608,6 +2585,12 @@ extension OpenChannelChatViewController: GroupChannelMessageTableViewCellDelegat
     @objc optional func didClickUserProfile(_ user: SBDUser);
     @objc optional func didClickGeneralFileMessage(_ message: SBDFileMessage);
      */
+    
+    func didClickUserProfile(_ user: SBDUser) {
+        let userProfileVC = UserProfileViewController.init(nibName: "UserProfileViewController", bundle: nil)
+        userProfileVC.user = user
+        navigationController?.pushViewController(userProfileVC, animated: true)
+    }
     
     func didLongClickUserProfile(_ user: SBDUser) {
         guard let currentUser = SBDMain.getCurrentUser() else { return }

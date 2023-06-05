@@ -8,6 +8,7 @@
 
 import UIKit
 import SendBirdSDK
+import SVProgressHUD
 
 class SettingsTimeViewController: UIViewController, SettingsTableViewCellDelegate, SettingsTimePickerDelegate, NotificationDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -42,14 +43,11 @@ class SettingsTimeViewController: UIViewController, SettingsTableViewCellDelegat
             self.showPreview = value
         }
         
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
-        self.loadingIndicatorView.isHidden = false
-        self.loadingIndicatorView.startAnimating()
+        SVProgressHUD.show()
     
         SBDMain.getDoNotDisturb { (isDoNotDisturbOn, startHour, startMin, endHour, endMin, timezone, error) in
             DispatchQueue.main.async {
-                self.loadingIndicatorView.isHidden = true
-                self.loadingIndicatorView.stopAnimating()
+                SVProgressHUD.dismiss()
             }
             
             UserDefaults.standard.set(startHour, forKey: "sendbird_dnd_start_hour")
@@ -263,8 +261,7 @@ class SettingsTimeViewController: UIViewController, SettingsTableViewCellDelegat
         if identifier == SBConstants.ID_DO_NOT_DISTURB {
             self.isDoNotDisturbOn = isOn
             DispatchQueue.main.async {
-                self.loadingIndicatorView.isHidden = false
-                self.loadingIndicatorView.startAnimating()
+                SVProgressHUD.show()
 
                 self.tableView.reloadData()
                 
@@ -281,8 +278,7 @@ class SettingsTimeViewController: UIViewController, SettingsTableViewCellDelegat
                 SBDMain.setDoNotDisturbWithEnable(isOn, startHour: startHour24, startMin: self.startMin, endHour: endHour24, endMin: self.endMin, timezone: TimeZone.current.identifier, completionHandler: { (error) in
                     
                     DispatchQueue.main.async {
-                        self.loadingIndicatorView.isHidden = true
-                        self.loadingIndicatorView.stopAnimating()
+                        SVProgressHUD.dismiss()
                     }
                     
                     guard error == nil else { return }
@@ -294,16 +290,14 @@ class SettingsTimeViewController: UIViewController, SettingsTableViewCellDelegat
     
     func setDoNotDisturbTime() {
         DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
+            SVProgressHUD.show()
 
             let startHour24 = self.startAmPm == "AM" ? self.startHour : self.startHour + 12
             let endHour24 = self.endAmPm == "AM" ? self.endHour : self.endHour + 12
             
             SBDMain.setDoNotDisturbWithEnable(true, startHour: startHour24, startMin: self.startMin, endHour: endHour24, endMin: self.endMin, timezone: TimeZone.current.identifier, completionHandler: { (error) in
                 DispatchQueue.main.async {
-                    self.loadingIndicatorView.isHidden = true
-                    self.loadingIndicatorView.stopAnimating()
+                    SVProgressHUD.dismiss()
                 }
                 
                 guard error == nil else { return }

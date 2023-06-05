@@ -11,42 +11,43 @@ import SendBirdSDK
 import Photos
 import AlamofireImage
 import MobileCoreServices
-import Branch
+import SVProgressHUD
+import SwiftJWT
 
 class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GroupChannelInviteMemberDelegate, GroupChannelSettingsTableViewCellDelegate, GroupChannelCoverImageNameSettingDelegate, NotificationDelegate, SBDChannelDelegate {
 
     weak var delegate: GroupChannelSettingsDelegate?
     var channel: SBDGroupChannel?
     var members: [SBDMember] = []
-    var selectedUsers: [String: SBDUser] = [:]
-    var groupInfoDic = [String: Any]();
+    var selectedUsers: [String:SBDUser] = [:]
+    var groupInfoDic = [String:Any]();
 
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
-
+    
     static let REGULAR_MEMBER_MENU_COUNT = 7
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getGroupInfo();
         // Do any additional setup after loading the view.
         self.title = "Private Chat Settings"
-
+        
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
-
+        
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
-
+        
         self.loadingIndicatorView.isHidden = true
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
-
+        
         self.rearrangeMembers()
-
+        
         self.settingsTableView.reloadData()
     }
-
-
-    func getGroupInfo() {
+    
+    
+    func getGroupInfo(){
+        
         var userId = ""
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
             print(userProfileData)
@@ -56,40 +57,41 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
         }
 
         let groupID = self.channel?.channelUrl
-
-        let params = ["GroupID": groupID!,
-            "UserID": userId] as [String: Any]
-
+        
+        let params = ["GroupID":groupID!,
+                      "UserID": userId] as [String:Any]
+        // "CNIC": textFieldFoneId.text!,
+        
         print("params: \(params)")
-        var headers = [String: String]()
+        var headers = [String:String]()
         headers = ["Content-Type": "application/json"]
-
+        
         ServerCall.makeCallWitoutFile(getSingleGroupDetails, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-
+            
             if let json = response {
                 print(json)
                 //                    self.activityIndicator.stopAnimating()
                 //                    self.activityIndicator.isHidden = true
-
+                
                 let statusCode = json["StatusCode"].string ?? ""
+                
+                if statusCode == "200" || statusCode == "201"{
+                   if let groupInfo = json["GroupData"].array {
+                    for items in groupInfo {
+                    self.groupInfoDic  = items.dictionaryObject ?? [String:Any]()
+                       }
+                   }
+                   
+                   print(self.groupInfoDic)
 
-                if statusCode == "200" || statusCode == "201" {
-                    if let groupInfo = json["GroupData"].array {
-                        for items in groupInfo {
-                            self.groupInfoDic = items.dictionaryObject ?? [String: Any]()
-                        }
-                    }
-
-                    print(self.groupInfoDic)
-
-
+                   
                 } else {
                     if let message = json["Message"].string
                     {
                         print(message)
-                        // self.errorAlert("\(message)")
+                       // self.errorAlert("\(message)")
                     }
-
+                    
                     //                        self.activityIndicator.stopAnimating()
                     //                        self.activityIndicator.isHidden = true
                 }
@@ -98,14 +100,14 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
-
+      
+    
     private func rearrangeMembers() {
         self.members.removeAll()
         guard let channel = self.channel else { return }
         guard let members = channel.members else { return }
         guard let currentUser = SBDMain.getCurrentUser() else { return }
-
+        
         for member in members as? [SBDMember] ?? [] {
             if member.userId == currentUser.userId {
                 self.members.insert(member, at: 0)
@@ -115,18 +117,18 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     func openChat(_ channelUrl: String) {
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: false)
         }
-
+        
         if let cvc = UIViewController.currentViewController() as? NotificationDelegate {
             cvc.openChat(channelUrl)
         }
     }
 
-
+  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GroupChannelInviteMember", let destination = segue.destination as? GroupChannelInviteMemberViewController {
             destination.channel = self.channel
@@ -138,44 +140,57 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             destination.user = self.members[index]
         }
     }
-
-    func inviteBtnTapped() {
-        if let val = self.groupInfoDic["DeepLink"] as? String {
-            if let link1 = NSURL(string: val) {
-                let objectsToShare = [link1] as [Any]
-                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-                self.present(activityVC, animated: true, completion: nil)
-            }
+    
+  func inviteBtnTapped() {
+        //Set the default sharing message.
+        let message = "Fone App"
+    
+    var groupLink = "";
+         let isPublic =  self.groupInfoDic["IsPublic"] as? String
+        if isPublic == "True" {
+        groupLink = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String ?? "")"
+       } else {
+        groupLink = self.groupInfoDic["GroupLink"] as? String ?? ""
+       }
+    
+        //Set the link to share.
+        if let link = NSURL(string: groupLink)
+        {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
+    
+    
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (section == 3) ? "Members" : nil
+        return (section == 2) ? "Members" : nil
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
-
+    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 3 {
+        if section == 2 {
             return self.members.count + 1
         } else {
             return 1
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let channel = self.channel, let currentUser = SBDMain.getCurrentUser() else { return UITableViewCell() }
-
+       
         switch indexPath.section {
         case 0:
             guard let channelCoverNameCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsChannelCoverNameTableViewCell", for: indexPath) as? GroupChannelSettingsChannelCoverNameTableViewCell else { return UITableViewCell() }
             channelCoverNameCell.channelNameTextField.placeholder = Utils.createGroupChannelNameFromMembers(channel: channel)
             channelCoverNameCell.channelNameTextField.text = channel.name
             channelCoverNameCell.delegate = self
-
+            
             var currentMembers: [SBDMember] = []
             var count = 0
             if let members = channel.members as? [SBDMember] {
@@ -190,7 +205,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
                     }
                 }
             }
-
+            
             if let url = channel.coverUrl, url.count > 0 && !url.hasPrefix("https://sendbird.com/main/img/cover/") {
                 channelCoverNameCell.profileImageView.setImage(withCoverUrl: url)
             }
@@ -198,56 +213,22 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
                 channelCoverNameCell.profileImageView.users = members
             }
             channelCoverNameCell.profileImageView.makeCircularWithSpacing(spacing: 1)
-
+            
             return channelCoverNameCell
+            
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GroupShareInfoCell")!
-            let infoLabel = cell.viewWithTag(100) as? UILabel
-
-            let isPublic = self.groupInfoDic["IsPublic"] as? String
-            if isPublic == "True" {
-
-                if let val = self.groupInfoDic["PublicGroupLink"] as? String {
-                    infoLabel?.text = "https://fone.me/g/" + val
-                }
-                else
-                {
-                    if let val = self.groupInfoDic["GroupName"] as? String {
-                        infoLabel?.text = "https://fone.me/g/" + val
-                    } else {
-                        infoLabel?.text = "https://foneme.app.link/\(self.groupInfoDic["PublicGroupLink"] as! String)"
-                    }
-                }//
-
-            } else {
-//                if let val =  self.groupInfoDic["PublicGroupLink"] as? String {
-//                infoLabel?.text =  "https://fone.me/g/" + val
-//                }
-//                else
-//                {
-                if let val = self.groupInfoDic["GroupName"] as? String {
-                    infoLabel?.text = "https://fone.me/g/" + val
-                } else {
-                    infoLabel?.text = self.groupInfoDic["GroupLink"] as? String
-                }
-//                    infoLabel?.text =  self.groupInfoDic["GroupLink"] as? String
-//                }
-            }
-            return cell
-
-        case 2:
             guard let notiCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsNotificationsTableViewCell", for: indexPath) as? GroupChannelSettingsNotificationsTableViewCell else { return UITableViewCell() }
-
+            
             notiCell.notificationSwitch.isOn = self.channel?.myPushTriggerOption == .off ? false : true
             notiCell.delegate = self
-
+            
             return notiCell
-        case 3:
-            if indexPath.row == 0 {
+        case 2:
+            if indexPath.row == 0{
                 return tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsInviteMemberTableViewCell", for: indexPath)
             } else {
                 guard let memberCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsMemberTableViewCell", for: indexPath) as? GroupChannelSettingsMemberTableViewCell else { return UITableViewCell() }
-
+                
                 let member = self.members[indexPath.row - 1]
                 memberCell.nicknameLabel.text = member.nickname
                 if member.isBlockedByMe {
@@ -260,19 +241,19 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
                     memberCell.statusLabel.isHidden = true
                     memberCell.statusLabel.text = ""
                 }
-
+                
                 if member.userId == currentUser.userId {
                     memberCell.accessoryType = .none
                 }
                 else {
                     memberCell.accessoryType = .disclosureIndicator
                 }
-
+                
                 DispatchQueue.main.async {
                     guard let updateCell = tableView.cellForRow(at: indexPath) as? GroupChannelSettingsMemberTableViewCell else { return }
-
+                    
                     updateCell.profileImageView.setProfileImageView(for: member)
-
+                    
                     if member.userId == currentUser.userId {
                         updateCell.myProfileImageCoverView.isHidden = false
                     }
@@ -280,48 +261,40 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
                         updateCell.myProfileImageCoverView.isHidden = true
                     }
                 }
-
+                
                 return memberCell
             }
-        case 4:
+        case 3:
             return tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsLeaveChatTableViewCell", for: indexPath)
         default:
             return UITableViewCell()
         }
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (section == 0) ? 0.1 : 18.0
-
-    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 251
+            return 140
         }
-        else if indexPath.section == 1 {
-            return 48
-        }
-        else {
-            return 48
-        }
+        return 48
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-
-        if indexPath.section == 1 {
-            inviteBtnTapped()
-        } else if indexPath.section == 3, indexPath.row == 0 {
+        
+        if indexPath.section == 1 {//Notification
+            //inviteBtnTapped()
+        } else if indexPath.section == 2, indexPath.row == 0 {
             // Invite member
             performSegue(withIdentifier: "GroupChannelInviteMember", sender: nil)
         }
-        else if indexPath.section == 3 {
+        else if indexPath.section == 2 {
             performSegue(withIdentifier: "ShowUserProfile", sender: (indexPath.row - 1))
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 3 {
             // Leave channel
             guard let channel = self.channel else { return }
             channel.leave { (error) in
                 guard error == nil else { return }
-
+                
                 DispatchQueue.main.async {
                     if self.splitViewController?.displayMode == UISplitViewController.DisplayMode.allVisible {
                         if let delegate = self.delegate {
@@ -338,12 +311,12 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section != 2 || indexPath.row == 0 { return nil }
         let currentMember = self.members[indexPath.row - 1]
         if !currentMember.isBlockedByMe { return nil }
-
+        
         let unblockAction = UIContextualAction(style: .normal, title: "Unblock") { (action, sourceView, completionHandler) in
             SBDMain.unblockUserId(currentMember.userId, completionHandler: { error in })
             let currentCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelSettingsMemberTableViewCell", for: indexPath) as! GroupChannelSettingsMemberTableViewCell
@@ -352,48 +325,41 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             currentCell.statusLabel.text = ""
             tableView.reloadData()
         }
-
+        
         unblockAction.backgroundColor = UIColor(named: "color_leave_group_channel_bg")
         return UISwipeActionsConfiguration(actions: [unblockAction])
     }
-
+    
     // MARK: - GroupChannelInviteMemberDelegate
     func didInviteMembers() {
         self.rearrangeMembers()
         self.settingsTableView.reloadData()
     }
-
+    
     // MARK: - GroupChannelSettingsTableViewCellDelegate
     func willUpdateChannelNameAndCoverImage() {
         performSegue(withIdentifier: "GroupChannelCoverSettings", sender: nil)
     }
-
+    
     func didChangeNotificationSwitchButton(isOn: Bool) {
         guard let channel = self.channel else { return }
-        self.loadingIndicatorView.superViewSize = self.view.frame.size
-        self.loadingIndicatorView.updateFrame()
-
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
-
-        let pushOption: SBDGroupChannelPushTriggerOption = isOn ? .all : .off
+        SVProgressHUD.show()
+        
+        let pushOption:SBDGroupChannelPushTriggerOption = isOn ? .all : .off
         channel.setMyPushTriggerOption(pushOption) { (error) in
             DispatchQueue.main.async {
-                self.loadingIndicatorView.isHidden = true
-                self.loadingIndicatorView.stopAnimating()
+                SVProgressHUD.dismiss()
             }
         }
     }
-
+    
     // MARK: - GroupChannelCoverImageNameSettingDelegate
     func didUpdateGroupChannel() {
         DispatchQueue.main.async {
             self.settingsTableView.reloadData()
         }
     }
-
+    
     // MARK: - SBDChannelDelegate
     func channelWasChanged(_ sender: SBDBaseChannel) {
         guard let channel = self.channel else { return }
@@ -404,7 +370,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     func channel(_ sender: SBDGroupChannel, userDidJoin user: SBDUser) {
         guard let channel = self.channel else { return }
         if sender.channelUrl == channel.channelUrl {
@@ -414,7 +380,7 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     func channel(_ sender: SBDGroupChannel, userDidLeave user: SBDUser) {
         guard let channel = self.channel else { return }
         if sender.channelUrl == channel.channelUrl {
@@ -424,22 +390,13 @@ class GroupChannelSettingsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        self.loadingIndicatorView.superViewSize = self.view.frame.size
-        self.loadingIndicatorView.updateFrame()
-
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
-
+    
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
 }

@@ -97,6 +97,7 @@ class SettingsViewController: UITableViewController, SettingsTableViewCellDelega
                 }
                 
                 ConnectionManager.logout {
+                    CurrentSession.shared.clearData()
                     self.dismiss(animated: true, completion: nil)
                 }
             }

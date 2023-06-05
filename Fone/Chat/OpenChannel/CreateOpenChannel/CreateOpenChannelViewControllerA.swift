@@ -19,29 +19,16 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
     @IBOutlet weak var channelNameTextField: UITextField!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var decriptionTextView: UITextView?
+    @IBOutlet weak var textView: UIView!
 
     var coverImageData: Data?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.title = "Create Public Chats"
         self.navigationItem.largeTitleDisplayMode = .never
         
-        self.cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CreateOpenChannelViewControllerA.clickCancelButton(_:)))
-        self.navigationItem.leftBarButtonItem = self.cancelButton
-        
-        self.nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateOpenChannelViewControllerA.clickNextButton(_:)))
-        self.navigationItem.rightBarButtonItem = self.nextButton
-        
-        if self.channelNameTextField.text!.count > 0 {
-            self.nextButton?.isEnabled = true
-        }
-        else {
-            self.nextButton?.isEnabled = false
-        }
         
         self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Public Chat Name", attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .regular),
@@ -52,40 +39,21 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
         let clickCoverImageRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateOpenChannelViewControllerA.clickCoverImage(_:)))
         self.coverImageView.isUserInteractionEnabled = true
         self.coverImageView.addGestureRecognizer(clickCoverImageRecognizer)
-        
-        // Set the default cover image randomly.
-       /* let r = arc4random() % 5
-        switch r {
-        case 0:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_1")
-            break
-        case 1:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_2")
-            break
-        case 2:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_3")
-            break
-        case 3:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_4")
-            break
-        case 4:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_5")
-            break
-        default:
-            self.coverImageView.image = UIImage(named: "img_default_cover_image_1")
-            break
-        }*/
       
-        self.coverImageView.image = UIImage(named: "ic_profile")
+        self.coverImageView.image = UIImage(named: "profile_place_holdder")
 
+        self.textView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        self.textView.layer.borderWidth = 1.0
+        self.textView.layer.cornerRadius = 12.0
+        self.textView?.backgroundColor = .clear
     }
     
-    @objc func clickCancelButton(_ sender: AnyObject) {
+    @IBAction func clickCancelButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc func clickCoverImage(_ sender: AnyObject) {
-        print("clickCoverImage/CreateOpenChannelViewController")
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.modalPresentationStyle = .popover
         
@@ -153,8 +121,13 @@ class CreateOpenChannelViewControllerA: UIViewController, UIImagePickerControlle
         }
      }
     
-    @objc func clickNextButton(_ sender: AnyObject) {
-        performSegue(withIdentifier: "ConfigureOpenChannel", sender: nil)
+    @IBAction func clickNextButton(_ sender: AnyObject) {
+        if self.channelNameTextField.text?.isEmpty == true {
+            self.showAlert("Fone", "Public Chat Name is required.")
+        } else {
+            performSegue(withIdentifier: "ConfigureOpenChannel", sender: nil)
+        }
+        
     }
     
     func cropImage(_ imageData: Data) {

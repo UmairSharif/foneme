@@ -15,6 +15,7 @@ import MobileCoreServices
 import Alamofire
 import AlamofireImage
 import FLAnimatedImage
+import SVProgressHUD
 
 class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SBDChannelDelegate, GroupChannelMessageTableViewCellDelegate, GroupChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate, SBDNetworkDelegate, SBDConnectionDelegate {
     
@@ -26,7 +27,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     var userDetails:UserDetailModel?
     var titleLabel: UILabel!
     var lastUpdatedLabel: UILabel!
-var isfromNotif = false
+    var isfromNotif = false
     @IBOutlet weak var viewLeft: UIView!
     @IBOutlet weak var imguser: UIImageView!
     @IBOutlet weak var inputMessageTextField: UITextField!
@@ -84,6 +85,7 @@ var isfromNotif = false
     
     var typingIndicatorTimer: Timer?
     var isloadingnot = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,68 +96,48 @@ var isfromNotif = false
         }
         
         self.navigationController?.navigationBar.tintColor = UIColor.white;
+        self.navigationController?.navigationBar.backgroundColor = .white
+        
         self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")//UIColor(named: "color_navigation_tint")
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white,
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: hexStringToUIColor(hex: "333333"),
                                                                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.prefersLargeTitles = false
         
         self.navigationItem.largeTitleDisplayMode = .never
-        //        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
-        //
-        //        self.navigationItem.rightBarButtonItem = self.settingBarButton
-        
-        
-        if userDetails == nil
-        {
+
+        if userDetails == nil {
             btnvideo.isEnabled = false
             btnvideo.image = nil
             btnCall.isEnabled = false
             btnCall.image = nil
-//            viewLeft.isHidden = true
             self.imguser.isHidden = true
             viewLeft.isUserInteractionEnabled = false
-            DispatchQueue.main.async {
-                if (self.channel?.coverUrl!.count)! > 0 && !(self.channel?.coverUrl!.hasPrefix("https://static.sendbird.com"))!{
-                    self.imguser.af_setImage(withURL: URL.init(string: self.channel?.coverUrl ?? "")!)
-                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
-                    self.imguser.layer.masksToBounds = true
-                }else{
-                    self.imguser.image =  UIImage(named: "ic_profile")
-                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
-                    self.imguser.layer.masksToBounds = true
-                }
-//                if self.channel?.coverUrl ?? "" == ""{
-//
-//
-//                }else{
-//
-//
-//                }
-               
+            if (self.channel?.coverUrl!.count)! > 0 && !(self.channel?.coverUrl!.hasPrefix("https://static.sendbird.com"))!{
+                self.imguser.af_setImage(withURL: URL.init(string: self.channel?.coverUrl ?? "")!)
+                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                self.imguser.layer.masksToBounds = true
+            }else{
+                self.imguser.image =  UIImage(named: "ic_profile")
+                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                self.imguser.layer.masksToBounds = true
             }
-        }
-        else
-        {
-            DispatchQueue.main.async {
-                if self.userDetails?.imageUrl ?? "" == ""{
-                    self.imguser.image =  UIImage(named: "ic_profile")
-                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
-                    self.imguser.layer.masksToBounds = true
-                } else {
-                    self.imguser.sd_setImage(with: URL(string: self.userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-//                    self.imguser.af_setImage(withURL: URL.init(string: self.userDetails?.imageUrl ?? "")!)
-                    self.imguser.layer.cornerRadius = self.imguser.frame.height/2
-                    self.imguser.layer.masksToBounds = true
-                    
-                }
-               
+        } else {
+            if self.userDetails?.imageUrl ?? "" == ""{
+                self.imguser.image =  UIImage(named: "ic_profile")
+                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                self.imguser.layer.masksToBounds = true
+            } else {
+                self.imguser.sd_setImage(with: URL(string: self.userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
+                self.imguser.layer.cornerRadius = self.imguser.frame.height/2
+                self.imguser.layer.masksToBounds = true
+
             }
            
         }
         if self.splitViewController?.displayMode != UISplitViewController.DisplayMode.allVisible {
-            self.backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.clickBackButton(_:)))
-            self.backButton?.tintColor = UIColor.white
+            self.backButton = UIBarButtonItem(image: UIImage(named: "ic_back_blk"), style: .plain, target: self, action: #selector(self.clickBackButton(_:)))
+            self.backButton?.tintColor = hexStringToUIColor(hex: "333333")
             self.navigationItem.leftBarButtonItem = self.backButton
         }
         
@@ -206,8 +188,6 @@ var isfromNotif = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
-        
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         self.loadingIndicatorView.isHidden = true
         
         self.loadPreviousMessages(initial: true)
@@ -218,8 +198,8 @@ var isfromNotif = false
         //SBDGroupChannel
         
         channel?.join(completionHandler: { (error) in
-            if let error = error {
-                Utils.showAlertController(error: error, viewController: self)
+            if let _ = error {
+                ///Utils.showAlertController(error: error, viewController: self)
                 return
             }
             DispatchQueue.main.async {
@@ -231,17 +211,11 @@ var isfromNotif = false
     lazy var titleStackView: UIStackView = {
          self.titleLabel = UILabel()
          self.titleLabel.textAlignment = .center
-         self.titleLabel.textColor = .white
+         self.titleLabel.textColor = hexStringToUIColor(hex: "333333")
         self.titleLabel.font = UIFont.systemFont(ofSize: 13)
-//        if userDetails != nil{
-//            self.titleLabel.isUserInteractionEnabled = true
-//            let tap = UITapGestureRecognizer(target: self, action: Selector(("tapFunction:")))
-//            self.titleLabel.addGestureRecognizer(tap)
-//
-//        }
          self.lastUpdatedLabel = UILabel()
          self.lastUpdatedLabel.textAlignment = .center
-        self.lastUpdatedLabel.textColor = .white
+        self.lastUpdatedLabel.textColor = hexStringToUIColor(hex: "333333")
                self.lastUpdatedLabel.font = UIFont.systemFont(ofSize:  11)
 
         let stackView = UIStackView(arrangedSubviews: [titleLabel, lastUpdatedLabel])
@@ -252,33 +226,35 @@ var isfromNotif = false
     func tapFunction(sender:UITapGestureRecognizer) {
         btnProfile(self)
     }
+
+    @objc private func openUserDetail() {
+        btnProfile(self)
+    }
     
     func setChanelTitle(channle: SBDGroupChannel?) {
         
         if let channelMembers = channel?.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser(), channelMembers.count == 2 {
             
-            let audioCallBarButton = UIBarButtonItem(image: UIImage(named: "ic_call_top"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickAudioBarButton(_:)))
-            let videoCallBarButton = UIBarButtonItem(image: UIImage(named: "Videos2"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickVideoBarButton(_:)))
-            
-            
-//               self.navigationItem.rightBarButtonItems = [videoCallBarButton,audioCallBarButton]
-            
-            
+            self.btnvideo.tintColor = hexStringToUIColor(hex: "333333")
+            self.btnCall.tintColor = hexStringToUIColor(hex: "333333")
             
             self.navigationItem.titleView = titleStackView
 
             for member in channelMembers {
                 if member.userId != currentUser.userId {
-                    //self.title = member.nickname
-                    self.titleLabel.text = member.nickname//"Online"
+                    self.titleLabel.text = member.nickname
 
                     self.loadUserDetailInfo(userId: member.userId)
                 }
             }
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openUserDetail))
+            titleLabel.isUserInteractionEnabled = true
+            titleLabel.addGestureRecognizer(tapGestureRecognizer)
         } else {
            
             self.title = Utils.createGroupChannelName(channel: channle!)
             self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
+            self.settingBarButton?.tintColor = hexStringToUIColor(hex: "333333")
             self.navigationItem.rightBarButtonItem = self.settingBarButton
         }
     }
@@ -295,6 +271,7 @@ var isfromNotif = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        SBDMain.removeChannelDelegate(forIdentifier: self.description)
         if let navigationController = self.navigationController, let topViewController = navigationController.topViewController {
             if navigationController.viewControllers.firstIndex(of: self) == nil {
                 if navigationController is CreateGroupChannelNavigationController && !(topViewController is GroupChannelSettingsViewController) {
@@ -303,8 +280,6 @@ var isfromNotif = false
                 else {
                     super.viewWillDisappear(animated)
                 }
-                
-                SBDMain.removeChannelDelegate(forIdentifier: self.description)
             }
             else {
                 super.viewWillDisappear(animated)
@@ -334,7 +309,7 @@ var isfromNotif = false
               query?.userIdsFilter = [userId]
               query?.loadNextPage(completionHandler: { (users, error) in
                   if error != nil {
-                      Utils.showAlertController(error: error!, viewController: self)
+                      //Utils.showAlertController(error: error!, viewController: self)
                       return
                   }
                   
@@ -371,9 +346,7 @@ var isfromNotif = false
     //MARK:- CALL AUDIO/VIDEO
     
     @IBAction func btnCallClicked(_ sender:Any){
-        //        self.activityIndicator.startAnimating()
-        //        self.activityIndicator.isHidden = false
-        
+
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = false
         vc.recieverNumber = contact?.number
@@ -401,7 +374,7 @@ var isfromNotif = false
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
                 
-            }
+    }
             
     
     
@@ -419,7 +392,7 @@ var isfromNotif = false
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowGroupChannelSettings", let destination = segue.destination as? GroupChannelSettingsViewController{
+        if segue.identifier == "ShowGroupChannelSettings", let destination = segue.destination as? GroupChannelSettingsViewController {
             destination.delegate = self
             destination.channel = self.channel
         }
@@ -838,10 +811,8 @@ var isfromNotif = false
                 userMessageCell.channel = self.channel
                 
                 var failed: Bool = false
-                if let requestId = userMessage.requestId as? String {
-                    if self.resendableMessages[requestId] != nil {
-                        failed = true
-                    }
+                if self.resendableMessages[userMessage.requestId] != nil {
+                    failed = true
                 }
                 
                 userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
@@ -853,12 +824,7 @@ var isfromNotif = false
                 guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingUserMessageTableViewCell") as? GroupChannelIncomingUserMessageTableViewCell else { return cell }
                 userMessageCell.delegate = self
                 userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage)
-                
-                DispatchQueue.main.async {
-                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
-                    guard let updateUserMessageCell = updateCell as? GroupChannelIncomingUserMessageTableViewCell else { return }
-                    updateUserMessageCell.profileImageView.setProfileImageView(for: sender)
-                }
+                userMessageCell.profileImageView.setProfileImageView(for: sender)
                 
                 cell = userMessageCell
             }
@@ -867,7 +833,7 @@ var isfromNotif = false
             // File Message
             guard let fileMessage = currMessage as? SBDFileMessage else { return cell }
             guard let sender = fileMessage.sender else { return cell }
-            guard let fileMessageRequestId = fileMessage.requestId as? String else { return cell }
+            let fileMessageRequestId = fileMessage.requestId
             guard let currentUser = SBDMain.getCurrentUser() else { return cell }
             if let _ = self.preSendMessages[fileMessageRequestId] {
                 // Pre send outgoing message
@@ -1269,11 +1235,28 @@ var isfromNotif = false
                                 }
                                 else {
                                     // Without thunbnail.
-                                    updateImageFileMessageCell.hideAllPlaceholders()
-                                    updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
-                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
-                                    updateImageFileMessageCell.setImage(nil)
-                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                    guard let url = URL(string: fileMessage.url) else { return }
+                                    updateImageFileMessageCell.imageFileMessageImageView.af_setImage(withURL: url, placeholderImage: nil, filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: { (response) in
+                                        updateImageFileMessageCell.hideAllPlaceholders()
+                                        
+                                        if response.error != nil {
+                                            updateImageFileMessageCell.imageMessagePlaceholderImageView.isHidden = false
+                                            updateImageFileMessageCell.setImage(nil)
+                                            updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+                                            self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
+                                            
+                                            return
+                                        }
+                                        
+                                        guard let data = response.data, let image = UIImage(data: data) else { return }
+                                        self.loadedImageHash[String(format: "%lld", fileMessage.messageId)] = image.jpegData(compressionQuality: 0.3).hashValue
+                                    })
+
+//                                    updateImageFileMessageCell.hideAllPlaceholders()
+//                                    updateImageFileMessageCell.videoMessagePlaceholderImageView.isHidden = false
+//                                    updateImageFileMessageCell.setAnimatedImage(nil, hash: 0)
+//                                    updateImageFileMessageCell.setImage(nil)
+//                                    self.loadedImageHash.removeValue(forKey: String(format: "%lld", fileMessage.messageId))
                                 }
                             }
                         }
@@ -1510,12 +1493,10 @@ var isfromNotif = false
     }
     
     func channelWasChanged(_ sender: SBDBaseChannel) {
-        DispatchQueue.main.async {
-            guard let channel = self.channel else { return }
-            
-            if sender == channel {
-                self.setChanelTitle(channle: sender as? SBDGroupChannel)
-            }
+        guard let channel = self.channel else { return }
+        
+        if sender == channel {
+            self.setChanelTitle(channle: sender as? SBDGroupChannel)
         }
     }
     
@@ -1565,7 +1546,7 @@ var isfromNotif = false
                         PHImageManager.default().requestImage(for: imageAsset , targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options) { result, info in
                             
                             if result != nil {
-                                guard let imageData = result?.jpegData(compressionQuality: 1.0) else { return }
+                                guard let imageData = result?.jpegData(compressionQuality: 0.4) else { return }
                                 self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
                             }
                         }
@@ -1573,7 +1554,7 @@ var isfromNotif = false
                     } else {
                         
                         guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-                        guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                        guard let imageData = originalImage.jpegData(compressionQuality: 0.4) else { return }
                         //self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
                         self.sendImageFileMessage(imageData: imageData, imageName: imageName, mimeType: mimeType)
                         
@@ -1595,7 +1576,7 @@ var isfromNotif = false
                     }
                 }else {
                     guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-                    guard let imageData = originalImage.jpegData(compressionQuality: 1.0) else { return }
+                    guard let imageData = originalImage.jpegData(compressionQuality: 0.4) else { return }
                     self.sendImageFileMessage(imageData: imageData, imageName: "image.jpg", mimeType: "image/jpeg")
                 }
             } else if CFStringCompare(mediaType, kUTTypeMovie, []) == .compareEqualTo {
@@ -1697,7 +1678,7 @@ var isfromNotif = false
                 let subActionDelete = UIAlertAction(title: "Yes. Delete the message", style: .default, handler: { (action) in
                     channel.delete(message, completionHandler: { (error) in
                         if error != nil {
-                            let alert = UIAlertController(title: "Error", message: error!.domain, preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                             let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                             alert.addAction(actionCancel)
                             
@@ -1838,7 +1819,7 @@ var isfromNotif = false
                     let subActionDelete = UIAlertAction(title: "Yes. Delete the message", style: .default, handler: { (action) in
                         channel.delete(message, completionHandler: { (error) in
                             if error != nil {
-                                let alert = UIAlertController(title: "Error", message: error!.domain, preferredStyle: .alert)
+                                let alert = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
                                 let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                                 alert.addAction(actionCancel)
                                 
@@ -2071,12 +2052,10 @@ var isfromNotif = false
                 let actionOpen = UIAlertAction(title: "Open", style: .`default`) { (action) in
                     
                     
-                    self.loadingIndicatorView.isHidden = false
-                    self.loadingIndicatorView.startAnimating()
+                    SVProgressHUD.show()
                     let session = URLSession.shared
                     guard let url = URL(string: message.url) else {
-                        self.loadingIndicatorView.isHidden = true
-                        self.loadingIndicatorView.stopAnimating()
+                        SVProgressHUD.dismiss()
                         return
                     }
                     let request = URLRequest(url: url)
@@ -2088,16 +2067,14 @@ var isfromNotif = false
                             DispatchQueue.main.async {
                                 let photosViewController = CustomPhotosViewController(photos: [photo])
                                 
-                                self.loadingIndicatorView.isHidden = true
-                                self.loadingIndicatorView.stopAnimating()
+                                SVProgressHUD.dismiss()
                                 
                                 self.present(photosViewController, animated: true, completion: nil)
                             }
                         }
                         else {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
-                                self.loadingIndicatorView.isHidden = true
-                                self.loadingIndicatorView.stopAnimating()
+                                SVProgressHUD.dismiss()
                             }
                         }
                     }
@@ -2107,12 +2084,10 @@ var isfromNotif = false
                 let actionGallery = UIAlertAction(title: "Save to Photo gallery", style: .`default`) { (action) in
                     
                     
-                    self.loadingIndicatorView.isHidden = false
-                    self.loadingIndicatorView.startAnimating()
+                    SVProgressHUD.show()
                     let session = URLSession.shared
                     guard let url = URL(string: message.url) else {
-                        self.loadingIndicatorView.isHidden = true
-                        self.loadingIndicatorView.stopAnimating()
+                        SVProgressHUD.dismiss()
                         return
                     }
                     let request = URLRequest(url: url)
@@ -2132,8 +2107,7 @@ var isfromNotif = false
                         }
                         else {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)){
-                                self.loadingIndicatorView.isHidden = true
-                                self.loadingIndicatorView.stopAnimating()
+                                SVProgressHUD.dismiss()
                             }
                         }
                     }
@@ -2156,8 +2130,7 @@ var isfromNotif = false
             }
             else if message.type.hasPrefix("video") {
                 guard let url = URL(string: message.url) else {
-                    self.loadingIndicatorView.isHidden = true
-                    self.loadingIndicatorView.stopAnimating()
+                    SVProgressHUD.dismiss()
                     return
                 }
                 let player = AVPlayer(url: url)
@@ -2172,8 +2145,7 @@ var isfromNotif = false
     
     //MARK: - Add image to Library
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        self.loadingIndicatorView.isHidden = true
-        self.loadingIndicatorView.stopAnimating()
+        SVProgressHUD.dismiss()
         if let error = error {
             // we got back an error!
             showAlertWith(title: "Save error", message: error.localizedDescription)

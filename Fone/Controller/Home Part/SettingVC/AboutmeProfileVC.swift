@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 import NVActivityIndicatorView
+import SVProgressHUD
+
 class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var lblcount: UILabel!
     @IBOutlet weak var txtaboutme: UITextView!
@@ -159,7 +161,7 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
     func callAPIAbout()
     {
         let current = UIDevice.modelName
-        activityIndicator.startAnimating()
+        SVProgressHUD.show()
         let param : [String: Any] = ["UserID":Userid,"Address":locationtext,"PhoneModel":current,"PhoneBrand":"iPhone","AboutMe":txtaboutme.text ?? "Hey there! I am using Fone Messenger.","Profession": txtProfession.text ?? ""]
         
         
@@ -170,8 +172,7 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
         ServerCall.makeCallWitoutFile(updateAboutme, params: param, type: Method.POST, currentView: nil, header: headers) { (response) in
             
             if let json = response {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
+                SVProgressHUD.dismiss()
 
                 let statusCode = json["StatusCode"].string ?? ""
                 
@@ -193,8 +194,7 @@ class AboutmeProfileVC: UIViewController,UITextViewDelegate, UITextFieldDelegate
 //                        self.callTABBAR()
                     }
                     
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    SVProgressHUD.dismiss()
                 }
             }
         }

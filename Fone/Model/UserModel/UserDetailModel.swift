@@ -27,6 +27,17 @@ struct UserDetailModel: Codable {
     var profession: String!
     var location: String!
     var socialLinks: [SocialLink]!
+    
+    var uniqueContact: String {
+        if let mobile = phoneNumber, !phoneNumber.isEmpty {
+            return mobile
+        }
+        if let email = email, !email.isEmpty {
+            return email
+        }
+        return ""
+    }
+    
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */

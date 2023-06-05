@@ -474,10 +474,10 @@ class VideoCallVC: UIViewController {
     }
     
     @IBAction func disconnect(sender: UIButton) {
-        if self.isIncommingCall {
-            self.recevierSendNotificationAPI("CE")
-        }else{
+        if !(NotificationHandler.shared.callStatus ?? false) {
             self.dialerSendNotificationAPI()
+        } else {
+            self.recevierSendNotificationAPI("CE")
         }
         self.stackCall.alpha = 0.5
 

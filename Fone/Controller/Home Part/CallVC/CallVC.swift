@@ -8,12 +8,15 @@
 
 import UIKit
 import NVActivityIndicatorView
+import SVProgressHUD
+
 class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     //IBOutlet and Variables
     @IBOutlet weak var codeLbl : UILabel!
     @IBOutlet weak var numberTxt : UITextField!
-    @IBOutlet weak var flagBtn : UIButton!
+    @IBOutlet weak var flagBtn : UIImageView!
+    @IBOutlet weak var callView : UIView!
     
     @IBOutlet weak var ActivityIndicatorView: NVActivityIndicatorView!
     var number : String?
@@ -23,14 +26,18 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ActivityIndicatorView.stopAnimating()
-        self.ActivityIndicatorView.isHidden = true
+        ActivityIndicatorView.isHidden = true
+        SVProgressHUD.dismiss()
         //Forcing View to light Mode
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         } else {
             // Fallback on earlier versions
         }
+        
+        callView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        callView.layer.borderWidth = 1.0
+        callView.layer.cornerRadius = 12.0
         
         network.reachability.whenReachable = { reachability in
             
@@ -90,7 +97,7 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
     
     func selectedCountry(countryName: String, countryCode: String, flag: UIImage) {
         codeLbl.text = countryCode
-        flagBtn.setImage(flag, for: .normal)
+        flagBtn.image = flag
     }
     
     @IBAction func callBtnTapped(_ sender : UIButton)
@@ -112,8 +119,7 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
         
         if (numberTxt.text?.isEmpty)!
         {
-            self.ActivityIndicatorView.stopAnimating()
-            self.ActivityIndicatorView.isHidden = true
+            SVProgressHUD.dismiss()
             self.errorAlert("Please enter your number.")
         }
         else {
@@ -125,17 +131,21 @@ class CallVC: UIViewController,CountryDataDelegate,LocalContactDelegate {
                 return;
             }
             
-            if ((subscriptionStatus.lowercased() != "active") && (diffreance <= 0)) || (subscriptionStatus.isEmpty) {
-                self.openPlanListView()
-                
-            } else {
-                
-                let number = self.codeLbl.text! + self.numberTxt.text!
-                let vc = UIStoryboard().loadVoiceCallVC()
-                vc.callTo = number
-                self.present(vc, animated: true, completion: nil)
-            }
-            
+//            if ((subscriptionStatus.lowercased() != "active") && (diffreance <= 0)) || (subscriptionStatus.isEmpty) {
+//                self.openPlanListView()
+//
+//            } else {
+//
+//                let number = self.codeLbl.text! + self.numberTxt.text!
+//                let vc = UIStoryboard().loadVoiceCallVC()
+//                vc.callTo = number
+//                self.present(vc, animated: true, completion: nil)
+//            }
+            /// Disable subscription for now
+            let number = self.codeLbl.text! + self.numberTxt.text!
+            let vc = UIStoryboard().loadVoiceCallVC()
+            vc.callTo = number
+            self.present(vc, animated: true, completion: nil)
             
             
             /*  let fullscreenAdManager = FullScreenAdManager()

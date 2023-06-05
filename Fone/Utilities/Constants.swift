@@ -19,9 +19,10 @@ let SubscriptionStatus = "subscriptionStatus"
 let SubscriptionPlan = "planId"
 let SubscriptionId = "subscriptionId"
 let SubscriptionDays = "subscriptionDays"
+//"5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
 
-let APP_ID = "5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
-let CHANNEL_URL = "https://api-5A3F0F54-1ED8-43D0-A352-627AFE220EC4.sendbird.com"
+let APP_ID = "29145444-C78E-445E-8EC0-E91D5821DB2A"
+let CHANNEL_URL = "https://api-29145444-C78E-445E-8EC0-E91D5821DB2A.sendbird.com"
 
 let APP_NAME = "Basket Ball App"
 let key_User_Profile = "User_Profile"
@@ -44,8 +45,9 @@ let appDelegateShareInst = UIApplication.shared.delegate as! AppDelegate
 //****************************************//
 
 var appDeleg = UIApplication.shared.delegate as! AppDelegate
-var GLBLatitude = 0.0
-var GLBLongitude = 0.0
+/// Default is New York, USA location. This value is used if user's location is disabled (Denied permission)
+var GLBLatitude = 40.730610
+var GLBLongitude = -73.935242
 var VoipToken : String? {
     if let token = UserDefaults.standard.string(forKey: Key_VOIP_Token) {
         return token

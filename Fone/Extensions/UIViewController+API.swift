@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import SVProgressHUD
 
 extension UIViewController {
     func getContacts(completion: @escaping (Bool) -> Void) {
@@ -11,7 +12,7 @@ extension UIViewController {
             "Content-Type": "application/json",
             "Authorization": "bearer " + token
         ]
-
+        print("parameters = \(["UserId": userId]) \n url = \(saveContactUrl)")
         ServerCall.makeCallWitoutFile(saveContactUrl,
                                       params: [
                                         "UserId": userId
@@ -19,10 +20,15 @@ extension UIViewController {
                                       type: Method.POST,
                                       currentView: nil,
                                       header: headers) { json in
-            guard let json = json else { return }
+            guard let json = json else {
+                SVProgressHUD.dismiss()
+                return
+                
+            }
 
             let statusCode = json["StatusCode"].string ?? ""
             if statusCode == "401" {
+                SVProgressHUD.dismiss()
                 //TODO: logout and go to login screen
                 return
             }
@@ -37,7 +43,7 @@ extension UIViewController {
 
                         //let json = JSON(number)
                         items["ContactsNumber"] = JSON(number)
-                        if (number.count > Min_Contact_Number_Lenght) && !(ContactsCnic.isEmpty) {
+                        if !(ContactsCnic.isEmpty) {
                             midConatct.append(items)
                         }
                     }
@@ -45,9 +51,11 @@ extension UIViewController {
                     CurrentSession.shared.storeFriends(friends: midConatct)
                     completion(true)
                 } else {
+                    SVProgressHUD.dismiss()
                     completion(false)
                 }
             } else {
+                SVProgressHUD.dismiss()
                 completion(false)
             }
         }

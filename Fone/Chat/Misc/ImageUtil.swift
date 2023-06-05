@@ -98,7 +98,7 @@ class ProfileImageView: UIView {
             let imageView = UIImageView(image: UIImage(named: "ic_profile"))
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageContainerView.translatesAutoresizingMaskIntoConstraints = false
-            
+            imageView.contentMode = .scaleAspectFit
             imageContainerView.addSubview(imageView)
             mainStackView.addArrangedSubview(imageContainerView)
             
@@ -117,6 +117,7 @@ class ProfileImageView: UIView {
             let imageView = UIImageView(withUser: user)
             imageContainerView.addSubview(imageView)
             imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleAspectFit
             imageContainerView.translatesAutoresizingMaskIntoConstraints = false
             if users.count == 1 {
                 mainStackView.addArrangedSubview(imageContainerView)
@@ -176,7 +177,7 @@ class ProfileImageView: UIView {
         else {
             imageView.image = UIImage(named: "ic_profile")
         }
-        
+        imageView.contentMode = .scaleAspectFit
         let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         stackView.addArrangedSubview(imageView)
         stackView.distribution = .fillEqually
@@ -187,7 +188,7 @@ class ProfileImageView: UIView {
     
     func setImage(withImage image: UIImage){
         let imageView = UIImageView(image: image)
-        
+        imageView.contentMode = .scaleAspectFit
         let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         stackView.addArrangedSubview(imageView)
         stackView.distribution = .fillEqually

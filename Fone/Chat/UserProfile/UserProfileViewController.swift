@@ -32,7 +32,7 @@ class UserProfileViewController: UIViewController, NotificationDelegate {
         query?.userIdsFilter = [user.userId]
         query?.loadNextPage(completionHandler: { (users, error) in
             if error != nil {
-                Utils.showAlertController(error: error!, viewController: self)
+                ///Utils.showAlertController(error: error!, viewController: self)
                 return
             }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import SendBirdSDK
+import SVProgressHUD
 
 //TODO: Merge with GroupChannelHiddenChannelsViewController
 class GroupChannelPublicChannelsViewController: UIViewController {
@@ -35,9 +36,8 @@ class GroupChannelPublicChannelsViewController: UIViewController {
         self.refreshControl?.addTarget(self, action: #selector(refreshChannelList), for: .valueChanged)
         
         self.tableView.refreshControl = self.refreshControl
-        
+        loadingIndicatorView.isHidden = true
         self.hideLoadingIndicatorView()
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         
         self.loadChannelListNextPage(true)
     }
@@ -93,17 +93,11 @@ class GroupChannelPublicChannelsViewController: UIViewController {
     
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
     
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
     
 }
@@ -215,8 +209,8 @@ extension GroupChannelPublicChannelsViewController: UITableViewDelegate, UITable
         let joinAction = UIAlertAction(title: "Join", style: .default) { (action) in
             if let password = ac.textFields?.first?.text, self.channels[indexPath.row].isAccessCodeRequired {
                 self.channels[indexPath.row].join(withAccessCode: password, completionHandler: { (error) in
-                    if let error = error {
-                        Utils.showAlertController(error: error, viewController: self)
+                    if let _ = error {
+                        ///Utils.showAlertController(error: error, viewController: self)
                         return
                     }
                     DispatchQueue.main.async {
@@ -225,8 +219,8 @@ extension GroupChannelPublicChannelsViewController: UITableViewDelegate, UITable
                 })
             } else {
                 self.channels[indexPath.row].join(completionHandler: { (error) in
-                    if let error = error {
-                        Utils.showAlertController(error: error, viewController: self)
+                    if let _ = error {
+                        //Utils.showAlertController(error: error, viewController: self)
                         return
                     }
                     DispatchQueue.main.async {

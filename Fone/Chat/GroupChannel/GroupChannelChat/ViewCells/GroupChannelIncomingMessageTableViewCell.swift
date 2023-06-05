@@ -43,7 +43,9 @@ class GroupChannelIncomingMessageTableViewCell: GroupChannelMessageTableViewCell
 
         let clickProfileGesture = UITapGestureRecognizer(target: self, action: #selector(GroupChannelIncomingMessageTableViewCell.clickProfile(_:)))
         self.profileContainerView.addGestureRecognizer(clickProfileGesture)
-        // Initialization code
+        let clickProfileGesture1 = UITapGestureRecognizer(target: self, action: #selector(GroupChannelIncomingMessageTableViewCell.clickProfile(_:)))
+        nicknameLabel.isUserInteractionEnabled = true
+        nicknameLabel.addGestureRecognizer(clickProfileGesture1)
     }
 
     func setMessage(currMessage: SBDBaseMessage, prevMessage: SBDBaseMessage?, nextMessage: SBDBaseMessage?) {

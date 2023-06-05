@@ -55,6 +55,13 @@ final class CurrentSession: NSObject {
         loadFriendsFromCaches()
     }
     
+    func clearData() {
+        self.user = nil
+        self.accessToken = nil
+        UserDefaults.standard.removeObject(forKey: "Contacts")
+        friends.removeAll()
+    }
+    
     private func loadFriendsFromCaches() {
         guard let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data else {
             return
@@ -71,7 +78,9 @@ final class CurrentSession: NSObject {
             let userImage = dict?["Image"]?.string ?? ""
             let ContactsCnic = dict?["ContactsCnic"]?.string ?? ""
             let userid = dict?["ContactsVT"]?.string ?? ""
-            friends.append(FriendList(name: name, number: number, userImage: userImage, ContactsCnic: ContactsCnic, userId: userid))
+            let email = dict?["Email"]?.string ?? ""
+            let socialId = dict?["SocialId"]?.string ?? ""
+            friends.append(FriendList(name: name, number: number, email: email, socialId: socialId, userImage: userImage, ContactsCnic: ContactsCnic, userId: userid))
         }
     }
     

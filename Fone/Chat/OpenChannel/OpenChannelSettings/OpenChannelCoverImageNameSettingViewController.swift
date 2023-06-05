@@ -12,6 +12,7 @@ import RSKImageCropper
 import AlamofireImage
 import Photos
 import MobileCoreServices
+import SVProgressHUD
 
 class OpenChannelCoverImageNameSettingViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     weak var delegate: OpenChannelCoverImageNameSettingDelegate?
@@ -38,8 +39,7 @@ class OpenChannelCoverImageNameSettingViewController: UIViewController, UIImageP
         
         self.channelCoverImage = nil
         self.hideLoadingIndicatorView()
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
-        
+        loadingIndicatorView.isHidden = true
         guard let channel = self.channel else { return }
         self.channelNameTextField.text = channel.name
         self.channelNameTextField.attributedPlaceholder = NSAttributedString(string: "Public Chat Name", attributes: [
@@ -209,12 +209,16 @@ class OpenChannelCoverImageNameSettingViewController: UIViewController, UIImageP
     func updateChannelInfo() {
         let imageData = self.channelCoverImage?.jpegData(compressionQuality: 0.5)
         
-        self.loadingIndicatorView.superViewSize = self.view.frame.size
-        self.loadingIndicatorView.updateFrame()
         self.showLoadingIndicatorView()
         
         guard let channel = self.channel else { return }
-        channel.update(withName: self.channelNameTextField.text, coverImage: imageData, coverImageName: "image.jpg", data: nil, operatorUserIds: nil, customType: nil, progressHandler: nil) { (channel, error) in
+        var operatorsId: [String] = []
+        if let operators = channel.operators as? [SBDUser] {
+            operators.forEach { user in
+                operatorsId.append(user.userId)
+            }
+        }
+        channel.update(withName: self.channelNameTextField.text, coverImage: imageData, coverImageName: "image.jpg", data: nil, operatorUserIds: operatorsId, customType: nil, progressHandler: nil) { (channel, error) in
             self.hideLoadingIndicatorView()
             
             if let delegate = self.delegate {
@@ -230,16 +234,10 @@ class OpenChannelCoverImageNameSettingViewController: UIViewController, UIImageP
 
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
     
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import SendBirdSDK
 import SwiftyJSON
+import SVProgressHUD
 
 class GroupChannelInviteMemberViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, NotificationDelegate {
     @IBOutlet weak var selectedUserListView: UICollectionView!
@@ -38,7 +39,7 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
         self.okButtonItem = UIBarButtonItem.init(title: "OK(0)", style: .plain, target: self, action: #selector(GroupChannelInviteMemberViewController.clickOkButton(_:)))
         self.navigationItem.rightBarButtonItem = self.okButtonItem
         
-        self.view.bringSubviewToFront(self.updatingIndicatorView)
+//        self.view.bringSubviewToFront(self.updatingIndicatorView)
         self.updatingIndicatorView.isHidden = true
         
         self.tableView.delegate = self
@@ -132,13 +133,20 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
                                 for items in contacts
                                 {
                                     let dict = items.dictionary
-                                    let number = dict?["ContactsNumber"]?.string ?? ""
+                                   
                                     let name = dict?["ContactsCnic"]?.string ?? ""
-                                    arrayNumber.append(number)
-                                    self.localUserInfo["\(number)"] = name;
+                                    
+                                    var key = ""
+                                    if let number = dict?["ContactsNumber"]?.string, !number.isEmpty {
+                                        key = number
+                                    } else if let email = dict?["Email"]?.string, !email.isEmpty {
+                                        key = email
+                                    }
+                                    arrayNumber.append(key)
+                                    self.localUserInfo["\(key)"] = name;
                                     // FM-3 populate friendName
                                     // to use down the logic execution
-                                    self.localUserInfo["friendname\(number)"] =  dict?["ContactsName"]?.string ?? ""
+                                    self.localUserInfo["friendname\(key)"] =  dict?["ContactsName"]?.string ?? ""
                                 }
                             }
                         }
@@ -195,18 +203,12 @@ class GroupChannelInviteMemberViewController: UIViewController, UITableViewDeleg
     
     @objc func clickOkButton(_ sender: Any) {
         guard let channel = self.channel else { return }
-        
-        self.updatingIndicatorView.superViewSize = self.view.frame.size
-        self.updatingIndicatorView.updateFrame()
-        self.updatingIndicatorView.isHidden = false
-        self.updatingIndicatorView.startAnimating()
+        SVProgressHUD.show()
         
         channel.invite(Array(self.selectedUsers.values) as [SBDUser]) { (error) in
-            self.updatingIndicatorView.isHidden = true
-            self.updatingIndicatorView.stopAnimating()
-            
+            SVProgressHUD.dismiss()
             if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 alert.addAction(actionCancel)
                 self.present(alert, animated: true, completion: nil)

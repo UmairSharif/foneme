@@ -31,8 +31,15 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
         // Do any additional setup after loading the view.
         
         self.navigationItem.largeTitleDisplayMode = .automatic
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.okButtonItem = UIBarButtonItem(image: UIImage(named: "ic_back_forward"), style: .plain, target: self, action: #selector(SelectOperatorsViewController.clickOkButton(_:)))
+                      
+        let yourBackImage = UIImage(named: "ic_back_blk")
+        self.navigationController?.navigationBar.backIndicatorImage = yourBackImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = yourBackImage
+        self.navigationController?.navigationBar.topItem?.title = " "
         
-        self.okButtonItem = UIBarButtonItem(title: "OK(0)", style: .plain, target: self, action: #selector(SelectOperatorsViewController.clickOkButton(_:)))
+        //self.okButtonItem = UIBarButtonItem(title: "OK(0)", style: .plain, target: self, action: #selector(SelectOperatorsViewController.clickOkButton(_:)))
         self.navigationItem.rightBarButtonItem = self.okButtonItem
         
         self.tableView.delegate = self
@@ -72,8 +79,8 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
         //        self.searchController?.searchBar.tintColor = hexStringToUIColor(hex: "0072F8")
         self.searchController?.searchBar.showsCancelButton = true
         
-        self.navigationItem.searchController = self.searchController
-        self.navigationItem.hidesSearchBarWhenScrolling = false
+        //self.navigationItem.searchController = self.searchController
+        //self.navigationItem.hidesSearchBarWhenScrolling = false
         
         if self.selectedUsers.count == 0 {
             self.okButtonItem?.isEnabled = false
@@ -82,7 +89,7 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
             self.okButtonItem?.isEnabled = true
         }
         
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         self.refreshUserList()
         
@@ -125,10 +132,15 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
                     if contacts.count > 0 {
                         for items in contacts {
                             let dict = items.dictionary
-                            let number = dict?["ContactsNumber"]?.string ?? ""
+                            var key = ""
+                            if let number = dict?["ContactsNumber"]?.string, !number.isEmpty {
+                                key = number
+                            } else if let email = dict?["Email"]?.string, !email.isEmpty {
+                                key = email
+                            }
                             let name = dict?["ContactsCnic"]?.string ?? ""
-                            arrayNumber.append(number)
-                            self.localUserInfo["\(number)"] = name;
+                            arrayNumber.append(key)
+                            self.localUserInfo["\(key)"] = name;
                         }
                     }
                 }
@@ -211,7 +223,7 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
         let key = Array(selectedUserKeys)[indexPath.row]
         
         self.selectedUsers.removeValue(forKey: key)
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         if self.selectedUsers.count == 0 {
             self.okButtonItem?.isEnabled = false
@@ -249,6 +261,10 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
                 else {
                     updateCell.selectedUser = false
                 }
+                
+                updateCell.cellContentView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+                updateCell.cellContentView.layer.borderWidth = 1.0
+                updateCell.cellContentView.layer.cornerRadius = 12.0
             }
         }
         
@@ -271,7 +287,7 @@ class SelectOperatorsViewController: UIViewController, UITableViewDelegate, UITa
             self.selectedUsers[self.users[indexPath.row].userId] = self.users[indexPath.row]
         }
         
-        self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
+        //self.okButtonItem?.title = "OK(\(Int(self.selectedUsers.count)))"
         
         if self.selectedUsers.count == 0 {
             self.okButtonItem?.isEnabled = false

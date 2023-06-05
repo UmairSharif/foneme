@@ -13,6 +13,7 @@ import AlamofireImage
 import MobileCoreServices
 import Photos
 import Branch
+import SVProgressHUD
 
 class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, NotificationDelegate {
     var members: [SBDUser] = []
@@ -51,12 +52,11 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
         self.navigationItem.largeTitleDisplayMode = .never
 
         self.createButtonItem = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(CreateGroupChannelViewControllerB.clickCreateGroupChannel(_:)))
-        self.createButtonItem?.tintColor = UIColor.white
+        //self.createButtonItem?.tintColor = UIColor.white
 
         self.navigationItem.rightBarButtonItem = self.createButtonItem
 
         self.coverImageData = nil
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
         self.loadingIndicatorView.isHidden = true
 
         var memberNicknames: [String] = []
@@ -211,9 +211,6 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
                         print(message)
                         self.errorAlert("\(message)")
                     }
-
-                    //                        self.activityIndicator.stopAnimating()
-                    //                        self.activityIndicator.isHidden = true
                 }
             }
         }
@@ -243,7 +240,7 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
                 self.hideLoadingIndicatorView()
 
                 if let error = error {
-                    let alertController = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                     alertController.addAction(actionCancel)
                     DispatchQueue.main.async {
@@ -312,7 +309,6 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
                 }
             } else {
                 Utils.showAlertController(title: "Error", message: "\(String(describing: error?.localizedDescription))", viewController: self)
-                print(String(format: "Branch error : %@", error! as CVarArg))
             }
 
         }
@@ -375,16 +371,10 @@ class CreateGroupChannelViewControllerB: UIViewController, UIImagePickerControll
 
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
 
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
 }

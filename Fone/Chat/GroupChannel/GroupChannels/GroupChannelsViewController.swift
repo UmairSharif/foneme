@@ -11,25 +11,22 @@ import SendBirdSDK
 import AlamofireImage
 import SwiftyJSON
 import SVProgressHUD
+import CommonCrypto
+import SwiftJWT
 
 class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SBDChannelDelegate, SBDConnectionDelegate, NotificationDelegate, CreateGroupChannelViewControllerDelegate, GroupChannelsUpdateListDelegate, CreateOpenChannelDelegate {
     
-        @IBOutlet weak var topSegmentCntl: UISegmentedControl?
-    
-    
-
-       @IBOutlet weak var searchBar : UISearchBar!
-       var isFiltering = false
-       var filteredChannels: [SBDGroupChannel] = []
-
+    @IBOutlet weak var topSegmentCntl: UISegmentedControl?
+    @IBOutlet weak var searchBar : UISearchBar!
     @IBOutlet weak var groupChannelsTableView: UITableView!
-    @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var toastView: UIView!
     @IBOutlet weak var toastMessageLabel: UILabel!
+    @IBOutlet weak var loadingIndicatorView: CustomActivityIndicatorView!
     @IBOutlet weak var emptyLabel: UILabel!
-    
     @IBOutlet weak var containerView: UIView!
 
+    var isFiltering = false
+    var filteredChannels: [SBDGroupChannel] = []
     var openChannelVC: OpenChannelsViewController?
     var openChannelNav: UINavigationController?
 
@@ -39,30 +36,22 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     var channelListQuery: SBDGroupChannelListQuery?
     var channels: [SBDGroupChannel] = []
     var toastCompleted: Bool = true
+    var isFirstTimeLoad = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        // show loader and load the data
+//        SVProgressHUD.show()
+
+        self.navigationController?.navigationBar.isHidden = true
         title = "Chat"
         navigationController?.title = "Chat"
-        
-              searchBar.delegate = self
-              let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-              textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-              self.groupChannelsTableView.tableFooterView = UIView.init()
-             
-
-        let createChannelBarButton = UIBarButtonItem.init(image: UIImage(named: "img_btn_create_group_channel_blue")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(GroupChannelsViewController.clickForGroupChannel(_:)))
-        createChannelBarButton.tintColor = UIColor.white
-        
-        navigationItem.largeTitleDisplayMode = .automatic
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:                                                                          UIColor.white,
-                                                                   NSAttributedString.Key.font: UIFont.systemFont(ofSize: 21, weight: .medium)]
-
-        self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")
-        self.navigationItem.rightBarButtonItem = createChannelBarButton
-        self.navigationController?.navigationBar.isTranslucent = false
+        self.loadingIndicatorView.isHidden = true
+        searchBar.delegate = self
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.groupChannelsTableView.tableFooterView = UIView.init()
         
         self.groupChannelsTableView.delegate = self
         self.groupChannelsTableView.dataSource = self
@@ -76,18 +65,29 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.groupChannelsTableView.refreshControl = self.refreshControl
         
-        self.hideLoadingIndicatorView()
-        self.view.bringSubviewToFront(self.loadingIndicatorView)
-        
         self.updateTotalUnreadMessageCountBadge()
+        
+        self.getUserDetail { model, success in
+            print(model)
+        }
         
         var USER_ID : String?
         var USER_NAME : String?
         
+        let loginToken = UserDefaults.standard.string(forKey: "AccessToken")
+        do {
+            let jwt = try decode(jwtToken: loginToken ?? "")
+            print(jwt)
+            USER_ID = jwt["uid"] as? String
+            USER_NAME = jwt["uid"] as? String
+        } catch {
+            
+        }
+        
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
-            print(userProfileData)
+            
             if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
-                USER_ID = user.mobile ?? ""
+                USER_ID = user.uniqueContact
                 USER_NAME = user.name ?? ""
                 
                 let userDefault = UserDefaults.standard
@@ -101,9 +101,21 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                     }
                 }
             }
+        } else {
+            let userDefault = UserDefaults.standard
+            userDefault.setValue(USER_ID, forKey: "sendbird_user_id")
+            userDefault.setValue(USER_NAME, forKey: "sendbird_user_nickname")
+            
+            ConnectionManager.login(userId: USER_ID!, nickname: USER_NAME!) { user, error in
+                print(error ?? "not an error")
+                guard error == nil else {
+                    return
+                }
+            }
         }
         
         guard let _ = USER_ID, let _ = USER_NAME else {
+            SVProgressHUD.dismiss()
             Utils.showAlertController(title: "Error", message: "User ID and Nickname are required.", viewController: self)
             
             return
@@ -113,24 +125,20 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         userDefault.setValue(USER_ID, forKey: "sendbird_user_id")
         userDefault.setValue(USER_NAME, forKey: "sendbird_user_nickname")
         
-        if  let _ = SBDMain.getCurrentUser() {
-            DispatchQueue.main.async {
-                self.loadChannelListNextPage(true)
-            }
-        }else {
+        if  SBDMain.getCurrentUser() == nil {
             ConnectionManager.login(userId: USER_ID!, nickname: USER_NAME!) { user, error in
                 guard error == nil else {
-                    //Utils.showAlertController(error: error as! SBDError, viewController: self)
                     return
                 }
-                DispatchQueue.main.async {
-                    self.loadChannelListNextPage(true)
-                }
+                self.refreshChannelList()
             }
         }
         
         SBDMain.add(self as SBDChannelDelegate, identifier: NSUUID().uuidString)
         SBDMain.add(self as SBDConnectionDelegate, identifier: NSUUID().uuidString)
+        
+        searchBar.searchBarStyle = .minimal;
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +149,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
 
         self.navigationController?.navigationBar.barTintColor = hexStringToUIColor(hex: "0072F8")
         self.navigationController?.navigationBar.isTranslucent = false
-
+        refreshChannelList()
         self.groupChannelsTableView.layoutIfNeeded()
     }
     
@@ -202,11 +210,10 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 let storyboard = UIStoryboard(name: "OpenChannel", bundle: nil)
                 openChannelVC = storyboard.instantiateViewController(withIdentifier: "OpenChannelsViewController") as? OpenChannelsViewController
                 openChannelNav = UINavigationController.init(rootViewController: openChannelVC ?? UIViewController())
-                //openChannelNav?.isNavigationBarHidden = true;
             }
             if let controller = openChannelNav {
-                var rectvalue = CGRect(x: 0, y: -64, width: self.containerView.bounds.width, height: self.containerView.bounds.height)
-                controller.view.frame = self.containerView.bounds//rectvalue
+                let rectvalue = CGRect(x: 0, y: -38, width: self.containerView.bounds.width, height: self.containerView.bounds.height)
+                controller.view.frame = rectvalue//rectvalue
                 containerView.addSubview(controller.view)
                 self.addChild(controller)
                 controller.didMove(toParent: self)
@@ -216,7 +223,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
- @objc func clickForGroupChannel(_ sender: Any) {
+ @IBAction func clickForGroupChannel(_ sender: Any) {
     
     let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         alert.modalPresentationStyle = .popover
@@ -261,6 +268,8 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
          //let destination = myVC.children.first as? OpenChannelChatViewController
             myVC.createChannelDelegate = openChannelVC
         }
+        
+        myVC.modalPresentationStyle = .fullScreen
         self.present(myVC, animated: true, completion: nil)
          //  performSegue(withIdentifier: "CreateOpenChannel", sender: nil)
        }
@@ -274,10 +283,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             
             let actionLeave = UIAlertAction(title: "Leave Channel", style: .destructive) { (action) in
                 channel.leave(completionHandler: { (error) in
-                    if let error = error {
-                        Utils.showAlertController(error: error, viewController: self)
+                    if let _ = error {
+                        ///Utils.showAlertController(error: error, viewController: self)
                         return
                     }
+                    self.refreshChannelList()
                 })
             }
             
@@ -369,29 +379,20 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - NotificationDelegate
     func openChat(_ channelUrl: String) {
-//        SBDGroupChannel.getWithUrl(channelUrl) { (channel, error) in
-//            if error != nil {
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                (UIApplication.shared.delegate as? AppDelegate)?.pushReceivedGroupChannel = nil
-//                self.performSegue(withIdentifier: "ShowGroupChat", sender: channel)
-//            }
-//        }
+
     }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelTableViewCell") as! GroupChannelTableViewCell
+
         var channel = self.channels[indexPath.row]
         
         if isFiltering {
             channel = self.filteredChannels[indexPath.row]
-        } else {
         }
-        
-         cell.channelNameLabel.text = channel.name//Utils.createGroupChannelName(channel: channel)
+
+        cell.channelNameLabel.text = channel.name
         
         let lastMessageDateFormatter = DateFormatter()
         var lastUpdatedAt: Date?
@@ -472,10 +473,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
            
             cell.unreadMessageCountLabel.font = UIFont.boldSystemFont(ofSize: 17)
             cell.unreadMessageCountLabel.text =  "\(channel.unreadMessageCount)"
-//
-//            cell.unreadMessageCountLabel.text = String(channel.unreadMessageCount)
-        }
-        else {
+        } else {
             cell.unreadMessageCountContainerView.isHidden = true
         }
         
@@ -498,52 +496,43 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             break
         }
 
-        
-        DispatchQueue.main.async {
-            var members: [SBDUser] = []
-            var count = 0
-            if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
-                
-                if channelMembers.count == 2 {
-                    for member in channelMembers {
-                        if member.userId != currentUser.userId {
-                            //cell.channelNameLabel.text = member.nickname
-                            if let updateCell = tableView.cellForRow(at: indexPath) as? GroupChannelTableViewCell {
-                                updateCell.profileImagView.makeCircularWithSpacing(spacing: 1)
-                                if let coverUrl = member.profileUrl, !coverUrl.hasPrefix("https://static.sendbird.com/sample/user_sdk"){
-                                    updateCell.profileImagView.setImage(withCoverUrl: coverUrl)
-                                }else {
-                                    updateCell.profileImagView.setImage(withImage: UIImage(named: "ic_profile")!)
-                                }
-                            }
+        var members: [SBDUser] = []
+        var count = 0
+        if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
+
+            if channelMembers.count == 2 {
+                for member in channelMembers {
+                    if member.userId != currentUser.userId {
+                        cell.profileImagView.makeCircularWithSpacing(spacing: 1)
+                        if let coverUrl = member.profileUrl, !coverUrl.hasPrefix("https://static.sendbird.com/sample/user_sdk"){
+                            cell.profileImagView.setImage(withCoverUrl: coverUrl)
+                        } else {
+                            cell.profileImagView.setImage(withImage: UIImage(named: "ic_profile")!)
                         }
                     }
-                }else {
-                    for member in channelMembers {
-                        if member.userId == currentUser.userId {
-                            continue
-                        }
-                        members.append(member)
-                        count += 1
-                        if count == 4 {
-                            break
-                        }
+                }
+            }else {
+                for member in channelMembers {
+                    if member.userId == currentUser.userId {
+                        continue
                     }
-                    if members.count == 1 {
-                        
-                        print("break here")
+                    members.append(member)
+                    count += 1
+                    if count == 4 {
+                        break
                     }
-                    
-                    if let updateCell = tableView.cellForRow(at: indexPath) as? GroupChannelTableViewCell {
-                        if let coverUrl = channel.coverUrl {
-                            if coverUrl.count > 0 && !coverUrl.hasPrefix("https://static.sendbird.com"){
-                                updateCell.profileImagView.setImage(withCoverUrl: coverUrl)
-                            }
-                            else {
-                                updateCell.profileImagView.users = members
-                                updateCell.profileImagView.makeCircularWithSpacing(spacing: 1)
-                            }
-                        }
+                }
+                if members.count == 1 {
+                    print("break here")
+                }
+
+                if let coverUrl = channel.coverUrl {
+                    if coverUrl.count > 0 && !coverUrl.hasPrefix("https://static.sendbird.com"){
+                        cell.profileImagView.setImage(withCoverUrl: coverUrl)
+                    }
+                    else {
+                        cell.profileImagView.users = members
+                        cell.profileImagView.makeCircularWithSpacing(spacing: 1)
                     }
                 }
             }
@@ -553,6 +542,9 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             self.loadChannelListNextPage(false)
         }
         
+        cell.contentChatView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        cell.contentChatView.layer.borderWidth = 1.0
+        cell.contentChatView.layer.cornerRadius = 12.0
         
         return cell
     }
@@ -561,7 +553,9 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.channels.count == 0 && self.toastCompleted && (topSegmentCntl?.selectedSegmentIndex == 0 ) {
-            self.emptyLabel.isHidden = false
+            if !isFirstTimeLoad {
+                self.emptyLabel.isHidden = false
+            }
         }
         else {
             self.emptyLabel.isHidden = true
@@ -581,13 +575,13 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = self.channels[indexPath.row]
-        if channel.members?.count == 2,
-            let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data,
-            let user = try? PropertyListDecoder().decode(User.self, from: userProfileData),
+        if  channel.members?.count == 2,
+            let currentUserLogged = CurrentSession.shared.user,
             let members = channel.members as? [SBDUser],
-            let friend = members.first(where: {user.mobile != $0.userId}) {
+            let friend = members.first(where: { (currentUserLogged.mobile != $0.userId && currentUserLogged.email != $0.userId ) }) {
+            
             SVProgressHUD.show()
-            getUserDetailPhone(cnic: friend.userId, friend: "") {userModel, success in
+            getUserDetailPhone(cnic: friend.userId.replacingOccurrences(of: " ", with: ""), friend: "") {userModel, success in
                 SVProgressHUD.dismiss()
                 if (success) {
                     let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
@@ -608,10 +602,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let leaveAction: UIContextualAction = UIContextualAction.init(style: .destructive, title: "Leave") { (action, sourceView, completionHandler) in
             self.channels[indexPath.row].leave(completionHandler: { (error) in
-                if let error = error {
-                    Utils.showAlertController(error: error, viewController: self)
+                if let _ = error {
+                    Utils.showAlertController(title: "Error", message: "Sorry, you cannot leave on the chat room at the moment. Please try again later.", viewController: self)
                     return
                 }
+                self.refreshChannelList()
             })
             
             completionHandler(true)
@@ -630,75 +625,50 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
         if refresh {
             self.channelListQuery = nil
         }
-        //createMemberListQuery
         
         if self.channelListQuery == nil {
             self.channelListQuery = SBDGroupChannel.createMyGroupChannelListQuery()
-            self.channelListQuery?.order = .latestLastMessage //.latestLastMessage
-            self.channelListQuery?.limit = 50
+            self.channelListQuery?.limit = 100
             self.channelListQuery?.includeEmptyChannel = true
-            /*if let contactData = UserDefaults.standard.object(forKey: "Contacts") as? Data  {
-                if let contacts = try? PropertyListDecoder().decode([JSON].self, from: contactData) {
-                    if contacts.count > 0 {
-                        var arrayNumber = [String]()
-                        for items in contacts {
-                            let dict = items.dictionary
-                                
-                            var number = dict?["ContactsNumber"]?.string ?? ""
-                            number = number.replacingOccurrences(of: " ", with: "")
-                            arrayNumber.append(number)
-                        }
-                        print(arrayNumber)
-                        if arrayNumber.count > 0 {
-                            self.channelListQuery?.setUserIdsIncludeFilter(arrayNumber, queryType: SBDGroupChannelListQueryType.init(rawValue: 1)!)
-                        }
-                    }
-                }
-
-            }*/
+            self.channelListQuery?.order = .latestLastMessage
         }
         
         if self.channelListQuery?.hasNext == false {
             return
         }
-        
+        SVProgressHUD.show()
         self.channelListQuery?.loadNextPage(completionHandler: { (channels, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.refreshControl?.endRefreshing()
-                }
-                
-                return
-            }
-            
+
             DispatchQueue.main.async {
+                guard error == nil else {
+                    return
+                }
                 if refresh {
                     self.channels.removeAll()
                 }
-                
-                self.channels += channels!
-                //                   //  Utils.createGroupChannelName(channel: channel)
 
-                var k = 0;
-                for channel in self.channels {
+                for channel in channels! {
                     var channelName =  Utils.createGroupChannelName(channel: channel)
-                        if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
-                            if channelMembers.count == 2 {
-                                for member in channelMembers {
-                                    if member.userId != currentUser.userId {
-                                        channelName = member.nickname ?? ""
-                                    }
+                    if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
+                        if channelMembers.count == 2 {// Peer chat
+                            for member in channelMembers {
+                                if member.userId != currentUser.userId {
+                                    channelName = member.nickname ?? ""
                                 }
                             }
+                        } else if channelMembers.count == 1 {
+                            channelName = channelMembers.first?.nickname ?? ""
                         }
-                    print(channelName);
-                    channel.name = channelName;
-                    self.channels[k] = channel;
-                    k = k + 1;
                     }
-                
+                    channel.name = channelName
+                    if channel.name != "" && channel.name.contains("+") == false { /// Skip channel is empty
+                        self.channels.append(channel)
+                    }
+                }
+                self.isFirstTimeLoad = false
                 self.groupChannelsTableView.reloadData()
                 self.refreshControl?.endRefreshing()
+                SVProgressHUD.dismiss()
             }
         })
     }
@@ -741,7 +711,11 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
                 }
                 
                 if hasChannelInList == false {
-                    self.channels.insert(sender as! SBDGroupChannel, at: 0)
+                    guard let channel = sender as? SBDGroupChannel else {
+                        return
+                    }
+                    channel.name = self.generateChannelNameBy(channel)
+                    self.channels.insert(channel, at: 0)
                     self.groupChannelsTableView.reloadData()
                     self.updateTotalUnreadMessageCountBadge()
                 }
@@ -765,6 +739,7 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
     func channel(_ sender: SBDGroupChannel, userDidJoin user: SBDUser) {
         DispatchQueue.main.async {
             if self.channels.firstIndex(of: sender) == nil {
+                sender.name = self.generateChannelNameBy(sender)
                 self.channels.insert(sender, at: 0)
             }
             self.groupChannelsTableView.reloadData()
@@ -804,27 +779,44 @@ class GroupChannelsViewController: UIViewController, UITableViewDelegate, UITabl
             
             if hasChannelInList == false {
                 DispatchQueue.main.async {
-                    self.channels.insert(sender as! SBDGroupChannel, at: 0)
+                    guard let channel = sender as? SBDGroupChannel else {
+                        return
+                    }
+                    channel.name = self.generateChannelNameBy(channel)
+                    self.channels.insert(channel, at: 0)
                     self.groupChannelsTableView.reloadData()
                     self.updateTotalUnreadMessageCountBadge()
                 }
             }
         }
     }
+
+    private func generateChannelNameBy(_ channel: SBDGroupChannel) -> String {
+
+        var channelName =  Utils.createGroupChannelName(channel: channel)
+
+        if let channelMembers = channel.members as? [SBDMember], let currentUser = SBDMain.getCurrentUser() {
+            if channelMembers.count == 2 {// Peer chat
+                for member in channelMembers {
+                    if member.userId != currentUser.userId {
+                        channelName = member.nickname ?? ""
+                    }
+                }
+            } else if channelMembers.count == 1 {
+                channelName = channelMembers.first?.nickname ?? ""
+            }
+        }
+        return channelName
+
+    }
     
     // MARK: - Utilities
     private func showLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = false
-            self.loadingIndicatorView.startAnimating()
-        }
+        SVProgressHUD.show()
     }
     
     private func hideLoadingIndicatorView() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.isHidden = true
-            self.loadingIndicatorView.stopAnimating()
-        }
+        SVProgressHUD.dismiss()
     }
 }
 
@@ -844,37 +836,8 @@ extension GroupChannelsViewController : UISearchBarDelegate {
             return
         }
         self.filteredChannels.removeAll()
-
-        
-        
         self.filteredChannels =  self.channels.filter({ $0.name.lowercased().range(of: searchText.lowercased()) != nil})
-
-        
-//        self.filteredChannels = self.channels.filter { term in
-//             return Utils.createGroupChannelName(channel: term).lowercased().contains(searchText.lowercased())
-//           }
-        
         self.groupChannelsTableView.reloadData()
-
-        
-      /*  self.activityIndicator.startAnimating()
-        self.activityIndicator.isHidden = false
-        self.view.isUserInteractionEnabled = false
-        self.searchFriend(byCnic: searchText) { (users, success) in
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-            self.view.isUserInteractionEnabled = true
-            if success {
-                self.filteredChannels.removeAll()
-                self.filteredChannels = users!
-                
-                self.isFiltering = self.filteredChannels.count > 0
-                if self.isFiltering == false {
-                    self.showAlert("Not user found for this fone id.")
-                }
-                self.groupChannelsTableView.reloadData()
-            }
-        }*/
         
     }
     
@@ -901,28 +864,22 @@ extension GroupChannelsViewController : UISearchBarDelegate {
    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        debugPrint(#function)
         isFiltering = true
-               guard let searchText = searchBar.text else {
-                   isFiltering = false
-                   return
-               }
-               if searchText == "" {
-                   isFiltering = false
-                   self.filteredChannels.removeAll()
-                   self.groupChannelsTableView.reloadData()
-                   return
-               }
-               self.filteredChannels.removeAll()
-
-               self.filteredChannels =  self.channels.filter({ $0.name.lowercased().range(of: searchText.lowercased()) != nil})
-
-//               self.filteredChannels = self.channels.filter { term in
-//                    return Utils.createGroupChannelName(channel: term).lowercased().contains(searchText.lowercased())
-//                  }
-               
-               self.groupChannelsTableView.reloadData()
+        guard let searchText = searchBar.text else {
+            isFiltering = false
+            return
+        }
+        if searchText == "" {
+            isFiltering = false
+            self.filteredChannels.removeAll()
+            self.groupChannelsTableView.reloadData()
+            return
+        }
+        self.filteredChannels.removeAll()
+        self.filteredChannels =  self.channels.filter({ $0.name.lowercased().range(of: searchText.lowercased()) != nil})
+        self.groupChannelsTableView.reloadData()
 
     }
     
 }
-

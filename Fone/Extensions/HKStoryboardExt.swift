@@ -67,6 +67,28 @@ extension UIStoryboard {
         return self.loadFromStoryBoard(.authentication , "ForgotPasswordVC") as! ForgotPasswordVC
     }
     
+    func loadSingUpNameVC() -> SignUpNameVC
+    {
+        return self.loadFromStoryBoard(.authentication , "SignUpNameVC") as! SignUpNameVC
+    }
+    
+    func loadChooseYourLinkVC() -> ChooseYourLink
+    {
+        return self.loadFromStoryBoard(.authentication , "ChooseYourLink") as! ChooseYourLink
+    }
+    
+    func loadIdealMatchViewController() -> IdealMatchViewController {
+        return self.loadFromStoryBoard(.authentication, "IdealMatchViewController") as! IdealMatchViewController
+    }
+    
+    func loadGenderListVC() -> GenderListVC {
+        return self.loadFromStoryBoard(.authentication, "GenderListVC") as! GenderListVC
+    }
+    
+    func loadEnterBirthDayVC() -> EnterBirthDayVC {
+        return self.loadFromStoryBoard(.authentication, "EnterBirthDayVC") as! EnterBirthDayVC
+    }
+    
     func loadPolicyVC() -> PolicyVC
     {
         return self.loadFromStoryBoard(.authentication , "PolicyVC") as! PolicyVC
@@ -76,7 +98,11 @@ extension UIStoryboard {
     return self.loadFromStoryBoard(.authentication , "AboutMeVC") as! AboutMeVC
 
     }
-    
+    func loadAddPhotosVC() -> AddPhotosViewController
+   {
+   return self.loadFromStoryBoard(.authentication , "AddPhotosViewController") as! AddPhotosViewController
+
+   }
     
     //// ******* Home Storyboard ****** ////
     
@@ -138,6 +164,10 @@ extension UIStoryboard {
         return self.loadFromStoryBoard(.home , "UserDetailsVC") as! UserDetailsVC
     }
     
+    func loadNearByVC() -> NearByPeople
+    {
+        return self.loadFromStoryBoard(.home , "NearByPeople") as! NearByPeople
+    }
     
     func socialLinksVC() -> SocialLinksViewController
     {
@@ -152,5 +182,10 @@ extension UIStoryboard {
     func addlinkVC() -> AddLinkViewController
     {
         return self.loadFromStoryBoard(.socialLinks , "AddLinkViewController") as! AddLinkViewController
+    }
+    
+    func loadCategoryVC() -> CategoryVC
+    {
+        return self.loadFromStoryBoard(.authentication , "CategoryVC") as! CategoryVC
     }
 }

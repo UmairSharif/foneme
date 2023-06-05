@@ -9,6 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 import SwiftyJSON
+import SVProgressHUD
 
 struct MissCallData {
 
@@ -32,6 +33,8 @@ class CallLogVC: UIViewController {
     @IBOutlet weak var emptyLbl: UILabel!
     @IBOutlet weak var callBtn: UIButton!
     @IBOutlet weak var Segment: UISegmentedControl!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchField: UITextField!
 
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     var logArray = [CallLog]()
@@ -41,7 +44,9 @@ class CallLogVC: UIViewController {
     var refreshControl = UIRefreshControl()
     let network = NetworkManager.sharedInstance
     var netStatus: Bool?
-    let dateFormatter = DateFormatter()
+    /// Filter call logs
+    private var filterCallLogs: [CallLog] = []
+    private var isFilterMode = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +57,7 @@ class CallLogVC: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-
+        self.callLogTVC.keyboardDismissMode = .interactive
         self.emptyLbl.isHidden = true
         self.callBtn.isHidden = true
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
@@ -119,13 +124,17 @@ class CallLogVC: UIViewController {
             self.present(alertController, animated: true, completion: nil)
 
         }
+        
+        self.searchView.layer.cornerRadius = 16.0
+        searchField.delegate = self
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        isFilterMode = false
         loadCallLogsFromCache()
         self.getCallLogAPI(showLoader: true)
-        //Get Call Logs API
 
     }
     @IBAction func segmentSelected(sender: UISegmentedControl)
@@ -157,6 +166,8 @@ class CallLogVC: UIViewController {
         {
             let dict = log.dictionary
 
+            debugPrint(dict ?? "")
+
             let dateTime = dict?["CallStartTime"]?.string ?? ""
             let userImage = dict?["CallLogImage"]?.string ?? ""
             let status = dict?["CallLogStatus"]?.string ?? ""
@@ -167,17 +178,17 @@ class CallLogVC: UIViewController {
             let callerUserId = dict?["CallerUserId"]?.string ?? ""
             let callingUserId = dict?["CallingUserId"]?.string ?? ""
 
-            if status == "Missed"
+            /*if status == "Missed"
             {
                 let getData = MissCallData(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                 self.missCallArray.append(getData)
-            }
+            }*/
 
-            if status != ""
-            {
+            ///if status != ""
+            //{
                 let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                 self.logArray.append(getData)
-            }
+            //}
         }
 
         self.logArray.reverse()
@@ -230,14 +241,21 @@ class CallLogVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    private func showIndicatorView() {
+        SVProgressHUD.show()
+    }
+
+    private func hideIndicatorView() {
+        SVProgressHUD.dismiss()
+        self.activityIndicator.isHidden = true
+    }
+
     func getCallLogAPI(showLoader: Bool)
     {
         if showLoader {
-            self.activityIndicator.startAnimating()
-            self.activityIndicator.isHidden = false
+            self.showIndicatorView()
         } else {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
+            self.hideIndicatorView()
         }
 
         var userId: String?
@@ -261,12 +279,10 @@ class CallLogVC: UIViewController {
 
         ServerCall.makeCallWitoutFile(getCallLogsUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
 
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
+            self.hideIndicatorView()
 
             if let json = response {
 
-                print(json)
                 self.logArray.removeAll()
                 self.missCallArray.removeAll()
 
@@ -277,13 +293,10 @@ class CallLogVC: UIViewController {
                     UserDefaults.standard.synchronize()
                 }
 
-                if callLogs?.count == 0
-                {
+                if callLogs?.count == 0 {
                     self.emptyLbl.isHidden = false
                     self.callBtn.isHidden = false
-                }
-                else
-                {
+                } else {
                     self.emptyLbl.isHidden = true
 
                     for log in callLogs ?? []
@@ -306,14 +319,14 @@ class CallLogVC: UIViewController {
                             self.missCallArray.append(getData)
                         }*/
 
-                        if status != ""
-                        {
+                        //if status != ""
+                        //{
                             let getData = CallLog(number: number, userImage: userImage, status: status, dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.logArray.append(getData)
-                        } else {
+                        /*} else {
                             let getData = MissCallData(number: number, userImage: userImage, status: "Missed", dateTime: dateTime, name: name, callerId: callerUserId, receiverId: callingUserId, callerFoneId: callerFoneId, receiverFoneId: callingFoneId)
                             self.missCallArray.append(getData)
-                        }
+                        }*/
                     }
 
                     self.logArray.reverse()
@@ -325,83 +338,38 @@ class CallLogVC: UIViewController {
             }
         }
     }
-}
 
+    private func searchByKeyword(_ keyword: String) {
+        isFilterMode = !keyword.isEmpty
+        filterCallLogs = logArray.filter({$0.name != nil && $0.name!.uppercased().contains(keyword.uppercased())})
+        self.callLogTVC.reloadData()
+    }
+}
 extension CallLogVC: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if status == "All"
-        {
-            return logArray.count
+        if status == "All" {
+            return  isFilterMode ? filterCallLogs.count : logArray.count
         }
-        else
-        {
-            return missCallArray.count
-        }
+        return missCallArray.count
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "logCell", for: indexPath) as! CallLogTVC
-
-        if status == "All"
-        {
-            if logArray.count > indexPath.row {
-                let log = logArray[indexPath.row]
-
-                debugPrint("")
-                if log.status == "Out Going" {
-                    cell.callStatusLbl.text = "Out Going"
-                } else if log.status == "InComing" {
-                    cell.callStatusLbl.text = "InComing"
-                } else {
-                    cell.callStatusLbl.text = "Missed"
-                }
-                dateFormatter.timeZone = TimeZone(abbreviation: "MST")
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                let date = dateFormatter.date(from: log.dateTime ?? "")
-                dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-                dateFormatter.timeZone = TimeZone.current
-                let dateString = dateFormatter.string(from: date ?? Date())
-                cell.timeLbl.text = dateString
-                cell.nameLbl.text = log.name
-                cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                cell.countLbl.isHidden = true
-            }
-        }
-        else
-        {
-            if missCallArray.count > indexPath.row {
-                let log = missCallArray[indexPath.row]
-
-                let dateFormatter = DateFormatter()
-                let tempLocale = dateFormatter.locale
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                let date = dateFormatter.date(from: log.dateTime ?? "")
-                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-                dateFormatter.locale = tempLocale // reset the locale
-                let dateString = dateFormatter.string(from: date ?? Date())
-                cell.timeLbl.text = dateString
-                cell.nameLbl.text = log.name
-                cell.callStatusLbl.text = log.status
-                cell.userImage.sd_setImage(with: URL(string: log.userImage ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-                cell.countLbl.isHidden = true
-            }
-        }
+        cell.callLog =  isFilterMode ? filterCallLogs[indexPath.row] : logArray[indexPath.row]
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.activityIndicator.startAnimating()
-        self.activityIndicator.isHidden = false
+        self.showIndicatorView()
         self.view.isUserInteractionEnabled = false
 
-        if status == "All"
-        {
-            let log = logArray[indexPath.row]
+        if status == "All" {
+            let log =  isFilterMode ? filterCallLogs[indexPath.row] : logArray[indexPath.row]
 
             let vc = UIStoryboard().loadVideoCallVC()
             vc.recieverNumber = log.number
@@ -410,16 +378,14 @@ extension CallLogVC: UITableViewDelegate, UITableViewDataSource
             vc.DialerFoneID = log.receiverFoneId ?? ""
             self.getUserDetail(cnic: log.receiverFoneId!, friend: "") { (user, success) in
                 if success {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    self.hideIndicatorView()
                     self.view.isUserInteractionEnabled = true
                     vc.userDetails = user!
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
                 } else {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    self.hideIndicatorView()
                     self.view.isUserInteractionEnabled = true
                     self.showAlert("Error"," Can't get user information. Please try again.")
                 }
@@ -428,9 +394,6 @@ extension CallLogVC: UITableViewDelegate, UITableViewDataSource
         else
         {
             let log = missCallArray[indexPath.row]
-
-//            let vc = UIStoryboard().loadVoiceCallVC()
-
             let vc = UIStoryboard().loadVideoCallVC()
             vc.recieverNumber = log.number
             vc.name = log.name ?? ""
@@ -438,21 +401,45 @@ extension CallLogVC: UITableViewDelegate, UITableViewDataSource
             vc.DialerFoneID = log.receiverFoneId ?? ""
             self.getUserDetail(cnic: log.receiverFoneId!, friend: "") { (user, success) in
                 if success {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    self.hideIndicatorView()
                     self.view.isUserInteractionEnabled = true
                     vc.userDetails = user!
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
                 } else {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    self.hideIndicatorView()
                     self.view.isUserInteractionEnabled = true
                     self.showAlert("Error"," Can't get user information. Please try again.")
                 }
             }
         }
 
+    }
+}
+
+extension CallLogVC: UITextFieldDelegate {
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isFilterMode = true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        isFilterMode = !textField.text!.isEmpty
+        self.callLogTVC.reloadData()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text as NSString? {
+            let txtAfterUpdate = text.replacingCharacters(in: range, with: string)
+            /// Search by keyword
+            self.searchByKeyword(txtAfterUpdate)
+        }
+        return true
     }
 }
