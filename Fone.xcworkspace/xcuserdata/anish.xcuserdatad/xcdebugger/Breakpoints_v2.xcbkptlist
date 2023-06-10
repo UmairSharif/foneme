@@ -78,8 +78,8 @@
             filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "btnClickFriend(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "Fone/Extensions/UIViewController+API.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "getContacts(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "btnClickChat(_:)"
             landmarkType = "7">
             <Locations>
@@ -158,8 +158,8 @@
             filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "btnClickChat(_:)"
             landmarkType = "7">
             <Locations>
@@ -221,8 +221,8 @@
             filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "btnClickChat(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -669,40 +669,40 @@
             filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "btnClickChat(_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E5709CA9-23E7-4BB1-BBA8-7B5A4ACAC161 - 27bf76d59746ab99"
+                  uuid = "E5709CA9-23E7-4BB1-BBA8-7B5A4ACAC161 - 8d1ea521677043a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Fone_Messenger.UserDetailsVC.btnClickChat(__C.UIButton) -&gt; ()"
                   moduleName = "Fone Messenger"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anish/Downloads/Priceride/Fone/Controller/Home%20Part/UserDetailsVC/UserDetailsVC.swift"
+                  urlString = "file:///Users/anish/Desktop/Createxch/Github/FhoneMe/foneme-ios-Github/Fone/Controller/Home%20Part/UserDetailsVC/UserDetailsVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "176"
-                  endingLineNumber = "176"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "105">
                </Location>
                <Location
-                  uuid = "E5709CA9-23E7-4BB1-BBA8-7B5A4ACAC161 - 27bf76d59746ab99"
+                  uuid = "E5709CA9-23E7-4BB1-BBA8-7B5A4ACAC161 - 8d1ea521677043a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Fone_Messenger.UserDetailsVC.btnClickChat(__C.UIButton) -&gt; ()"
                   moduleName = "Fone Messenger"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anish/Downloads/Priceride/Fone/Controller/Home%20Part/UserDetailsVC/UserDetailsVC.swift"
+                  urlString = "file:///Users/anish/Desktop/Createxch/Github/FhoneMe/foneme-ios-Github/Fone/Controller/Home%20Part/UserDetailsVC/UserDetailsVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "176"
-                  endingLineNumber = "176"
-                  offsetFromSymbolStart = "120">
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
+                  offsetFromSymbolStart = "161">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -710,17 +710,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "24CD7C08-8258-451E-AE1F-414006D4A1B6"
-            shouldBeEnabled = "Yes"
+            uuid = "0F8C1142-C2D9-4F52-ABD7-2F8729E74C79"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fone/Controller/Home Part/UserDetailsVC/UserDetailsVC.swift"
+            filePath = "Fone/Extensions/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
+            landmarkName = "addFirend(foneId:friendId:url:_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C167010D-7459-4169-B8F7-62AA5CD17EAF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fone/Extensions/Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "addFirend(foneId:friendId:url:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C167010D-7459-4169-B8F7-62AA5CD17EAF - 70bb1316cf5f7659"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;SwiftyJSON.JSON&gt;) -&gt; () in __C.UIViewController.addFirend(foneId: Swift.String, friendId: Swift.String, url: Swift.String, _: (Swift.Optional&lt;Fone_Messenger.UserDetailModel&gt;, Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Fone Messenger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anish/Desktop/Createxch/Github/FhoneMe/foneme-ios-Github/Fone/Extensions/Extensions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "296">
+               </Location>
+               <Location
+                  uuid = "C167010D-7459-4169-B8F7-62AA5CD17EAF - 70bb1316cf5f7659"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;SwiftyJSON.JSON&gt;) -&gt; () in __C.UIViewController.addFirend(foneId: Swift.String, friendId: Swift.String, url: Swift.String, _: (Swift.Optional&lt;Fone_Messenger.UserDetailModel&gt;, Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Fone Messenger"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anish/Desktop/Createxch/Github/FhoneMe/foneme-ios-Github/Fone/Extensions/Extensions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "559"
+                  endingLineNumber = "559"
+                  offsetFromSymbolStart = "775">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -12,10 +12,16 @@ extension UIViewController {
             "Content-Type": "application/json",
             "Authorization": "bearer " + token
         ]
+        
         print("parameters = \(["UserId": userId]) \n url = \(saveContactUrl)")
         ServerCall.makeCallWitoutFile(saveContactUrl,
                                       params: [
-                                        "UserId": userId
+                                        "UserId": userId,
+                                        "LatitudeUrl":23.1137837,
+                                        "Longitude":72.5402278,
+                                        "Radius":10000000,
+                                        "Unit":"Meter",
+                                        "Page":100
                                       ],
                                       type: Method.POST,
                                       currentView: nil,

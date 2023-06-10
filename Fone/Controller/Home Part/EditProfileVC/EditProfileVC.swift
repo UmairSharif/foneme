@@ -67,6 +67,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     var arrayImage = [String]()
     var tag:Int?
     var arrPic = [String]()
+    let idealMatchData = ["Group 651","Group 650","Group 649","Group 647","Group 648","Figuring out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -894,4 +895,42 @@ func SignUpAddPhotosAPI() {
         
     }
   }
+}
+
+extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.idealMatchData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? IdealMatchEditProfileCell {
+            cell.imgView.image = UIImage(named: self.idealMatchData[indexPath.row])
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width / 3.0 - 8, height: 130.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+     print("did select ideal match collectionView")
+    }
 }

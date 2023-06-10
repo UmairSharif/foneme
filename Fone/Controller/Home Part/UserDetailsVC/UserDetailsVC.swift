@@ -32,16 +32,17 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnFriend: UIFriendButton!
-    @IBOutlet weak var btnFonemeID: UIButton!
+ //   @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var lblAdress: UILabel!
     @IBOutlet weak var UserImage: UIImageView!
     @IBOutlet weak var lblAboutme: UILabel!
-    @IBOutlet weak var lblprofession: UILabel!
-    @IBOutlet weak var viewLoc: UIView!
-    @IBOutlet weak var viewDes: UIView!
-    @IBOutlet weak var viewLinks: UIView!
-    @IBOutlet weak var lbLinks: UILabel!
+    //@IBOutlet weak var lblprofession: UILabel!
+    //@IBOutlet weak var viewLoc: UIView!
+    //@IBOutlet weak var viewDes: UIView!
+   // @IBOutlet weak var viewLinks: UIView!
+   // @IBOutlet weak var lbLinks: UILabel!
+    
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
@@ -50,6 +51,7 @@ class UserDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         viewDes.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
         viewDes.layer.borderWidth = 1.0
         viewDes.layer.cornerRadius = 12.0
@@ -57,6 +59,7 @@ class UserDetailsVC: UIViewController {
         viewLinks.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
         viewLinks.layer.borderWidth = 1.0
         viewLinks.layer.cornerRadius = 12.0
+         */
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -91,13 +94,11 @@ class UserDetailsVC: UIViewController {
         }
         
         self.btnFriend.isFriendAdded = isContactAdded
-        UserImage.layer.cornerRadius = UserImage.frame.size.height / 2
-        UserImage.contentMode = .scaleAspectFill
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? ""
-        self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
+       // self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
         self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
-        self.lblprofession.text = self.userDetails?.profession ?? ""
+//        self.lblprofession.text = self.userDetails?.profession ?? ""
         //viewLoc.isHidden = true
 
         self.lblAdress.text = ""
@@ -107,7 +108,7 @@ class UserDetailsVC: UIViewController {
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
         if let name = userDetails?.name {
-            lbLinks.text = "\(name)'s Links"
+          //  lbLinks.text = "\(name)'s Links"
         }
     }
 
@@ -133,7 +134,7 @@ class UserDetailsVC: UIViewController {
 
     @IBAction func btnClickFriend(_ sender: UIButton) {
         SVProgressHUD.show()
-        self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: (btnFonemeID.titleLabel?.text)!) { (user, success) in
+        self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: ("btnFonemeID.titleLabel?.text")) { (user, success) in
             if success {
                 self.getContacts { finished in
                     SVProgressHUD.dismiss()

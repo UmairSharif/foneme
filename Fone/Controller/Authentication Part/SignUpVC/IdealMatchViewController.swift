@@ -21,6 +21,7 @@ class IdealMatchViewController: UIViewController {
     var idealMatchId: Int = 0
     var selectedDate: String?
     var user_id = ""
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var data: [[String: Any]] = [] {
         didSet {
