@@ -26,8 +26,10 @@ class ServerCall {
     
     // MARK: ServerCalls
     class func makeCallWitoutFile(_ url: String, params: [String:Any]?, type:Method, currentView: UIView?,header:[String:String], completionHandler: @escaping (_ response: JSON?) -> ()) {
+        
         self.makeCallWithFile(url, params:params, files: nil, type: type, currentView: currentView, header: header, completionHandler: completionHandler)
     }
+    
     class func makeCallWithFile(_ url: String, params: [String:Any]?, files: [String:OMFile]?, type:Method, currentView: UIView?, header:[String:String],completionHandler: @escaping (_ response: JSON?) -> ()) {
         
         var header = header
@@ -358,14 +360,6 @@ class ServerCall {
                 for (key, value) in params ??  [:]  {
                     multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
                 }
-                
-                
-                //            for (key, value) in files {
-                //                guard let imgData = value.data else { return }
-                //                multipartFormData.append(imgData, withName: key, fileName: value.fileName, mimeType: "image/jpeg")
-                //            }
-                
-                
             }, with: urlRequest) { (result) in
                 switch result {
                 case.success(let request, let streamingFromDisk, let streamFileURL):

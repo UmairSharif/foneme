@@ -21,7 +21,9 @@ class GenderListVC: UIViewController {
     var idGender: Int = 0
     var selectedDate: String?
     var user_id = ""
+    
     @IBOutlet weak var tableView: UITableView!
+    
     var data: [[String: Any]] = [] {
         didSet {
             idGender = data[0]["Id"] as! Int

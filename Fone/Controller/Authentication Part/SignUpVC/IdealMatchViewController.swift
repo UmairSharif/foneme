@@ -79,17 +79,17 @@ class IdealMatchViewController: UIViewController {
     }
     
     @IBAction func actionNext(_ sender: Any) {
-        let vc = UIStoryboard().loadAddPhotosVC()
-//        vc.email = email
-//        vc.phoneNumber = phoneNumber
-//        vc.phoneCode = phoneCode
-//        vc.name = name
-//        vc.lastName = lastName
-//        vc.user = user
-//        vc.accessToken = accessToken
-//        vc.idGender = idGender
-//        vc.idealMatchId = idealMatchId
-//        vc.selectedDate = selectedDate
+        let vc = storyboard?.instantiateViewController(withIdentifier: "InterestsViewController") as! InterestsViewController
+        vc.email = email
+        vc.phoneNumber = phoneNumber
+        vc.phoneCode = phoneCode
+        vc.name = name
+        vc.lastName = lastName
+        vc.user = user
+        vc.accessToken = accessToken
+        vc.idGender = idGender
+        vc.idealMatchId = idealMatchId
+        vc.selectedDate = selectedDate
         vc.user_id = self.user_id
         self.navigationController?.pushViewController(vc, animated: true)
     }

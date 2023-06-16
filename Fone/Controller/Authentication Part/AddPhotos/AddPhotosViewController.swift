@@ -10,11 +10,24 @@ import UIKit
 import NVActivityIndicatorView
 import SendBirdSDK
 import SVProgressHUD
+import Alamofire
+import SwiftyJSON
 
 class AddPhotosViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
 
+    var phoneCode : String = ""
+    var phoneNumber : String = ""
+    var email : String = ""
+    var name : String = ""
+    var lastName : String = ""
+    var user: User?
+    var accessToken: String = ""
+    var idGender: Int = 0
+    var idealMatchId: Int = 0
+    var selectedDate: String?
     var user_id = ""
+    var interestsIds = [Int]()
     
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
@@ -220,13 +233,16 @@ class AddPhotosViewController: UIViewController, UIImagePickerControllerDelegate
  
         print(imageParams)
         
+        let commaSeparatedString = interestsIds.map { String($0) }.joined(separator: ",")
+        print(commaSeparatedString)
         let parameters = [
             "UserId" : self.user_id ,
-            "Dob" : "2023-03-01",
-            "GenderId" : "1",
-            "IdealMatchId" : "2" ,
+            "Dob" : self.selectedDate ?? "",
+            "GenderId" : "\(self.idGender)",
+            "IdealMatchId" : "\(self.idealMatchId)",
             "IsNewImg" : "True",
             "PreviousImgUrls" : "",
+            "PersonalInterestIds": commaSeparatedString
             ] as [String : Any]
         
          print(parameters)
@@ -244,7 +260,7 @@ class AddPhotosViewController: UIViewController, UIImagePickerControllerDelegate
                 if json["StatusCode"].string == "200" {
                 print("success")
                     self.callTABBAR()
-
+                    
                 }else {
                     let alertController = UIAlertController(title: "Error", message: "Please enter unique fone id", preferredStyle: .alert)
                     
@@ -262,7 +278,24 @@ class AddPhotosViewController: UIViewController, UIImagePickerControllerDelegate
         }
     }
     
-    
+    func updatePrefrences(){
+        let parameters = [
+            "UserId" : self.user_id ,
+            "Dob" : self.selectedDate ?? "",
+            "GenderId" : self.idGender,
+            "IdealMatchId" : self.idealMatchId,
+            "IsNewImg" : "False",
+            "PersonalInterestIds": self.interestsIds
+            ] as [String : Any]
+        
+        Alamofire.request("https://test.zwilio.com/api/account/v1/updateProfilePreference",method: .post,parameters: parameters,encoding: JSONEncoding.default).responseJSON { response in
+            if response.result.isSuccess {
+                self.callTABBAR()
+            }else {
+                print("error in Addphotos VC")
+            }
+        }
+    }
     
 }
 

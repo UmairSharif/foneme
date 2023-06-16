@@ -9,8 +9,8 @@
 import Foundation
 
 let IS_SANDBOX = 1
-let BASEURL =   "https://zwilio.com/"
-//let BASEURL = "https://test.zwilio.com/"
+//let BASEURL =   "https://zwilio.com/"
+let BASEURL = "https://test.zwilio.com/"
 let TESTURL =   "https://test.zwilio.com/"
 //************** Authenticate Part URL *************/////
 

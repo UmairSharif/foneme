@@ -11,8 +11,10 @@ import SendBirdSDK
 import SwiftyJSON
 import Branch
 import SVProgressHUD
+import Alamofire
 
 // @rackuka: introduce isFriendAdded - app specific property designating if button should let add friend OR depict that the friend is added
+
 class UIFriendButton: UIButton {
     var isFriendAdded: Bool = false {
         didSet {
@@ -25,6 +27,8 @@ class UserDetailsVC: UIViewController {
 
     //MARK:-Outlets
 
+    @IBOutlet weak var interestCollectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lblVideoCall: UILabel!
     @IBOutlet weak var lblChat: UILabel!
     @IBOutlet weak var lblVoiceCall: UILabel!
@@ -33,24 +37,37 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnFriend: UIFriendButton!
  //   @IBOutlet weak var btnFonemeID: UIButton!
+    @IBOutlet weak var foneId: UILabel!
+    
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var lblAdress: UILabel!
     @IBOutlet weak var UserImage: UIImageView!
     @IBOutlet weak var lblAboutme: UILabel!
-    //@IBOutlet weak var lblprofession: UILabel!
+    @IBOutlet weak var lblprofession: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
+    
     //@IBOutlet weak var viewLoc: UIView!
     //@IBOutlet weak var viewDes: UIView!
    // @IBOutlet weak var viewLinks: UIView!
-   // @IBOutlet weak var lbLinks: UILabel!
+    @IBOutlet weak var lbLinks: UILabel!
+    @IBOutlet weak var lblLinkView: UIView!
     
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
     var isFromLink = false
     var FoneID = ""
+    var arrPic = [String]()
+    var interestIds = [Int]()
+    var tempInterests = [InterestsSubCategory]()
+    var finalInterests = [InterestsSubCategory]()
+    //107,32
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        lblLinkView.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+        lblLinkView.layer.borderWidth = 1.0
+        lblLinkView.layer.cornerRadius = 12.0
+        lblLinkView.backgroundColor = .clear
         /*
         viewDes.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
         viewDes.layer.borderWidth = 1.0
@@ -73,13 +90,16 @@ class UserDetailsVC: UIViewController {
                     SVProgressHUD.dismiss()
                     self.userDetails = userModel
                     self.UpdateDetails()
+                    self.getProfilePreference()
                 } else {
                     self.showAlert("Error"," Can't get user information. Please try again.")
                 }
             }
         }
         else {
+            
             self.UpdateDetails()
+            self.getProfilePreference()
         }
 
     }
@@ -98,7 +118,7 @@ class UserDetailsVC: UIViewController {
         self.LbluserName.text = userDetails?.name ?? ""
        // self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
         self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
-//        self.lblprofession.text = self.userDetails?.profession ?? ""
+        self.lblprofession.text = self.userDetails?.profession ?? ""
         //viewLoc.isHidden = true
 
         self.lblAdress.text = ""
@@ -107,9 +127,34 @@ class UserDetailsVC: UIViewController {
             //viewLoc.isHidden = false
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
-        if let name = userDetails?.name {
-          //  lbLinks.text = "\(name)'s Links"
-        }
+        lbLinks.text = "fone.me/\(userDetails!.cnic!)"
+
+    }
+    
+    func getProfilePreference() {
+        
+        let userID = self.userDetails?.userId
+        let url = "\(getProfilePic)?UserId=\(userID ?? "")"
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default)
+                .responseJSON { response in
+
+                    switch response.result {
+
+                    case .success(let json):
+                        print(json)
+                       
+                        let data = json as! [String:Any]
+                        let profileData = data["UserProfileData"] as? [String:Any]
+                        self.arrPic = profileData?["Urls"] as? [String] ?? []
+                        let interestIds = profileData?["PersonalInterestId"] as? String ?? ""
+                        self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
+                        self.getInterests()
+                        self.collectionView.delegate = self
+                        self.collectionView.dataSource = self
+                    case .failure(let error):
+                        print(error)
+                    }
+            }
     }
 
     @IBAction func btnClickBack(_ sender: UIButton) {
@@ -134,7 +179,7 @@ class UserDetailsVC: UIViewController {
 
     @IBAction func btnClickFriend(_ sender: UIButton) {
         SVProgressHUD.show()
-        self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: ("btnFonemeID.titleLabel?.text")) { (user, success) in
+        self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: ("\(userDetails?.cnic?.cnicToLink ?? "")")) { (user, success) in
             if success {
                 self.getContacts { finished in
                     SVProgressHUD.dismiss()
@@ -198,7 +243,7 @@ class UserDetailsVC: UIViewController {
 
                         DispatchQueue.main.async {
                             let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
-                            vc.delegate = sSelf
+                            //vc.delegate = sSelf
                             vc.userDetails = sSelf.userDetails
                             vc.channel = channel
                             let nav = UINavigationController(rootViewController: vc)
@@ -235,7 +280,6 @@ class UserDetailsVC: UIViewController {
 
     func show(message: String) {
         DispatchQueue.main.async {
-
             let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertController, animated: true, completion: nil)
@@ -243,6 +287,73 @@ class UserDetailsVC: UIViewController {
     }
 }
 
-extension UserDetailsVC: GroupChannelsUpdateListDelegate {
+extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.collectionView {
+            return self.arrPic.count
+        }else {
+            return self.interestIds.count
+        }
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserDetailImagesCell
+            if let url = URL(string: self.arrPic[indexPath.row]) {
+                cell.userImage.sd_setImage(with: url)
+            }
+            return cell
+        }else {
+            let interest = self.finalInterests[indexPath.row]
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! UserDetailInterestCell
+            cell.interestName.text = interest.name
+            return cell
+        }
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.collectionView {
+            let yourWidth = (collectionView.bounds.width)
+            let yourHeight = CGFloat(418)
+            return CGSize(width: yourWidth, height: yourHeight)
+        }else {
+            let yourWidth = (collectionView.bounds.width/5)
+            let yourHeight = CGFloat(35)
+            return CGSize(width: yourWidth, height: yourHeight)
+        }
+
+    }
+
+}
+extension UserDetailsVC {
+    func getInterests(){
+        Alamofire.request("https://test.zwilio.com/api/account/v1/getPersonalcategories",method: .get).responseJSON { response in
+            
+            if response.result.isSuccess {
+                let value:JSON = JSON(response.result.value!)
+                self.parseInterets(json: value["Categories"])
+            }else {
+                print("error")
+            }
+        }
+    }
+    func parseInterets(json:JSON) {
+        for item in json {
+            let subCat = item.1["SubCategoryList"].array ?? []
+            for category in subCat {
+                let id = category["Id"].int ?? 0
+                let SubCategory = category["SubCategory"].string ?? ""
+                if self.interestIds.contains(id) {
+                    let data = InterestsSubCategory(id: id, name: SubCategory)
+                    self.tempInterests.append(data)
+                }
+            }
+        }
+        self.finalInterests = self.tempInterests
+        self.interestCollectionView.delegate = self
+        self.interestCollectionView.dataSource = self
+        self.interestCollectionView.reloadData()
+    
+    }
 }

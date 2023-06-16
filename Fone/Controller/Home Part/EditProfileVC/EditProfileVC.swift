@@ -14,6 +14,7 @@ import SendBirdSDK
 import SVProgressHUD
 import Alamofire
 import SDWebImage
+import SwiftyJSON
 
 class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -53,9 +54,13 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     @IBOutlet weak var btnDeletePhoto4: UIButton!
     @IBOutlet weak var image4: UIImageView!
     @IBOutlet weak var btnAddPhoto4: UIButton!
+    @IBOutlet weak var genderField: UITextField!
+    @IBOutlet weak var age: UITextField!
     
   
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var interestCollectionView: UICollectionView!
     
     var imagePicker = UIImagePickerController()
     var userId : String?
@@ -68,10 +73,17 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     var tag:Int?
     var arrPic = [String]()
     let idealMatchData = ["Group 651","Group 650","Group 649","Group 647","Group 648","Figuring out"]
+    let idealMatchIds = [1,2,3,4,5,6,7]
+    
+    var selectedGenderId = 0
+    var selectedIdealMatchId = 0
+    var interestIds = [Int]()
+    var tempInterests = [InterestsSubCategory]()
+    var finalInterests = [InterestsSubCategory]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getProfilePreference()
+       
         imagePicker.delegate = self
         
         //Forcing View to light Mode
@@ -80,7 +92,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
         } else {
             // Fallback on earlier versions
         }
-        
+        self.getProfilePreference()
         DispatchQueue.main.async {
             if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
                 print(userProfileData)
@@ -116,6 +128,8 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                         if success {
                             self.abtProfTxt.text = userModel?.profession
                             self.abtYouselfTxt.text = userModel?.aboutme
+                            self.numberTxt.text = userModel?.phoneNumber
+                            self.codeLbl.text = userModel?.countryCode
                             if let _ = userModel?.imageUrl{
                                 let url = URL(string: userModel?.imageUrl ?? "")!
                                 print(url)
@@ -317,8 +331,27 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                         let data = json as! [String:Any]
                         let profileData = data["UserProfileData"] as? [String:Any]
                         self.arrPic = profileData?["Urls"] as? [String] ?? []
+                        let age = profileData?["DateofBirth"] as? String ?? "2023-06-16T00:00:00"
+                        let seprateAge = age.components(separatedBy: "T")
+                        self.age.text = seprateAge[0]
+                        let gender = profileData?["GenderId"] as? Int ?? 0
+                        if gender == 3 {
+                            self.selectedGenderId = 3
+                            self.genderField.text = "Female"
+                        }else {
+                            self.selectedGenderId = 2
+                            self.genderField.text = "Male"
+                        }
+                        let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 0
+                        self.selectedIdealMatchId = idealMatchId
+                        self.collectionView.reloadData()
+                        
+                        let interestIds = profileData?["PersonalInterestId"] as? String ?? ""
+                        self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
+                        self.getInterests()
                         
                         if self.arrPic.count > 0 {
+                        
                             self.image1.sd_setImage(with: URL(string: self.arrPic[0]))
                             self.btnAddPhoto1.isHidden = true
                             self.btnDeletePhoto1.isHidden = false
@@ -584,8 +617,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
             ] as [String : Any]
 
         var headers = [String:String]()
-//        headers = ["Content-type": "multipart/form-data; boundary=\(boundary)",
-//                   "Authorization": "bearer " + loginToken!]
+
         headers = ["Content-type": "application/json",
                    "Authorization": "bearer " + loginToken!]
 
@@ -849,15 +881,15 @@ func SignUpAddPhotosAPI() {
         imageParams.append(imageParam4)
     }
     
-    
+    let commaSeparatedString = self.interestIds.map { String($0) }.joined(separator: ",")
     let parameters = [
         "UserId" : self.userId ?? "" ,
-        "Dob" : "1997-04-26",
-        "GenderId" : "1",
-        "IdealMatchId" : "2" ,
+        "Dob" : self.age.text ?? "1997-04-26",
+        "GenderId" : "\(self.selectedGenderId)",
+        "IdealMatchId" : "\(selectedIdealMatchId)" ,
         "IsNewImg" : "True",
         "PreviousImgUrls" : "",
-        "ProfessionalInterestId" : ""
+        "PersonalInterestIds" : commaSeparatedString
         ] as [String : Any]
     
      print(parameters)
@@ -900,19 +932,44 @@ func SignUpAddPhotosAPI() {
 extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.idealMatchData.count
+        if collectionView == self.collectionView {
+            return self.idealMatchData.count
+        }else {
+            return self.finalInterests.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? IdealMatchEditProfileCell {
-            cell.imgView.image = UIImage(named: self.idealMatchData[indexPath.row])
+        
+        if collectionView == self.collectionView {
+             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! IdealMatchEditProfileCell
+                cell.imgView.image = UIImage(named: self.idealMatchData[indexPath.row])
+                if selectedIdealMatchId == idealMatchIds[indexPath.row] {
+                    cell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED").withAlphaComponent(0.2)
+                } else {
+                    cell.viewCOntainer.backgroundColor = UIColor(hexString: "F9f9f9")
+                }
+                return cell
+            
+           
+        }else {
+            let interest = self.finalInterests[indexPath.row]
+            let cell = interestCollectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! UserDetailInterestCell
+            cell.interestName.text = interest.name
             return cell
         }
-        return UICollectionViewCell()
+        
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width / 3.0 - 8, height: 130.0)
+        if collectionView == self.collectionView {
+            return CGSize(width: collectionView.frame.size.width / 3.0 - 8, height: 130.0)
+        }else {
+            let yourWidth = (collectionView.bounds.width/5)
+            let yourHeight = CGFloat(35)
+            return CGSize(width: yourWidth, height: yourHeight)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -931,6 +988,42 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
         return 10
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-     print("did select ideal match collectionView")
+        if collectionView == self.collectionView {
+            self.selectedIdealMatchId = self.idealMatchIds[indexPath.row]
+            collectionView.reloadData()
+        }
+    }
+}
+
+
+extension EditProfileVC {
+    func getInterests(){
+        Alamofire.request("https://test.zwilio.com/api/account/v1/getPersonalcategories",method: .get).responseJSON { response in
+            
+            if response.result.isSuccess {
+                let value:JSON = JSON(response.result.value!)
+                self.parseInterets(json: value["Categories"])
+            }else {
+                print("error")
+            }
+        }
+    }
+    func parseInterets(json:JSON) {
+        for item in json {
+            let subCat = item.1["SubCategoryList"].array ?? []
+            for category in subCat {
+                let id = category["Id"].int ?? 0
+                let SubCategory = category["SubCategory"].string ?? ""
+                if self.interestIds.contains(id) {
+                    let data = InterestsSubCategory(id: id, name: SubCategory)
+                    self.tempInterests.append(data)
+                }
+            }
+        }
+        self.finalInterests = self.tempInterests
+        self.interestCollectionView.delegate = self
+        self.interestCollectionView.dataSource = self
+        self.interestCollectionView.reloadData()
+    
     }
 }

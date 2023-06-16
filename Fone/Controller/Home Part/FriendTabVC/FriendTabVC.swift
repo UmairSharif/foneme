@@ -30,16 +30,19 @@ class FriendTabVC: UIViewController, CLLocationManagerDelegate {
             contactTVC.reloadData()
         }
     }
+    
     private var friendList: [FriendList] = [] {
         didSet {
             contactTVC.reloadData()
         }
     }
+    
     private var filteredContacts: [FriendList] = [] {
         didSet {
             contactTVC.reloadData()
         }
     }
+    
     private var isFiltering = false
     private let network = NetworkManager.sharedInstance
     private var netStatus: Bool?

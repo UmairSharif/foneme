@@ -282,7 +282,14 @@
 		C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34B924C3170D00400874 /* VideoCallSetings.swift */; };
 		C56F34D724C397AB00400874 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F34D624C397AB00400874 /* NotificationService.swift */; };
 		C56F34DB24C397AB00400874 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C56F34D424C397AB00400874 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F80735C82A3BB5ED002378D9 /* UserDetailImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735C72A3BB5ED002378D9 /* UserDetailImagesCell.swift */; };
+		F80735CA2A3BBBA5002378D9 /* UserDetailInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735C92A3BBBA5002378D9 /* UserDetailInterestCell.swift */; };
 		F84F8CE62A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F8CE52A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift */; };
+		F8ED9A952A3A2B3600ECE1C5 /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED9A942A3A2B3600ECE1C5 /* InterestsViewController.swift */; };
+		F8ED9AA22A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED9AA02A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift */; };
+		F8ED9AA32A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8ED9AA12A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib */; };
+		F8ED9AA62A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED9AA42A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift */; };
+		F8ED9AA72A3A608D00ECE1C5 /* InterestsHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8ED9AA52A3A608D00ECE1C5 /* InterestsHeaderReusableView.xib */; };
 		F9830F51C53B85263393ACAE /* Pods_Fone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A64DBE24908D9A67844B754C /* Pods_Fone.framework */; };
 		FB80496827B919FE00140A04 /* SignUpNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80496727B919FE00140A04 /* SignUpNameVC.swift */; };
 		FB80496A27B91A1300140A04 /* ChooseYourLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB80496927B91A1300140A04 /* ChooseYourLink.swift */; };
@@ -608,7 +615,14 @@
 		C56F34D624C397AB00400874 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C56F34D824C397AB00400874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD514903E852AD32D8241371 /* Pods-FoneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoneTests.release.xcconfig"; path = "Target Support Files/Pods-FoneTests/Pods-FoneTests.release.xcconfig"; sourceTree = "<group>"; };
+		F80735C72A3BB5ED002378D9 /* UserDetailImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailImagesCell.swift; sourceTree = "<group>"; };
+		F80735C92A3BBBA5002378D9 /* UserDetailInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailInterestCell.swift; sourceTree = "<group>"; };
 		F84F8CE52A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealMatchEditProfileCell.swift; sourceTree = "<group>"; };
+		F8ED9A942A3A2B3600ECE1C5 /* InterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
+		F8ED9AA02A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8ED9AA12A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsCollectionViewCell.xib; sourceTree = "<group>"; };
+		F8ED9AA42A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsHeaderReusableView.swift; sourceTree = "<group>"; };
+		F8ED9AA52A3A608D00ECE1C5 /* InterestsHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsHeaderReusableView.xib; sourceTree = "<group>"; };
 		FB80496727B919FE00140A04 /* SignUpNameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNameVC.swift; sourceTree = "<group>"; };
 		FB80496927B91A1300140A04 /* ChooseYourLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseYourLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -667,6 +681,10 @@
 				08B383A729E2A0CB0045D37F /* IdealMatchCell.xib */,
 				08B383AE29E447100045D37F /* GenderListCell.swift */,
 				08B383AF29E447100045D37F /* GenderListCell.xib */,
+				F8ED9AA02A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift */,
+				F8ED9AA12A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib */,
+				F8ED9AA42A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift */,
+				F8ED9AA52A3A608D00ECE1C5 /* InterestsHeaderReusableView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1434,6 +1452,7 @@
 				08B383A329E29D1F0045D37F /* IdealMatchViewController.swift */,
 				08B383AC29E445670045D37F /* GenderListVC.swift */,
 				0824E4B629E58724009E1E22 /* EnterBirthDayVC.swift */,
+				F8ED9A942A3A2B3600ECE1C5 /* InterestsViewController.swift */,
 			);
 			path = SignUpVC;
 			sourceTree = "<group>";
@@ -1677,6 +1696,8 @@
 			isa = PBXGroup;
 			children = (
 				4F83FD3624ACA39D00121486 /* UserDetailsVC.swift */,
+				F80735C72A3BB5ED002378D9 /* UserDetailImagesCell.swift */,
+				F80735C92A3BBBA5002378D9 /* UserDetailInterestCell.swift */,
 			);
 			path = UserDetailsVC;
 			sourceTree = "<group>";
@@ -1899,6 +1920,8 @@
 				6FA8C51F27B96CA6000D768B /* Temp.storyboard in Resources */,
 				1BA0978924817B5000E0A042 /* OpenChannelAdminMessageTableViewCell.xib in Resources */,
 				18693E2A298C195500F36B24 /* categories.json in Resources */,
+				F8ED9AA72A3A608D00ECE1C5 /* InterestsHeaderReusableView.xib in Resources */,
+				F8ED9AA32A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib in Resources */,
 				1BA0979224817B5000E0A042 /* OpenChannelUserMessageTableViewCell.xib in Resources */,
 				08B383B129E447100045D37F /* GenderListCell.xib in Resources */,
 				A82C2F5627E9C62000749B5D /* Rubik-SemiBold.ttf in Resources */,
@@ -2102,6 +2125,7 @@
 				959E2C0B296EC458006E0D61 /* GoogleLogin.swift in Sources */,
 				18A7CDDA25162E38006308CB /* PlanListVC.swift in Sources */,
 				1BA0977424817B5000E0A042 /* GroupChannelMessageTableViewCell.swift in Sources */,
+				F80735C82A3BB5ED002378D9 /* UserDetailImagesCell.swift in Sources */,
 				22880EF023C0766B0044263D /* User.swift in Sources */,
 				22880ECB23C074830044263D /* CosmosDefaultSettings.swift in Sources */,
 				1BA0977524817B5000E0A042 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift in Sources */,
@@ -2110,10 +2134,12 @@
 				4F16BC8B249D1744001C4708 /* Audio.swift in Sources */,
 				1BA097B224817B5100E0A042 /* LoginViewController.swift in Sources */,
 				1BA0976D24817B5000E0A042 /* GroupChannelNeutralAdminMessageTableViewCell.swift in Sources */,
+				F8ED9AA62A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift in Sources */,
 				1BA0979324817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.swift in Sources */,
 				1BA097BD24817B5100E0A042 /* UIViewController+Utils.swift in Sources */,
 				1BA0979124817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.swift in Sources */,
 				FB80496827B919FE00140A04 /* SignUpNameVC.swift in Sources */,
+				F8ED9A952A3A2B3600ECE1C5 /* InterestsViewController.swift in Sources */,
 				18693E23298C194600F36B24 /* CategoryTableViewCell.swift in Sources */,
 				1BA0974B24817B5000E0A042 /* SettingsTimeViewController.swift in Sources */,
 				4F16BC8C249D1744001C4708 /* NewCallViewController.swift in Sources */,
@@ -2260,11 +2286,13 @@
 				22880EE423C074830044263D /* HKImagePickerHandler.swift in Sources */,
 				C56F34B724C2FEF000400874 /* VideoCallVC.swift in Sources */,
 				18693E2C298C195500F36B24 /* Category.swift in Sources */,
+				F8ED9AA22A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift in Sources */,
 				22880ECE23C074830044263D /* RightToLeft.swift in Sources */,
 				22880EE323C074830044263D /* Extensions.swift in Sources */,
 				4F2E83552492103D00FFC0B0 /* AppDelegate+IncomingCall.swift in Sources */,
 				1BA097C6248181AF00E0A042 /* MainTabBarController.swift in Sources */,
 				0824E4B729E58724009E1E22 /* EnterBirthDayVC.swift in Sources */,
+				F80735CA2A3BBBA5002378D9 /* UserDetailInterestCell.swift in Sources */,
 				C56F34BA24C3170D00400874 /* VideoCallSetings.swift in Sources */,
 				08B383A829E2A0CB0045D37F /* IdealMatchCell.swift in Sources */,
 				1BA0975B24817B5000E0A042 /* GroupChannelTableViewCell.swift in Sources */,
@@ -2466,7 +2494,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
@@ -2481,7 +2509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.16;
+				MARKETING_VERSION = 3.8.18;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
@@ -2504,7 +2532,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
@@ -2519,7 +2547,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.16;
+				MARKETING_VERSION = 3.8.18;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
