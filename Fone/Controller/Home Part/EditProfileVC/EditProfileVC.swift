@@ -72,7 +72,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     var arrayImage = [String]()
     var tag:Int?
     var arrPic = [String]()
-    let idealMatchData = ["Group 651","Group 650","Group 649","Group 647","Group 648","Figuring out"]
+    let idealMatchData = ["1","2","3","4","5","6","7"]
     let idealMatchIds = [1,2,3,4,5,6,7]
     
     var selectedGenderId = 0
@@ -346,8 +346,10 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                         self.selectedIdealMatchId = idealMatchId
                         self.collectionView.reloadData()
                         
-                        let interestIds = profileData?["PersonalInterestId"] as? String ?? ""
+                        let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
                         self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
+                        
+                       
                         self.getInterests()
                         
                         if self.arrPic.count > 0 {
@@ -444,6 +446,13 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     @IBAction func backBtnTapped(_ sender : UIButton)
     {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func addInterestsTapped(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "EditProfileInterestsVC") as! EditProfileInterestsVC
+        vc.user_id = self.userId!
+        vc.selectedInterestsId = interestIds
+        vc.delegate = self
+        self.present(vc, animated: true)
     }
     
     @IBAction func codeBtnTapped(_ sender: UIButton)
@@ -889,7 +898,7 @@ func SignUpAddPhotosAPI() {
         "IdealMatchId" : "\(selectedIdealMatchId)" ,
         "IsNewImg" : "True",
         "PreviousImgUrls" : "",
-        "PersonalInterestIds" : commaSeparatedString
+        "ProfessionalInterestId" : commaSeparatedString
         ] as [String : Any]
     
      print(parameters)
@@ -935,7 +944,12 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
         if collectionView == self.collectionView {
             return self.idealMatchData.count
         }else {
-            return self.finalInterests.count
+            if finalInterests.count >= 6 {
+                return 6
+            }else {
+                return self.finalInterests.count
+            }
+            
         }
     }
     
@@ -966,7 +980,7 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
         if collectionView == self.collectionView {
             return CGSize(width: collectionView.frame.size.width / 3.0 - 8, height: 130.0)
         }else {
-            let yourWidth = (collectionView.bounds.width/5)
+            let yourWidth =  CGFloat(92)
             let yourHeight = CGFloat(35)
             return CGSize(width: yourWidth, height: yourHeight)
         }
@@ -991,7 +1005,23 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
         if collectionView == self.collectionView {
             self.selectedIdealMatchId = self.idealMatchIds[indexPath.row]
             collectionView.reloadData()
+        }else {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "EditProfileInterestsVC") as! EditProfileInterestsVC
+            vc.user_id = self.userId!
+            vc.selectedInterestsId = interestIds
+            vc.delegate = self
+            self.present(vc, animated: true)
         }
+    }
+}
+///this is the delegate to get the interest ids here and load the data
+extension EditProfileVC : DidselectInterestsDelegate {
+    func selectedIds(ids: [Int]) {
+        self.interestIds.removeAll()
+        self.tempInterests.removeAll()
+        self.finalInterests.removeAll()
+        self.interestIds = ids
+        self.getInterests()
     }
 }
 
@@ -1021,6 +1051,15 @@ extension EditProfileVC {
             }
         }
         self.finalInterests = self.tempInterests
+        if finalInterests.count == 0 {
+            self.interestCollectionView.isHidden = true
+        }else if finalInterests.count >= 5 {
+            self.interestCollectionView.isHidden = false
+            self.finalInterests.insert(InterestsSubCategory(id: 99, name: "More"), at: 5)
+        }else if finalInterests.count <= 5 {
+            self.interestCollectionView.isHidden = false
+            self.finalInterests.append(InterestsSubCategory(id: 99, name: "More"))
+        }
         self.interestCollectionView.delegate = self
         self.interestCollectionView.dataSource = self
         self.interestCollectionView.reloadData()

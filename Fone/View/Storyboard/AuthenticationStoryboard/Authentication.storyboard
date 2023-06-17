@@ -2809,9 +2809,9 @@ sent to +94 779713495</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-vi-Z7N">
-                                <rect key="frame" x="24" y="143" width="327" height="545"/>
+                                <rect key="frame" x="24" y="231" width="327" height="457"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n8t-VL-tri">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n8t-VL-tri">
                                     <size key="itemSize" width="98" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2828,8 +2828,8 @@ sent to +94 779713495</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AtT-8t-G2C">
                                                     <rect key="frame" x="0.0" y="0.0" width="98" height="46"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VD-pd-C2c">
-                                                            <rect key="frame" x="34" y="16" width="30.333333333333329" height="14"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="6VD-pd-C2c">
+                                                            <rect key="frame" x="3" y="3" width="92" height="40"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -2837,8 +2837,10 @@ sent to +94 779713495</string>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="6VD-pd-C2c" firstAttribute="centerY" secondItem="AtT-8t-G2C" secondAttribute="centerY" id="4bh-Tk-7Jn"/>
-                                                        <constraint firstItem="6VD-pd-C2c" firstAttribute="centerX" secondItem="AtT-8t-G2C" secondAttribute="centerX" id="eKx-In-UuL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6VD-pd-C2c" secondAttribute="trailing" constant="3" id="BLW-38-PcS"/>
+                                                        <constraint firstItem="6VD-pd-C2c" firstAttribute="leading" secondItem="AtT-8t-G2C" secondAttribute="leading" constant="3" id="DRb-yJ-OyF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="6VD-pd-C2c" secondAttribute="bottom" constant="3" id="EZn-ra-Jfd"/>
+                                                        <constraint firstItem="6VD-pd-C2c" firstAttribute="top" secondItem="AtT-8t-G2C" secondAttribute="top" constant="3" id="qMA-1F-UHy"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2854,6 +2856,7 @@ sent to +94 779713495</string>
                                                 <constraint firstAttribute="bottom" secondItem="AtT-8t-G2C" secondAttribute="bottom" id="px3-Qh-J9V"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="98" height="46"/>
                                         <connections>
                                             <outlet property="nameLbl" destination="6VD-pd-C2c" id="np0-2a-TaN"/>
                                             <outlet property="viewCOntainer" destination="AtT-8t-G2C" id="q95-0E-SeP"/>
@@ -2886,13 +2889,24 @@ sent to +94 779713495</string>
                                     <action selector="nextTapped:" destination="cm2-PE-wih" eventType="touchUpInside" id="ZfN-nd-QcZ"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ky5-sz-m1p">
+                                <rect key="frame" x="24" y="157" width="327" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="jwa-On-t4a"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cm2-PE-wih" id="kj8-Wn-zj3"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="12l-8J-isl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="XGH-vi-Z7N" firstAttribute="top" secondItem="ky5-sz-m1p" secondAttribute="bottom" constant="30" id="8e2-Ji-xLY"/>
                             <constraint firstItem="XID-Lj-S5c" firstAttribute="top" secondItem="XGH-vi-Z7N" secondAttribute="bottom" constant="20" id="CM9-pc-Nu4"/>
+                            <constraint firstItem="ky5-sz-m1p" firstAttribute="top" secondItem="07q-GG-UDI" secondAttribute="bottom" constant="24" id="HcZ-ru-B4r"/>
                             <constraint firstItem="yWm-Ua-vmO" firstAttribute="leading" secondItem="12l-8J-isl" secondAttribute="leading" constant="24" id="I3Q-lf-0eT"/>
-                            <constraint firstItem="XGH-vi-Z7N" firstAttribute="top" secondItem="07q-GG-UDI" secondAttribute="bottom" constant="10" id="JTe-wY-OJ2"/>
                             <constraint firstItem="12l-8J-isl" firstAttribute="trailing" secondItem="XGH-vi-Z7N" secondAttribute="trailing" constant="24" id="K70-4b-qb5"/>
                             <constraint firstItem="XGH-vi-Z7N" firstAttribute="leading" secondItem="12l-8J-isl" secondAttribute="leading" constant="24" id="SRn-3K-DHx"/>
                             <constraint firstItem="XID-Lj-S5c" firstAttribute="leading" secondItem="12l-8J-isl" secondAttribute="leading" constant="20" id="WBH-Ro-6nK"/>
@@ -2900,13 +2914,16 @@ sent to +94 779713495</string>
                             <constraint firstItem="07q-GG-UDI" firstAttribute="leading" secondItem="12l-8J-isl" secondAttribute="leading" constant="24" id="Z8Y-DG-dSf"/>
                             <constraint firstItem="12l-8J-isl" firstAttribute="trailing" secondItem="07q-GG-UDI" secondAttribute="trailing" constant="24" id="a3K-sz-845"/>
                             <constraint firstAttribute="bottom" secondItem="XID-Lj-S5c" secondAttribute="bottom" constant="60" id="bFv-hX-V33"/>
+                            <constraint firstItem="12l-8J-isl" firstAttribute="trailing" secondItem="ky5-sz-m1p" secondAttribute="trailing" constant="24" id="dQc-Qn-wjH"/>
                             <constraint firstItem="12l-8J-isl" firstAttribute="trailing" secondItem="yWm-Ua-vmO" secondAttribute="trailing" constant="16" id="gLR-nF-Agu"/>
+                            <constraint firstItem="ky5-sz-m1p" firstAttribute="leading" secondItem="12l-8J-isl" secondAttribute="leading" constant="24" id="gbH-04-kco"/>
                             <constraint firstItem="12l-8J-isl" firstAttribute="trailing" secondItem="XID-Lj-S5c" secondAttribute="trailing" constant="20" id="wwX-rK-jRE"/>
                             <constraint firstItem="07q-GG-UDI" firstAttribute="top" secondItem="yWm-Ua-vmO" secondAttribute="bottom" constant="6" id="zbn-tk-iqq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="XGH-vi-Z7N" id="OIw-EX-P61"/>
+                        <outlet property="search" destination="ky5-sz-m1p" id="FdY-Lw-8dx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GgY-mr-Cfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

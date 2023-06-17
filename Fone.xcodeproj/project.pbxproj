@@ -285,6 +285,7 @@
 		F80735C82A3BB5ED002378D9 /* UserDetailImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735C72A3BB5ED002378D9 /* UserDetailImagesCell.swift */; };
 		F80735CA2A3BBBA5002378D9 /* UserDetailInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735C92A3BBBA5002378D9 /* UserDetailInterestCell.swift */; };
 		F84F8CE62A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F8CE52A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift */; };
+		F8ADB63C2A3E0B00004281A4 /* EditProfileInterestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADB63B2A3E0B00004281A4 /* EditProfileInterestsVC.swift */; };
 		F8ED9A952A3A2B3600ECE1C5 /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED9A942A3A2B3600ECE1C5 /* InterestsViewController.swift */; };
 		F8ED9AA22A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ED9AA02A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift */; };
 		F8ED9AA32A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8ED9AA12A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib */; };
@@ -618,6 +619,7 @@
 		F80735C72A3BB5ED002378D9 /* UserDetailImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailImagesCell.swift; sourceTree = "<group>"; };
 		F80735C92A3BBBA5002378D9 /* UserDetailInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailInterestCell.swift; sourceTree = "<group>"; };
 		F84F8CE52A30FC7400CD6B42 /* IdealMatchEditProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealMatchEditProfileCell.swift; sourceTree = "<group>"; };
+		F8ADB63B2A3E0B00004281A4 /* EditProfileInterestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestsVC.swift; sourceTree = "<group>"; };
 		F8ED9A942A3A2B3600ECE1C5 /* InterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
 		F8ED9AA02A3A5CC100ECE1C5 /* InterestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8ED9AA12A3A5CC100ECE1C5 /* InterestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1567,6 +1569,7 @@
 			children = (
 				F84F8CE42A30FC4F00CD6B42 /* Cell */,
 				229BCD0B23C3C38D00AEF903 /* EditProfileVC.swift */,
+				F8ADB63B2A3E0B00004281A4 /* EditProfileInterestsVC.swift */,
 			);
 			path = EditProfileVC;
 			sourceTree = "<group>";
@@ -2136,6 +2139,7 @@
 				1BA0976D24817B5000E0A042 /* GroupChannelNeutralAdminMessageTableViewCell.swift in Sources */,
 				F8ED9AA62A3A608D00ECE1C5 /* InterestsHeaderReusableView.swift in Sources */,
 				1BA0979324817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.swift in Sources */,
+				F8ADB63C2A3E0B00004281A4 /* EditProfileInterestsVC.swift in Sources */,
 				1BA097BD24817B5100E0A042 /* UIViewController+Utils.swift in Sources */,
 				1BA0979124817B5000E0A042 /* OpenChannelAudioFileMessageTableViewCell.swift in Sources */,
 				FB80496827B919FE00140A04 /* SignUpNameVC.swift in Sources */,

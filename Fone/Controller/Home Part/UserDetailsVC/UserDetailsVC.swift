@@ -18,6 +18,7 @@ import Alamofire
 class UIFriendButton: UIButton {
     var isFriendAdded: Bool = false {
         didSet {
+            
             self.isSelected = isFriendAdded
             self.isUserInteractionEnabled = !isFriendAdded
         }
@@ -39,6 +40,7 @@ class UserDetailsVC: UIViewController {
  //   @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var foneId: UILabel!
     
+    @IBOutlet weak var idelInterestImage: UIImageView!
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var lblAdress: UILabel!
     @IBOutlet weak var UserImage: UIImageView!
@@ -52,6 +54,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var lbLinks: UILabel!
     @IBOutlet weak var lblLinkView: UIView!
     
+    let idealMatchData = ["1","2","3","4","5","6","7"]
     var userDetails: UserDetailModel?
     var userListQuery: SBDApplicationUserListQuery?
     var isSearch = false
@@ -108,10 +111,17 @@ class UserDetailsVC: UIViewController {
     func UpdateDetails() {
         var isContactAdded = false
         if let contact = userDetails?.uniqueContact {
-            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
+//            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
+//                isContactAdded = true
+//            }
+        }
+        for item in CurrentSession.shared.friends {
+            if item.userId == userDetails?.contactVT {
                 isContactAdded = true
+                self.btnFriend.backgroundColor = UIColor.lightGray
             }
         }
+        
         
         self.btnFriend.isFriendAdded = isContactAdded
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
@@ -145,9 +155,11 @@ class UserDetailsVC: UIViewController {
                        
                         let data = json as! [String:Any]
                         let profileData = data["UserProfileData"] as? [String:Any]
+                        let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 1
                         self.arrPic = profileData?["Urls"] as? [String] ?? []
-                        let interestIds = profileData?["PersonalInterestId"] as? String ?? ""
+                        let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
                         self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
+                        self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
                         self.getInterests()
                         self.collectionView.delegate = self
                         self.collectionView.dataSource = self
@@ -318,7 +330,7 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
             let yourHeight = CGFloat(418)
             return CGSize(width: yourWidth, height: yourHeight)
         }else {
-            let yourWidth = (collectionView.bounds.width/5)
+            let yourWidth = CGFloat(92)
             let yourHeight = CGFloat(35)
             return CGSize(width: yourWidth, height: yourHeight)
         }
@@ -351,9 +363,15 @@ extension UserDetailsVC {
             }
         }
         self.finalInterests = self.tempInterests
-        self.interestCollectionView.delegate = self
-        self.interestCollectionView.dataSource = self
-        self.interestCollectionView.reloadData()
+        if self.finalInterests.count <= 0 {
+            self.interestCollectionView.isHidden = true
+        }else {
+            self.interestCollectionView.isHidden = false
+            self.interestCollectionView.delegate = self
+            self.interestCollectionView.dataSource = self
+            self.interestCollectionView.reloadData()
+        }
+
     
     }
 }

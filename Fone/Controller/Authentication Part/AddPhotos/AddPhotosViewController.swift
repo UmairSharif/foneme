@@ -242,7 +242,7 @@ class AddPhotosViewController: UIViewController, UIImagePickerControllerDelegate
             "IdealMatchId" : "\(self.idealMatchId)",
             "IsNewImg" : "True",
             "PreviousImgUrls" : "",
-            "PersonalInterestIds": commaSeparatedString
+            "ProfessionalInterestId": commaSeparatedString
             ] as [String : Any]
         
          print(parameters)
