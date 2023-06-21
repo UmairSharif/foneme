@@ -1066,7 +1066,7 @@
                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rNp-MA-Zqp">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rNp-MA-Zqp">
                                                         <rect key="frame" x="30" y="791.66666666666674" width="362" height="872.33333333333326"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7If-OW-7dY">
@@ -1254,7 +1254,7 @@
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="enx-ss-X6a">
                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="120"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bKa-Mx-2IG">
+                                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bKa-Mx-2IG">
                                                                     <size key="itemSize" width="107" height="35"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1441,6 +1441,7 @@
                         <outlet property="btnVideoCall" destination="w1b-Lc-yzj" id="1DB-TY-2Ta"/>
                         <outlet property="collectionView" destination="rNp-MA-Zqp" id="geA-AQ-eAX"/>
                         <outlet property="distanceLbl" destination="v0Y-Kn-elj" id="wHI-Fg-yf1"/>
+                        <outlet property="idealMatchImageView" destination="fZP-Du-6c2" id="h6c-ta-Hl1"/>
                         <outlet property="idelInterestImage" destination="Gmy-oj-15q" id="nHs-A7-50B"/>
                         <outlet property="interestCollectionView" destination="enx-ss-X6a" id="4LK-td-hdQ"/>
                         <outlet property="lbLinks" destination="XqR-Mz-6MV" id="Bde-8m-Mms"/>
@@ -1448,6 +1449,7 @@
                         <outlet property="lblAdress" destination="cWE-Di-pa6" id="WnD-za-H3r"/>
                         <outlet property="lblLinkView" destination="Ck6-yb-UYt" id="Gzh-uz-VNv"/>
                         <outlet property="lblprofession" destination="Fb8-tO-UO7" id="N8B-Vx-x95"/>
+                        <outlet property="scrollViewHeight" destination="Z07-Rr-27b" id="j9Q-eM-dYc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tr7-cf-uNc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3811,7 +3813,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="420" id="0yj-wC-kra"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fMp-51-8Rg">
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fMp-51-8Rg">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -3819,17 +3821,17 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="roe-tj-kH4" customClass="IdealMatchEditProfileCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="90.666666666666657" height="128"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4cR-cf-q6k">
-                                                            <rect key="frame" x="0.0" y="0.0" width="90.666666666666657" height="128"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNe-GC-fLI">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="90.666666666666671" height="128"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3u-uZ-Xmr">
-                                                                            <rect key="frame" x="12" y="75" width="66.666666666666671" height="28.666666666666671"/>
+                                                                            <rect key="frame" x="12" y="75" width="104" height="28.666666666666671"/>
                                                                             <string key="text">Still figuring
 it out</string>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
@@ -3837,7 +3839,7 @@ it out</string>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="1KT-hd-hLP">
-                                                                            <rect key="frame" x="25.333333333333329" y="20" width="40" height="40"/>
+                                                                            <rect key="frame" x="44" y="20" width="40" height="40"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="40" id="HrA-bQ-WWw"/>
                                                                                 <constraint firstAttribute="height" constant="40" id="wfZ-lS-sVX"/>
@@ -3874,6 +3876,7 @@ it out</string>
                                                         </collectionViewCellContentView>
                                                         <connections>
                                                             <outlet property="imgView" destination="1KT-hd-hLP" id="drY-ep-yQF"/>
+                                                            <outlet property="matchName" destination="c3u-uZ-Xmr" id="2Ot-50-HpS"/>
                                                             <outlet property="viewCOntainer" destination="wNe-GC-fLI" id="TBd-Dq-Ayj"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -4214,32 +4217,32 @@ it out</string>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-bF-d4M">
                                                         <rect key="frame" x="0.0" y="0.0" width="310" height="110"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ANw-F3-2c4">
-                                                            <size key="itemSize" width="107" height="35"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ANw-F3-2c4">
+                                                            <size key="itemSize" width="107" height="40"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell2" id="haU-0g-MBM" customClass="UserDetailInterestCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="107" height="35"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="G9p-zf-SSM">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="35"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0IE-QQ-3N3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="35"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dep-Gg-VLF">
-                                                                                    <rect key="frame" x="21" y="5" width="81" height="25"/>
+                                                                                    <rect key="frame" x="21" y="5" width="81" height="30"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                                     <color key="textColor" systemColor="tintColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="done-all" translatesAutoresizingMaskIntoConstraints="NO" id="JZ9-Hr-YcV">
-                                                                                    <rect key="frame" x="5" y="9.6666666666666679" width="16" height="15.666666666666668"/>
+                                                                                    <rect key="frame" x="5" y="9.6666666666666661" width="16" height="20.666666666666671"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="16" id="z2T-7D-wni"/>
                                                                                     </constraints>
@@ -4275,7 +4278,7 @@ it out</string>
                                                                         <constraint firstAttribute="bottom" secondItem="0IE-QQ-3N3" secondAttribute="bottom" id="rga-GL-YqK"/>
                                                                     </constraints>
                                                                 </collectionViewCellContentView>
-                                                                <size key="customSize" width="107" height="35"/>
+                                                                <size key="customSize" width="107" height="40"/>
                                                                 <connections>
                                                                     <outlet property="bgCell" destination="0IE-QQ-3N3" id="tyw-BV-r6r"/>
                                                                     <outlet property="interestName" destination="dep-Gg-VLF" id="vO5-60-kpV"/>
@@ -4616,6 +4619,7 @@ it out</string>
                         <outlet property="numberTxt" destination="XUd-Bf-Bho" id="vT7-gI-shm"/>
                         <outlet property="phoneNumberView" destination="ZhH-Ow-XOW" id="1wZ-6F-mmR"/>
                         <outlet property="professionView" destination="sek-Qx-hET" id="6Jq-4m-pmo"/>
+                        <outlet property="scrollViewHeight" destination="d54-ky-QnP" id="bRX-Qw-kU2"/>
                         <outlet property="userImage" destination="Exn-9p-Kp3" id="luJ-A6-HoF"/>
                     </connections>
                 </viewController>
@@ -4651,31 +4655,31 @@ it out</string>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-hz-fys">
                                 <rect key="frame" x="24" y="243" width="382" height="565"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zja-QH-tYs">
-                                    <size key="itemSize" width="98" height="46"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zja-QH-tYs">
+                                    <size key="itemSize" width="120" height="47"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InterestsCollectionViewCell" id="29I-sC-cia" customClass="InterestsCollectionViewCell" customModule="Fone_Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="98" height="46"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0sr-Pn-gtd">
-                                            <rect key="frame" x="0.0" y="0.0" width="98" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="47"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBr-Gt-lye">
-                                                    <rect key="frame" x="0.0" y="0.0" width="98" height="46"/>
+                                                    <rect key="frame" x="10" y="10" width="100" height="27"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Wda-Pg-bd5">
-                                                            <rect key="frame" x="3" y="3" width="92" height="40"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wda-Pg-bd5">
+                                                            <rect key="frame" x="3" y="3" width="94" height="21"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="Wda-Pg-bd5" firstAttribute="leading" secondItem="eBr-Gt-lye" secondAttribute="leading" constant="3" id="3NB-iL-SYi"/>
                                                         <constraint firstAttribute="trailing" secondItem="Wda-Pg-bd5" secondAttribute="trailing" constant="3" id="ZNB-u0-fr2"/>
@@ -4689,14 +4693,20 @@ it out</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="eBr-Gt-lye" firstAttribute="top" secondItem="0sr-Pn-gtd" secondAttribute="top" id="Dq0-J4-Qep"/>
-                                                <constraint firstAttribute="bottom" secondItem="eBr-Gt-lye" secondAttribute="bottom" id="TCd-Ni-I32"/>
-                                                <constraint firstItem="eBr-Gt-lye" firstAttribute="leading" secondItem="0sr-Pn-gtd" secondAttribute="leading" id="lKf-ez-whE"/>
-                                                <constraint firstAttribute="trailing" secondItem="eBr-Gt-lye" secondAttribute="trailing" id="nEa-Cb-E3v"/>
+                                                <constraint firstItem="eBr-Gt-lye" firstAttribute="top" secondItem="0sr-Pn-gtd" secondAttribute="top" constant="10" id="Dq0-J4-Qep"/>
+                                                <constraint firstAttribute="bottom" secondItem="eBr-Gt-lye" secondAttribute="bottom" constant="10" id="TCd-Ni-I32"/>
+                                                <constraint firstItem="eBr-Gt-lye" firstAttribute="leading" secondItem="0sr-Pn-gtd" secondAttribute="leading" constant="10" id="lKf-ez-whE"/>
+                                                <constraint firstAttribute="trailing" secondItem="eBr-Gt-lye" secondAttribute="trailing" constant="10" id="nEa-Cb-E3v"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="98" height="46"/>
+                                        <size key="customSize" width="120" height="47"/>
                                         <connections>
                                             <outlet property="nameLbl" destination="Wda-Pg-bd5" id="v2c-Yf-YhF"/>
                                             <outlet property="viewCOntainer" destination="eBr-Gt-lye" id="6jd-Yb-OcN"/>
@@ -4767,7 +4777,7 @@ it out</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xke-R0-vRq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3483" y="916"/>
+            <point key="canvasLocation" x="3482.7906976744184" y="915.45064377682411"/>
         </scene>
     </scenes>
     <resources>

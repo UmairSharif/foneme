@@ -113,10 +113,10 @@ class InterestsViewController: UIViewController ,UICollectionViewDelegate,UIColl
         let subCategory = finalInterests[indexPath.section].subcategories[indexPath.item]
         cell.nameLbl.text = subCategory.name
         if self.selectedInterestsId.contains(subCategory.id){
-            cell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED")
+            cell.contentView.backgroundColor = UIColor(hexString: "3E79ED")
             cell.nameLbl.textColor = UIColor.white
         }else {
-            cell.viewCOntainer.backgroundColor = UIColor(hexString: "F5F5F5")
+            cell.contentView.backgroundColor = UIColor(hexString: "F5F5F5")
             cell.nameLbl.textColor = UIColor.black
         }
         return cell
@@ -132,7 +132,7 @@ class InterestsViewController: UIViewController ,UICollectionViewDelegate,UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? InterestsCollectionViewCell {
             selectedCell.isSelected = true
-            selectedCell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED") // Set the desired selected cell background color
+            selectedCell.contentView.backgroundColor = UIColor(hexString: "3E79ED") // Set the desired selected cell background color
             
             let id = finalInterests[indexPath.section].subcategories[indexPath.item].id
             if !selectedInterestsId.contains(id) {
@@ -143,7 +143,7 @@ class InterestsViewController: UIViewController ,UICollectionViewDelegate,UIColl
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let deselectedCell = collectionView.cellForItem(at: indexPath) as? InterestsCollectionViewCell {
             deselectedCell.isSelected = false
-            deselectedCell.viewCOntainer.backgroundColor = UIColor(hexString: "F5F5F5") // Set the default cell background color
+            deselectedCell.contentView.backgroundColor = UIColor(hexString: "F5F5F5") // Set the default cell background color
             deselectedCell.nameLbl.textColor = UIColor.black
             
             let id = finalInterests[indexPath.section].subcategories[indexPath.item].id

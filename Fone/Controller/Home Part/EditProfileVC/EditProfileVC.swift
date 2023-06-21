@@ -61,6 +61,9 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     @IBOutlet weak var activityIndicator : NVActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var interestCollectionView: UICollectionView!
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    
+    
     
     var imagePicker = UIImagePickerController()
     var userId : String?
@@ -74,7 +77,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     var arrPic = [String]()
     let idealMatchData = ["1","2","3","4","5","6","7"]
     let idealMatchIds = [1,2,3,4,5,6,7]
-    
+    let idealMatchesNames = ["Long-term Partner","Open Minded","Traveling","Business/Professional","Friends","Still figuring it out","Self Improvement"]
     var selectedGenderId = 0
     var selectedIdealMatchId = 0
     var interestIds = [Int]()
@@ -587,20 +590,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
             self.errorAlert("Please enter your name!")
             return false
         }
-//        else if (emailTxt.text?.isEmpty)!
-//        {
-//            self.errorAlert("Please enter your email!")
-//            return false
-//        }
-//        else if !Utility.sharedInstance.isValidEmail(emailTxt.text!) {
-//            self.errorAlert("Please enter a valid email!")
-//            return false
-//        }
-        else if (numberTxt.text?.isEmpty)!
-        {
-            self.errorAlert("Please enter your phone number!")
-            return false
-        }
+
         return true
     }
     
@@ -958,6 +948,7 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
         if collectionView == self.collectionView {
              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! IdealMatchEditProfileCell
                 cell.imgView.image = UIImage(named: self.idealMatchData[indexPath.row])
+                cell.matchName.text = idealMatchesNames[indexPath.row]
                 if selectedIdealMatchId == idealMatchIds[indexPath.row] {
                     cell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED").withAlphaComponent(0.2)
                 } else {

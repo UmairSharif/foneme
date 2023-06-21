@@ -86,10 +86,10 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
         let subCategory = finalInterests[indexPath.section].subcategories[indexPath.item]
         cell.nameLbl.text = subCategory.name
         if self.selectedInterestsId.contains(subCategory.id){
-            cell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED")
+            cell.contentView.backgroundColor = UIColor(hexString: "3E79ED")
             cell.nameLbl.textColor = UIColor.white
         }else {
-            cell.viewCOntainer.backgroundColor = UIColor(hexString: "F5F5F5")
+            cell.contentView.backgroundColor = UIColor(hexString: "F5F5F5")
             cell.nameLbl.textColor = UIColor.black
         }
         return cell
@@ -106,7 +106,7 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
         
             if let selectedCell = collectionView.cellForItem(at: indexPath) as? InterestsCollectionViewCell {
                 selectedCell.isSelected = true
-                selectedCell.viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED") // Set the desired selected cell background color
+                selectedCell.contentView.backgroundColor = UIColor(hexString: "3E79ED") // Set the desired selected cell background color
                 
                 let id = finalInterests[indexPath.section].subcategories[indexPath.item].id
                 if !selectedInterestsId.contains(id) {
@@ -119,7 +119,7 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
         
             if let deselectedCell = collectionView.cellForItem(at: indexPath) as? InterestsCollectionViewCell {
                 deselectedCell.isSelected = false
-                deselectedCell.viewCOntainer.backgroundColor = UIColor(hexString: "F5F5F5") // Set the default cell background color
+                deselectedCell.contentView.backgroundColor = UIColor(hexString: "F5F5F5") // Set the default cell background color
                 deselectedCell.nameLbl.textColor = UIColor.black
                 
                 let id = finalInterests[indexPath.section].subcategories[indexPath.item].id
@@ -135,7 +135,7 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let yourWidth = (collectionView.bounds.width/5.0)
+        let yourWidth = (collectionView.bounds.width/3.0) - 5
         let yourHeight = CGFloat(40)
         return CGSize(width: yourWidth, height: yourHeight)
     }
@@ -144,12 +144,12 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 10
+        return 5
         
     }
 }

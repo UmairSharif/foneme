@@ -2811,7 +2811,7 @@ sent to +94 779713495</string>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-vi-Z7N">
                                 <rect key="frame" x="24" y="231" width="327" height="457"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n8t-VL-tri">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n8t-VL-tri">
                                     <size key="itemSize" width="98" height="46"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2826,16 +2826,16 @@ sent to +94 779713495</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AtT-8t-G2C">
-                                                    <rect key="frame" x="0.0" y="0.0" width="98" height="46"/>
+                                                    <rect key="frame" x="10" y="10" width="78" height="26"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="6VD-pd-C2c">
-                                                            <rect key="frame" x="3" y="3" width="92" height="40"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VD-pd-C2c">
+                                                            <rect key="frame" x="3" y="3" width="72" height="20"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="6VD-pd-C2c" secondAttribute="trailing" constant="3" id="BLW-38-PcS"/>
                                                         <constraint firstItem="6VD-pd-C2c" firstAttribute="leading" secondItem="AtT-8t-G2C" secondAttribute="leading" constant="3" id="DRb-yJ-OyF"/>
@@ -2850,11 +2850,16 @@ sent to +94 779713495</string>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="AtT-8t-G2C" secondAttribute="trailing" id="7nd-Mh-BZo"/>
-                                                <constraint firstItem="AtT-8t-G2C" firstAttribute="top" secondItem="2ot-V8-NOX" secondAttribute="top" id="K9b-5P-97w"/>
-                                                <constraint firstItem="AtT-8t-G2C" firstAttribute="leading" secondItem="2ot-V8-NOX" secondAttribute="leading" id="NBx-jd-Y7I"/>
-                                                <constraint firstAttribute="bottom" secondItem="AtT-8t-G2C" secondAttribute="bottom" id="px3-Qh-J9V"/>
+                                                <constraint firstAttribute="trailing" secondItem="AtT-8t-G2C" secondAttribute="trailing" constant="10" id="7nd-Mh-BZo"/>
+                                                <constraint firstItem="AtT-8t-G2C" firstAttribute="top" secondItem="2ot-V8-NOX" secondAttribute="top" constant="10" id="K9b-5P-97w"/>
+                                                <constraint firstItem="AtT-8t-G2C" firstAttribute="leading" secondItem="2ot-V8-NOX" secondAttribute="leading" constant="10" id="NBx-jd-Y7I"/>
+                                                <constraint firstAttribute="bottom" secondItem="AtT-8t-G2C" secondAttribute="bottom" constant="10" id="px3-Qh-J9V"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="98" height="46"/>
                                         <connections>

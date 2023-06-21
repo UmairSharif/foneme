@@ -12,6 +12,7 @@ class IdealMatchEditProfileCell: UICollectionViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var viewCOntainer: UIView!
+    @IBOutlet weak var matchName : UILabel!
     
     override var isSelected: Bool {
         didSet{

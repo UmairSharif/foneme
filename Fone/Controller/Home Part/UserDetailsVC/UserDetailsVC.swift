@@ -29,6 +29,8 @@ class UserDetailsVC: UIViewController {
     //MARK:-Outlets
 
     @IBOutlet weak var interestCollectionView: UICollectionView!
+    
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var lblVideoCall: UILabel!
     @IBOutlet weak var lblChat: UILabel!
@@ -40,6 +42,7 @@ class UserDetailsVC: UIViewController {
  //   @IBOutlet weak var btnFonemeID: UIButton!
     @IBOutlet weak var foneId: UILabel!
     
+    @IBOutlet weak var idealMatchImageView: UIView!
     @IBOutlet weak var idelInterestImage: UIImageView!
     @IBOutlet weak var LbluserName: UILabel!
     @IBOutlet weak var lblAdress: UILabel!
@@ -149,20 +152,37 @@ class UserDetailsVC: UIViewController {
                 .responseJSON { response in
 
                     switch response.result {
-
+                        
                     case .success(let json):
                         print(json)
-                       
+                        
                         let data = json as! [String:Any]
                         let profileData = data["UserProfileData"] as? [String:Any]
-                        let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 1
+                        let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 99
                         self.arrPic = profileData?["Urls"] as? [String] ?? []
                         let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
                         self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
-                        self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
+                        if idealMatchId == 99 {
+                            self.idealMatchImageView.isHidden = true
+                        }else {
+                            self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
+                        }
+                      
                         self.getInterests()
                         self.collectionView.delegate = self
                         self.collectionView.dataSource = self
+                        if self.arrPic.count == 1 {
+                            self.scrollViewHeight.constant = 1600
+                        }else if self.arrPic.count == 2 {
+                            self.scrollViewHeight.constant = 1950
+                        }else if self.arrPic.count == 3 {
+                            self.scrollViewHeight.constant = 2400
+                        }else if self.arrPic.count == 4 {
+                            self.scrollViewHeight.constant = 2840
+                        }else {
+                            self.scrollViewHeight.constant = 900
+                        }
+                        
                     case .failure(let error):
                         print(error)
                     }

@@ -19,7 +19,7 @@ class InterestsCollectionViewCell: UICollectionViewCell {
     }
     override var isSelected: Bool {
         didSet {
-            viewCOntainer.backgroundColor = UIColor(hexString: "3E79ED")
+            contentView.backgroundColor = UIColor(hexString: "3E79ED")
             nameLbl.textColor = .white
             UserDefaults.standard.set(true, forKey: "isSelected")
         }
