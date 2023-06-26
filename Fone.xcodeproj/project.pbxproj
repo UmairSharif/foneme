@@ -2498,7 +2498,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
@@ -2536,7 +2536,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
@@ -2622,7 +2622,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -2637,7 +2637,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.8.16;
+				MARKETING_VERSION = 3.8.18;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2658,7 +2658,7 @@
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
@@ -2673,7 +2673,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.8.16;
+				MARKETING_VERSION = 3.8.18;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

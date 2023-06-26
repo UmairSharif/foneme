@@ -131,7 +131,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
                         if success {
                             self.abtProfTxt.text = userModel?.profession
                             self.abtYouselfTxt.text = userModel?.aboutme
-                            self.numberTxt.text = userModel?.phoneNumber
+                            self.numberTxt.text = userModel?.mobileNumberWithoutCode
                             self.codeLbl.text = userModel?.countryCode
                             if let _ = userModel?.imageUrl{
                                 let url = URL(string: userModel?.imageUrl ?? "")!
@@ -969,7 +969,7 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionView {
-            return CGSize(width: collectionView.frame.size.width / 3.0 - 8, height: 130.0)
+            return CGSize(width: collectionView.frame.size.width / 3.0 - 7, height: 140.0)
         }else {
             let yourWidth =  CGFloat(92)
             let yourHeight = CGFloat(35)
@@ -992,6 +992,7 @@ extension EditProfileVC : UICollectionViewDelegate,UICollectionViewDataSource,UI
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.collectionView {
             self.selectedIdealMatchId = self.idealMatchIds[indexPath.row]

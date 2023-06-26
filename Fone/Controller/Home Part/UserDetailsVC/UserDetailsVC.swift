@@ -30,17 +30,19 @@ class UserDetailsVC: UIViewController {
 
     @IBOutlet weak var interestCollectionView: UICollectionView!
     
+    @IBOutlet weak var interestCollectionViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var lblVideoCall: UILabel!
-    @IBOutlet weak var lblChat: UILabel!
-    @IBOutlet weak var lblVoiceCall: UILabel!
+  //  @IBOutlet weak var lblVideoCall: UILabel!
+    //@IBOutlet weak var lblChat: UILabel!
+    //@IBOutlet weak var lblVoiceCall: UILabel!
     @IBOutlet weak var btnVideoCall: UIButton!
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnFriend: UIFriendButton!
  //   @IBOutlet weak var btnFonemeID: UIButton!
-    @IBOutlet weak var foneId: UILabel!
+  //  @IBOutlet weak var foneId: UILabel!
     
     @IBOutlet weak var idealMatchImageView: UIView!
     @IBOutlet weak var idelInterestImage: UIImageView!
@@ -51,6 +53,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var lblprofession: UILabel!
     @IBOutlet weak var distanceLbl: UILabel!
     
+    @IBOutlet weak var galleryLbl: UILabel!
     //@IBOutlet weak var viewLoc: UIView!
     //@IBOutlet weak var viewDes: UIView!
    // @IBOutlet weak var viewLinks: UIView!
@@ -128,13 +131,19 @@ class UserDetailsVC: UIViewController {
         
         self.btnFriend.isFriendAdded = isContactAdded
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
-        self.LbluserName.text = userDetails?.name ?? ""
+        self.LbluserName.text = userDetails?.name ?? "-"
        // self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
-        self.lblAboutme.text = self.userDetails?.aboutme ?? "Hey there! I am using Fone Messenger."
-        self.lblprofession.text = self.userDetails?.profession ?? ""
+        if self.userDetails!.aboutme == "" {
+            self.lblAboutme.text = "Hey there! I am using Fone Messenger."
+        }else {
+            self.lblAboutme.text = self.userDetails!.aboutme ?? "Hey there! I am using Fone Messenger."
+        }
+        
+        
+        self.lblprofession.text = self.userDetails?.profession ?? "-"
         //viewLoc.isHidden = true
 
-        self.lblAdress.text = ""
+        self.lblAdress.text = "Not Available"
         if self.userDetails?.location != "" && self.userDetails?.location != nil && self.userDetails?.location != "null"
         {
             //viewLoc.isHidden = false
@@ -163,7 +172,7 @@ class UserDetailsVC: UIViewController {
                         let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
                         self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
                         if idealMatchId == 99 {
-                            self.idealMatchImageView.isHidden = true
+                           self.idealMatchImageView.isHidden = true
                         }else {
                             self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
                         }
@@ -180,7 +189,8 @@ class UserDetailsVC: UIViewController {
                         }else if self.arrPic.count == 4 {
                             self.scrollViewHeight.constant = 2840
                         }else {
-                            self.scrollViewHeight.constant = 900
+                            self.galleryLbl.isHidden = true
+                          // self.scrollViewHeight.constant = 1100
                         }
                         
                     case .failure(let error):
@@ -338,6 +348,9 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
         }else {
             let interest = self.finalInterests[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! UserDetailInterestCell
+            if interest.id == 99 {
+                cell.bgCell.isHidden = true
+            }
             cell.interestName.text = interest.name
             return cell
         }
@@ -350,13 +363,46 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
             let yourHeight = CGFloat(418)
             return CGSize(width: yourWidth, height: yourHeight)
         }else {
-            let yourWidth = CGFloat(92)
-            let yourHeight = CGFloat(35)
-            return CGSize(width: yourWidth, height: yourHeight)
+//              let label = UILabel(frame: CGRect.zero)
+//                   label.text = finalInterests[indexPath.row].name
+//                   label.sizeToFit()
+//                  return CGSize(width: label.frame.width, height: 32)
+              let height = CGFloat(32)
+            let text = self.finalInterests[indexPath.row].name
+            let width = text.width(withConstrainedHeight: CGFloat(height), font: UIFont.systemFont(ofSize: 12)) + 30
+               return CGSize(width: width, height: height)
         }
-
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+   
 
+
+}
+extension String {
+
+    public func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = self.boundingRect(with: constraintRect,
+                                        options: .usesLineFragmentOrigin,
+                                        attributes: [.font: font], context: nil)
+
+        return ceil(boundingBox.width)
+    }
 }
 extension UserDetailsVC {
     func getInterests(){
@@ -383,15 +429,26 @@ extension UserDetailsVC {
             }
         }
         self.finalInterests = self.tempInterests
+        
         if self.finalInterests.count <= 0 {
             self.interestCollectionView.isHidden = true
         }else {
+            if interestIds.count == 1 {
+                self.interestIds.append(99)
+                self.finalInterests.insert(InterestsSubCategory(id: 99, name: ""), at: self.finalInterests.count)
+            }
             self.interestCollectionView.isHidden = false
             self.interestCollectionView.delegate = self
             self.interestCollectionView.dataSource = self
             self.interestCollectionView.reloadData()
         }
-
+        let height = interestCollectionView.collectionViewLayout.collectionViewContentSize.height
+        if self.finalInterests.count <= 0 {
+            interestCollectionViewHeight.constant = height + 40
+        }else {
+            interestCollectionViewHeight.constant = height + 20
+        }
+       self.view.layoutIfNeeded()
     
     }
 }

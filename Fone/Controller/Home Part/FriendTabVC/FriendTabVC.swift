@@ -72,7 +72,7 @@ class FriendTabVC: UIViewController, CLLocationManagerDelegate {
         self.contactTVC.keyboardDismissMode = .interactive
         var showLoader = true
         if !CurrentSession.shared.friends.isEmpty { showLoader = false }
-        setCacheData()
+        
         // Get Contacts Friend List
         self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: showLoader)
         network.reachability.whenReachable = { reachability in
@@ -80,7 +80,7 @@ class FriendTabVC: UIViewController, CLLocationManagerDelegate {
             self.netStatus = true
             UserDefaults.standard.set("Yes", forKey: "netStatus")
             UserDefaults.standard.synchronize()
-
+            self.setCacheData()
             // Get Contacts Friend List
             self.sendContactAPI(contactsArray: LocalContactHandler.instance.contactArray, showLoader: showLoader)
         }
@@ -284,12 +284,27 @@ class FriendTabVC: UIViewController, CLLocationManagerDelegate {
         }
 
         var parameters = [
-            "UserId": userId,
-            "Contacts": contactList
-        ] as [String: Any]
+             "UserId": userId,
+             "Contacts": contactList,
+             "Latitude": String (GLBLatitude) ,
+             "Longitude": String (GLBLongitude) ,
+             "Radius": "500000",
+             "Unit": "Meter",
+             "Page": 100
+         ] as [String: Any]
+        
         if showLoader || contactList.count == 0 {
-            parameters = ["UserId": userId] as [String: Any]
-        }
+            parameters = [
+                "UserId": userId,
+                "Latitude": String (GLBLatitude) ,
+                "Longitude": String (GLBLongitude) ,
+                "Radius": "500000",
+                "Unit": "Meter",
+                "Page": 100
+           
+            ] as [String: Any]
+          }
+        
 
         var headers = [String: String]()
         headers = ["Content-Type": "application/json",
@@ -949,7 +964,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     mobileNumber.remove(at: mobileNumber.startIndex)
                 }
             } catch {
-                
+                print(error.localizedDescription)
             }
         }
         if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
