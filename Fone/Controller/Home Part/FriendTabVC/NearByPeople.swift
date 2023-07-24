@@ -30,7 +30,7 @@ class NearByPeople : UIViewController
     private var userListQuery: SBDApplicationUserListQuery?
     private var userDetails: UserDetailModel?
     private var interstitial: GADInterstitialAd?
-    static let interstitial = "ca-app-pub-3940256099942544/4411468910"
+    static let interstitial = "ca-app-pub-0169736027593374/2447488069"
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInterstitialAd(owner: self)
@@ -177,11 +177,14 @@ class NearByPeople : UIViewController
             vc.name = contact.name ?? ""
             vc.userImage = contact.userImage
             vc.DialerFoneID = contact.ContactsCnic ?? ""
-            self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
+            self.getUserDetail(cnic: contact.ContactsCnic ?? "", friend: "") { (user, success) in
                 if success {
                     SVProgressHUD.dismiss()
                     self.view.isUserInteractionEnabled = true
-                    vc.userDetails = user!
+                    guard let user = user else {
+                        return
+                    }
+                    vc.userDetails = user
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
@@ -205,11 +208,14 @@ class NearByPeople : UIViewController
         vc.recieverNumber = contact.number
         vc.userImage = contact.userImage
         vc.DialerFoneID = contact.ContactsCnic ?? ""
-        self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
+        self.getUserDetail(cnic: contact.ContactsCnic ?? "", friend: "") { (user, success) in
             if success {
                 SVProgressHUD.dismiss()
                 self.view.isUserInteractionEnabled = true
-                vc.userDetails = user!
+                guard let user = user else {
+                    return
+                }
+                vc.userDetails = user
                 vc.modalPresentationStyle = .fullScreen
                 NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                 self.present(vc, animated: true, completion: nil)
@@ -413,7 +419,12 @@ extension NearByPeople: UITableViewDelegate, UITableViewDataSource
             }
             
             let vc = UIStoryboard().loadUserDetailsVC()
-            self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
+            guard let contactCnic = contact.ContactsCnic else {
+                SVProgressHUD.dismiss()
+                self.view.isUserInteractionEnabled = true
+                return
+            }
+            self.getUserDetail(cnic: contactCnic, friend: "") { (user, success) in
                 if success {
                     self.view.isUserInteractionEnabled = true
                     if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {

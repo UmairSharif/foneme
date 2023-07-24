@@ -25,24 +25,24 @@ class UIFriendButton: UIButton {
     }
 }
 class UserDetailsVC: UIViewController {
-
+    
     //MARK:-Outlets
-
+    
     @IBOutlet weak var interestCollectionView: UICollectionView!
     
     @IBOutlet weak var interestCollectionViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
-  //  @IBOutlet weak var lblVideoCall: UILabel!
+    //  @IBOutlet weak var lblVideoCall: UILabel!
     //@IBOutlet weak var lblChat: UILabel!
     //@IBOutlet weak var lblVoiceCall: UILabel!
     @IBOutlet weak var btnVideoCall: UIButton!
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnFriend: UIFriendButton!
- //   @IBOutlet weak var btnFonemeID: UIButton!
-  //  @IBOutlet weak var foneId: UILabel!
+    //   @IBOutlet weak var btnFonemeID: UIButton!
+    //  @IBOutlet weak var foneId: UILabel!
     
     @IBOutlet weak var idealMatchImageView: UIView!
     @IBOutlet weak var idelInterestImage: UIImageView!
@@ -56,7 +56,7 @@ class UserDetailsVC: UIViewController {
     @IBOutlet weak var galleryLbl: UILabel!
     //@IBOutlet weak var viewLoc: UIView!
     //@IBOutlet weak var viewDes: UIView!
-   // @IBOutlet weak var viewLinks: UIView!
+    // @IBOutlet weak var viewLinks: UIView!
     @IBOutlet weak var lbLinks: UILabel!
     @IBOutlet weak var lblLinkView: UIView!
     
@@ -78,22 +78,27 @@ class UserDetailsVC: UIViewController {
         lblLinkView.layer.cornerRadius = 12.0
         lblLinkView.backgroundColor = .clear
         /*
-        viewDes.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
-        viewDes.layer.borderWidth = 1.0
-        viewDes.layer.cornerRadius = 12.0
-        
-        viewLinks.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
-        viewLinks.layer.borderWidth = 1.0
-        viewLinks.layer.cornerRadius = 12.0
+         viewDes.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+         viewDes.layer.borderWidth = 1.0
+         viewDes.layer.cornerRadius = 12.0
+         
+         viewLinks.layer.borderColor = hexStringToUIColor(hex: "E8E8E8").cgColor
+         viewLinks.layer.borderWidth = 1.0
+         viewLinks.layer.cornerRadius = 12.0
          */
+        
+        getContacts { yes in
+            
+            print("yes")
+        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
-    
+        
         if isFromLink == true {
             SVProgressHUD.show()
             isFromLink = false
-
+            
             self.getUserDetail(cnic: FoneID, friend: "") { (userModel, success) in
                 if success {
                     SVProgressHUD.dismiss()
@@ -110,21 +115,28 @@ class UserDetailsVC: UIViewController {
             self.UpdateDetails()
             self.getProfilePreference()
         }
-
+        
     }
-
+    
+    
+    
     //MARK:- Update Details
     func UpdateDetails() {
         var isContactAdded = false
         if let contact = userDetails?.uniqueContact {
-//            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
-//                isContactAdded = true
-//            }
-        }
-        for item in CurrentSession.shared.friends {
-            if item.userId == userDetails?.contactVT {
+            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
                 isContactAdded = true
                 self.btnFriend.backgroundColor = UIColor.lightGray
+            }
+        }
+        for item in CurrentSession.shared.friends {
+            let  id = item.userId
+            let thisUserId = userDetails?.contactVT
+            if id != "" && thisUserId != "" {
+                if item.userId == userDetails?.contactVT {
+                    isContactAdded = true
+                    self.btnFriend.backgroundColor = UIColor.lightGray
+                }
             }
         }
         
@@ -132,7 +144,7 @@ class UserDetailsVC: UIViewController {
         self.btnFriend.isFriendAdded = isContactAdded
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))
         self.LbluserName.text = userDetails?.name ?? "-"
-       // self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
+        // self.btnFonemeID.setTitle(userDetails?.cnic?.cnicToLink, for: .normal)
         if self.userDetails!.aboutme == "" {
             self.lblAboutme.text = "Hey there! I am using Fone Messenger."
         }else {
@@ -142,7 +154,7 @@ class UserDetailsVC: UIViewController {
         
         self.lblprofession.text = self.userDetails?.profession ?? "-"
         //viewLoc.isHidden = true
-
+        
         self.lblAdress.text = "Not Available"
         if self.userDetails?.location != "" && self.userDetails?.location != nil && self.userDetails?.location != "null"
         {
@@ -150,7 +162,7 @@ class UserDetailsVC: UIViewController {
             self.lblAdress.text = self.userDetails?.location ?? ""
         }
         lbLinks.text = "fone.me/\(userDetails!.cnic!)"
-
+        
     }
     
     func getProfilePreference() {
@@ -158,56 +170,56 @@ class UserDetailsVC: UIViewController {
         let userID = self.userDetails?.userId
         let url = "\(getProfilePic)?UserId=\(userID ?? "")"
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default)
-                .responseJSON { response in
-
-                    switch response.result {
-                        
-                    case .success(let json):
-                        print(json)
-                        
-                        let data = json as! [String:Any]
-                        let profileData = data["UserProfileData"] as? [String:Any]
-                        let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 99
-                        self.arrPic = profileData?["Urls"] as? [String] ?? []
-                        let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
-                        self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
-                        if idealMatchId == 99 {
-                           self.idealMatchImageView.isHidden = true
-                        }else {
-                            self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
-                        }
-                      
-                        self.getInterests()
-                        self.collectionView.delegate = self
-                        self.collectionView.dataSource = self
-                        if self.arrPic.count == 1 {
-                            self.scrollViewHeight.constant = 1600
-                        }else if self.arrPic.count == 2 {
-                            self.scrollViewHeight.constant = 1950
-                        }else if self.arrPic.count == 3 {
-                            self.scrollViewHeight.constant = 2400
-                        }else if self.arrPic.count == 4 {
-                            self.scrollViewHeight.constant = 2840
-                        }else {
-                            self.galleryLbl.isHidden = true
-                          // self.scrollViewHeight.constant = 1100
-                        }
-                        
-                    case .failure(let error):
-                        print(error)
+            .responseJSON { response in
+                
+                switch response.result {
+                    
+                case .success(let json):
+                    print(json)
+                    
+                    let data = json as! [String:Any]
+                    let profileData = data["UserProfileData"] as? [String:Any]
+                    let idealMatchId = profileData?["IdealMatchId"] as? Int ?? 99
+                    self.arrPic = profileData?["Urls"] as? [String] ?? []
+                    let interestIds = profileData?["ProfessionalInterestId"] as? String ?? ""
+                    self.interestIds = interestIds.components(separatedBy: ",").compactMap { Int($0) }
+                    if idealMatchId == 99 {
+                        self.idealMatchImageView.isHidden = true
+                    }else {
+                        self.idelInterestImage.image = UIImage(named: self.idealMatchData[idealMatchId - 1])
                     }
+                    
+                    self.getInterests()
+                    self.collectionView.delegate = self
+                    self.collectionView.dataSource = self
+                    if self.arrPic.count == 1 {
+                        self.scrollViewHeight.constant = 1600
+                    }else if self.arrPic.count == 2 {
+                        self.scrollViewHeight.constant = 1950
+                    }else if self.arrPic.count == 3 {
+                        self.scrollViewHeight.constant = 2400
+                    }else if self.arrPic.count == 4 {
+                        self.scrollViewHeight.constant = 2840
+                    }else {
+                        self.galleryLbl.isHidden = true
+                        // self.scrollViewHeight.constant = 1100
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                }
             }
     }
-
+    
     @IBAction func btnClickBack(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func btnCopyBranchLink(_ sender: UIButton) {
         UIPasteboard.general.string = sender.titleLabel?.text ?? ""
         self.showToast(controller: self, message: "Fone id copied", seconds: 1)
     }
-
+    
     @IBAction func btnLinksTapped(_ sender: Any) {
         if let user = self.userDetails {
             let vc = UIStoryboard().socialLinksVC()
@@ -218,7 +230,7 @@ class UserDetailsVC: UIViewController {
             self.showAlert("", "Oops!! Can't get user detail. Please try again later!")
         }
     }
-
+    
     @IBAction func btnClickFriend(_ sender: UIButton) {
         SVProgressHUD.show()
         self.addFirend(foneId: (userDetails?.cnic)!, friendId: (userDetails?.userId)!, url: ("\(userDetails?.cnic?.cnicToLink ?? "")")) { (user, success) in
@@ -235,14 +247,14 @@ class UserDetailsVC: UIViewController {
             }
         }
     }
-
+    
     @IBAction func btnClickVoiceCall(_ sender: UIButton) {
-
+        
         // UserDefaults.standard.set(subscriptionStatus, forKey: SubscriptionStatus)
-
-//        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
-//        if subscription.lowercased() == "active" {
-
+        
+        //        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+        //        if subscription.lowercased() == "active" {
+        
         let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = false
@@ -253,25 +265,34 @@ class UserDetailsVC: UIViewController {
         vc.userDetails = contact
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
-//        } else {
-//
-//            self.show(message: "Please subscribe for app to use this feature.")
-//        }
-
+        //        } else {
+        //
+        //            self.show(message: "Please subscribe for app to use this feature.")
+        //        }
+        
     }
-
+    
     @IBAction func btnClickChat(_ sender: UIButton) {
+        
+        let status = SBDMain.getConnectState()
+        SBDMain.connect(withUserId: self.userDetails!.userId!) { user, error in
+            guard let user = user, error == nil else {
+                // Handle error.
+                return
+            }
+            print(user)
+        }
         if let userDetail = self.userDetails,
-            let query = SBDMain.createApplicationUserListQuery() {
+           let query = SBDMain.createApplicationUserListQuery() {
             query.limit = 100
             query.userIdsFilter = [userDetail.uniqueContact]
-
+            
             SVProgressHUD.show()
             query.loadNextPage {[weak self] users, error in
                 guard let sSelf = self else { return }
                 if let error = error {
                     SVProgressHUD.dismiss()
-                    sSelf.showAlert("Error", error.localizedDescription)
+                    sSelf.showAlert("", "Private user")
                     return
                 }
                 if let users = users, let selectedUser = users.first {
@@ -279,10 +300,10 @@ class UserDetailsVC: UIViewController {
                         guard let sSelf = self else { return }
                         SVProgressHUD.dismiss()
                         if let error = error {
-                            sSelf.showAlert("Error", error.localizedDescription)
+                            sSelf.showAlert("","Private user")
                             return
                         }
-
+                        
                         DispatchQueue.main.async {
                             let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
                             //vc.delegate = sSelf
@@ -295,15 +316,15 @@ class UserDetailsVC: UIViewController {
                     }
                 } else {
                     SVProgressHUD.dismiss()
-                    sSelf.showAlert("Error", "Sorry, We couldn't start this conversation due to user not found. Please contact administrator for more information.")
+                    sSelf.showAlert("","Private user")
                 }
             }
         }
     }
-
+    
     @IBAction func btnClickVideoCall(_ sender: UIButton) {
-//        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
-//      if subscription.lowercased() == "active" {
+        //        let subscription = UserDefaults.standard.object(forKey: SubscriptionStatus) as? String ?? ""
+        //      if subscription.lowercased() == "active" {
         let contact = userDetails
         let vc = UIStoryboard().loadVideoCallVC()
         vc.isVideo = true
@@ -314,12 +335,12 @@ class UserDetailsVC: UIViewController {
         vc.userDetails = contact
         NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
         self.present(vc, animated: true, completion: nil)
-//              } else {
-//
-//            self.show(message: "Please subscribe for app to use this feature.")
-//        }
+        //              } else {
+        //
+        //            self.show(message: "Please subscribe for app to use this feature.")
+        //        }
     }
-
+    
     func show(message: String) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: message, message: "", preferredStyle: .alert)
@@ -349,12 +370,13 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
             let interest = self.finalInterests[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! UserDetailInterestCell
             if interest.id == 99 {
-                cell.bgCell.isHidden = true
+                // cell.bgCell.isHidden = true
+                cell.contentView.isHidden = true
             }
             cell.interestName.text = interest.name
             return cell
         }
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -363,14 +385,14 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
             let yourHeight = CGFloat(418)
             return CGSize(width: yourWidth, height: yourHeight)
         }else {
-//              let label = UILabel(frame: CGRect.zero)
-//                   label.text = finalInterests[indexPath.row].name
-//                   label.sizeToFit()
-//                  return CGSize(width: label.frame.width, height: 32)
-              let height = CGFloat(32)
+            //              let label = UILabel(frame: CGRect.zero)
+            //                   label.text = finalInterests[indexPath.row].name
+            //                   label.sizeToFit()
+            //                  return CGSize(width: label.frame.width, height: 32)
+            let height = CGFloat(32)
             let text = self.finalInterests[indexPath.row].name
             let width = text.width(withConstrainedHeight: CGFloat(height), font: UIFont.systemFont(ofSize: 12)) + 30
-               return CGSize(width: width, height: height)
+            return CGSize(width: width, height: height)
         }
     }
     
@@ -389,18 +411,18 @@ extension UserDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UIC
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-   
-
-
+    
+    
+    
 }
 extension String {
-
+    
     public func width(withConstrainedHeight height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
         let boundingBox = self.boundingRect(with: constraintRect,
-                                        options: .usesLineFragmentOrigin,
-                                        attributes: [.font: font], context: nil)
-
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [.font: font], context: nil)
+        
         return ceil(boundingBox.width)
     }
 }
@@ -448,7 +470,7 @@ extension UserDetailsVC {
         }else {
             interestCollectionViewHeight.constant = height + 20
         }
-       self.view.layoutIfNeeded()
-    
+        self.view.layoutIfNeeded()
+        
     }
 }

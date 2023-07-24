@@ -1107,7 +1107,7 @@
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swimming" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHU-nZ-1M3">
-                                                                                    <rect key="frame" x="5" y="5" width="118" height="25"/>
+                                                                                    <rect key="frame" x="5" y="10" width="118" height="15"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="11"/>
                                                                                     <color key="textColor" systemColor="tintColor"/>
@@ -1118,8 +1118,8 @@
                                                                                 <constraint firstItem="JHU-nZ-1M3" firstAttribute="centerX" secondItem="olk-6l-kJy" secondAttribute="centerX" id="New-5Q-9vl"/>
                                                                                 <constraint firstItem="JHU-nZ-1M3" firstAttribute="leading" secondItem="olk-6l-kJy" secondAttribute="leading" constant="5" id="QjG-33-dlK"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="JHU-nZ-1M3" secondAttribute="trailing" constant="5" id="g4X-Gz-mFY"/>
-                                                                                <constraint firstItem="JHU-nZ-1M3" firstAttribute="top" secondItem="olk-6l-kJy" secondAttribute="top" constant="5" id="kg7-pk-deh"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="JHU-nZ-1M3" secondAttribute="bottom" constant="5" id="pQB-DG-gpb"/>
+                                                                                <constraint firstItem="JHU-nZ-1M3" firstAttribute="top" secondItem="olk-6l-kJy" secondAttribute="top" constant="10" id="kg7-pk-deh"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="JHU-nZ-1M3" secondAttribute="bottom" constant="10" id="pQB-DG-gpb"/>
                                                                                 <constraint firstItem="JHU-nZ-1M3" firstAttribute="centerY" secondItem="olk-6l-kJy" secondAttribute="centerY" id="ycZ-KY-21C"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
@@ -4244,8 +4244,8 @@ it out</string>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0IE-QQ-3N3">
                                                                             <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dep-Gg-VLF">
-                                                                                    <rect key="frame" x="21" y="5" width="81" height="30"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dep-Gg-VLF">
+                                                                                    <rect key="frame" x="5" y="10" width="97" height="20"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
                                                                                     <color key="textColor" systemColor="tintColor"/>
@@ -4260,13 +4260,15 @@ it out</string>
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
+                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="top" secondItem="0IE-QQ-3N3" secondAttribute="top" constant="10" id="2Cm-86-wn8"/>
                                                                                 <constraint firstItem="JZ9-Hr-YcV" firstAttribute="centerY" secondItem="0IE-QQ-3N3" secondAttribute="centerY" id="5gw-XK-a0o"/>
-                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="leading" secondItem="JZ9-Hr-YcV" secondAttribute="trailing" id="Bfu-Ue-aKC"/>
-                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="top" secondItem="0IE-QQ-3N3" secondAttribute="top" constant="5" id="EfI-BK-yc9"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="dep-Gg-VLF" secondAttribute="trailing" constant="5" id="Fkv-GH-w1X"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="dep-Gg-VLF" secondAttribute="bottom" constant="10" id="5nn-h2-SWD"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="dep-Gg-VLF" secondAttribute="trailing" constant="5" id="Gly-uw-PwY"/>
+                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="centerY" secondItem="0IE-QQ-3N3" secondAttribute="centerY" id="MaP-lz-BLn"/>
                                                                                 <constraint firstItem="JZ9-Hr-YcV" firstAttribute="top" secondItem="0IE-QQ-3N3" secondAttribute="top" constant="9.6666666666666643" id="UCG-hz-zL5"/>
-                                                                                <constraint firstAttribute="bottom" secondItem="dep-Gg-VLF" secondAttribute="bottom" constant="5" id="XNr-n3-2Mb"/>
                                                                                 <constraint firstItem="JZ9-Hr-YcV" firstAttribute="leading" secondItem="0IE-QQ-3N3" secondAttribute="leading" constant="5" id="dYj-m5-k5A"/>
+                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="centerX" secondItem="0IE-QQ-3N3" secondAttribute="centerX" id="hTt-cQ-txE"/>
+                                                                                <constraint firstItem="dep-Gg-VLF" firstAttribute="leading" secondItem="0IE-QQ-3N3" secondAttribute="leading" constant="5" id="zfo-4y-TwX"/>
                                                                             </constraints>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -4279,6 +4281,11 @@ it out</string>
                                                                                     <color key="value" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
+                                                                            <variation key="default">
+                                                                                <mask key="subviews">
+                                                                                    <exclude reference="JZ9-Hr-YcV"/>
+                                                                                </mask>
+                                                                            </variation>
                                                                         </view>
                                                                     </subviews>
                                                                     <constraints>

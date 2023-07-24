@@ -382,7 +382,7 @@ extension UIViewController {
                                "Authorization" : "bearer " + loginToken]
                     
                     ServerCall.makeCallWitoutFile(getProfileUrl, params: params, type: Method.POST, currentView: nil, header: headers) { (response) in
-                        let swiftyJsonData:JSON = JSON(response!)
+                //let swiftyJsonData:JSON = JSON(response!)
                         if let json = response {
                             let statusCode = json["StatusCode"].string ?? ""
                             if statusCode == "200" {

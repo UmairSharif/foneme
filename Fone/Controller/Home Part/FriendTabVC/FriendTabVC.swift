@@ -688,7 +688,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             let contact = filteredContacts[indexPath.row]
             let vc = UIStoryboard().loadUserDetailsVC()
             vc.isSearch = true
-            self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
+            self.getUserDetail(cnic: "", friend: contact.userId ?? "" ) { (user, success) in
                 if success {
                     if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
                         if cell.userImage.image != nil {
@@ -716,7 +716,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             }
         }
         else if friendList.count > 0 {
-            
+   
             let contact = friendList[indexPath.row]
             
             if contact.name == "Find People Nearby" {
@@ -753,6 +753,8 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     }
                 }
             }
+
+
         }
     }
     
@@ -767,10 +769,13 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             vc.name = contact.name ?? ""
             vc.userImage = contact.userImage
             vc.DialerFoneID = contact.ContactsCnic ?? ""
-            self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
+            self.getUserDetail(cnic: "", friend: contact.userId ?? "") { (user, success) in
                 if success {
                     self.hideIndicatorView()
-                    vc.userDetails = user!
+                    guard let user = user else {
+                        return
+                    }
+                    vc.userDetails = user
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
@@ -788,10 +793,14 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             vc.name = contact.name ?? ""
             vc.userImage = contact.userImage
             vc.DialerFoneID = contact.ContactsCnic ?? ""
-            self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
+            self.getUserDetail(cnic: contact.ContactsCnic ?? "", friend: "") { (user, success) in
                 if success {
+                    
                     self.hideIndicatorView()
-                    vc.userDetails = user!
+                    guard let user = user else {
+                        return
+                    }
+                    vc.userDetails = user
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
@@ -821,10 +830,13 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             vc.recieverNumber = contact.number
             vc.userImage = contact.userImage
             vc.DialerFoneID = contact.ContactsCnic ?? ""
-            self.getUserDetail(cnic: "", friend: contact.userId!) { (user, success) in
+            self.getUserDetail(cnic: "", friend: contact.userId ?? "") { (user, success) in
                 if success {
                     self.hideIndicatorView()
-                    vc.userDetails = user!
+                    guard let user = user else {
+                        return
+                    }
+                    vc.userDetails = user
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
@@ -841,10 +853,13 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             vc.recieverNumber = contact.number
             vc.userImage = contact.userImage
             vc.DialerFoneID = contact.ContactsCnic ?? ""
-            self.getUserDetail(cnic: contact.ContactsCnic!, friend: "") { (user, success) in
+            self.getUserDetail(cnic: contact.ContactsCnic ?? "", friend: "") { (user, success) in
                 if success {
                     self.hideIndicatorView()
-                    vc.userDetails = user!
+                    guard let user = user else {
+                        return
+                    }
+                    vc.userDetails = user
                     vc.modalPresentationStyle = .fullScreen
                     NotificationHandler.shared.currentCallStatus = CurrentCallStatus.OutGoing
                     self.present(vc, animated: true, completion: nil)
@@ -863,6 +878,13 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
     //MARK:- NEW CHANGE FOR CALL DIRECT :-
     func btnClickChat(_ userMd: UserDetailModel?, img: Data?, cont: FriendList?) {
         
+        var userId = ""
+        if let userProfileData = UserDefaults.standard.object(forKey: key_User_Profile) as? Data {
+            print(userProfileData)
+            if let user = try? PropertyListDecoder().decode(User.self, from: userProfileData) {
+                userId = user.userId!
+            }
+        }
         let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
         vc.delegate = self
         vc.userDetails = userMd
@@ -875,38 +897,39 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
         } else {
             self.userListQuery?.userIdsFilter = ["0"]
         }
-        
+        var selecteduser = SBDUser()
         self.userListQuery?.loadNextPage(completionHandler: { (users, error) in
-            
             if error != nil {
                 print(error?.localizedDescription ?? "Error")
                 return
             }
-            
-            guard let users = users, users.count > 0 else {
-                DispatchQueue.main.async {
-                    self.hideIndicatorView()
-                    self.showAlert("Error", "Sorry, We couldn't start this conversation due to user not found. Please contact administrator for more information.")
+
+            DispatchQueue.main.async {
+
+                for user in users! {
+                    if user.userId == SBDMain.getCurrentUser()!.userId {
+                        continue
+                    }
+                    //User user here
+                    selecteduser = user
                 }
-                return
-            }
-            
-            let selecteduser = users.first!
-            
-            let params = SBDGroupChannelParams()
-            params.coverImage = img
-            params.add(selecteduser)
-            params.name = userMd?.name
-            
-            SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
-                
-                DispatchQueue.main.async {
-                    self.hideIndicatorView()
-                    guard error == nil else {
-                        let alertController = UIAlertController(title: "Error", message: error!.localizedDescription, preferredStyle: .alert)
+
+                let params = SBDGroupChannelParams()
+                params.coverImage = img
+                params.add(selecteduser)
+                params.name = userMd?.name
+
+                SBDGroupChannel.createChannel(with: [selecteduser], isDistinct: true) { (channel, error) in
+
+                    SVProgressHUD.dismiss()
+                    if let error = error {
+                        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                         let actionCancel = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                         alertController.addAction(actionCancel)
-                        self.present(alertController, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+
                         return
                     }
                     vc.channel = channel
@@ -914,7 +937,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     nav.modalPresentationStyle = .fullScreen
                     self.present(nav, animated: true, completion: nil)
                 }
-                
+
             }
         })
         

@@ -77,7 +77,7 @@ class EditProfileVC: UIViewController,CountryDataDelegate,UIImagePickerControlle
     var arrPic = [String]()
     let idealMatchData = ["1","2","3","4","5","6","7"]
     let idealMatchIds = [1,2,3,4,5,6,7]
-    let idealMatchesNames = ["Long-term Partner","Open Minded","Traveling","Business/Professional","Friends","Still figuring it out","Self Improvement"]
+    let idealMatchesNames = ["Long-term Partner","Open Minded","Traveling","Friends","Business/Professional","Still figuring it out","Self Improvement"]
     var selectedGenderId = 0
     var selectedIdealMatchId = 0
     var interestIds = [Int]()

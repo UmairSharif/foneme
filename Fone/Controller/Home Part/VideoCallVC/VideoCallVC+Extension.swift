@@ -1117,12 +1117,12 @@ extension VideoCallVC : RoomDelegate {
     }
     
     func roomDidFailToConnect(room: Room, error: Error) {
-        logMessage(messageText: "Failed to connect to room with error: \(error.localizedDescription)")
+        logMessage(messageText:"Private user")
         self.callKitProvider.invalidate()
         self.callKitCompletionHandler!(false)
         self.room = nil
         self.player?.stop()
-        self.showCustomAlert(title: "Error", message: "Failed to connect to room with error: \(error.localizedDescription)") { (alert) in
+        self.showCustomAlert(title: "", message:"Private user") { (alert) in
             self.disconnect(sender: UIButton())
         }
     }

@@ -551,7 +551,7 @@ extension VoiceCallVC: TVOCallDelegate {
         }
         
         func call(_ call: TVOCall, didFailToConnectWithError error: Error) {
-            NSLog("Call failed to connect: \(error.localizedDescription)")
+            NSLog("Private user")
             
             if let completion = self.callKitCompletionCallback {
                 completion(false)
