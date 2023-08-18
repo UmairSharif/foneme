@@ -21,7 +21,7 @@ import SendBirdSDK
 import AudioToolbox
 import TwilioVideo
 import Alamofire
-import OneSignal
+import OneSignalFramework
 import SwiftyJSON
 import CoreLocation
 import SVProgressHUD
@@ -64,11 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
        GADMobileAds.sharedInstance().start(completionHandler: nil)
         SVProgressHUD.setDefaultMaskType(.clear)
         
-        OneSignal.setLogLevel(.LL_INFO, visualLevel: .LL_NONE)
-        
+//        OneSignal.setLogLevel(.LL_INFO, visualLevel: .LL_NONE)
+        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
+
         // OneSignal initialization NEW CODE : 16 JAN
-        OneSignal.initWithLaunchOptions(launchOptions)
-        OneSignal.setAppId(OneSignalId)
+//        OneSignal.initWithLaunchOptions(launchOptions)
+//        OneSignal.setAppId(OneSignalId)
+        OneSignal.initialize(OneSignalId, withLaunchOptions: launchOptions)
         
         //START OneSignal initialization code
         //   OLD ONE .......
@@ -82,11 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
          
          OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
          */
-        OneSignal.consentGranted(true)
+//        OneSignal.consentGranted(true)
+        OneSignal.User.pushSubscription.optIn()
+
         // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 6)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
+//        OneSignal.promptForPushNotifications(userResponse: { accepted in
+//            print("User accepted notifications: \(accepted)")
+//        })
         
         LocationAcess()
         // Voip Push Call Registry

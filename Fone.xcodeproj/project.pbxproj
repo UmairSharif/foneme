@@ -2513,7 +2513,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.19;
+				MARKETING_VERSION = 3.8.20;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
@@ -2551,7 +2551,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.19;
+				MARKETING_VERSION = 3.8.20;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";

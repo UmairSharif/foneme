@@ -20,8 +20,8 @@ let SubscriptionPlan = "planId"
 let SubscriptionId = "subscriptionId"
 let SubscriptionDays = "subscriptionDays"
 //"5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
-
-let APP_ID = "A1DBCE29-98BD-42E9-AA18-CC85D771FF98"
+let APP_ID = "52C39F76-3C24-4995-A355-BEB34FACBC8A"
+//let APP_ID = "A1DBCE29-98BD-42E9-AA18-CC85D771FF98"
 let CHANNEL_URL = "https://api-A1DBCE29-98BD-42E9-AA18-CC85D771FF98.sendbird.com"
 
 let APP_NAME = "Basket Ball App"

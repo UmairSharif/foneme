@@ -391,19 +391,22 @@ extension UIViewController {
                                 if foneId != "" {
                                     userModel.cnic = foneId
                                 }
-                                DispatchQueue.main.async {
-                                    completion(userModel,true)
-                                }
+                                completion(userModel,true)
+
+//                                DispatchQueue.main.async {
+//                                }
                             }
                             else{
-                                DispatchQueue.main.async {
-                                    completion(nil,false)
-                                }
+                                completion(nil,false)
+
+//                                DispatchQueue.main.async {
+//                                }
                             }
                         }else{
-                            DispatchQueue.main.async {
-                                completion(nil,false)
-                            }
+                            completion(nil,false)
+
+//                            DispatchQueue.main.async {
+//                            }
                         }
                     }
                 }

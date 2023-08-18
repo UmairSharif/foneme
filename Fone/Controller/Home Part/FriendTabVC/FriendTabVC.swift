@@ -729,27 +729,29 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             } else {
                 let vc = UIStoryboard().loadUserDetailsVC()
                 self.getUserDetail(cnic: contact.ContactsCnic!, friend: contact.userId!) { (user, success) in
-                    self.hideIndicatorView()
-                    if success {
-                        if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
-                            
-                            if cell.userImage.image != nil
-                            {
-                                let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
-                                if  self.checkUSERFRIEND(num: user?.uniqueContact ?? "") {
-                                    self.btnClickChat(user, img: imgdata, cont: contact)
-                                    return
+                    DispatchQueue.main.async {
+                        self.hideIndicatorView()
+                        if success {
+                            if let cell = tableView.cellForRow(at: indexPath) as? LocalContactTVC {
+                                
+                                if cell.userImage.image != nil
+                                {
+                                    let imgdata = cell.userImage.image?.jpegData(compressionQuality: 0.5)
+                                    if  self.checkUSERFRIEND(num: user?.uniqueContact ?? "") {
+                                        self.btnClickChat(user, img: imgdata, cont: contact)
+                                        return
+                                    }
                                 }
                             }
+                            vc.userDetails = user!
+                            let nav = UINavigationController(rootViewController: vc)
+                            nav.navigationBar.isHidden = true
+                            nav.modalPresentationStyle = .fullScreen
+                            self.present(nav, animated: true, completion: nil)
+                        } else {
+                            self.hideIndicatorView()
+                            self.showAlert("Error", " Can't get user information. Please try again.")
                         }
-                        vc.userDetails = user!
-                        let nav = UINavigationController(rootViewController: vc)
-                        nav.navigationBar.isHidden = true
-                        nav.modalPresentationStyle = .fullScreen
-                        self.present(nav, animated: true, completion: nil)
-                    } else {
-                        self.hideIndicatorView()
-                        self.showAlert("Error", " Can't get user information. Please try again.")
                     }
                 }
             }
@@ -818,7 +820,6 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
         if num.isEmpty { return false }
         return CurrentSession.shared.friends.first(where: { (num.comparePhoneNumber(number: $0.number) || num == $0.email ) }) != nil
     }
-    
     
     @objc func btnVideoClicked(_ sender: UIButton) {
         self.showIndicatorView()

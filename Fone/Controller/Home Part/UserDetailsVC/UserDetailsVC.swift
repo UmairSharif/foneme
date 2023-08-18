@@ -123,23 +123,12 @@ class UserDetailsVC: UIViewController {
     //MARK:- Update Details
     func UpdateDetails() {
         var isContactAdded = false
-        if let contact = userDetails?.uniqueContact {
-            if let _ = CurrentSession.shared.friends.first(where: { (contact.comparePhoneNumber(number: $0.number)) || contact == $0.email }) {
+        if let cnicId = userDetails?.cnic, cnicId.isEmpty == false {
+            if let _ = CurrentSession.shared.friends.first(where: { cnicId == $0.ContactsCnic }) {
                 isContactAdded = true
                 self.btnFriend.backgroundColor = UIColor.lightGray
             }
         }
-        for item in CurrentSession.shared.friends {
-            let  id = item.userId
-            let thisUserId = userDetails?.contactVT
-            if id != "" && thisUserId != "" {
-                if item.userId == userDetails?.contactVT {
-                    isContactAdded = true
-                    self.btnFriend.backgroundColor = UIColor.lightGray
-                }
-            }
-        }
-        
         
         self.btnFriend.isFriendAdded = isContactAdded
         self.UserImage.sd_setImage(with: URL(string: userDetails?.imageUrl ?? ""), placeholderImage: UIImage(named: "ic_profile"))

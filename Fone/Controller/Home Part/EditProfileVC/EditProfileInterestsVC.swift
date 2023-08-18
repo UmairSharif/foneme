@@ -39,6 +39,9 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
     
 
     //MARK: SEARCH
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search.resignFirstResponder()
+    }
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         
         search.resignFirstResponder()
@@ -50,13 +53,16 @@ class EditProfileInterestsVC: UIViewController ,UICollectionViewDelegate,UIColle
             return
         }
         
-        let filteredInterests = tempInterests.filter { interest in
-            let lowercasedSearchText = searchText.lowercased()
-            let matchesName = interest.name.lowercased().contains(lowercasedSearchText)
-            let matchesSubcategory = interest.subcategories.contains { subcategory in
-                subcategory.name.lowercased().contains(lowercasedSearchText)
+        let lowercasedSearchText = searchText.lowercased()
+        var filteredInterests = [InterestsModel]()
+        for var interest in tempInterests {
+            interest.subcategories = interest.subcategories.filter { subCategory in
+                let matchesName = subCategory.name.lowercased().contains(lowercasedSearchText)
+                return matchesName
             }
-            return matchesName || matchesSubcategory
+            if interest.subcategories.isEmpty == false {
+                filteredInterests.append(interest)
+            }
         }
         
         self.finalInterests = filteredInterests

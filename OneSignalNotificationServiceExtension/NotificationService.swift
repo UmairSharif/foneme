@@ -7,7 +7,9 @@
 //
 
 import UserNotifications
-import OneSignal
+import OneSignalFramework
+import OneSignalCore
+import OneSignalOSCore
 
 class NotificationService: UNNotificationServiceExtension {
     

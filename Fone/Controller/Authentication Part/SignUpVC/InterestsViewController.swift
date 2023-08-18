@@ -58,27 +58,13 @@ class InterestsViewController: UIViewController ,UICollectionViewDelegate,UIColl
         vc.interestsIds = self.selectedInterestsId
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     //MARK: SEARCH
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         
         search.resignFirstResponder()
     }
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        guard !searchText.isEmpty else {
-//            self.finalInterests = tempInterests
-//            self.collectionView.reloadData()
-//            return
-//        }
-//
-//        let filteredImages = finalInterests.filter { image in
-//            let lowercasedSearchText = searchText.lowercased()
-//            return image.name.lowercased().contains(lowercasedSearchText) ||
-//            image.subca.lowercased().contains(lowercasedSearchText)
-//        }
-//        finalInterests = filteredImages
-//        collectionView.reloadData()
-//
-//    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             self.finalInterests = tempInterests
@@ -86,18 +72,22 @@ class InterestsViewController: UIViewController ,UICollectionViewDelegate,UIColl
             return
         }
         
-        let filteredInterests = tempInterests.filter { interest in
-            let lowercasedSearchText = searchText.lowercased()
-            let matchesName = interest.name.lowercased().contains(lowercasedSearchText)
-            let matchesSubcategory = interest.subcategories.contains { subcategory in
-                subcategory.name.lowercased().contains(lowercasedSearchText)
+        let lowercasedSearchText = searchText.lowercased()
+        var filteredInterests = [InterestsModel]()
+        for var interest in tempInterests {
+            interest.subcategories = interest.subcategories.filter { subCategory in
+                let matchesName = subCategory.name.lowercased().contains(lowercasedSearchText)
+                return matchesName
             }
-            return matchesName || matchesSubcategory
+            if interest.subcategories.isEmpty == false {
+                filteredInterests.append(interest)
+            }
         }
         
         self.finalInterests = filteredInterests
         self.collectionView.reloadData()
     }
+    
     // MARK: - UICollectionViewDataSource
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -213,7 +203,7 @@ extension InterestsViewController {
 
 struct InterestsModel {
     let name: String
-    let subcategories: [InterestsSubCategory]
+    var subcategories: [InterestsSubCategory]
 }
 
 struct InterestsSubCategory {
