@@ -237,6 +237,7 @@
 		22E3FDD22405B801009AEC0C /* AudioCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */; };
 		28A1D8FA297148DB00E0A655 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1D8F9297148DB00E0A655 /* KeychainItem.swift */; };
 		39E66B9710067A63295224C6 /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */; };
+		4208F4082A94F08700925413 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4208F4072A94F08700925413 /* README.md */; };
 		4F16BC84249D1744001C4708 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC76249D1744001C4708 /* CallManager.swift */; };
 		4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC77249D1744001C4708 /* CallsViewController.swift */; };
 		4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC79249D1744001C4708 /* CallTableViewCell.swift */; };
@@ -564,6 +565,7 @@
 		28A1D8F9297148DB00E0A655 /* KeychainItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		368AFAA4C0229CFD552C2188 /* Pods-Fone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.debug.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.debug.xcconfig"; sourceTree = "<group>"; };
+		4208F4072A94F08700925413 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4F16BC76249D1744001C4708 /* CallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		4F16BC77249D1744001C4708 /* CallsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsViewController.swift; sourceTree = "<group>"; };
 		4F16BC79249D1744001C4708 /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; };
@@ -1169,6 +1171,7 @@
 				22880EE623C074B10044263D /* Resources */,
 				22880EBB23C074830044263D /* Utilities */,
 				22880EE923C074E70044263D /* View */,
+				4208F4072A94F08700925413 /* README.md */,
 			);
 			path = Fone;
 			sourceTree = "<group>";
@@ -1932,6 +1935,7 @@
 				182AE23124FE63460084A174 /* telephone.caf in Resources */,
 				185F52A02500ECA2003D8DE7 /* iphone-original.mp3 in Resources */,
 				185F529A2500E49E003D8DE7 /* ringtone.caf in Resources */,
+				4208F4082A94F08700925413 /* README.md in Resources */,
 				22880E7C23C074390044263D /* LaunchScreen.storyboard in Resources */,
 				6669E61A267509A9001BDC75 /* SocialLinkView.xib in Resources */,
 				1BA0978E24817B5000E0A042 /* OpenChannelImageVideoFileMessageTableViewCell.xib in Resources */,
