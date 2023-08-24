@@ -238,6 +238,7 @@
 		28A1D8FA297148DB00E0A655 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A1D8F9297148DB00E0A655 /* KeychainItem.swift */; };
 		39E66B9710067A63295224C6 /* Pods_FoneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E4110A2ED089202CF5B1BA /* Pods_FoneTests.framework */; };
 		4208F4082A94F08700925413 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4208F4072A94F08700925413 /* README.md */; };
+		42E7C5002A967EFD00D7D2D0 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E794AB9C316CDA819E6CC /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
 		4F16BC84249D1744001C4708 /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC76249D1744001C4708 /* CallManager.swift */; };
 		4F16BC85249D1744001C4708 /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC77249D1744001C4708 /* CallsViewController.swift */; };
 		4F16BC87249D1744001C4708 /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16BC79249D1744001C4708 /* CallTableViewCell.swift */; };
@@ -264,7 +265,6 @@
 		66E6F98726751D6A00F5BA25 /* AddLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6F98626751D6A00F5BA25 /* AddLinkViewController.swift */; };
 		6FA8C51F27B96CA6000D768B /* Temp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA8C51E27B96CA6000D768B /* Temp.storyboard */; };
 		6FDC0FF927C9213400E6CF65 /* NearByPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDC0FF827C9213400E6CF65 /* NearByPeople.swift */; };
-		71D4AF664AC8310155E01C8D /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E794AB9C316CDA819E6CC /* Pods_Fone_OneSignalNotificationServiceExtension.framework */; };
 		8B674B2C29C32EF00060FC88 /* PhoneEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B674B2A29C32EF00060FC88 /* PhoneEmailVC.swift */; };
 		8B674B2D29C32EF00060FC88 /* PhoneEmailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B674B2B29C32EF00060FC88 /* PhoneEmailVC.xib */; };
 		959E2C08296EC458006E0D61 /* FBLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E2C02296EC458006E0D61 /* FBLogin.swift */; };
@@ -663,7 +663,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71D4AF664AC8310155E01C8D /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				42E7C5002A967EFD00D7D2D0 /* Pods_Fone_OneSignalNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2500,11 +2500,12 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone Messenger.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Unified Acquisitions  LLC (CSKR5DZ5UY)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2522,6 +2523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = foneme_distribution_23Aug;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e x86_64 ";
@@ -2538,11 +2540,12 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = "Fone/Fone MessengerRelease.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Unified Acquisitions  LLC (CSKR5DZ5UY)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2560,6 +2563,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = foneme_distribution_23Aug;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e x86_64 ";
@@ -2625,9 +2629,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2646,6 +2652,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OneSignal_Provisioning;
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2661,9 +2668,11 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = CSKR5DZ5UY;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2682,6 +2691,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = OneSignal_Provisioning;
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
