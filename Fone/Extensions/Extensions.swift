@@ -409,7 +409,11 @@ extension UIViewController {
 //                            }
                         }
                     }
+                } else {
+                    completion(nil,false)
                 }
+            } else {
+                completion(nil,false)
             }
         }
           
