@@ -70,6 +70,7 @@ class UserDetailsVC: UIViewController {
     var interestIds = [Int]()
     var tempInterests = [InterestsSubCategory]()
     var finalInterests = [InterestsSubCategory]()
+    var firebaseChatId: String?
     //107,32
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -263,6 +264,21 @@ class UserDetailsVC: UIViewController {
     
     @IBAction func btnClickChat(_ sender: UIButton) {
         
+        guard let toUserId = userDetails?.userId else {
+            return
+        }
+        
+//        FirebaseChatManager.shared.getUser(from: toUserId) { firebaseChatId in
+//            let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+//            //vc.delegate = sSelf
+//            vc.userDetails = self.userDetails
+//            vc.userDetails?.firebaseId = firebaseChatId
+//    //        vc.channel = channel
+//            let nav = UINavigationController(rootViewController: vc)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+//        }
+
         let status = SBDMain.getConnectState()
         SBDMain.connect(withUserId: self.userDetails!.userId!) { user, error in
             guard let user = user, error == nil else {
@@ -275,7 +291,7 @@ class UserDetailsVC: UIViewController {
            let query = SBDMain.createApplicationUserListQuery() {
             query.limit = 100
             query.userIdsFilter = [userDetail.uniqueContact]
-            
+
             SVProgressHUD.show()
             query.loadNextPage {[weak self] users, error in
                 guard let sSelf = self else { return }
@@ -292,15 +308,18 @@ class UserDetailsVC: UIViewController {
                             sSelf.showAlert("","Private user")
                             return
                         }
-                        
+
                         DispatchQueue.main.async {
-                            let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
-                            //vc.delegate = sSelf
-                            vc.userDetails = sSelf.userDetails
-                            vc.channel = channel
-                            let nav = UINavigationController(rootViewController: vc)
-                            nav.modalPresentationStyle = .fullScreen
-                            sSelf.present(nav, animated: true, completion: nil)
+                            FirebaseChatManager.shared.getUser(from: toUserId) { firebaseChatId in
+                                let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+                                //vc.delegate = sSelf
+                                vc.userDetails = sSelf.userDetails
+                                vc.userDetails?.firebaseId = firebaseChatId
+                                vc.channel = channel
+                                let nav = UINavigationController(rootViewController: vc)
+                                nav.modalPresentationStyle = .fullScreen
+                                sSelf.present(nav, animated: true, completion: nil)
+                            }
                         }
                     }
                 } else {

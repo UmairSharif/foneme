@@ -422,8 +422,9 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 let vc = UIStoryboard().loadAboutVC()
                 vc.user_id = user_id
                 vc.mobileNumber = mobileNumber
+                    FirebaseChatManager.shared.setUserInFirebase()
                 self.navigationController?.pushViewController(vc, animated: true)
-                }else{
+                } else {
                     if mobileNumber != "+00" && mobileNumber.count > 8 {
                         self.getProfileWithPhone(mobileNumber: mobileNumber)
                     }else {
@@ -432,6 +433,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                       appDeleg.window?.rootViewController = tabBarVC
                       appDeleg.window?.makeKeyAndVisible()
                     }
+                    
                 }
            
             case.failure(let error):
@@ -465,6 +467,7 @@ class VerificationVC: UIViewController,UITextFieldDelegate {
                 }
             
                 LocalContactHandler.instance.getContacts()
+                FirebaseChatManager.shared.setUserInFirebase()
                 let tabBarVC = UIStoryboard().loadTabBarController()
                 appDeleg.window?.rootViewController = tabBarVC
                 appDeleg.window?.makeKeyAndVisible()

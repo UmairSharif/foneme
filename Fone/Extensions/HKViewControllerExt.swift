@@ -250,19 +250,19 @@ extension UIViewController {
 
         return
 
-        if let uuid = NotificationHandler.shared.currentCallUUID {
-            let endCallAction = CXEndCallAction(call: uuid)
-            let transaction = CXTransaction(action: endCallAction)
-
-            callController.request(transaction) { error in
-                if let error = error {
-                    NSLog("EndCallAction transaction request failed: \(error.localizedDescription).")
-                } else {
-                    NSLog("EndCallAction transaction request successful")
-                }
-            }
-        }
-        self.dismiss(animated: true, completion: nil)
+//        if let uuid = NotificationHandler.shared.currentCallUUID {
+//            let endCallAction = CXEndCallAction(call: uuid)
+//            let transaction = CXTransaction(action: endCallAction)
+//
+//            callController.request(transaction) { error in
+//                if let error = error {
+//                    NSLog("EndCallAction transaction request failed: \(error.localizedDescription).")
+//                } else {
+//                    NSLog("EndCallAction transaction request successful")
+//                }
+//            }
+//        }
+//        self.dismiss(animated: true, completion: nil)
     }
 
 

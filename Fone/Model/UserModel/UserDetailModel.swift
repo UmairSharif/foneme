@@ -27,7 +27,7 @@ struct UserDetailModel: Codable {
     var profession: String!
     var location: String!
     var socialLinks: [SocialLink]!
-    
+    var firebaseId: String?
     var uniqueContact: String {
         if let mobile = phoneNumber, !phoneNumber.isEmpty {
             return mobile

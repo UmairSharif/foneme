@@ -14,8 +14,16 @@ import SendBirdSDK
 import Branch
 import SVProgressHUD
 import CoreLocation
+import Firebase
+import FirebaseDatabase
+import FirebaseStorage
+import FirebaseCore
 
 class FriendTabVC: UIViewController, CLLocationManagerDelegate {
+    
+    
+    var messages = [Message]()
+    var messagesDictionary = [String: Message]()
     
     var users = [SBDUser]()
   
@@ -54,6 +62,7 @@ class FriendTabVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FirebaseChatManager.shared.setUserInFirebase()
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         } else {
@@ -716,7 +725,7 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
             }
         }
         else if friendList.count > 0 {
-   
+            
             let contact = friendList[indexPath.row]
             
             if contact.name == "Find People Nearby" {
@@ -755,8 +764,8 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                     }
                 }
             }
-
-
+            
+            
         }
     }
     
@@ -886,6 +895,26 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                 userId = user.userId!
             }
         }
+        
+        if userId.isEmpty {
+            return
+        }
+        
+        guard let receiverFoneMeUserId = userMd?.userId else {
+            return
+        }
+        
+//        FirebaseChatManager.shared.getUser(from: receiverFoneMeUserId) { firebaseChatId in
+//            let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
+//            //vc.delegate = sSelf
+//            vc.userDetails = userMd
+//            vc.userDetails?.firebaseId = firebaseChatId
+//            let nav = UINavigationController(rootViewController: vc)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+//
+//        }
+
         let vc = UIStoryboard(name: "GroupChannel", bundle: nil).instantiateViewController(withIdentifier: "GrouplChatViewController") as! GroupChannelChatViewController
         vc.delegate = self
         vc.userDetails = userMd
@@ -934,14 +963,49 @@ extension FriendTabVC: UITableViewDelegate, UITableViewDataSource
                         return
                     }
                     vc.channel = channel
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true, completion: nil)
+                    FirebaseChatManager.shared.getUser(from: receiverFoneMeUserId) { firebaseChatId in
+                        vc.userDetails?.firebaseId = firebaseChatId
+                        let nav = UINavigationController(rootViewController: vc)
+                        nav.modalPresentationStyle = .fullScreen
+                        self.present(nav, animated: true, completion: nil)
+                    }
                 }
 
             }
         })
         
+    }
+
+    func observeUserMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let ref = Database.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            let userId = snapshot.key
+            Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (DataSnapshot) in
+                
+                let messageId = DataSnapshot.key
+                let messagesReference = Database.database().reference().child("messages").child(messageId)
+                
+                messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let dictionary = snapshot.value as? [String: Any] {
+                        let message = Message(from: dictionary)
+                        if let chatPartnerId = message.chatPartnerId() {
+                            self.messagesDictionary[chatPartnerId] = message
+                        }
+//                        self.attemptReloadofTable()
+                    }
+                }, withCancel: nil)
+        
+            }, withCancel: { (nil) in
+                
+            })
+            
+        }, withCancel: nil)
     }
     
     private func searchByKeyword(_ keyword: String?) {

@@ -451,7 +451,9 @@ extension SignUpVC {
                     let vc = UIStoryboard().loadSingUpNameVC()
                     vc.user = self.user
                     vc.accessToken = accessToken
+                    FirebaseChatManager.shared.setUserInFirebase()
                     self.navigationController?.pushViewController(vc, animated: true)
+
                 } else {
                     self.socialLoginToProfile(email: email, socialId: socialId, accessToken: accessToken)
                 }
@@ -477,6 +479,7 @@ extension SignUpVC {
                     let vc = UIStoryboard().loadSingUpNameVC()
                     vc.user = self.user
                     vc.accessToken = accessToken
+                    FirebaseChatManager.shared.setUserInFirebase()
                     self.navigationController?.pushViewController(vc, animated: true)
                 }else if statusCode == "200" {
                     let profileData = value["UserProfileData"]
@@ -495,7 +498,7 @@ extension SignUpVC {
                     userInfo.profession = userModel.profession
                     userInfo.address = userModel.cnic
                     userInfo.url = userModel.cnic
-                    
+                    FirebaseChatManager.shared.setUserInFirebase()
                     if let userProfileData = try? PropertyListEncoder().encode(userInfo) {
                         UserDefaults.standard.set(userProfileData, forKey: key_User_Profile)
                         UserDefaults.standard.synchronize()

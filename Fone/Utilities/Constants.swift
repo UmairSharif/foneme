@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+struct MessageFields {
+  static let name = "name"
+  static let text = "text"
+  static let imageURL = "imageUrl"
+    static let senderId = "sender_Id"
+    static let receiverId = "to_Id"
+    static let timestamp = "timestamp"
+  static let imageUrl = "imageUrl"
+    static let imageWidth = "imageWidth"
+    static let imageHeight = "imageHeight"
+}
+
 let KEY_OPEN_PROFILE_SOCIAL_LINKS = "KEY_OPEN_PROFILE_SOCIAL_LINKS"
 
 let BrainTree_toKinizationKey = "sandbox_ktbkxkdd_trhv6grk27vpbzkp"
@@ -20,7 +32,7 @@ let SubscriptionPlan = "planId"
 let SubscriptionId = "subscriptionId"
 let SubscriptionDays = "subscriptionDays"
 //"5A3F0F54-1ED8-43D0-A352-627AFE220EC4"
-let APP_ID = "2C6C4025-ED70-4517-8B8B-8DDAAD62745B"
+let APP_ID = "9A680D22-0703-46F8-92CA-2BE5DDD300DF"
 //let APP_ID = "A1DBCE29-98BD-42E9-AA18-CC85D771FF98"
 let CHANNEL_URL = "https://api-A1DBCE29-98BD-42E9-AA18-CC85D771FF98.sendbird.com"
 
@@ -136,6 +148,10 @@ public func topViewController(_ base: UIViewController? = UIApplication.shared.k
 }
 
 extension Date {
+
+    static var currentTimeStamp: Int64 {
+        return Int64(Date().timeIntervalSince1970 * 1000)
+    }
 
     func timeAgoSinceDate() -> String {
 

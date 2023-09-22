@@ -65,6 +65,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     var minMessageTimestamp: Int64 = Int64.max
     var isLoading: Bool = false
     
+    var firebaseMessages: [Message] = []
     var messages: [SBDBaseMessage] = []
     
     var resendableMessages: [String:SBDBaseMessage] = [:]
@@ -636,24 +637,32 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func clickSendUserMessageButton(_ sender: Any) {
-        guard let messageText = self.inputMessageTextField.text else { return }
-        guard let channel = self.channel else { return }
-        
-        if messageText.count == 0 {
+        guard let messageText = self.inputMessageTextField.text,
+                messageText.isEmpty == false,
+        let receiverFirebaseId = self.userDetails?.firebaseId,
+        let messageObject: Message = FirebaseChatManager.shared.frameMessage(from: messageText, receiverId: receiverFirebaseId) else {
             return
         }
-        
+
         self.inputMessageTextField.text = ""
         self.sendUserMessageButton.isEnabled = false
         
+        FirebaseChatManager.shared.sendMessage(withData: messageObject.toDictionary())
+        firebaseMessages.append(messageObject)
+      
+        guard let channel = self.channel else { return }
+
         var preSendMessage: SBDUserMessage?
-//
-//        let params = SBDUserMessageParams(message: messageText)
-//        params?.mentionedUserIds = channel.members as! [String]
-//
-//        guard let paramsBinded: SBDUserMessageParams = params else {
-//            return
-//        }
+
+        let params = SBDUserMessageParams(message: messageText)
+        
+        if let membersIds = channel.members as? [String] {
+            params?.mentionedUserIds = membersIds
+        }
+
+        guard let paramsBinded: SBDUserMessageParams = params else {
+            return
+        }
         
         preSendMessage = channel.sendUserMessage(messageText) { (userMessage, error) in
             if let channel = self.channel {
@@ -663,7 +672,7 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 DispatchQueue.main.async {
                     guard let preSendMsg = preSendMessage else { return }
                     guard let requestId = preSendMsg.requestId as? String else { return }
-                    
+
                     self.preSendMessages.removeValue(forKey: requestId)
                     self.resendableMessages[requestId] = preSendMsg
                     self.messageTableView.reloadData()
@@ -671,13 +680,13 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
                 }
                 return
             }
-            
+
             guard let message = userMessage else { return }
             guard let requestId = userMessage?.requestId else { return }
-            
+
             DispatchQueue.main.async {
                 self.determineScrollLock()
-                
+
                 if let preSendMessage = self.preSendMessages[requestId] {
                     if let index = self.messages.firstIndex(of: preSendMessage) {
                         self.messages[index] = message
