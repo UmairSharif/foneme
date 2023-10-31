@@ -11,9 +11,9 @@ target 'Fone' do
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
-  pod'Firebase/Database'
-  pod'Firebase/Storage'
-  pod'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Core'
   pod 'MASegmentedControl'
   pod 'SVProgressHUD'
 
@@ -43,8 +43,8 @@ target 'Fone' do
   pod "TTGTagCollectionView"
   pod 'GoogleSignIn', '~> 6.2.4'
   #pod 'FBSDKLoginKit'
-pod 'FacebookCore'
-pod 'FacebookLogin'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
   pod 'Braintree', :inhibit_warnings => true
   pod 'SnapKit'
   pod 'SwiftJWT'
@@ -61,20 +61,18 @@ pod 'FacebookLogin'
     inherit! :search_paths
     # Pods for testing
   end
-
-#  target 'FoneUITests' do
-#    inherit! :search_paths
-#    # Pods for testing
-#  end
   
   post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        xcconfig_path = config.base_configuration_reference.real_path
-        xcconfig = File.read(xcconfig_path)
-        xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
-        File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
-       end
+      # fix xcode 15 DT_TOOLCHAIN_DIR - remove after fix oficially - https://github.com/CocoaPods/CocoaPods/issues/12065
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+          if config.base_configuration_reference.is_a? Xcodeproj::Project::Object::PBXFileReference
+            xcconfig_path = config.base_configuration_reference.real_path
+            IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
+          end
+        end
+      end
     end
   end
-end
