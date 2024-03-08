@@ -39,8 +39,11 @@ class UserDetailsVC: UIViewController {
     //@IBOutlet weak var lblVoiceCall: UILabel!
     @IBOutlet weak var btnVideoCall: UIButton!
     @IBOutlet weak var btnCall: UIButton!
+    @IBOutlet weak var btnWhatsApp: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnFriend: UIFriendButton!
+    @IBOutlet weak var btnWhatsAppView: UIView!
+    @IBOutlet weak var actionsStackView: UIStackView!
     //   @IBOutlet weak var btnFonemeID: UIButton!
     //  @IBOutlet weak var foneId: UILabel!
     
@@ -153,6 +156,9 @@ class UserDetailsVC: UIViewController {
         }
         lbLinks.text = "fone.me/\(userDetails!.cnic!)"
         
+        if let phoneNumber = userDetails?.phoneNumber, phoneNumber.isEmpty {
+            actionsStackView.removeFully(view: btnWhatsAppView)
+        }
     }
     
     func getProfilePreference() {
@@ -260,6 +266,17 @@ class UserDetailsVC: UIViewController {
         //            self.show(message: "Please subscribe for app to use this feature.")
         //        }
         
+    }
+    
+    @IBAction func btnClickWhatsApp(_ sender: UIButton) {
+        if let phoneNumber = userDetails?.phoneNumber, let whatsappURL = URL(string: "https://wa.me/\(phoneNumber)") {
+            var components = URLComponents(url: whatsappURL, resolvingAgainstBaseURL: false)
+            let queryItem = URLQueryItem(name: "text", value: "")
+            components?.queryItems = [queryItem]
+            if let finalURL = components?.url {
+                UIApplication.shared.open(finalURL, options: [:], completionHandler: nil)
+            }
+        }
     }
     
     @IBAction func btnClickChat(_ sender: UIButton) {

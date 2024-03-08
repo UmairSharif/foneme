@@ -27,6 +27,7 @@ import CoreLocation
 import SVProgressHUD
 import FirebaseAuth
 import GoogleMobileAds
+import FirebaseRemoteConfig
 
 protocol PushKitEventDelegate: AnyObject {
     func credentialsUpdated(credentials: PKPushCredentials) -> Void
@@ -153,9 +154,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, BranchDelegate, CLLocatio
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
         }
         //NotificationHandler.shared.isCallNotificationHandled = true
-        
-        SBDMain.initWithApplicationId(APP_ID)
+        let sendbirdAppID = RCValuesHandler.sharedInstance.string(forKey: RCValueKey.sendbirdAppID)
+        SBDMain.initWithApplicationId(sendbirdAppID)
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
+        
         let isLogin = UserDefaults.standard.bool(forKey: "isLoggedIn")
         
         if isLogin {

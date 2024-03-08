@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048A6FAA2B98DC660012EC5F /* RCValuesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A6FA92B98DC660012EC5F /* RCValuesHandler.swift */; };
 		048AC46229F9037B00B635B0 /* AddPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048AC46129F9037B00B635B0 /* AddPhotosViewController.swift */; };
 		0824E4B229E579DB009E1E22 /* CalendarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824E4B029E579DA009E1E22 /* CalendarPickerView.swift */; };
 		0824E4B329E579DB009E1E22 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824E4B129E579DB009E1E22 /* DatePickerCell.swift */; };
@@ -331,6 +332,7 @@
 
 /* Begin PBXFileReference section */
 		0441F1D0A2DB8E30714AD40D /* Pods-Fone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fone.release.xcconfig"; path = "Target Support Files/Pods-Fone/Pods-Fone.release.xcconfig"; sourceTree = "<group>"; };
+		048A6FA92B98DC660012EC5F /* RCValuesHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCValuesHandler.swift; sourceTree = "<group>"; };
 		048AC46129F9037B00B635B0 /* AddPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotosViewController.swift; sourceTree = "<group>"; };
 		0824E4B029E579DA009E1E22 /* CalendarPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerView.swift; sourceTree = "<group>"; };
 		0824E4B129E579DB009E1E22 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
@@ -1646,6 +1648,7 @@
 				22E1602A23C8FA9600D2E54C /* LocalContactHandler.swift */,
 				2282ECE023CBCFF100D80A97 /* NotificationHandler.swift */,
 				22E3FDD12405B801009AEC0C /* AudioCallHandler.swift */,
+				048A6FA92B98DC660012EC5F /* RCValuesHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -2277,6 +2280,7 @@
 				22880EC723C074830044263D /* StarFillMode.swift in Sources */,
 				22880EE123C074830044263D /* HKStoryboardExt.swift in Sources */,
 				1BA0979524817B5000E0A042 /* CreateOpenChannelViewControllerB.swift in Sources */,
+				048A6FAA2B98DC660012EC5F /* RCValuesHandler.swift in Sources */,
 				1BA097A124817B5000E0A042 /* OpenChannelSettingsViewController.swift in Sources */,
 				1BA0979024817B5000E0A042 /* OpenChannelAdminMessageTableViewCell.swift in Sources */,
 				22880ED923C074830044263D /* OMFile.swift in Sources */,
@@ -2516,7 +2520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = U52624PYDN;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2531,7 +2535,7 @@
 				);
 				MARKETING_VERSION = 3.8.21;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.Fone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.FoneApp;
 				PRODUCT_NAME = "Fone Messenger";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2589,7 +2593,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = U52624PYDN;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2615,7 +2619,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = U52624PYDN;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FoneTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2642,7 +2646,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
-				DEVELOPMENT_TEAM = CSKR5DZ5UY;
+				DEVELOPMENT_TEAM = U52624PYDN;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (

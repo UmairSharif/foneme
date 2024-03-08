@@ -80,6 +80,8 @@
 	<string>$(PRODUCT_NAME) would like to access your camera to take a profile picture.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your contacts so we can upload your contacts to server and find matching your friends who are using this app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to access your location for send location in chat.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your location for send location in chat.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -90,8 +92,6 @@
 	<string>Please allow access to save photo in your photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your gallery to select profile picture.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your location for send location in chat.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Rubik-Regular.ttf</string>

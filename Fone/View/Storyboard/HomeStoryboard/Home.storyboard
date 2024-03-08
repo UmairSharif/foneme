@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -31,19 +31,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Lr-VF-pac">
-                                <rect key="frame" x="20" y="233.33333333333337" width="335" height="103"/>
+                                <rect key="frame" x="20" y="232.66666666666663" width="335" height="103"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NE0-2C-AwI">
                                         <rect key="frame" x="10" y="0.0" width="315" height="103"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey there! I am using Fone Messenger." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMa-8G-aBx">
-                                        <rect key="frame" x="12" y="13" width="311" height="14.333333333333336"/>
+                                        <rect key="frame" x="12" y="13" width="311" height="14"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey there! I am using Fone Messenger." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALm-Ja-ZYx">
-                                        <rect key="frame" x="12" y="35.333333333333343" width="311" height="14.333333333333336"/>
+                                        <rect key="frame" x="12" y="35.000000000000028" width="311" height="14"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -65,10 +65,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPb-b9-vH5">
-                                <rect key="frame" x="20" y="123.33333333333331" width="335" height="90"/>
+                                <rect key="frame" x="20" y="122.66666666666669" width="335" height="90"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profile" translatesAutoresizingMaskIntoConstraints="NO" id="Izw-U0-VPo">
-                                        <rect key="frame" x="0.0" y="7.0000000000000142" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="6.9999999999999858" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="Ptk-wL-hFo"/>
                                             <constraint firstAttribute="height" constant="80" id="lv7-r5-2aS"/>
@@ -84,16 +84,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ssn-5k-dpB">
-                                        <rect key="frame" x="90" y="35.000000000000014" width="205" height="24"/>
+                                        <rect key="frame" x="90" y="35.333333333333329" width="205" height="23.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Millesa R." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CE-FX-hCN">
-                                                <rect key="frame" x="0.0" y="0.0" width="89.333333333333329" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="23.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-nv-jHs">
-                                                <rect key="frame" x="0.0" y="24" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="23.333333333333343" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -123,7 +123,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kH0-XG-PqD">
-                                <rect key="frame" x="20" y="370.33333333333331" width="335" height="183.99999999999994"/>
+                                <rect key="frame" x="20" y="369.66666666666669" width="335" height="184.00000000000006"/>
                                 <subviews>
                                     <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdT-eU-FOG">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
@@ -136,7 +136,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Links" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhB-pr-B4O">
-                                                <rect key="frame" x="71" y="11.666666666666687" width="58.333333333333343" height="16.666666666666671"/>
+                                                <rect key="frame" x="71" y="11.999999999999998" width="56.333333333333343" height="16.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.18428918720000001" green="0.1843278706" blue="0.18428674340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -176,7 +176,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVw-M8-ajZ">
-                                                <rect key="frame" x="71" y="11.666666666666687" width="30.666666666666671" height="16.666666666666671"/>
+                                                <rect key="frame" x="71" y="11.999999999999998" width="29.333333333333329" height="16.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.18428918720000001" green="0.1843278706" blue="0.18428674340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -216,7 +216,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell a Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMM-Cd-nxW">
-                                                <rect key="frame" x="71" y="11.666666666666687" width="80.333333333333314" height="16.666666666666671"/>
+                                                <rect key="frame" x="71" y="11.999999999999998" width="75" height="16.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.18428918720000001" green="0.1843278706" blue="0.18428674340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -246,7 +246,7 @@
                                         </constraints>
                                     </view>
                                     <view tag="104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lD-p0-xFZ">
-                                        <rect key="frame" x="0.0" y="144.00000000000006" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="143.99999999999994" width="335" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_contact" translatesAutoresizingMaskIntoConstraints="NO" id="UzJ-Mf-QBW">
                                                 <rect key="frame" x="8" y="4" width="31" height="32"/>
@@ -256,7 +256,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leb-wM-sfz">
-                                                <rect key="frame" x="71" y="11.666666666666631" width="75.333333333333314" height="16.666666666666671"/>
+                                                <rect key="frame" x="71" y="11.999999999999998" width="71" height="16.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.18428918720000001" green="0.1843278706" blue="0.18428674340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -286,7 +286,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Io-Rb-Z1U">
-                                        <rect key="frame" x="0.0" y="184.00000000000006" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="183.99999999999994" width="335" height="40"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_qr_set" translatesAutoresizingMaskIntoConstraints="NO" id="CZd-Ze-8HL">
                                                 <rect key="frame" x="0.0" y="4" width="31" height="32"/>
@@ -367,7 +367,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wA4-10-ufs">
-                                <rect key="frame" x="20" y="587.33333333333337" width="335" height="40"/>
+                                <rect key="frame" x="20" y="586.66666666666663" width="335" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="L8z-3y-y3f"/>
                                 </constraints>
@@ -380,7 +380,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-9B-NwJ">
-                                <rect key="frame" x="20" y="70" width="116" height="33.333333333333343"/>
+                                <rect key="frame" x="20" y="70" width="103" height="32.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="28"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1176,13 +1176,13 @@
                                                                 <rect key="frame" x="34" y="30" width="227" height="68"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-ZG-gdW">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="75.666666666666671" height="68"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="56.666666666666664" height="68"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChatImg" translatesAutoresizingMaskIntoConstraints="NO" id="L6f-Kx-QBr">
-                                                                                <rect key="frame" x="5" y="5" width="65.666666666666671" height="58"/>
+                                                                                <rect key="frame" x="5" y="5" width="46.666666666666664" height="58"/>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7WJ-0g-k5x">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="75.666666666666671" height="68"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="56.666666666666664" height="68"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <connections>
@@ -1203,13 +1203,13 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6s-gs-XDR">
-                                                                        <rect key="frame" x="75.666666666666657" y="0.0" width="75.666666666666657" height="68"/>
+                                                                        <rect key="frame" x="56.666666666666657" y="0.0" width="57" height="68"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VideosProf" translatesAutoresizingMaskIntoConstraints="NO" id="95J-TI-6qf">
-                                                                                <rect key="frame" x="5" y="5" width="65.666666666666671" height="58"/>
+                                                                                <rect key="frame" x="5" y="5" width="47" height="58"/>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-Lc-yzj">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="75.666666666666671" height="68"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="57" height="68"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <connections>
@@ -1230,13 +1230,13 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCU-Wk-YF4">
-                                                                        <rect key="frame" x="151.33333333333334" y="0.0" width="75.666666666666657" height="68"/>
+                                                                        <rect key="frame" x="113.66666666666667" y="0.0" width="56.666666666666671" height="68"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CallProf" translatesAutoresizingMaskIntoConstraints="NO" id="qKQ-gc-z3Z">
-                                                                                <rect key="frame" x="5" y="5" width="65.666666666666671" height="58"/>
+                                                                                <rect key="frame" x="5" y="5" width="46.666666666666664" height="58"/>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87o-F2-Mxd">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="75.666666666666671" height="68"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="56.666666666666664" height="68"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <connections>
@@ -1254,6 +1254,33 @@
                                                                             <constraint firstItem="qKQ-gc-z3Z" firstAttribute="leading" secondItem="aCU-Wk-YF4" secondAttribute="leading" constant="5" id="hR4-y8-y1N"/>
                                                                             <constraint firstItem="87o-F2-Mxd" firstAttribute="leading" secondItem="aCU-Wk-YF4" secondAttribute="leading" id="iT4-Ej-Qva"/>
                                                                             <constraint firstItem="87o-F2-Mxd" firstAttribute="centerX" secondItem="qKQ-gc-z3Z" secondAttribute="centerX" id="vXm-Hs-OSj"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jg8-8x-ZyS">
+                                                                        <rect key="frame" x="170.33333333333334" y="0.0" width="56.666666666666657" height="68"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CallProf" translatesAutoresizingMaskIntoConstraints="NO" id="LRY-Et-pWH">
+                                                                                <rect key="frame" x="5" y="5" width="46.666666666666664" height="58"/>
+                                                                            </imageView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7N-rd-Euh">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="56.666666666666664" height="68"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <connections>
+                                                                                    <action selector="btnClickWhatsApp:" destination="Tyt-KJ-wLr" eventType="touchUpInside" id="maJ-po-Bx0"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="centerX" secondItem="Jg8-8x-ZyS" secondAttribute="centerX" id="2OE-BQ-SfA"/>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="centerY" secondItem="LRY-Et-pWH" secondAttribute="centerY" id="D3J-pL-YNB"/>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="top" secondItem="Jg8-8x-ZyS" secondAttribute="top" id="Oxm-kS-ziK"/>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="leading" secondItem="Jg8-8x-ZyS" secondAttribute="leading" id="e75-Xx-SdD"/>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="centerX" secondItem="LRY-Et-pWH" secondAttribute="centerX" id="kEY-x1-6jo"/>
+                                                                            <constraint firstItem="c7N-rd-Euh" firstAttribute="centerY" secondItem="Jg8-8x-ZyS" secondAttribute="centerY" id="lPX-Q6-adG"/>
+                                                                            <constraint firstItem="LRY-Et-pWH" firstAttribute="leading" secondItem="Jg8-8x-ZyS" secondAttribute="leading" constant="5" id="smC-KZ-EzN"/>
+                                                                            <constraint firstItem="LRY-Et-pWH" firstAttribute="top" secondItem="Jg8-8x-ZyS" secondAttribute="top" constant="5" id="vmo-kp-WNM"/>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
@@ -1443,10 +1470,13 @@
                     <connections>
                         <outlet property="LbluserName" destination="OKE-Od-4Ml" id="HjE-B4-an1"/>
                         <outlet property="UserImage" destination="Srl-Xq-UXh" id="3oi-4d-1pG"/>
+                        <outlet property="actionsStackView" destination="0n2-PK-DrN" id="fxI-aZ-QUp"/>
                         <outlet property="btnCall" destination="87o-F2-Mxd" id="n6M-c7-3Hg"/>
                         <outlet property="btnChat" destination="7WJ-0g-k5x" id="cJ1-Uv-PDA"/>
                         <outlet property="btnFriend" destination="ALn-We-r7t" id="Zqa-19-tTw"/>
                         <outlet property="btnVideoCall" destination="w1b-Lc-yzj" id="1DB-TY-2Ta"/>
+                        <outlet property="btnWhatsApp" destination="c7N-rd-Euh" id="CDT-zw-8ff"/>
+                        <outlet property="btnWhatsAppView" destination="Jg8-8x-ZyS" id="a1H-35-Peq"/>
                         <outlet property="collectionView" destination="rNp-MA-Zqp" id="geA-AQ-eAX"/>
                         <outlet property="distanceLbl" destination="v0Y-Kn-elj" id="wHI-Fg-yf1"/>
                         <outlet property="galleryLbl" destination="F8s-xe-fro" id="4ax-dc-7xa"/>
@@ -3531,7 +3561,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtL-7Z-awt">
-                                                <rect key="frame" x="39.999999999999993" y="25.666666666666675" width="87.333333333333314" height="33.333333333333343"/>
+                                                <rect key="frame" x="40" y="25.666666666666668" width="79" height="32.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="28"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3562,7 +3592,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can type any description for your public chat group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Sf-wO-KZG">
-                                                <rect key="frame" x="20" y="440" width="231" height="10.666666666666686"/>
+                                                <rect key="frame" x="20" y="440" width="223" height="10.666666666666686"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10.67" id="vWH-qp-hI0"/>
                                                 </constraints>
@@ -3616,13 +3646,13 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 <rect key="frame" x="20" y="232" width="350" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="Link name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lYq-5w-Ysh">
-                                                        <rect key="frame" x="77" y="0.0" width="265" height="50"/>
+                                                        <rect key="frame" x="73.666666666666657" y="0.0" width="268.33333333333337" height="50"/>
                                                         <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fone.me/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvm-88-81L">
-                                                        <rect key="frame" x="10" y="16.666666666666686" width="63" height="16.666666666666671"/>
+                                                        <rect key="frame" x="9.9999999999999964" y="17" width="59.666666666666657" height="16.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                         <color key="textColor" red="0.24313725489999999" green="0.47450980390000003" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -3657,7 +3687,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRd-p2-ArI">
-                                                                <rect key="frame" x="10" y="16.666666666666686" width="14.666666666666664" height="16.666666666666671"/>
+                                                                <rect key="frame" x="9.9999999999999982" y="17" width="16.333333333333329" height="16.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                                 <color key="textColor" red="0.14901960780000001" green="0.15686274510000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -3702,7 +3732,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any details such as age, profession or city." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCp-Yf-tcl">
-                                                <rect key="frame" x="20" y="362" width="177" height="11"/>
+                                                <rect key="frame" x="20" y="362" width="171.66666666666666" height="11"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="11" id="OOx-bK-bai"/>
                                                 </constraints>
@@ -3800,7 +3830,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gae-yS-Ptl">
-                                                <rect key="frame" x="20" y="615.66666666666663" width="70.666666666666671" height="20"/>
+                                                <rect key="frame" x="19.999999999999996" y="615.66666666666663" width="61.666666666666657" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Ldl-N1-4bF"/>
                                                 </constraints>
@@ -3808,7 +3838,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ideal Match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6T-3N-THT">
-                                                <rect key="frame" x="20" y="785.66666666666663" width="89" height="20"/>
+                                                <rect key="frame" x="20" y="785.66666666666663" width="84" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="OVI-f1-NXQ"/>
                                                     <constraint firstAttribute="height" constant="20" id="Wn3-fP-pYI"/>
@@ -3840,7 +3870,7 @@ Please contact us if you have any questions, concerns or recommendations, our te
                                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="140"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3u-uZ-Xmr">
-                                                                            <rect key="frame" x="12" y="87" width="104" height="28.666666666666671"/>
+                                                                            <rect key="frame" x="12" y="87" width="104" height="28"/>
                                                                             <string key="text">Still figuring
 it out</string>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
@@ -4877,7 +4907,7 @@ it out</string>
             <color red="0.51800000667572021" green="0.54900002479553223" blue="0.60399997234344482" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
